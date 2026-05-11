@@ -18,11 +18,17 @@
 
       <!-- Tab switcher -->
       <div style="display:flex;justify-content:center;gap:1em;margin-bottom:2em;flex-wrap:wrap;">
-        <button id="tab-dod" onclick="switchCal('dod')" style="
+        <button id="tab-ms" onclick="switchCal('ms')" style="
           padding:1em 2.4em;border-radius:50em;border:2px solid #e8950a;
           background:linear-gradient(135deg,#f5c748,#e8950a);color:#2b0804;font-size:1.2em;font-weight:700;
           cursor:pointer;transition:all .18s;font-family:inherit;">
-          Den otevřených dveří
+          Den otevřených dveří MŠ
+        </button>
+        <button id="tab-dod" onclick="switchCal('dod')" style="
+          padding:1em 2.4em;border-radius:50em;border:2px solid #e8950a;
+          background:#fff;color:#a06500;font-size:1.2em;font-weight:700;
+          cursor:pointer;transition:all .18s;font-family:inherit;">
+          Den otevřených dveří ZŠ
         </button>
         <button id="tab-kafe" onclick="switchCal('kafe')" style="
           padding:1em 2.4em;border-radius:50em;border:2px solid #e8950a;
@@ -38,10 +44,16 @@
         </button>
       </div>
 
-      <!-- DOD calendar -->
+      <!-- MŠ Open Day calendar (default visible) -->
+      <div id="cal-ms" class="calendly-inline-widget"
+           data-url="https://calendly.com/skolaflowcz/ms-little-flow-pozvanka-na-osobni-setkani-s-rodici?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=004aad"
+           style="min-width:320px;width:100%;height:750px;overflow:hidden;background:none;border:none;">
+      </div>
+
+      <!-- DOD calendar (hidden by default) -->
       <div id="cal-dod" class="calendly-inline-widget"
            data-url="https://calendly.com/skolaflowcz/zs-flow-den-otevrenych-dveri-2025-26?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=004aad"
-           style="min-width:320px;width:100%;height:750px;overflow:hidden;background:none;border:none;">
+           style="min-width:320px;width:100%;height:750px;overflow:hidden;background:none;border:none;display:none;">
       </div>
 
       <!-- Kafe calendar (hidden by default) -->
@@ -64,8 +76,8 @@
         var INACTIVE_COLOR = '#a06500';
 
         function switchCal(which) {
-          var tabs = {dod: 'tab-dod', kafe: 'tab-kafe', online: 'tab-online'};
-          var cals = {dod: 'cal-dod', kafe: 'cal-kafe', online: 'cal-online'};
+          var tabs = {ms: 'tab-ms', dod: 'tab-dod', kafe: 'tab-kafe', online: 'tab-online'};
+          var cals = {ms: 'cal-ms', dod: 'cal-dod', kafe: 'cal-kafe', online: 'cal-online'};
           Object.keys(tabs).forEach(function(key) {
             var tab = document.getElementById(tabs[key]);
             var cal = document.getElementById(cals[key]);
@@ -84,8 +96,10 @@
           var hash = window.location.hash.replace('#', '');
           if (hash === 'cal-kafe') { switchCal('kafe'); setTimeout(function(){ document.getElementById('booking-embed').scrollIntoView({behavior:'smooth'}); }, 200); }
           else if (hash === 'cal-online') { switchCal('online'); setTimeout(function(){ document.getElementById('booking-embed').scrollIntoView({behavior:'smooth'}); }, 200); }
-          else if (hash === 'booking-embed') switchCal('dod');
-          else switchCal('dod');
+          else if (hash === 'cal-dod') { switchCal('dod'); setTimeout(function(){ document.getElementById('booking-embed').scrollIntoView({behavior:'smooth'}); }, 200); }
+          else if (hash === 'cal-ms') { switchCal('ms'); setTimeout(function(){ document.getElementById('booking-embed').scrollIntoView({behavior:'smooth'}); }, 200); }
+          else if (hash === 'booking-embed') switchCal('ms');
+          else switchCal('ms');
         })();
       </script>
     </div>
