@@ -32,9 +32,25 @@
   {"@context":"https://schema.org","@type":"School","name":"FLOW Elementary School","url":"https://www.skolaflow.cz/en/","description":"Private elementary school and kindergarten with project-based learning in Prague 9. Now enrolling for school year 2026/27.","email":"info@skolaflow.cz","telephone":"+420770673828","address":{"@type":"PostalAddress","addressLocality":"Prague 9","addressCountry":"CZ"}}
   </script>
 
+  <!-- Google Consent Mode v2 — default DENIED (CMP will update on user choice) -->
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied',
+    'functionality_storage': 'granted',
+    'security_storage': 'granted',
+    'wait_for_update': 500
+  });
+  </script>
+
   <script>
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M8J8ZP');
   </script>
+  <link rel="stylesheet" href="../assets/css/cmp.css">
 
   <link rel="stylesheet" href="../assets/css/flow.css">
 
@@ -402,8 +418,14 @@
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('consent', 'revoke');
   fbq('init', '1250403810500269');
-  fbq('track', 'PageView');
+  // PageView is fired by CMP after consent granted (or skipped if rejected)
+  if (window.__flowConsent && window.__flowConsent.marketing) {
+    fbq('consent', 'grant');
+    fbq('track', 'PageView');
+    window.__flowFbPvFired = true;
+  }
   </script>
   <noscript><img alt="" height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1250403810500269&ev=PageView&noscript=1"
@@ -839,6 +861,7 @@
 </a>
 <!-- FLOW-FOOTER-EN-END -->
 
+<script defer src="../assets/js/cmp.js"></script>
 <script src="../assets/js/flow.js" defer></script>
 
 <script>
