@@ -1,12 +1,60 @@
-# macOS system files
+# ============================================================
+# FLOW-web — Git ignore
+# ============================================================
+# Files/folders here are NEVER committed to GitHub or deployed to CF Pages.
+# ============================================================
+
+# --- macOS metadata ---
 .DS_Store
 **/.DS_Store
+.AppleDouble
+.LSOverride
+Icon
 
-# Editor / IDE files
+# --- Editor / IDE ---
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
-# Logs
+# --- Dev tools (interni, neprodukcni) ---
+_photo_audit/
+_preview/
+_backups/
+_form-backend/
+_templates/
+_seo_scripts/
+
+# --- Archive / squooshed originaly ---
+images/_archive/
+
+# --- Build artifacts ---
+FLOW-web-deploy.zip
+*.zip
+node_modules/
+dist/
+build/
+
+# --- Dev dokumentace (interni handovery) ---
+HANDOVER.md
+HANDOFF.md
+HANDOVER_*.md
+AUDIT_REPORT.md
+TODO.md
+
+# --- Build skripty (jen pro lokalni Mac, ne pro deploy) ---
+cleanup_for_deploy.sh
+sync_templates.py
+
+# --- Logy / temp ---
 *.log
+*.tmp
+.env
+.env.local
+
+# --- iCloud sync junk (nikdy nepatri do gitu) ---
+* 2.*
+* 3.*
+*\ 2.*
+*\ 3.*
