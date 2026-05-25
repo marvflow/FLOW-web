@@ -120,6 +120,13 @@
   }
 
   function applyConsent(consent) {
+    // 0) Expose consent state globally pro flow.js + dalsi scripty
+    window.__flowConsent = {
+      necessary: true,
+      analytics: !!consent.analytics,
+      marketing: !!consent.marketing
+    };
+
     // 1) Google Consent Mode v2 — update
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }

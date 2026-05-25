@@ -92,9 +92,26 @@
       var data = new FormData(form);
       fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data })
         .then(function () {
+          // Source detection — page slug z URL (lepsi nez hardcoded 'homepage')
+          var pagePath = window.location.pathname.replace(/^\/|\.html$|\/$/g, '') || 'index';
+
+          // 1) GTM dataLayer event (vse co ma GA4 in GTM dostane tento event)
           if (window.dataLayer) {
-            window.dataLayer.push({ event: 'callback_form_submit', source: 'homepage' });
+            window.dataLayer.push({
+              event: 'callback_form_submit',
+              source: pagePath,
+              form_id: form.id || 'callback-form'
+            });
           }
+
+          // 2) FB Pixel Lead event — consent-gated
+          if (window.fbq && window.__flowConsent && window.__flowConsent.marketing) {
+            window.fbq('track', 'Lead', {
+              content_name: pagePath,
+              content_category: 'Callback form submit'
+            });
+          }
+
           showSuccess(name);
         })
         .catch(function (err) {
@@ -384,5 +401,29 @@
     initSmoothScroll();
     initSmartHideNav();
     initMessengerFab();
+    initConversionPageEvents();
+  }
+
+  // ───── Conversion page events (CompleteRegistration on /dekujeme-za-zajem)
+  function initConversionPageEvents() {
+    var path = window.location.pathname.replace(/\.html$|\/$/g, '');
+    var isThankYou = /\/dekujeme-za-zajem$/.test(path);
+    if (!isThankYou) return;
+
+    // GTM dataLayer event
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'conversion_complete',
+        conversion_type: 'callback_submitted'
+      });
+    }
+
+    // FB Pixel CompleteRegistration — consent-gated
+    if (window.fbq && window.__flowConsent && window.__flowConsent.marketing) {
+      window.fbq('track', 'CompleteRegistration', {
+        content_name: 'Callback form thank-you',
+        status: 'submitted'
+      });
+    }
   }
 })();
