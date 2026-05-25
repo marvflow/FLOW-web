@@ -1,112 +1,336 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
 <head>
-<meta charset="utf-8">
-<title>Stránka nenalezena (404) | Základní škola FLOW</title>
-<meta name="description" content="Omlouváme se, požadovanou stránku se nepodařilo najít. Vraťte se prosím na hlavní stránku nebo použijte menu.">
-<meta name="robots" content="noindex, follow">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="/images/favicon.png" rel="shortcut icon" type="image/x-icon">
-<link href="/images/67f6bc81331b2efe13fa1506_flow-fav.png" rel="apple-touch-icon">
-<link href="/css/webflow.css" rel="stylesheet" type="text/css">
-<link href="/css/custom.css" rel="stylesheet" type="text/css">
-<style>
-  .flow-404 {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 6vh 1.25rem;
-    background: linear-gradient(135deg, #fefaf3 0%, #ffffff 70%);
-    box-sizing: border-box;
-  }
-  .flow-404__code {
-    font-size: clamp(6rem, 20vw, 12rem);
-    font-weight: 700;
-    color: #004aad;
-    line-height: 1;
-    margin: 0;
-    letter-spacing: -0.04em;
-  }
-  .flow-404__title {
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
-    font-weight: 700;
-    color: #1a1a1a;
-    margin: 1rem 0 0.75rem;
-  }
-  .flow-404__text {
-    font-size: 1.0625rem;
-    line-height: 1.6;
-    color: #555;
-    max-width: 32rem;
-    margin: 0 auto 2rem;
-  }
-  .flow-404__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    justify-content: center;
-  }
-  .flow-404__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.85em 1.75em;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    min-height: 48px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  }
-  .flow-404__btn--primary {
-    background: #004aad;
-    color: #fff;
-    box-shadow: 0 11px 20px -7px rgba(30, 2, 63, 0.2);
-  }
-  .flow-404__btn--primary:hover {
-    background: #0057cc;
-    transform: translateY(-2px);
-    box-shadow: 0 14px 26px -7px rgba(30, 2, 63, 0.28);
-  }
-  .flow-404__btn--secondary {
-    background: #f5c748;
-    color: #2b0804;
-    border: 1px solid rgb(247, 198, 62);
-    box-shadow: 0 11px 20px -7px rgba(30, 2, 63, 0.2);
-  }
-  .flow-404__btn--secondary:hover {
-    background: #f7ce55;
-    transform: translateY(-2px);
-  }
-  .flow-404__lang {
-    margin-top: 2.5rem;
-    font-size: 0.9rem;
-    color: #888;
-  }
-  .flow-404__lang a {
-    color: #004aad;
-    text-decoration: underline;
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Stránka nenalezena (404) | FLOW</title>
+  <meta name="description" content="Tuhle stránku jsme nenašli. Pokračujte na hlavní stránku, prohlídněte si školu nebo nás přímo kontaktujte.">
+  <meta name="robots" content="noindex">
+
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/67f6bc81331b2efe13fa1506_flow-fav.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M8J8ZP');
+  </script>
+
+  <link rel="stylesheet" href="assets/css/flow.css">
+
+  <style>
+    .nf-hero {
+      background: var(--c-blue-deep);
+      color: var(--c-white);
+      padding: 100px 0 110px;
+      position: relative;
+      overflow: hidden;
+      border-bottom-left-radius: var(--r-section);
+      border-bottom-right-radius: var(--r-section);
+      text-align: center;
+    }
+    .nf-hero::before {
+      content: ""; position: absolute;
+      top: -260px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 216, 74, 0.18) 0%, rgba(255, 216, 74, 0.06) 45%, rgba(255, 216, 74, 0) 100%);
+      pointer-events: none;
+    }
+    .nf-hero__inner {
+      position: relative; z-index: 2;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .nf-hero__big {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(6rem, 16vw, 11rem);
+      color: var(--c-yellow);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      margin-bottom: var(--space-md);
+      text-shadow: 8px 8px 0 rgba(255, 216, 74, 0.15);
+    }
+    .nf-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+      color: var(--c-white);
+      margin: 0 0 var(--space-md);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+    }
+    .nf-hero h1 em { font-style: normal; color: var(--c-yellow); }
+    .nf-hero p.lead {
+      color: rgba(255,255,255,0.85);
+      font-size: var(--fs-md);
+      max-width: 540px;
+      margin: 0 auto var(--space-lg);
+      line-height: 1.55;
+    }
+
+    .nf-lifeline {
+      padding: 90px 0 100px;
+      background: var(--c-cream);
+    }
+    .nf-lifeline__head {
+      max-width: 720px;
+      margin: 0 auto var(--space-xl);
+      text-align: center;
+    }
+    .nf-lifeline__grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+    .nf-link-card {
+      background: var(--c-white);
+      border: 1.5px solid rgba(20, 37, 107, 0.1);
+      border-radius: var(--r-card);
+      padding: 28px 24px 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: all var(--t);
+      text-align: center;
+      display: block;
+    }
+    .nf-link-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(20, 37, 107, 0.16);
+      border-color: var(--c-blue-deep);
+    }
+    .nf-link-card__icon {
+      width: 48px;
+      height: 48px;
+      background: var(--c-yellow);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .nf-link-card h3 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--c-blue-deep);
+      margin: 0 0 4px;
+      letter-spacing: -0.005em;
+    }
+    .nf-link-card p {
+      margin: 0;
+      font-size: var(--fs-xs);
+      color: var(--c-muted);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 991px) {
+      .nf-hero { padding: 64px 0 70px; }
+      .nf-lifeline { padding: 56px 0 70px; }
+      .nf-lifeline__grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .nf-lifeline__grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1250403810500269');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img alt="" height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1250403810500269&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
-<main class="flow-404" role="main">
-  <p class="flow-404__code" aria-hidden="true">404</p>
-  <h1 class="flow-404__title">Tuhle stránku jsme nenašli</h1>
-  <p class="flow-404__text">
-    Odkaz může být neplatný nebo se stránka přesunula jinam.
-    Můžete se vrátit na hlavní stránku nebo nás přímo kontaktovat &mdash; rádi pomůžeme.
-  </p>
-  <div class="flow-404__actions">
-    <a class="flow-404__btn flow-404__btn--primary" href="/">Zpět na hlavní stránku</a>
-    <a class="flow-404__btn flow-404__btn--secondary" href="/kontakt">Kontaktovat školu</a>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8J8ZP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ===== HEADER ===== -->
+<!-- FLOW-NAV-START -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="site-header__brand" aria-label="FLOW — domů">
+      <img src="images/67c55ee11c9d998cbc1cec25_flow-white.svg" alt="FLOW">
+    </a>
+
+    <nav class="site-nav" aria-label="Hlavní navigace">
+      <a href="nase-skola.html" class="site-nav__link">O škole</a>
+      <a href="pro-zajemce.html" class="site-nav__link">Pro zájemce</a>
+      <a href="vzdelavaci-program.html" class="site-nav__link">Jak učíme</a>
+      <a href="materska-skola-little-flow.html" class="site-nav__link">Little FLOW</a>
+      <a href="novy-kampus.html" class="site-nav__link">Nový kampus</a>
+      <a href="en/404" class="site-nav__link" lang="en" hreflang="en" title="English">EN</a>
+      <a href="chci-do-flow.html" class="site-nav__cta">Chci do FLOW →</a>
+    </nav>
+
+    <button class="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <p class="flow-404__lang">
-    <a href="/en/404.html" hreflang="en" lang="en">English version</a>
-  </p>
+</header>
+
+<aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+  <nav class="mobile-drawer__inner" aria-label="Mobilní menu">
+    <a href="chci-do-flow.html" class="btn btn-primary">Chci do FLOW →</a>
+
+    <a href="nase-skola.html" class="mobile-drawer__link">O škole</a>
+    <a href="pro-zajemce.html" class="mobile-drawer__link">Pro zájemce</a>
+    <a href="vzdelavaci-program.html" class="mobile-drawer__link">Jak učíme</a>
+    <a href="materska-skola-little-flow.html" class="mobile-drawer__link">Little FLOW (MŠ)</a>
+    <a href="novy-kampus.html" class="mobile-drawer__link">Nový kampus</a>
+    <a href="pro-rodice-ve-flow.html" class="mobile-drawer__link">Pro rodiče ve FLOW</a>
+    <a href="blog.html" class="mobile-drawer__link">Blog</a>
+    <a href="kontakt.html" class="mobile-drawer__link">Kontakt</a>
+    <a href="en/404" class="mobile-drawer__link" lang="en" hreflang="en">🇬🇧 English</a>
+
+  </nav>
+</aside>
+
+<!-- FLOW-NAV-END -->
+
+
+<!-- ===== MAIN ===== -->
+<main class="site-main">
+
+  <section class="nf-hero">
+    <div class="container">
+      <div class="nf-hero__inner">
+        <div class="nf-hero__big">404</div>
+        <h1>Tuhle stránku jsme <em>nenašli</em>.</h1>
+        <p class="lead">Odkaz může být neplatný nebo se stránka přesunula. Nezoufejte — níže jsou nejčastější destinace, kam se chcete dostat.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="nf-lifeline">
+    <div class="container">
+      <div class="nf-lifeline__head">
+        <span class="eyebrow">Kam dál</span>
+        <h2 class="h-section">Vyberte si <em style="font-style:normal;color:var(--c-blue);">cíl</em>.</h2>
+      </div>
+
+      <div class="nf-lifeline__grid">
+        <a href="index.html" class="nf-link-card">
+          <div class="nf-link-card__icon">🏠</div>
+          <h3>Hlavní stránka</h3>
+          <p>Začněte od začátku</p>
+        </a>
+        <a href="nase-skola.html" class="nf-link-card">
+          <div class="nf-link-card__icon">🏫</div>
+          <h3>O škole</h3>
+          <p>Poznejte FLOW</p>
+        </a>
+        <a href="pro-zajemce.html" class="nf-link-card">
+          <div class="nf-link-card__icon">✨</div>
+          <h3>Pro zájemce</h3>
+          <p>Termíny, formulář</p>
+        </a>
+        <a href="kontakt.html" class="nf-link-card">
+          <div class="nf-link-card__icon">✉</div>
+          <h3>Kontakt</h3>
+          <p>Napište nám</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
 </main>
+
+<!-- ===== FOOTER ===== -->
+<!-- FLOW-FOOTER-START -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <div class="site-footer__top">
+      <a href="index.html" class="site-footer__brand" aria-label="FLOW — domů">
+        <img src="images/67c55ee11c9d998cbc1cec25_flow-white.svg" alt="FLOW">
+      </a>
+    </div>
+
+    <div class="site-footer__cols">
+      <div>
+        <p class="site-footer__heading">Menu</p>
+        <a href="nase-skola.html" class="site-footer__link">Škola FLOW</a>
+        <a href="pro-zajemce.html" class="site-footer__link">Pro zájemce</a>
+        <a href="pro-rodice-ve-flow.html" class="site-footer__link">Pro rodiče ve FLOW</a>
+        <a href="kariera.html" class="site-footer__link">Kariéra</a>
+        <a href="blog.html" class="site-footer__link">Blog</a>
+        <a href="kontakt.html" class="site-footer__link">Kontakt</a>
+        <a href="gdpr.html" class="site-footer__link">GDPR</a>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Kampus</p>
+        <p class="site-footer__small">Aktuální</p>
+        <p>Roh Přívozní 1064/2a a Jankovcovy 53<br>Praha 7 — Holešovice</p>
+        <p class="site-footer__small" style="margin-top:14px;">Nový (od šk. roku 2026/27)</p>
+        <p>Českomoravská 1a<br>Praha 9 — Balabenka</p>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Dejte nám vědět</p>
+        <p class="site-footer__small">Obecné info</p>
+        <a href="mailto:info@skolaflow.cz" class="site-footer__email">info@skolaflow.cz</a>
+        <p class="site-footer__small" style="margin-top:14px;">GDPR pověřenec</p>
+        <a href="mailto:gdpr@skolaflow.cz" class="site-footer__email">gdpr@skolaflow.cz</a>
+        <p class="site-footer__small" style="margin-top:14px;">Sledujte nás</p>
+        <div class="site-footer__socials">
+          <a href="https://www.facebook.com/skolaflowcz" target="_blank" rel="noopener" class="site-footer__social" aria-label="Facebook"><img src="images/67b351f4c755934221b6669f_facebook-logo-white.svg" alt="" loading="lazy"></a>
+          <a href="https://www.linkedin.com/company/skolaflow/" target="_blank" rel="noopener" class="site-footer__social" aria-label="LinkedIn"><img src="images/67b351f4c755934221b666a1_linkedin-logo-white.svg" alt="" loading="lazy"></a>
+          <a href="https://www.instagram.com/skolaflowcz" target="_blank" rel="noopener" class="site-footer__social" aria-label="Instagram"><img src="images/67b351f4c755934221b666a4_instagram-logo-white.svg" alt="" loading="lazy"></a>
+        </div>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Fakturační údaje</p>
+        <p><strong>Základní škola FLOW s.r.o.</strong><br>
+        IČ: 08916403<br>
+        Red IZO: 691016054 / IZO: 181129167<br>
+        Datová schránka: uf3q7m6</p>
+      </div>
+
+      <a href="chci-do-flow.html" class="btn btn-primary site-footer__cta">Chci do FLOW →</a>
+    </div>
+
+    <div class="site-footer__bottom-line">
+      <img src="images/680935e767127338a262bfd9_EU_2BM_D9_86MT_20_D8_8CB.svg" alt="EU spolufinancování + MŠMT" class="site-footer__partner site-footer__partner--mono" loading="lazy">
+      <img src="images/68093a79aace0042c9a41742_CC_partner_kulaty_20copy.svg" alt="Cambridge Center — partner institution" class="site-footer__partner" loading="lazy">
+    </div>
+
+    <p class="site-footer__legal">© <span id="footer-year">2026</span> Základní škola FLOW s.r.o. · Všechna práva vyhrazena</p>
+
+  </div>
+</footer>
+
+<!-- FB MESSENGER FAB — show on scroll, hide on body.no-messenger -->
+<a href="https://m.me/skolaflowcz" target="_blank" rel="noopener" class="msg-fab" aria-label="Napište nám na FB Messenger">
+  <svg class="msg-fab__svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.913 1.454 5.512 3.726 7.21V22l3.405-1.869c.909.252 1.872.387 2.869.387 5.523 0 10-4.145 10-9.259C22 6.145 17.523 2 12 2zm.99 12.452l-2.546-2.716L5.49 14.452l5.49-5.83 2.61 2.716 4.89-2.716-5.49 5.83z"/>
+  </svg>
+  <span class="msg-fab__dot" aria-hidden="true"></span>
+</a>
+
+<!-- FLOW-FOOTER-END -->
+
+<script src="assets/js/flow.js" defer></script>
+
 </body>
 </html>

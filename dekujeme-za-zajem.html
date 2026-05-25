@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Děkujeme! Ozveme se vám do 1 pracovního dne | FLOW</title>
+  <meta name="description" content="Děkujeme za zájem o FLOW. Ozveme se vám do 1 pracovního dne. Mezitím se podívejte na náš tým, den ve FLOW nebo si rezervujte termín dne otevřených dveří.">
+
+  <link rel="canonical" href="https://www.skolaflow.cz/dekujeme-za-zajem">
+  <link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/dekujeme-za-zajem">
+  <meta name="robots" content="noindex">
+
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/67f6bc81331b2efe13fa1506_flow-fav.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M8J8ZP');
+  </script>
+
+  <!-- GTM event: form_submit_success -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'form_submit_success', page: 'dekujeme-za-zajem' });
+  </script>
+
+  <link rel="stylesheet" href="assets/css/flow.css">
+
+  <style>
+    /* ============================================================
+       DĚKUJEME HERO — centered, personal, no foto
+       Page-specific override (ne .hero-a — visitor právě konvertoval,
+       chceme jiný emocionální tón než ostatní subpages)
+       ============================================================ */
+    .ty-hero {
+      background: var(--c-blue-deep);
+      color: var(--c-white);
+      padding: 100px 0 90px;
+      position: relative;
+      overflow: hidden;
+      border-bottom-left-radius: var(--r-section);
+      border-bottom-right-radius: var(--r-section);
+      text-align: center;
+    }
+    .ty-hero::before {
+      content: ""; position: absolute;
+      top: -260px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 216, 74, 0.18) 0%, rgba(255, 216, 74, 0.06) 45%, rgba(255, 216, 74, 0) 100%);
+      pointer-events: none;
+    }
+    .ty-hero__inner {
+      position: relative; z-index: 2;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .ty-hero__eyebrow {
+      display: inline-block;
+      border: 1px solid rgba(255, 216, 74, 0.4);
+      color: var(--c-yellow);
+      padding: 6px 18px;
+      border-radius: var(--r-pill);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+      font-family: var(--font-display);
+    }
+    .ty-hero__check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--c-yellow);
+      color: var(--c-blue-deep);
+      margin-bottom: var(--space-md);
+      box-shadow: 0 12px 32px rgba(255, 216, 74, 0.3);
+    }
+    .ty-hero__check svg { width: 44px; height: 44px; }
+    .ty-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      color: var(--c-white);
+      margin: 0 0 var(--space-md);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      font-weight: 800;
+    }
+    .ty-hero h1 em { font-style: normal; color: var(--c-yellow); }
+    .ty-hero p.lead {
+      color: rgba(255,255,255,0.88);
+      font-size: 1.18rem;
+      max-width: 580px;
+      margin: 0 auto var(--space-lg);
+      line-height: 1.55;
+    }
+    .ty-hero__meta {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      justify-content: center;
+      align-items: center;
+      color: rgba(255,255,255,0.78);
+      font-size: var(--fs-sm);
+      font-weight: 500;
+    }
+    .ty-hero__meta strong { color: var(--c-yellow); font-weight: 700; }
+    .ty-hero__meta-divider { color: rgba(255,255,255,0.3); }
+
+    /* CO SE BUDE DÍT — 3-step timeline */
+    .ty-steps {
+      padding: 100px 0;
+      background: var(--c-cream);
+    }
+    .ty-steps__grid {
+      margin-top: var(--space-xl);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1.5px solid rgba(20, 37, 107, 0.14);
+    }
+    .ty-step {
+      padding: 36px 28px 32px;
+      border-right: 1.5px solid rgba(20, 37, 107, 0.14);
+      position: relative;
+    }
+    .ty-step:last-child { border-right: none; }
+    .ty-step__num {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 38px;
+      color: var(--c-blue);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .ty-step__num span {
+      display: inline-block;
+      width: 28px;
+      height: 3px;
+      background: var(--c-yellow);
+      border-radius: 2px;
+    }
+    .ty-step__when {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-blue);
+      margin-bottom: 8px;
+      padding: 3px 10px;
+      background: rgba(255, 216, 74, 0.25);
+      border-radius: var(--r-pill);
+    }
+    .ty-step h3 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--c-blue-deep);
+      margin: 0 0 10px;
+      line-height: 1.2;
+    }
+    .ty-step p {
+      color: var(--c-ink-soft);
+      font-size: var(--fs-sm);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* OPEN DAY BANNER — secondary CTA */
+    .ty-openday {
+      padding: 80px 0;
+      background: var(--c-white);
+    }
+    .ty-openday__card {
+      max-width: 920px;
+      margin: 0 auto;
+      background: var(--c-blue-deep);
+      color: var(--c-white);
+      border-radius: var(--r-card);
+      padding: 48px 56px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .ty-openday__card::before {
+      content: ""; position: absolute;
+      top: -180px; right: -160px;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,216,74,0.18) 0%, rgba(255,216,74,0) 70%);
+      pointer-events: none;
+    }
+    .ty-openday__body { position: relative; z-index: 2; }
+    .ty-openday__eyebrow {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-yellow);
+      margin-bottom: 8px;
+    }
+    .ty-openday h2 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.5rem, 2.6vw, 2rem);
+      color: var(--c-white);
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+    .ty-openday h2 em { font-style: normal; color: var(--c-yellow); }
+    .ty-openday p {
+      color: rgba(255,255,255,0.85);
+      margin: 0;
+      max-width: 480px;
+      line-height: 1.55;
+    }
+    .ty-openday__cta { position: relative; z-index: 2; }
+
+    /* MARV VIDEO — humanizace */
+    .ty-video {
+      padding: 100px 0;
+      background: var(--c-cream);
+    }
+    .ty-video__head {
+      max-width: 720px;
+      margin: 0 auto var(--space-xl);
+      text-align: center;
+    }
+    .ty-video__wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .ty-video__loom {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid var(--c-blue-deep);
+      box-shadow: 0 18px 50px -20px rgba(20,37,107,0.4);
+      background: #000;
+    }
+    .ty-video__loom iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .ty-video__pill {
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--c-blue-deep);
+      color: var(--c-white);
+      padding: 12px 22px;
+      border-radius: var(--r-pill);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 18px 40px -20px rgba(20,37,107,0.55);
+      z-index: 3;
+      white-space: nowrap;
+    }
+    .ty-video__pill-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--c-yellow);
+      flex-shrink: 0;
+    }
+    .ty-video__pill-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .ty-video__pill-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--fs-sm);
+      color: var(--c-white);
+      display: block;
+    }
+    .ty-video__pill-role {
+      font-size: 0.72rem;
+      color: var(--c-yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    /* URGENT CONTACT */
+    .ty-urgent {
+      padding: 60px 0 100px;
+      background: var(--c-white);
+      text-align: center;
+    }
+    .ty-urgent__inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding-top: 50px;
+      border-top: 1.5px solid rgba(20, 37, 107, 0.14);
+    }
+    .ty-urgent h3 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--c-blue-deep);
+      margin: 0 0 12px;
+    }
+    .ty-urgent p {
+      color: var(--c-ink-soft);
+      margin: 0 0 var(--space-md);
+      font-size: var(--fs-sm);
+    }
+    .ty-urgent__contacts {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 14px 28px;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-md);
+    }
+    .ty-urgent__contacts a {
+      color: var(--c-blue);
+      text-decoration: none;
+      border-bottom: 2px solid var(--c-yellow);
+      padding-bottom: 2px;
+    }
+    .ty-urgent__divider { color: rgba(20,37,107,0.3); font-weight: 400; }
+
+    /* MOBILE */
+    @media (max-width: 991px) {
+      .ty-hero { padding: 64px 0 56px; }
+      .ty-hero__check { width: 72px; height: 72px; }
+      .ty-hero__check svg { width: 36px; height: 36px; }
+
+      .ty-steps { padding: 56px 0; }
+      .ty-steps__grid { grid-template-columns: 1fr; }
+      .ty-step {
+        border-right: none;
+        border-bottom: 1.5px solid rgba(20, 37, 107, 0.14);
+        padding: 24px 4px;
+      }
+      .ty-step:last-child { border-bottom: none; }
+
+      .ty-openday { padding: 56px 0; }
+      .ty-openday__card {
+        grid-template-columns: 1fr;
+        padding: 32px 28px;
+        gap: 24px;
+      }
+      .ty-openday__cta .btn { width: 100%; justify-content: center; }
+
+      .ty-video { padding: 56px 0 70px; }
+      .ty-video__pill {
+        position: static;
+        transform: none;
+        margin: 24px auto 0;
+        display: inline-flex;
+      }
+
+      .ty-urgent { padding: 40px 0 70px; }
+      .ty-urgent__inner { padding-top: 32px; }
+      .ty-urgent__divider { display: none; }
+      .ty-urgent__contacts { flex-direction: column; gap: 10px; }
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1250403810500269');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img alt="" height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1250403810500269&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body class="no-messenger">
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8J8ZP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ===== HEADER ===== -->
+<!-- FLOW-NAV-START -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="site-header__brand" aria-label="FLOW — domů">
+      <img src="images/67c55ee11c9d998cbc1cec25_flow-white.svg" alt="FLOW">
+    </a>
+
+    <nav class="site-nav" aria-label="Hlavní navigace">
+      <a href="nase-skola.html" class="site-nav__link">O škole</a>
+      <a href="pro-zajemce.html" class="site-nav__link">Pro zájemce</a>
+      <a href="vzdelavaci-program.html" class="site-nav__link">Jak učíme</a>
+      <a href="materska-skola-little-flow.html" class="site-nav__link">Little FLOW</a>
+      <a href="novy-kampus.html" class="site-nav__link">Nový kampus</a>
+      <a href="en/dekujeme-za-zajem" class="site-nav__link" lang="en" hreflang="en" title="English">EN</a>
+      <a href="chci-do-flow.html" class="site-nav__cta">Chci do FLOW →</a>
+    </nav>
+
+    <button class="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+  <nav class="mobile-drawer__inner" aria-label="Mobilní menu">
+    <a href="chci-do-flow.html" class="btn btn-primary">Chci do FLOW →</a>
+
+    <a href="nase-skola.html" class="mobile-drawer__link">O škole</a>
+    <a href="pro-zajemce.html" class="mobile-drawer__link">Pro zájemce</a>
+    <a href="vzdelavaci-program.html" class="mobile-drawer__link">Jak učíme</a>
+    <a href="materska-skola-little-flow.html" class="mobile-drawer__link">Little FLOW (MŠ)</a>
+    <a href="novy-kampus.html" class="mobile-drawer__link">Nový kampus</a>
+    <a href="pro-rodice-ve-flow.html" class="mobile-drawer__link">Pro rodiče ve FLOW</a>
+    <a href="blog.html" class="mobile-drawer__link">Blog</a>
+    <a href="kontakt.html" class="mobile-drawer__link">Kontakt</a>
+    <a href="en/dekujeme-za-zajem" class="mobile-drawer__link" lang="en" hreflang="en">🇬🇧 English</a>
+
+  </nav>
+</aside>
+
+<!-- FLOW-NAV-END -->
+
+
+<!-- ===== MAIN ===== -->
+<main class="site-main">
+
+  <!-- HERO — centered, personal -->
+  <section class="ty-hero">
+    <div class="container">
+      <div class="ty-hero__inner">
+        <span class="ty-hero__check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="ty-hero__eyebrow">Děkujeme!</span>
+        <h1>Máme vaši zprávu. <em>Brzy se ozveme</em>.</h1>
+        <p class="lead">Vaše údaje dorazily v pořádku. Ozve se vám náš tým — nečekejte na automat, mluvit s vámi bude člověk, který FLOW dobře zná.</p>
+        <div class="ty-hero__meta">
+          <span><strong>⏱ Do 1 pracovního dne</strong> se vám ozveme</span>
+          <span class="ty-hero__meta-divider">·</span>
+          <span><strong>✉ Potvrzení</strong> už jde na váš e-mail</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CO SE BUDE DÍT — 3 step timeline -->
+  <section class="ty-steps">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Co se bude dít dál</span>
+        <h2 class="h-section">Tři kroky, žádný <em style="font-style:normal;color:var(--c-blue);">spam</em>.</h2>
+      </div>
+
+      <div class="ty-steps__grid">
+
+        <article class="ty-step">
+          <div class="ty-step__num">01<span></span></div>
+          <span class="ty-step__when">Hned · do 5 minut</span>
+          <h3>Potvrzení na e-mail</h3>
+          <p>Během chvíle vám dorazí potvrzení o přijetí. Pokud nepřijde, mrkněte do spamu (občas tam padne) nebo nám napište na info@skolaflow.cz.</p>
+        </article>
+
+        <article class="ty-step">
+          <div class="ty-step__num">02<span></span></div>
+          <span class="ty-step__when">Do 1 pracovního dne</span>
+          <h3>Osobní ozvání</h3>
+          <p>Někdo z našeho týmu vám zavolá nebo napíše. Bavíme se o tom, co potřebujete, představíme školu a domluvíme další krok — schůzku, den otevřených dveří nebo prohlídku.</p>
+        </article>
+
+        <article class="ty-step">
+          <div class="ty-step__num">03<span></span></div>
+          <span class="ty-step__when">Dle vašeho času</span>
+          <h3>Schůzka nebo den otevřených dveří</h3>
+          <p>Společně najdeme nejvhodnější formát — osobní schůzka, návštěva dne otevřených dveří, online call nebo prohlídka kampusu. Vy říkáte tempo, my přizpůsobíme.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN DAY BANNER -->
+  <section class="ty-openday">
+    <div class="container">
+      <div class="ty-openday__card">
+        <div class="ty-openday__body">
+          <span class="ty-openday__eyebrow">Chcete to urychlit?</span>
+          <h2>Vyberte si rovnou termín <em>otevřených dveří</em>.</h2>
+          <p>Pokud nechcete čekat na zpětné ozvání, vyberte si nejbližší termín otevřených dveří přímo. Ozveme se vám s potvrzením do hodiny.</p>
+        </div>
+        <div class="ty-openday__cta">
+          <a href="pro-zajemce.html#form" class="btn btn-primary">Vybrat termín →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARV VIDEO -->
+  <section class="ty-video">
+    <div class="container">
+      <div class="ty-video__head">
+        <span class="eyebrow">Mezitím — poznejte zakladatele</span>
+        <h2 class="h-section">Slovo Marva, <em style="font-style:normal;color:var(--c-blue);">zakladatele FLOW</em>.</h2>
+        <p class="lead" style="margin-inline:auto;text-align:center;">3 minuty o tom, proč jsme FLOW založili a co od školy 21. století čekáme.</p>
+      </div>
+
+      <div class="ty-video__wrap">
+        <div class="ty-video__loom">
+          <iframe src="https://www.loom.com/embed/b845c7d4d318477e94c1d97e551f11d3" frameborder="0" allow="autoplay; fullscreen" allowfullscreen title="FLOW — vize a projektová výuka"></iframe>
+        </div>
+        <div class="ty-video__pill">
+          <div class="ty-video__pill-avatar"><img src="images/Marv.jpeg" alt="Marv Shamma, zakladatel FLOW" loading="lazy"></div>
+          <div>
+            <span class="ty-video__pill-name">Marv Shamma</span>
+            <span class="ty-video__pill-role">Zakladatel FLOW</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- URGENT CONTACT -->
+  <section class="ty-urgent">
+    <div class="container">
+      <div class="ty-urgent__inner">
+        <h3>Potřebujete nás zastihnout dříve?</h3>
+        <p>Zavolejte nebo napište přímo. Ozveme se obratem.</p>
+        <div class="ty-urgent__contacts">
+          <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>
+          <span class="ty-urgent__divider">·</span>
+          <a href="tel:+420770673828">+420 770 673 828</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED LINKS — co dál na webu, dokud čekáte -->
+  <div class="related-links">
+    <span class="related-links__label">Mezitím na FLOW</span>
+    <a href="nas-tym.html">Náš tým →</a>
+    <a href="den-ve-flow.html">Den ve FLOW →</a>
+    <a href="faq.html">Časté otázky →</a>
+  </div>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<!-- FLOW-FOOTER-START -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <div class="site-footer__top">
+      <a href="index.html" class="site-footer__brand" aria-label="FLOW — domů">
+        <img src="images/67c55ee11c9d998cbc1cec25_flow-white.svg" alt="FLOW">
+      </a>
+    </div>
+
+    <div class="site-footer__cols">
+      <div>
+        <p class="site-footer__heading">Menu</p>
+        <a href="nase-skola.html" class="site-footer__link">Škola FLOW</a>
+        <a href="pro-zajemce.html" class="site-footer__link">Pro zájemce</a>
+        <a href="pro-rodice-ve-flow.html" class="site-footer__link">Pro rodiče ve FLOW</a>
+        <a href="kariera.html" class="site-footer__link">Kariéra</a>
+        <a href="blog.html" class="site-footer__link">Blog</a>
+        <a href="kontakt.html" class="site-footer__link">Kontakt</a>
+        <a href="gdpr.html" class="site-footer__link">GDPR</a>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Kampus</p>
+        <p class="site-footer__small">Aktuální</p>
+        <p>Roh Přívozní 1064/2a a Jankovcovy 53<br>Praha 7 — Holešovice</p>
+        <p class="site-footer__small" style="margin-top:14px;">Nový (od šk. roku 2026/27)</p>
+        <p>Českomoravská 1a<br>Praha 9 — Balabenka</p>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Dejte nám vědět</p>
+        <p class="site-footer__small">Obecné info</p>
+        <a href="mailto:info@skolaflow.cz" class="site-footer__email">info@skolaflow.cz</a>
+        <p class="site-footer__small" style="margin-top:14px;">GDPR pověřenec</p>
+        <a href="mailto:gdpr@skolaflow.cz" class="site-footer__email">gdpr@skolaflow.cz</a>
+        <p class="site-footer__small" style="margin-top:14px;">Sledujte nás</p>
+        <div class="site-footer__socials">
+          <a href="https://www.facebook.com/skolaflowcz" target="_blank" rel="noopener" class="site-footer__social" aria-label="Facebook"><img src="images/67b351f4c755934221b6669f_facebook-logo-white.svg" alt="" loading="lazy"></a>
+          <a href="https://www.linkedin.com/company/skolaflow/" target="_blank" rel="noopener" class="site-footer__social" aria-label="LinkedIn"><img src="images/67b351f4c755934221b666a1_linkedin-logo-white.svg" alt="" loading="lazy"></a>
+          <a href="https://www.instagram.com/skolaflowcz" target="_blank" rel="noopener" class="site-footer__social" aria-label="Instagram"><img src="images/67b351f4c755934221b666a4_instagram-logo-white.svg" alt="" loading="lazy"></a>
+        </div>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Fakturační údaje</p>
+        <p><strong>Základní škola FLOW s.r.o.</strong><br>
+        IČ: 08916403<br>
+        Red IZO: 691016054 / IZO: 181129167<br>
+        Datová schránka: uf3q7m6</p>
+      </div>
+
+      <a href="chci-do-flow.html" class="btn btn-primary site-footer__cta">Chci do FLOW →</a>
+    </div>
+
+    <div class="site-footer__bottom-line">
+      <img src="images/680935e767127338a262bfd9_EU_2BM_D9_86MT_20_D8_8CB.svg" alt="EU spolufinancování + MŠMT" class="site-footer__partner site-footer__partner--mono" loading="lazy">
+      <img src="images/68093a79aace0042c9a41742_CC_partner_kulaty_20copy.svg" alt="Cambridge Center — partner institution" class="site-footer__partner" loading="lazy">
+    </div>
+
+    <p class="site-footer__legal">© <span id="footer-year">2026</span> Základní škola FLOW s.r.o. · Všechna práva vyhrazena</p>
+
+  </div>
+</footer>
+
+<!-- FB MESSENGER FAB — show on scroll, hide on body.no-messenger -->
+<a href="https://m.me/skolaflowcz" target="_blank" rel="noopener" class="msg-fab" aria-label="Napište nám na FB Messenger">
+  <svg class="msg-fab__svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.913 1.454 5.512 3.726 7.21V22l3.405-1.869c.909.252 1.872.387 2.869.387 5.523 0 10-4.145 10-9.259C22 6.145 17.523 2 12 2zm.99 12.452l-2.546-2.716L5.49 14.452l5.49-5.83 2.61 2.716 4.89-2.716-5.49 5.83z"/>
+  </svg>
+  <span class="msg-fab__dot" aria-hidden="true"></span>
+</a>
+
+<!-- FLOW-FOOTER-END -->
+
+<script src="assets/js/flow.js" defer></script>
+
+</body>
+</html>

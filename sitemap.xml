@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
+  <!-- ============================================================
+       FLOW website sitemap — bilingual (CZ + EN)
+       Each URL has hreflang alternates pointing to its sibling.
+       Last regen: 2026-05-20
+       ============================================================ -->
+
   <!-- ===== CZ pages ===== -->
   <url>
     <loc>https://www.skolaflow.cz/</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/" />
@@ -14,31 +20,63 @@
   </url>
   <url>
     <loc>https://www.skolaflow.cz/nase-skola</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/nase-skola" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/nase-skola" />
   </url>
   <url>
+    <loc>https://www.skolaflow.cz/pro-zajemce</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce" />
+  </url>
+  <url>
+    <loc>https://www.skolaflow.cz/chci-do-flow</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/chci-do-flow" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/chci-do-flow" />
+  </url>
+  <url>
     <loc>https://www.skolaflow.cz/vzdelavaci-program</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/vzdelavaci-program" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/vzdelavaci-program" />
   </url>
   <url>
-    <loc>https://www.skolaflow.cz/nas-model-vyuky-a-uceni</loc>
-    <lastmod>2026-04-21</lastmod>
+    <loc>https://www.skolaflow.cz/novy-kampus</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/novy-kampus" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/novy-kampus" />
+  </url>
+  <url>
+    <loc>https://www.skolaflow.cz/materska-skola-little-flow</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/materska-skola-little-flow" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/materska-skola-little-flow" />
+  </url>
+  <url>
+    <loc>https://www.skolaflow.cz/den-ve-flow</loc>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/nas-model-vyuky-a-uceni" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/nas-model-vyuky-a-uceni" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/den-ve-flow" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/den-ve-flow" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/kurikulum</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/kurikulum" />
@@ -46,15 +84,23 @@
   </url>
   <url>
     <loc>https://www.skolaflow.cz/anglictina-ve-flow</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/anglictina-ve-flow" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/anglictina-ve-flow" />
   </url>
   <url>
+    <loc>https://www.skolaflow.cz/wellbeing</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/wellbeing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/wellbeing" />
+  </url>
+  <url>
     <loc>https://www.skolaflow.cz/informatika-a-digitalni-gramotnost</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/informatika-a-digitalni-gramotnost" />
@@ -62,55 +108,47 @@
   </url>
   <url>
     <loc>https://www.skolaflow.cz/telesna-vychova</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/telesna-vychova" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/telesna-vychova" />
   </url>
   <url>
-    <loc>https://www.skolaflow.cz/wellbeing</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/wellbeing" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/wellbeing" />
-  </url>
-  <url>
     <loc>https://www.skolaflow.cz/nas-tym</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/nas-tym" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/nas-tym" />
   </url>
   <url>
-    <loc>https://www.skolaflow.cz/novy-kampus</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/novy-kampus" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/novy-kampus" />
-  </url>
-  <url>
     <loc>https://www.skolaflow.cz/kariera</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/kariera" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/kariera" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/kontakt</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/kontakt" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/kontakt" />
   </url>
   <url>
+    <loc>https://www.skolaflow.cz/pro-rodice-ve-flow</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-rodice-ve-flow" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-rodice-ve-flow" />
+  </url>
+  <url>
     <loc>https://www.skolaflow.cz/faq</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/faq" />
@@ -118,146 +156,88 @@
   </url>
   <url>
     <loc>https://www.skolaflow.cz/blog</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/blog" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/blog" />
   </url>
   <url>
-    <loc>https://www.skolaflow.cz/after-work-seminare-flow</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/after-work-seminare-flow" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/after-work-seminare-flow" />
-  </url>
-  <url>
     <loc>https://www.skolaflow.cz/gdpr</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/gdpr" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/gdpr" />
   </url>
 
-  <!-- ===== CZ pro-zajemce section ===== -->
+  <!-- ===== CZ pro-zajemce sub-pages ===== -->
   <url>
-    <loc>https://www.skolaflow.cz/pro-zajemce</loc>
-    <lastmod>2026-04-21</lastmod>
+    <loc>https://www.skolaflow.cz/pro-zajemce/zapisy</loc>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce" />
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/pro-zajemce/navstivte-skolu-flow</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/navstivte-skolu-flow" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/navstivte-skolu-flow" />
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/pro-zajemce/poplatky-2025-26</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/poplatky-2025-26" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/poplatky-2025-26" />
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/pro-zajemce/prijimaci-rizeni</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/prijimaci-rizeni" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/prijimaci-rizeni" />
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/pro-zajemce/prijimaci-rizeni-do-1-rocniku-2026-27</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/zapisy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/zapisy" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/pro-zajemce/prestupy</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/prestupy" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/prestupy" />
   </url>
+  <url>
+    <loc>https://www.skolaflow.cz/pro-zajemce/poplatky</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/poplatky" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/poplatky" />
+  </url>
 
-  <!-- ===== CZ blog posts ===== -->
-  <url>
-    <loc>https://www.skolaflow.cz/blog-post/jak-stavime-pedagogicky-tym-ve-flow-a-koho-to-vlastne-hledame</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/blog-post/jak-stavime-pedagogicky-tym-ve-flow-a-koho-to-vlastne-hledame" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/blog-post/jak-stavime-pedagogicky-tym-ve-flow-a-koho-to-vlastne-hledame" />
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/blog-post/marv-shamma-smysl-zivota-je-pomahat</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/blog-post/marv-shamma-smysl-zivota-je-pomahat" />
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/blog-post/marv-shamma-tedx-prague-ed</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/blog-post/marv-shamma-tedx-prague-ed" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/blog-post/marv-shamma-tedx-prague-ed" />
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/blog-post/na-vlne-podnikani-s-marvem-shammou</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/blog-post/na-vlne-podnikani-s-marvem-shammou" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/blog-post/na-vlne-podnikani-s-marvem-shammou" />
-  </url>
+  <!-- ===== CZ blog posts (4 evergreen articles) ===== -->
   <url>
     <loc>https://www.skolaflow.cz/blog-post/proc-jsem-zalozil-skolu-flow-a-jak-vnimam-vzdelavani</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/blog-post/proc-jsem-zalozil-skolu-flow-a-jak-vnimam-vzdelavani" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/blog-post/proc-jsem-zalozil-skolu-flow-a-jak-vnimam-vzdelavani" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/blog-post/proc-ve-flow-sazime-na-projektovou-vyuku</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/blog-post/proc-ve-flow-sazime-na-projektovou-vyuku" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/blog-post/proc-ve-flow-sazime-na-projektovou-vyuku" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/blog-post/s-mindsetem-minulosti-deti-na-budoucnost-nikdy-nepripravime</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/blog-post/s-mindsetem-minulosti-deti-na-budoucnost-nikdy-nepripravime" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/blog-post/s-mindsetem-minulosti-deti-na-budoucnost-nikdy-nepripravime" />
   </url>
   <url>
-    <loc>https://www.skolaflow.cz/blog-post/talk-z-lomu-s-marvem-shammou</loc>
-    <lastmod>2026-04-21</lastmod>
+    <loc>https://www.skolaflow.cz/blog-post/marv-shamma-tedx-prague-ed</loc>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/blog-post/talk-z-lomu-s-marvem-shammou" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/blog-post/talk-z-lomu-s-marvem-shammou" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/blog-post/marv-shamma-tedx-prague-ed" />
   </url>
+
+  <!-- ============================================================
+       EN pages — each mirrors a CZ sibling.
+       hreflang alternates point back at the CZ version.
+       Blog-post EN pages are redirect stubs (excluded from sitemap
+       — they have noindex and 6s meta refresh to CZ).
+       ============================================================ -->
 
   <!-- ===== EN pages ===== -->
   <url>
     <loc>https://www.skolaflow.cz/en/</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/" />
@@ -265,186 +245,182 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.skolaflow.cz/" />
   </url>
   <url>
-    <loc>https://www.skolaflow.cz/en/about-us</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.skolaflow.cz/en/nase-skola</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/nase-skola" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/nase-skola" />
   </url>
   <url>
-    <loc>https://www.skolaflow.cz/en/vzdelavaci-program</loc>
-    <lastmod>2026-04-21</lastmod>
+    <loc>https://www.skolaflow.cz/en/pro-zajemce</loc>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce" />
+  </url>
+  <url>
+    <loc>https://www.skolaflow.cz/en/chci-do-flow</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/chci-do-flow" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/chci-do-flow" />
+  </url>
+  <url>
+    <loc>https://www.skolaflow.cz/en/vzdelavaci-program</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/vzdelavaci-program" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/vzdelavaci-program" />
   </url>
   <url>
-    <loc>https://www.skolaflow.cz/en/nas-model-vyuky-a-uceni</loc>
-    <lastmod>2026-04-21</lastmod>
+    <loc>https://www.skolaflow.cz/en/novy-kampus</loc>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/novy-kampus" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/novy-kampus" />
+  </url>
+  <url>
+    <loc>https://www.skolaflow.cz/en/materska-skola-little-flow</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/materska-skola-little-flow" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/materska-skola-little-flow" />
+  </url>
+  <url>
+    <loc>https://www.skolaflow.cz/en/den-ve-flow</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/den-ve-flow" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/den-ve-flow" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/en/kurikulum</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/kurikulum" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/kurikulum" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/en/anglictina-ve-flow</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/informatika-a-digitalni-gramotnost</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/telesna-vychova</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/anglictina-ve-flow" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/anglictina-ve-flow" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/en/wellbeing</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/wellbeing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/wellbeing" />
+  </url>
+  <url>
+    <loc>https://www.skolaflow.cz/en/informatika-a-digitalni-gramotnost</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/informatika-a-digitalni-gramotnost" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/informatika-a-digitalni-gramotnost" />
+  </url>
+  <url>
+    <loc>https://www.skolaflow.cz/en/telesna-vychova</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/telesna-vychova" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/telesna-vychova" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/en/nas-tym</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/novy-kampus</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/nas-tym" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/nas-tym" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/en/kariera</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/kariera" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/kariera" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/en/kontakt</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/kontakt" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/kontakt" />
+  </url>
+  <url>
+    <loc>https://www.skolaflow.cz/en/pro-rodice-ve-flow</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-rodice-ve-flow" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-rodice-ve-flow" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/en/faq</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.65</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/faq" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/faq" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/en/blog</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/after-work-seminare-flow</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/blog" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/en/gdpr</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <priority>0.25</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/gdpr" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/gdpr" />
   </url>
 
-  <!-- ===== EN pro-zajemce section ===== -->
+  <!-- ===== EN pro-zajemce sub-pages ===== -->
   <url>
-    <loc>https://www.skolaflow.cz/en/pro-zajemce</loc>
-    <lastmod>2026-04-21</lastmod>
+    <loc>https://www.skolaflow.cz/en/pro-zajemce/zapisy</loc>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/pro-zajemce/navstivte-skolu-flow</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/pro-zajemce/poplatky-2025-26</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/pro-zajemce/prijimaci-rizeni</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/zapisy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/zapisy" />
   </url>
   <url>
     <loc>https://www.skolaflow.cz/en/pro-zajemce/prestupy</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- ===== EN blog posts ===== -->
-  <url>
-    <loc>https://www.skolaflow.cz/en/blog-post/jak-stavime-pedagogicky-tym-ve-flow-a-koho-to-vlastne-hledame</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/prestupy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/prestupy" />
   </url>
   <url>
-    <loc>https://www.skolaflow.cz/en/blog-post/marv-shamma-tedx-prague-ed</loc>
-    <lastmod>2026-04-21</lastmod>
+    <loc>https://www.skolaflow.cz/en/pro-zajemce/poplatky</loc>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/blog-post/na-vlne-podnikani-s-marvem-shammou</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/blog-post/proc-jsem-zalozil-skolu-flow-a-jak-vnimam-vzdelavani</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/blog-post/proc-ve-flow-sazime-na-projektovou-vyuku</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/blog-post/s-mindsetem-minulosti-deti-na-budoucnost-nikdy-nepripravime</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.skolaflow.cz/en/blog-post/talk-z-lomu-s-marvem-shammou</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/poplatky" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/poplatky" />
   </url>
 
 </urlset>

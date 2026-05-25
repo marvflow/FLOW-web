@@ -1,59 +1,886 @@
-<html lang="cs"><head><style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style><meta charset="utf-8"><title>Základní škola FLOW</title><meta content="Škola FLOW nabízí projektovou výuku se zaměřením na digitální gramotnost a rozšířenou výuku anglického jazyka. Naším cílem je připravit vaše děti na rychle se měnící svět a budoucnost plnou neznáma. Naší misí je pomoct dětem rozvíjet myšlení budoucích inovátorů." name="description"><meta content="Základní škola FLOW" property="og:title"><meta content="Škola FLOW nabízí projektovou výuku se zaměřením na digitální gramotnost a rozšířenou výuku anglického jazyka. Naším cílem je připravit vaše děti na rychle se měnící svět a budoucnost plnou neznáma. Naší misí je pomoct dětem rozvíjet myšlení budoucích inovátorů." property="og:description"><meta content="images/67f6bd29bd8f96e006163b1f_flow-cover.webp" property="og:image"><meta content="Základní škola FLOW" property="twitter:title"><meta content="Škola FLOW nabízí projektovou výuku se zaměřením na digitální gramotnost a rozšířenou výuku anglického jazyka. Naším cílem je připravit vaše děti na rychle se měnící svět a budoucnost plnou neznáma. Naší misí je pomoct dětem rozvíjet myšlení budoucích inovátorů." property="twitter:description"><meta content="images/67f6bd29bd8f96e006163b1f_flow-cover.webp" property="twitter:image"><meta property="og:type" content="website"><meta content="summary_large_image" name="twitter:card"><meta content="width=device-width, initial-scale=1" name="viewport"><link href="css/webflow.css" rel="stylesheet" type="text/css">
-<link href="css/custom.css" rel="stylesheet" type="text/css"><style>@media (min-width:992px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="f70595a4-5adc-5210-6ba5-df446780a9a0"] {opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="f70595a4-5adc-5210-6ba5-df446780a9a6"] {opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="f70595a4-5adc-5210-6ba5-df446780a9ac"] {opacity:0;}}@media (max-width:991px) and (min-width:768px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="f70595a4-5adc-5210-6ba5-df446780a9a0"] {opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="f70595a4-5adc-5210-6ba5-df446780a9a6"] {opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="f70595a4-5adc-5210-6ba5-df446780a9ac"] {opacity:0;}}</style><link href="images/favicon.png" rel="shortcut icon" type="image/x-icon"><link href="images/67f6bc81331b2efe13fa1506_flow-fav.png" rel="apple-touch-icon"><!-- Správce značek Google -->
-<link rel="canonical" href="https://www.skolaflow.cz/" />
-<link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/" />
-<link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/" />
-<link rel="alternate" hreflang="x-default" href="https://www.skolaflow.cz/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","EducationalOrganization"],"@id":"https://www.skolaflow.cz/#organization","name":"Základní škola FLOW","alternateName":"Flow Elementary School","url":"https://www.skolaflow.cz/","logo":{"@type":"ImageObject","url":"https://www.skolaflow.cz/images/favicon.png"},"address":{"@type":"PostalAddress","streetAddress":"Jankovcova 53","addressLocality":"Praha 7","postalCode":"170 00","addressCountry":"CZ"},"sameAs":["https://www.linkedin.com/company/skolaflow/","https://www.instagram.com/skolaflowcz","https://www.facebook.com/skolaflowcz"]}]}</script>
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Soukromá ZŠ FLOW Praha 9 a 7 — projektová výuka a angličtina</title>
+  <meta name="description" content="Škola FLOW — soukromá ZŠ a MŠ v Praze 9 a 7. Projektová výuka, rozšířená angličtina s Cambridge certifikací, malé třídy max 16 dětí. Připravujeme děti pro 21. století.">
+
+  <link rel="canonical" href="https://www.skolaflow.cz/">
+  <link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/">
+  <link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/index">
+  <link rel="alternate" hreflang="x-default" href="https://www.skolaflow.cz/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Základní škola FLOW">
+  <meta property="og:description" content="Škola FLOW nabízí projektovou výuku se zaměřením na digitální gramotnost a rozšířenou výuku anglického jazyka.">
+  <meta property="og:image" content="images/67f6bd29bd8f96e006163b1f_flow-cover.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Základní škola FLOW">
+  <meta name="twitter:description" content="Škola FLOW nabízí projektovou výuku se zaměřením na digitální gramotnost a rozšířenou výuku anglického jazyka.">
+  <meta name="twitter:image" content="images/67f6bd29bd8f96e006163b1f_flow-cover.webp">
+
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/67f6bc81331b2efe13fa1506_flow-fav.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["School", "EducationalOrganization", "LocalBusiness"],
+        "@id": "https://www.skolaflow.cz/#organization",
+        "name": "Základní škola FLOW",
+        "alternateName": ["Flow Elementary School", "FLOW — Founders' School"],
+        "description": "Soukromá ZŠ a MŠ v Praze. Projektová výuka, denní angličtina s Cambridge zkušebnou, max 16 dětí ve třídě. Founders' School — škola založená foundery pro budoucí foundery.",
+        "url": "https://www.skolaflow.cz/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.skolaflow.cz/images/67c55ee11c9d998cbc1cec25_flow-white.svg"
+        },
+        "image": "https://www.skolaflow.cz/images/67f6bd29bd8f96e006163b1f_flow-cover.webp",
+        "telephone": "+420770673828",
+        "email": "info@skolaflow.cz",
+        "foundingDate": "2022",
+        "priceRange": "180 000 Kč ročně (18 000 Kč × 10 měsíců)",
+        "currenciesAccepted": "CZK",
+        "paymentAccepted": "Bank transfer",
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "@id": "https://www.skolaflow.cz/#campus-praha7",
+            "streetAddress": "Roh Přívozní 1064/2a a Jankovcovy 53",
+            "addressLocality": "Praha 7 — Holešovice",
+            "postalCode": "170 00",
+            "addressRegion": "Hlavní město Praha",
+            "addressCountry": "CZ"
+          },
+          {
+            "@type": "PostalAddress",
+            "@id": "https://www.skolaflow.cz/#campus-praha9",
+            "streetAddress": "Českomoravská 1a",
+            "addressLocality": "Praha 9 — Balabenka",
+            "postalCode": "190 00",
+            "addressRegion": "Hlavní město Praha",
+            "addressCountry": "CZ"
+          }
+        ],
+        "areaServed": {
+          "@type": "City",
+          "name": "Praha"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "07:30",
+            "closes": "17:00"
+          }
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+420770673828",
+            "contactType": "Admissions",
+            "email": "info@skolaflow.cz",
+            "availableLanguage": ["Czech", "English"]
+          },
+          {
+            "@type": "ContactPoint",
+            "email": "gdpr@skolaflow.cz",
+            "contactType": "Data Protection Officer"
+          },
+          {
+            "@type": "ContactPoint",
+            "email": "campus@skolaflow.cz",
+            "contactType": "New campus inquiries"
+          }
+        ],
+        "founder": {
+          "@type": "Person",
+          "name": "Marv Shamma",
+          "jobTitle": "Zakladatel a ředitel"
+        },
+        "memberOf": {
+          "@type": "Organization",
+          "name": "Cambridge English Authorised Exam Centre"
+        },
+        "hasCredential": [
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "Akreditace MŠMT",
+            "identifier": "Red IZO 691016054 · IZO 181129167"
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "Cambridge English Authorised Exam Centre"
+          }
+        ],
+        "sameAs": [
+          "https://www.facebook.com/skolaflowcz",
+          "https://www.instagram.com/skolaflowcz",
+          "https://www.linkedin.com/company/skolaflow/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.skolaflow.cz/#website",
+        "url": "https://www.skolaflow.cz/",
+        "name": "Škola FLOW",
+        "inLanguage": "cs-CZ",
+        "publisher": {
+          "@id": "https://www.skolaflow.cz/#organization"
+        }
+      },
+      {
+        "@type": "Place",
+        "@id": "https://www.skolaflow.cz/#kampus-balabenka",
+        "name": "FLOW kampus Balabenka (od září 2026)",
+        "address": {
+          "@id": "https://www.skolaflow.cz/#campus-praha9"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 50.1075,
+          "longitude": 14.4920
+        },
+        "publicAccess": false,
+        "isAccessibleForFree": false
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M8J8ZP');
+  </script>
+
+  <link rel="stylesheet" href="assets/css/flow.css">
+
+  <!-- Page-specific CSS (homepage) -->
+  <style>
+    /* ============================================================
+       HERO B-ALT v2 — display H1 + montage + stats + section preview
+       ============================================================ */
+    :root { --fs-4xl: clamp(3rem, 6.5vw, 4.8rem); }
+
+    .hero {
+      background: var(--c-blue-deep);
+      color: var(--c-white);
+      padding: 90px 0 100px;
+      position: relative;
+      overflow: hidden;
+      border-bottom-left-radius: var(--r-section);
+      border-bottom-right-radius: var(--r-section);
+    }
+    .hero::before {
+      content: ""; position: absolute;
+      top: -260px; right: -200px;
+      width: 760px; height: 760px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,99,196,0.45) 0%, rgba(74,99,196,0.18) 55%, rgba(74,99,196,0) 100%);
+      pointer-events: none;
+    }
+    .hero__grid {
+      position: relative; z-index: 2;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero__eyebrow {
+      display: inline-block;
+      border: 1px solid rgba(255,216,74,0.4);
+      color: var(--c-yellow);
+      padding: 6px 18px;
+      border-radius: var(--r-pill);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+      font-family: var(--font-display);
+    }
+    .hero h1 {
+      font-size: var(--fs-4xl);
+      color: var(--c-white);
+      margin-bottom: 28px;
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+    }
+    .hero h1 em { font-style: normal; color: var(--c-yellow); }
+    .hero p.lead {
+      color: rgba(255,255,255,0.88);
+      margin: 0 0 var(--space-lg);
+      font-size: 1.18rem;
+      max-width: 540px;
+      line-height: 1.55;
+    }
+    .hero__ctas {
+      display: flex; flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: 0;
+    }
+    .hero__stats {
+      margin: 28px 0 0;
+      padding: 22px 0 6px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      border-top: 1.5px solid rgba(255,255,255,0.15);
+    }
+    .hero__stat { text-align: left; }
+    .hero__stat-value {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--c-yellow);
+      line-height: 1;
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+    .hero__stat-label {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Photo montage — 3 fotky asymetricky */
+    .hero__montage {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 14px;
+    }
+    .hero__montage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 20px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+    }
+    .hero__montage img:nth-child(1) { grid-row: 1 / 3; grid-column: 1; }
+    .hero__montage img:nth-child(2) { grid-row: 1; grid-column: 2; }
+    .hero__montage img:nth-child(3) { grid-row: 2; grid-column: 2; }
+    .hero__montage-pin {
+      position: absolute;
+      bottom: -14px;
+      left: -14px;
+      background: var(--c-yellow);
+      color: var(--c-blue-deep);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 13px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      box-shadow: 0 8px 20px rgba(20,37,107,0.25);
+      letter-spacing: 0.02em;
+      z-index: 3;
+      white-space: nowrap;
+    }
+
+    /* Section preview teaser — vykukuje zpod hero borderu */
+    .hero__preview-wrap {
+      position: relative;
+      z-index: 5;
+      margin-top: -70px;
+      margin-bottom: 40px;
+    }
+    .hero__preview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .hero__preview-card {
+      background: var(--c-white);
+      border-radius: 20px;
+      padding: 22px 22px 20px;
+      box-shadow: 0 12px 32px rgba(20,37,107,0.16);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1.5px solid rgba(20,37,107,0.06);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .hero__preview-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(20,37,107,0.22);
+    }
+    .hero__preview-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--c-yellow);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .hero__preview-card h4 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--c-blue-deep);
+      margin: 0 0 4px;
+      letter-spacing: -0.005em;
+    }
+    .hero__preview-card p {
+      margin: 0;
+      font-size: 12.5px;
+      color: var(--c-muted);
+      line-height: 1.4;
+    }
+
+    /* Kurikulum strip */
+    .strip {
+      padding: 90px 0;
+      background: var(--c-white);
+    }
+    .strip__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .strip__photo {
+      position: relative;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 2px solid var(--c-blue-deep);
+      box-shadow: var(--sh-hard-lg);
+      aspect-ratio: 5/4;
+    }
+    .strip__photo img { width: 100%; height: 100%; object-fit: cover; }
+    .strip__tag {
+      position: absolute;
+      top: 20px; left: 20px;
+      background: var(--c-yellow);
+      color: var(--c-blue-deep);
+      padding: 8px 16px;
+      border-radius: var(--r-pill);
+      font-weight: 800;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 2px solid var(--c-blue-deep);
+      font-family: var(--font-display);
+    }
+
+    /* Marv + video */
+    .video-section { padding: 96px 0 130px; background: var(--c-white); }
+    .video-section__head { text-align: center; max-width: 760px; margin: 0 auto var(--space-xl); }
+    .video-section__wrap { max-width: 1000px; margin: 0 auto; position: relative; }
+    .video-loom {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      border-radius: 24px; overflow: hidden;
+      border: 2px solid var(--c-blue-deep);
+      box-shadow: var(--sh-hard-lg);
+      background: #000;
+    }
+    .video-loom iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .video-pill {
+      position: absolute; bottom: -32px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--c-blue-deep);
+      color: var(--c-white);
+      padding: 14px 26px;
+      border-radius: var(--r-pill);
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 18px 40px -20px rgba(20,37,107,0.55);
+      z-index: 3;
+      white-space: nowrap;
+    }
+    .video-pill__avatar { width: 36px; height: 36px; border-radius: 50%; overflow: hidden; border: 2px solid var(--c-yellow); flex-shrink: 0; }
+    .video-pill__avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .video-pill__name { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-sm); color: var(--c-white); display: block; }
+    .video-pill__role { font-size: 0.72rem; color: var(--c-yellow); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+
+    /* Testimoniály */
+    .testimonials { padding: 96px 0 100px; background: var(--c-cream); }
+    .testimonials__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); }
+    .testimonial {
+      padding: 0 8px;
+      display: flex;
+      flex-direction: column;
+    }
+    .testimonial__quote {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 4.5rem;
+      color: var(--c-yellow);
+      line-height: 0.8;
+      margin-bottom: 10px;
+      display: block;
+      letter-spacing: -0.04em;
+    }
+    .testimonial__text {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--c-blue-deep);
+      line-height: 1.5;
+      margin: 0 0 20px;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      flex-grow: 1;
+    }
+    .testimonial__author {
+      padding-top: 16px;
+      border-top: 1.5px solid rgba(20, 37, 107, 0.18);
+    }
+    .testimonial__name { display: block; font-family: var(--font-display); font-weight: 800; color: var(--c-blue-deep); }
+    .testimonial__role { font-size: var(--fs-xs); color: var(--c-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* Callback */
+    .callback {
+      padding: 96px 0 120px;
+      background: var(--c-white);
+    }
+    .callback__head { text-align: center; max-width: 540px; margin: 0 auto var(--space-lg); }
+    .callback h2 em { font-style: normal; color: var(--c-blue-deep); position: relative; display: inline-block; }
+    .callback h2 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: 5px; height: 12px; background: var(--c-yellow); opacity: 0.55; z-index: -1; border-radius: 6px; }
+    .callback__form {
+      background: var(--c-white);
+      border: 2px solid var(--c-blue-deep);
+      border-radius: var(--r-card);
+      padding: 32px;
+      box-shadow: var(--sh-hard-yellow);
+    }
+    .callback__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .callback__submit-row {
+      display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;
+    }
+    .callback__gdpr { flex: 1; min-width: 240px; }
+    .callback__honeypot {
+      position: absolute; left: -9999px; width: 1px; height: 1px;
+    }
+
+    @media (max-width: 991px) {
+      .hero { padding: 64px 0 0; border-radius: 0 0 24px 24px; }
+      .hero__grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
+      .hero p.lead { font-size: 1.05rem; }
+      .hero__stats { grid-template-columns: 1fr; gap: 16px; }
+      .hero__stat { border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 14px; }
+      .hero__stat:last-child { border-bottom: 0; }
+      .hero__montage { aspect-ratio: 16/10; grid-template-columns: 1fr; grid-template-rows: none; max-width: 480px; margin: 0 auto; }
+      .hero__montage img:nth-child(1), .hero__montage img:nth-child(2), .hero__montage img:nth-child(3) {
+        grid-row: auto; grid-column: auto;
+      }
+      .hero__montage img:nth-child(2), .hero__montage img:nth-child(3) { display: none; }
+      .hero__preview-wrap { margin-top: -40px; margin-bottom: 20px; }
+      .hero__preview { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .hero__preview-card { padding: 18px 18px 16px; }
+      .strip { padding: 60px 0; }
+      .strip__grid { grid-template-columns: 1fr; gap: var(--space-md); }
+      .testimonials { padding: 64px 0 70px; }
+      .testimonials__grid { grid-template-columns: 1fr; }
+      .video-section { padding: 70px 0 90px; }
+      .video-pill { position: static; transform: none; margin: 24px auto 0; display: inline-flex; }
+      .callback { padding: 70px 0 80px; }
+      .callback__grid { grid-template-columns: 1fr; }
+      .callback__submit-row { flex-direction: column; align-items: stretch; }
+      .callback__submit-row .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1250403810500269');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img alt="" height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1250403810500269&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div class="page-wrapper">
-<div class="w-embed w-iframe"><!-- Google Tag Manager (noscript) -->
+
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8J8ZP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) --></div>
-<div role="banner" class="nav w-nav"><div class="button-for-aside-menu"><div class="burger-button-dots"><div class="burger-button-dot is-1st"></div><div class="burger-button-dot is-2nd"></div><div class="burger-button-dot is-3rd"></div></div><div class="burger-button-backgrouind" style="height: 92%;"></div></div><div class="nav-main-section"><div class="nav-wrapper"><div class="nav-main-links"><a href="index.html" class="nav-brand w-inline-block"><img src="images/6803765eddf9ecceb76bb904_flow-logo.svg" loading="lazy" alt="" class="logo-image-default"></a></div><div class="nav-sub-links"><div class="nav-dropdown-link"><div class="nav-dropdown-link-text">O škole Flow</div><div class="nav-dropdown-dot"></div><div class="dropdown-block" style="display: none;"><div class="dropdown-layout" style="transform: translate3d(0px, 3rem, 0px) scale3d(0.8, 0.8, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0;"><a href="about-us.html" class="link-text-with-dot w-inline-block"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Den ve Flow</div></a><a href="nase-skola.html" class="link-text-with-dot w-inline-block"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Prostředí a koncepce</div></a><a href="vzdelavaci-program.html" class="link-text-with-dot w-inline-block"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Vzdělávací program</div></a><a href="faq.html" class="link-text-with-dot w-inline-block"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">FAQ</div></a><a href="nas-tym.html" class="link-text-with-dot w-inline-block"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Tým Flow</div></a></div></div></div><div class="nav-dropdown-link"><div class="nav-dropdown-link-text">Pro zájemce</div><div class="nav-dropdown-dot"></div><div class="dropdown-block" style="display: none;"><div class="dropdown-layout" style="transform: translate3d(0px, 3rem, 0px) scale3d(0.8, 0.8, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0;"><a href="pro-zajemce/prijimaci-rizeni.html" class="link-text-with-dot w-inline-block"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Přijímací řízení</div></a><a href="pro-zajemce/prestupy.html" class="link-text-with-dot w-inline-block"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Přestupy</div></a><a href="pro-zajemce/navstivte-skolu-flow.html" class="link-text-with-dot w-inline-block"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Navštivte školu Flow</div></a><a href="pro-zajemce/poplatky-2025-26.html" class="link-text-with-dot w-inline-block"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Poplatky 2025/26</div></a></div></div></div><div class="nav-dropdown-link"><div class="nav-dropdown-link-text">Studium ve FLOW</div><div class="nav-dropdown-dot"></div><div class="dropdown-block" style="display: none;"><div class="dropdown-layout" style="transform: translate3d(0px, 3rem, 0px) scale3d(0.8, 0.8, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0;"><a class="link-text-with-dot w-inline-block" href="nas-model-vyuky-a-uceni.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Náš model výuky a učení</div></a><a class="link-text-with-dot w-inline-block" href="kurikulum.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Učební plán 1. stupně</div></a><a class="link-text-with-dot w-inline-block" href="informatika-a-digitalni-gramotnost.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">IT a digitální gramotnost</div></a><a class="link-text-with-dot w-inline-block" href="anglictina-ve-flow.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Angličtina ve FLOW</div></a><a class="link-text-with-dot w-inline-block" href="wellbeing.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Wellbeing</div></a><a class="link-text-with-dot w-inline-block" href="telesna-vychova.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Tělesná výchova ve FLOW</div></a><a class="link-text-with-dot w-inline-block" href="nas-model-vyuky-a-uceni-old.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Náš model výuky a učení OLD</div></a></div></div></div><a href="kariera.html" class="nav-link">Kariéra</a><a href="after-work-seminare-flow.html" class="nav-link">After-work semináře</a><a href="blog.html" class="nav-link">Blog</a><a href="#footer" class="nav-link">Kontakt</a><a href="novy-kampus.html" class="nav-link button">Nový kampus</a><div class="w-locales-list"><div role="list" class="w-locales-items"><div role="listitem" class="w-locales-item"><a href="index.html" aria-current="page" class="nav-link is-lang w--current">CS</a></div><div role="listitem" class="w-locales-item"><a href="en/index.html" class="nav-link is-lang">EN</a></div></div></div></div></div></div><div class="w-nav-overlay" id="w-nav-overlay-0"></div></div><div class="aside-menu" style="display: none;"><div class="menu-layout"><div class="menu-close" style="opacity: 0;"><img src="images/67b351f4c755934221b665b4_close-fill0-wght600-grad0-opsz24.svg" loading="lazy" alt="" class="icon is-close-icon"><div class="menu-close-text">Close</div></div><div class="menu-links" style="opacity: 0;"><div class="menu-main-links" style="transform: translate3d(0px, 4em, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0;"><details class="menu-submenu"><summary class="menu-submenu-summary link-text-with-dot"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">O škole Flow</div><span class="menu-submenu-chevron" aria-hidden="true">›</span></summary><div class="menu-submenu-items"><a class="link-text-with-dot w-inline-block" href="nas-tym.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Tým Flow</div></a><a class="link-text-with-dot w-inline-block" href="about-us.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Den ve Flow</div></a><a class="link-text-with-dot w-inline-block" href="nase-skola.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Prostředí a koncepce</div></a><a class="link-text-with-dot w-inline-block" href="vzdelavaci-program.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Vzdělávací program</div></a><a class="link-text-with-dot w-inline-block" href="faq.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">FAQ</div></a></div></details><details class="menu-submenu"><summary class="menu-submenu-summary link-text-with-dot"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Pro zájemce</div><span class="menu-submenu-chevron" aria-hidden="true">›</span></summary><div class="menu-submenu-items"><a class="link-text-with-dot w-inline-block" href="pro-zajemce/prijimaci-rizeni.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Přijímací řízení</div></a><a class="link-text-with-dot w-inline-block" href="pro-zajemce/prestupy.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Přestupy</div></a><a class="link-text-with-dot w-inline-block" href="pro-zajemce/navstivte-skolu-flow.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Navštivte školu Flow</div></a><a class="link-text-with-dot w-inline-block" href="pro-zajemce/poplatky-2025-26.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Poplatky 2025/26</div></a></div></details><details class="menu-submenu"><summary class="menu-submenu-summary link-text-with-dot"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Výuka ve FLOW</div><span class="menu-submenu-chevron" aria-hidden="true">›</span></summary><div class="menu-submenu-items"><a class="link-text-with-dot w-inline-block" href="nas-model-vyuky-a-uceni.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Náš model výuky a učení</div></a><a class="link-text-with-dot w-inline-block" href="kurikulum.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Učební plán 1. stupně</div></a><a class="link-text-with-dot w-inline-block" href="informatika-a-digitalni-gramotnost.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">IT a digitální gramotnost</div></a><a class="link-text-with-dot w-inline-block" href="anglictina-ve-flow.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Angličtina ve FLOW</div></a><a class="link-text-with-dot w-inline-block" href="wellbeing.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Wellbeing</div></a><a class="link-text-with-dot w-inline-block" href="telesna-vychova.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Tělesná výchova ve FLOW</div></a></div></details><a class="link-text-with-dot w-inline-block" href="kariera.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Kariéra</div></a><a class="link-text-with-dot w-inline-block" href="after-work-seminare-flow.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">After-work semináře</div></a><a class="link-text-with-dot w-inline-block" href="blog.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Blog</div></a><a class="link-text-with-dot w-inline-block" href="kontakt.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Kontakt</div></a><a class="link-text-with-dot w-inline-block" href="novy-kampus.html"><div class="link-text-yellow-dot" style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(45deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="link-text" style="transform: translate3d(-1em, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">Nový kampus</div></a></div><div class="aside-menu-locales"><a href="index.html" aria-current="page" class="aside-menu-lang is-current">CS</a><a href="en/index.html" class="aside-menu-lang">EN</a></div><div class="menu-links-background"></div><div class="menu-links-shadow"></div><div class="menu-links-shadow-line"></div></div></div><div class="menu-delay-for-animation" style="display: block;"></div><div class="menu-mesh-background"><img src="images/67b351f4c755934221b66523_mesh-gradient-1.webp" loading="lazy" sizes="100vw" srcset="images/67b351f4c755934221b66523_mesh-gradient-1-p-500.webp 500w, images/67b351f4c755934221b66523_mesh-gradient-1-p-800.webp 800w, images/67b351f4c755934221b66523_mesh-gradient-1-p-1080.webp 1080w, images/67b351f4c755934221b66523_mesh-gradient-1-p-1600.webp 1600w, images/67b351f4c755934221b66523_mesh-gradient-1.webp 2000w" alt="" class="menu-cover-image" style="opacity: 0;"></div><div class="menu-background" style="transform: translate3d(101%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div></div>
-<main class="main"><div class="home-2-title-block is-alert"><div class="flex-vertical-start" style="gap:.4em"><p class="heading is-about-1-title is-color-white" style="margin:0;line-height:1.25;font-size:2.8em">Hledáte pro své dítě místo, kde se učení potkává s radostí?</p><div style="display:flex;gap:0;flex-wrap:wrap;align-items:stretch;padding-bottom:.3em;margin-top:.7em;"><div style="padding:.2em 1.6em .2em 0;"><p style="margin:0;color:rgba(255,255,255,0.6);font-size:.8em;font-weight:500;letter-spacing:.06em;text-transform:uppercase;">Den otevřených dveří</p><p style="margin:.1em 0 0;color:#ffe066;font-size:2.2em;font-weight:800;line-height:1.1;letter-spacing:-.01em;">MŠ FLOW</p><p style="margin:.15em 0 0;color:#fff;font-size:1.35em;font-weight:500;">středa 20. května · 17:00</p></div><div style="width:1px;background:rgba(255,255,255,0.3);margin:.1em 1.6em .1em 0;flex-shrink:0;"></div><div style="padding:.2em 1.6em .2em 0;"><p style="margin:0;color:rgba(255,255,255,0.6);font-size:.8em;font-weight:500;letter-spacing:.06em;text-transform:uppercase;">Den otevřených dveří</p><p style="margin:.1em 0 0;color:#ffe066;font-size:2.2em;font-weight:800;line-height:1.1;letter-spacing:-.01em;">FLOW</p><p style="margin:.15em 0 0;color:#fff;font-size:1.35em;font-weight:500;">středa 27. května · 17:00</p></div><div style="width:1px;background:rgba(255,255,255,0.3);margin:.1em 1.6em .1em 0;flex-shrink:0;"></div><div style="padding:.2em 1.6em .2em 0;"><p style="margin:0;color:rgba(255,255,255,0.6);font-size:.8em;font-weight:500;letter-spacing:.06em;text-transform:uppercase;">Káva s ředitelem</p><p style="margin:.1em 0 0;color:#ffe066;font-size:2.2em;font-weight:800;line-height:1.1;letter-spacing:-.01em;">FLOW/LF</p><p style="margin:.15em 0 0;color:#fff;font-size:1.35em;font-weight:500;">út &amp; čt · dopoledne</p></div><div style="width:1px;background:rgba(255,255,255,0.3);margin:.1em 1.6em .1em 0;flex-shrink:0;"></div><div style="padding:.2em 0;"><p style="margin:0;color:rgba(255,255,255,0.6);font-size:.8em;font-weight:500;letter-spacing:.06em;text-transform:uppercase;">Online schůzka</p><p style="margin:.1em 0 0;color:#ffe066;font-size:2.2em;font-weight:800;line-height:1.1;letter-spacing:-.01em;">FLOW/LF</p><p style="margin:.15em 0 0;color:#fff;font-size:1.35em;font-weight:500;">každý pracovní den · 19:00</p></div></div></div><div style="display:flex;flex-direction:column;gap:.65em;align-items:stretch;min-width:180px"><a href="pro-zajemce.html#booking-embed" class="button is-yellow w-inline-block"><p class="main-button-name">Přijďte se podívat</p><div class="main-button-icon is-2nd"><img loading="lazy" src="images/67b351f4c755934221b66627_arrow-forward-fill0-wght400-grad0-opsz24-purple.svg" alt="" class="icon in-main-button"></div><div class="main-button-shadow is-2nd"></div><div class="main-button-line is-2nd"></div></a></div></div><div class="home-hero"><div class="home-hero-layout"><div class="home-hero-content"><h1 class="heading is-home-hero-title"><span class="span-yellow-waves-purple-font">Vracíme dětem radost</span> do školních lavic</h1><p class="paragraph is-subtitle">Jsme akreditovaná základní škola a naší misí je pomoct dětem rozvíjet myšlení budoucích inovátorů.<br></p><div class="overview-hero-buttons"><a href="#intro" class="button w-inline-block"><p class="main-button-name">Chci vědět víc</p><div class="main-button-icon"><img loading="lazy" src="images/67b351f4c755934221b66625_arrow-downward-fill0-wght400-grad0-opsz24-white.svg" alt="" class="icon in-main-button"></div><div class="main-button-shadow" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(-6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="main-button-line" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div></a><a href="pro-zajemce.html" class="button is-yellow w-inline-block"><p class="main-button-name">Pro zájemce</p><div class="main-button-icon is-2nd"><img loading="lazy" src="images/67b351f4c755934221b66627_arrow-forward-fill0-wght400-grad0-opsz24-purple.svg" alt="" class="icon in-main-button"></div><div class="main-button-shadow is-2nd" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(-6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="main-button-line is-2nd" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div></a></div></div><div class="home-hero-image-wrapper"><div class="scrolling-animation with-shadow" style="will-change: transform; transform: translate3d(0px, 4em, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><div class="image-3d-parallax"><div class="image-overlay-colors" style="opacity: 0;"></div><div class="_3d-block for-image"><div class="_3d-trigger for-image" style="will-change: transform; transform: translate3d(0%, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><div class="image-animation-trigger"><div class="parallax-animation"><div class="animation-color-background" style="display: block; transform: translate3d(0px, 101%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><img src="images/6900e0b366ea2612977f2440_Copy of  Flow_OpenDay_Post1Announce-min.png" alt="" sizes="(max-width: 1919px) 100vw, 1920px" srcset="images/6900e0b366ea2612977f2440_Copy of  Flow_OpenDay_Post1Announce-min-p-500.png 500w, images/6900e0b366ea2612977f2440_Copy of  Flow_OpenDay_Post1Announce-min-p-800.png 800w, images/6900e0b366ea2612977f2440_Copy of  Flow_OpenDay_Post1Announce-min-p-1080.png 1080w, images/6900e0b366ea2612977f2440_Copy of  Flow_OpenDay_Post1Announce-min-p-1600.png 1600w, images/6900e0b366ea2612977f2440_Copy of  Flow_OpenDay_Post1Announce-min.png 1920w" class="cover-image is-parallax" style="transform: translate3d(-3em, -7%, 0px) scale3d(1.3, 1.3, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; will-change: transform;" loading="lazy"></div></div></div></div></div></div><div class="home-hero-icon-position" style="will-change: transform; transform: translate3d(0px, 1rem, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><img src="images/67b351f4c755934221b6652d_icon-element-2.svg" loading="lazy" alt="" class="home-hero-icon"></div><div class="home-hero-image-shadow-1"></div><div class="home-hero-image-shadow-2"></div><div class="info-badge-1" style="will-change: transform; transform: translate3d(0px, 1rem, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><img src="images/67b351f4c755934221b6652d_icon-element-2.svg" loading="lazy" alt="" class="info-badge-icon"><div class="info-badge-content"><div class="info-badge-number">10</div><p class="info-badge-text">projektů ročně</p></div><div class="info-badge-1-addon"></div></div><div class="info-badge-2" style="will-change: transform; transform: translate3d(0px, 1rem, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><div class="info-badge-content"><div class="info-badge-number">16</div><p class="info-badge-text">žáků ve třídě</p></div><div class="info-badge-lines"><div class="info-badge-line"></div><div class="info-badge-line is-2nd"></div></div><div class="info-badge-2-addon"></div></div></div></div></div><section id="intro" class="section is-sticky-section-in-about-page"><div class="container"><div class="padding"><div class="vertical-flex with-gap-2em is-align-center"><h2 class="heading is-extra-large-title align-center">Naše základní<span class="span-underline-1-contain"> pilíře</span></h2><div class="max-width-100"><p class="paragraph is-extra-large is-align-center">Vstoupit do světa FLOW je začátkem jedinečné vzdělávací cesty. Naše přijímací řízení je navrženo tak, aby bylo co nejpřístupnější a zároveň nám umožnilo poznat každé dítě. Zde je přehled toho, co můžete očekávat, a jak se můžete stát součástí naší školy.</p></div><div class="max-width-60"></div></div><div class="sticky-about-wrapper"><div class="sticky-about-links"><a href="#sticky-block-1" class="sticky-about-link">1</a><a href="#sticky-block-2" class="sticky-about-link">2</a><a href="#sticky-block-3" class="sticky-about-link">3</a><a href="#sticky-block-4" class="sticky-about-link">4</a></div><div id="sticky-block-1" class="sticky-about-block"><div class="sticky-about-content"><h3 class="heading is-medium-title">Projektová výuka</h3><p class="paragraph is-extra-large">Naše výuka se opírá o projektové učení, kde žáci řeší reálné problémy a výzvy. Tím rozvíjejí schopnost analyzovat situace, pracovat v týmu a prezentovat nápady. Tento přístup podporuje sociální dovednosti a komunikační schopnosti, připravuje děti na budoucí kariéru a zvyšuje jejich motivaci tím, že je činí aktivními tvůrci svého učení.</p><a href="vzdelavaci-program.html" class="button w-inline-block"><p class="main-button-name">Vzdělávací program FLOW</p><div class="main-button-icon"><img loading="lazy" src="images/67b351f4c755934221b66626_arrow-forward-fill0-wght400-grad0-opsz24-white.svg" alt="" class="icon in-main-button"></div><div class="main-button-shadow" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(-6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="main-button-line" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div></a><div class="sticky-about-number">01</div></div><div class="sticky-about-image"><div class="image-parallax-wrapper"><div class="parallax-animation"><img src="images/6900ea6da2d51cf2c77b94c0_7710355f-01e2-4b9c-8076-33b960ec9a6f-min.png" alt="" sizes="(max-width: 1024px) 100vw, 1024px" srcset="images/6900ea6da2d51cf2c77b94c0_7710355f-01e2-4b9c-8076-33b960ec9a6f-min-p-500.png 500w, images/6900ea6da2d51cf2c77b94c0_7710355f-01e2-4b9c-8076-33b960ec9a6f-min-p-800.png 800w, images/6900ea6da2d51cf2c77b94c0_7710355f-01e2-4b9c-8076-33b960ec9a6f-min.png 1024w" class="cover-image is-parallax" style="will-change: transform; transform: translate3d(0px, -7%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" loading="lazy"></div></div></div></div><div id="sticky-block-2" class="sticky-about-block is-yellow"><div class="sticky-about-content"><h3 class="heading is-medium-title">Rozšířená výuka AJ</h3><p class="paragraph is-extra-large"><strong>Naše rozšířená výuka angličtiny je určena pro všechny žáky, ať už mají jakoukoliv úroveň angličtiny. Program kombinuje gramatiku a konverzaci s cílem odstranit strach z mluvení a povzbudit děti k používání angličtiny ve všech předmětech a každodenním životě.</strong></p><p class="paragraph is-extra-large">Cílem je, aby angličtina byla pro děti přirozeným komunikačním jazykem. V určitých fázích vzdělávací cesty žáci obdrží certifikát od Cambridge Centre, který potvrzuje jejich jazykové dovednosti. Program je navržen tak, aby podporoval každého žáka v jeho individuálním jazykovém rozvoji.</p><a href="vzdelavaci-program.html" class="button w-inline-block"><p class="main-button-name">Vzdělávací program FLOW</p><div class="main-button-icon"><img loading="lazy" src="images/67b351f4c755934221b66626_arrow-forward-fill0-wght400-grad0-opsz24-white.svg" alt="" class="icon in-main-button"></div><div class="main-button-shadow" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(-6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="main-button-line" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div></a><div class="sticky-about-number">02</div></div><div class="sticky-about-image"><div class="image-parallax-wrapper"><div class="parallax-animation"><img src="images/6900e7a35cd867f4db8130b5_976cfb5-7254-4f4c-bf28-807ec288d4e8-min.png" alt="" sizes="(max-width: 1024px) 100vw, 1024px" srcset="images/6900e7a35cd867f4db8130b5_976cfb5-7254-4f4c-bf28-807ec288d4e8-min-p-500.png 500w, images/6900e7a35cd867f4db8130b5_976cfb5-7254-4f4c-bf28-807ec288d4e8-min-p-800.png 800w, images/6900e7a35cd867f4db8130b5_976cfb5-7254-4f4c-bf28-807ec288d4e8-min.png 1024w" class="cover-image is-parallax" style="will-change: transform; transform: translate3d(0px, -7%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" loading="lazy"></div></div></div></div><div id="sticky-block-3" class="sticky-about-block is-light-yellow"><div class="sticky-about-content"><h3 class="heading is-medium-title">Programování a digitální gramotnost</h3><p class="paragraph is-extra-large"><strong>V rámci našeho kurikula klademe důraz na programování a digitální gramotnost, aby naše děti od první třídy rozvíjely dovednosti nezbytné v digitálním věku.</strong></p><p class="paragraph is-extra-large">Učíme je, jak s pomocí digitálních technologií tvořit obsah, vytvářet digitální produkty a služby. Cílem je, aby děti nebyly jen pasivními spotřebiteli, ale staly se aktivními tvůrci v digitálním světě, rozuměly technologiím kolem sebe a byly schopné je kreativně využívat.</p><a href="vzdelavaci-program.html" class="button w-inline-block"><p class="main-button-name">Vzdělávací program FLOW</p><div class="main-button-icon"><img loading="lazy" src="images/67b351f4c755934221b66626_arrow-forward-fill0-wght400-grad0-opsz24-white.svg" alt="" class="icon in-main-button"></div><div class="main-button-shadow" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(-6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="main-button-line" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div></a><div class="sticky-about-number">03</div></div><div class="sticky-about-image"><div class="image-parallax-wrapper"><div class="parallax-animation"><img src="images/6900e0a2fa86f1de313db1af_45b8-b117-3bb0982b4780-min.png" alt="" sizes="(max-width: 1024px) 100vw, 1024px" srcset="images/6900e0a2fa86f1de313db1af_45b8-b117-3bb0982b4780-min-p-500.png 500w, images/6900e0a2fa86f1de313db1af_45b8-b117-3bb0982b4780-min-p-800.png 800w, images/6900e0a2fa86f1de313db1af_45b8-b117-3bb0982b4780-min.png 1024w" class="cover-image is-parallax" style="will-change: transform; transform: translate3d(0px, -7%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" loading="lazy"></div></div></div></div><div id="sticky-block-4" class="sticky-about-block is-green"><div class="sticky-about-content"><h3 class="heading is-medium-title">Psychologické bezpečí</h3><p class="paragraph is-extra-large"><strong>Ve FLOW klademe důraz na psychologické bezpečí a celkový wellbeing dětí. Toho dosahujeme prostřednictvím projektové výuky, která je navržena tak, aby podporovala individualizaci učení a zahrnovala různé učební zóny ve třídách.</strong></p><p class="paragraph is-extra-large">Naše 90minutové výukové bloky umožňují pedagogům i dětem plně se ponořit do daného projektu a probrané látky, což napomáhá hlubšímu porozumění a lepšímu zapojení do učebního procesu. Důležitou součástí našeho týmu je školní psycholog, který nejen sleduje celkovou dynamiku třídy, ale také pracuje individuálně s dětmi, aby podpořil jejich emocionální a sociální rozvoj. Náš školní den začíná ranním kruhem, kde mají děti možnost vyjádřit se k čemukoli, co je trápí nebo co chtějí sdílet, což jim pomáhá začít den s pozitivním nastavením a pocitem sounáležitosti. Tento holistický přístup k vzdělávání je klíčem k podpoře dobrého psychického zdraví a celkové pohody našich dětí. </p><a href="vzdelavaci-program.html" class="button w-inline-block"><p class="main-button-name">Vzdělávací program FLOW</p><div class="main-button-icon"><img loading="lazy" src="images/67b351f4c755934221b66626_arrow-forward-fill0-wght400-grad0-opsz24-white.svg" alt="" class="icon in-main-button"></div><div class="main-button-shadow" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(-6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="main-button-line" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div></a><div class="sticky-about-number">04<br></div></div><div class="sticky-about-image"><div class="image-parallax-wrapper"><div class="parallax-animation"><img src="images/6900e0ba42c056bd73e0abfe_bc1cdc55-b18d-475b-9f02-70dd0cf043cb-min.png" alt="" sizes="(max-width: 1024px) 100vw, 1024px" srcset="images/6900e0ba42c056bd73e0abfe_bc1cdc55-b18d-475b-9f02-70dd0cf043cb-min-p-500.png 500w, images/6900e0ba42c056bd73e0abfe_bc1cdc55-b18d-475b-9f02-70dd0cf043cb-min-p-800.png 800w, images/6900e0ba42c056bd73e0abfe_bc1cdc55-b18d-475b-9f02-70dd0cf043cb-min.png 1024w" class="cover-image is-parallax" style="will-change: transform; transform: translate3d(0px, -7%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" loading="lazy"></div></div></div></div></div></div></div></section><section class="section is-transparent"><div class="container"><div class="padding"><div class="vertical-flex with-gap-6em is-align-center"><h2 class="heading is-extra-large-title"><span class="span-underline-1">Vstoupit do světa FLOW</span> <br>je začátkem jedinečné vzdělávací cesty. </h2><div class="about-grid"><div class="about-grid-block"><div class="about-grid-image"><div class="image-3d-parallax"><div class="image-overlay-colors" style="opacity: 0;"></div><div class="_3d-block for-image"><div class="_3d-trigger for-image" style="will-change: transform; transform: translate3d(0%, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><div class="image-animation-trigger"><div class="parallax-animation"><div class="animation-color-background" style="display: block; transform: translate3d(0px, 101%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><img src="images/6900e9bc037fde93cf0b78d9_aac6b437-883d-4c0d-beec-1500f0b1c186-min.png" alt="" sizes="(max-width: 1919px) 100vw, 1920px" srcset="images/6900e9bc037fde93cf0b78d9_aac6b437-883d-4c0d-beec-1500f0b1c186-min-p-500.png 500w, images/6900e9bc037fde93cf0b78d9_aac6b437-883d-4c0d-beec-1500f0b1c186-min-p-800.png 800w, images/6900e9bc037fde93cf0b78d9_aac6b437-883d-4c0d-beec-1500f0b1c186-min.png 1024w" class="cover-image is-parallax" style="transform: translate3d(-3em, -7%, 0px) scale3d(1.3, 1.3, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; will-change: transform;" loading="lazy"></div></div></div></div></div></div></div><div class="about-grid-block is-content"><div class="about-grid-content"><h2 class="heading is-medium-title">Naše <a href="nas-model-vyuky-a-uceni-old.html">kurikulum</a> je navrženo tak, aby <span class="span-yellow-waves-purple-font">reflektovalo požadavky současného</span>, neustále se měnícího <span class="span-yellow-waves-purple-font">světa</span>. </h2><p class="paragraph is-extra-large">Nabízíme širokou škálu projektů, které nejen poskytují praktické zkušenosti, ale také rozvíjí digitální gramotnost – základní dovednosti potřebné pro úspěšnou budoucnost v digitálním věku.</p><a href="vzdelavaci-program.html" class="button w-inline-block"><p class="main-button-name">Vzdělávací program FLOW</p><div class="main-button-icon"><img loading="lazy" src="images/67b351f4c755934221b66626_arrow-forward-fill0-wght400-grad0-opsz24-white.svg" alt="" class="icon in-main-button"></div><div class="main-button-shadow" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(-6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="main-button-line" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div></a></div><div class="about-grid-shadow"></div></div><div class="about-grid-block is-grid"><div class="achievement-block" style="opacity: 0;"><div class="achievement-number">10</div><p class="achievement-paragraph">projektů ročně</p><div class="achievement-backgound-white"></div></div><div class="achievement-block is-2nd" style="opacity: 0;"><div class="achievement-number">16</div><p class="achievement-paragraph">žáků ve třídě</p><div class="achievement-backgound-yellow"></div></div><div class="achievement-block is-3rd" style="opacity: 0;"><div class="achievement-number">2</div><p class="achievement-paragraph">učitelé pro třídu</p><div class="achievement-backgound-purple"></div></div><div style="opacity: 0;" class="achievement-block is-4th"><div class="achievement-number">1.–6.</div><p class="achievement-paragraph">třída ZŠ</p><div class="achievement-backgound-white-2"></div></div></div><div id="w-node-f70595a4-5adc-5210-6ba5-df446780a9b8-21b662ac" class="about-grid-block"><div class="about-grid-image"><div class="image-3d-parallax"><div class="image-overlay-colors" style="opacity: 0;"></div><div class="_3d-block for-image"><div class="_3d-trigger for-image" style="will-change: transform; transform: translate3d(0%, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><div class="image-animation-trigger"><div class="parallax-animation"><div class="animation-color-background" style="display: block; transform: translate3d(0px, 101%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><img src="images/6900efa2dc17355a54e2cc31_76ec0539-5a5f-4c7f-a898-3598eb64420f-min.png" alt="" sizes="(max-width: 1919px) 100vw, 1920px" srcset="images/6900efa2dc17355a54e2cc31_76ec0539-5a5f-4c7f-a898-3598eb64420f-min-p-500.png 500w, images/6900efa2dc17355a54e2cc31_76ec0539-5a5f-4c7f-a898-3598eb64420f-min-p-800.png 800w, images/6900efa2dc17355a54e2cc31_76ec0539-5a5f-4c7f-a898-3598eb64420f-min.png 1024w" class="cover-image is-parallax" style="transform: translate3d(-3em, -7%, 0px) scale3d(1.3, 1.3, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; will-change: transform;" loading="lazy"></div></div></div></div></div></div></div><div id="w-node-_603233cf-75bc-b6ff-e295-71bfbdb25158-21b662ac" class="about-grid-block"><div class="about-grid-image"><div class="image-3d-parallax"><div class="image-overlay-colors" style="opacity: 0;"></div><div class="_3d-block for-image"><div class="_3d-trigger for-image" style="will-change: transform; transform: translate3d(0%, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><div class="image-animation-trigger"><div class="parallax-animation"><div class="animation-color-background" style="display: block; transform: translate3d(0px, 101%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><img src="images/67b5c66eb2b2093ab495e01d_65450e48ec70f7d838edf89a_MichaelaKralova-p-1600.avif" alt="" sizes="(max-width: 1600px) 100vw, 1600px" srcset="images/67b5c66eb2b2093ab495e01d_65450e48ec70f7d838edf89a_MichaelaKralova-p-1600-p-500.avif 500w, images/67b5c66eb2b2093ab495e01d_65450e48ec70f7d838edf89a_MichaelaKralova-p-1600-p-800.avif 800w, images/67b5c66eb2b2093ab495e01d_65450e48ec70f7d838edf89a_MichaelaKralova-p-1600-p-1080.avif 1080w, images/67b5c66eb2b2093ab495e01d_65450e48ec70f7d838edf89a_MichaelaKralova-p-1600.avif 1600w" class="cover-image is-parallax" style="transform: translate3d(-3em, -7%, 0px) scale3d(1.3, 1.3, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; will-change: transform;" loading="lazy"></div></div></div></div></div></div></div><div class="about-grid-block is-content"><div class="about-grid-content"><h2 class="heading is-regular-title">Potřebujeme se dokázat zorientovat v nových situacích, <span class="span-yellow-waves-purple-font">umět se kriticky zamyslet, rozhodnout se a za těmito svými kroky si stát</span>, přijmout za ně zodpovědnost. </h2><p class="paragraph is-extra-large">Právě takový přístup jsem objevila ve FLOW se svým holistickým přístupem ke vzdělávání a projektově orientovanou výukou, která má žáky připravovat pro život takový, jaký nám 21. století přináší. Líbí se mi, že FLOW do vzdělávacího procesu zahrnuje smysluplnost, kreativitu, hravost a zejména radost. FLOW se nebojí realizovat vzdělávání „jinak“, přinášet výzvy. I já si je ráda stanovuji, mám neustálou potřebu posouvat se vpřed a motivovat také ostatní k podobnému smýšlení. FLOW vnímám jako příležitost pro změnu přístupu ke vzdělávání i pro svůj profesní růst.</p><p class="paragraph"><strong>Michaela Trněná Králová<br>Hlavní Metodička</strong><br></p></div><div class="about-grid-shadow"></div></div></div></div></div></div></section><section class="section is-transparent" style="display:none"><div class="container"><div class="padding"><div class="vertical-flex with-gap-6em is-align-center"><div class="max-width-60"><h2 class="heading is-extra-large-title"><span class="span-green-waves-purple-font">Rodiče</span> mluví za nás</h2></div><div class="carousel-layout"><div class="carousel w-slider" role="region" aria-label="carousel"><div class="carousel-mask w-slider-mask" id="w-slider-mask-0"><article class="carousel-slide w-slide" aria-label="1 of 3" role="group" style="transition: all; transform: translateX(0px); opacity: 1;"><div href="#" class="carousel-block"><div class="vertical-flex with-gap-4em is-align-center"><p class="carousel-testimonial">Hodně mě baví lidi s vizí. Ještě víc lidi, co tu vizi i umějí naplňovat. A proto mě fakt baví pozorovat Marva Shammu a jeho školu FLOW. Dneska mají den otevřených dveří ve škole, která zase vypadá o kus líp než když jsem tu byl naposledy.</p><p class="paragraph is-large"><span>Dan Pražák, učitel</span></p></div></div></article><article class="carousel-slide w-slide" aria-label="2 of 3" role="group" aria-hidden="true" style="transition: all; transform: translateX(0px); opacity: 1;"><div href="#" class="carousel-block" aria-hidden="true"><div class="vertical-flex with-gap-4em is-align-center" aria-hidden="true"><p class="carousel-testimonial" aria-hidden="true"> </p><div class="vertical-flex with-gap-4em is-align-center" aria-hidden="true"><p class="carousel-testimonial" aria-hidden="true"><span class="carousel-testimonial-truncate" aria-hidden="true">Chtěla jsem pro syna školu, do které se bude těšit a učení ho bude bavit. A nejenže se do školy těší, ale často se mu ani nechce z ní domů - protože i družina je super ☺️ Já oceňuji individuální přístup k vzdělávání - pokud synovi něco nejde hledáme společně řešení (jak s učitelkou, tak dalšími odborníky) jak mu učivo vysvětlit formou, která bude pro něj lepší a stále zábavná. To nám umožňuje více času věnovat tomu, v čem je dobrý!</span> <span class="carousel-testimonial-more" aria-hidden="true">více</span></p><p class="paragraph is-large" aria-hidden="true">Veronika, maminka</p></div></div></div></article><article class="carousel-slide w-slide" aria-label="3 of 3" role="group" aria-hidden="true" style="transition: all; transform: translateX(0px); opacity: 1;"><div href="#" class="carousel-block" aria-hidden="true"><div class="vertical-flex with-gap-4em is-align-center" aria-hidden="true"><p class="carousel-testimonial" aria-hidden="true"><span class="carousel-testimonial-truncate" aria-hidden="true">Naše dcera navštěvuje školu Flow, kam přestoupila ze státní školy, a rozdíl je nepřehlédnutelný. Zde se opět našla a každé ráno jde do školy s velkým nadšením! Na Flow si nejvíce vážíme jejich přístupu zaměřeného na děti. Nejenže se snaží, aby se děti naučily, ale také se jim snaží vytvořit bezpečné a podporující prostředí. Dcera si chválí všechny učitele, kterých si váží a cítí v nich oporu, i zajímavou náplň učiva. Jako rodiče oceňujeme, že škola usiluje o splnění svých cílů, které si stanovila na začátku, i přes různé výzvy spojené s nově zahájeným provozem (škola byla otevřena pouze před 7 měsíci). Naše dcera i my se vždy těšíme na každoměsíční demo day (kde děti předvádí, na čem pracovaly během posledních týdnů.) Výhodou jsou i pestré odpolední kroužky (jóga, věda, keramika, logopedie). Celkově jsme se školou Flow velmi spokojení a jsme rádi, že jsme se rozhodli pro ni.</span> <span class="carousel-testimonial-more" aria-hidden="true">více</span></p><p class="paragraph is-large" aria-hidden="true">Eva, rodič</p></div></div></article><div aria-live="off" aria-atomic="true" class="w-slider-aria-label"></div></div><div class="carousel-button is-left w-slider-arrow-left" role="button" aria-controls="w-slider-mask-0" aria-label="previous slide"></div><div class="carousel-button w-slider-arrow-right" role="button" aria-controls="w-slider-mask-0" aria-label="next slide"></div><div class="carousel-nav w-slider-nav"><div class="w-slider-dot w-active" aria-label="Show slide 1 of 3" aria-pressed="true" role="button" style="margin-left: 0px; margin-right: 0px;"></div><div class="w-slider-dot" aria-label="Show slide 2 of 3" aria-pressed="false" role="button" style="margin-left: 0px; margin-right: 0px;"></div><div class="w-slider-dot" aria-label="Show slide 3 of 3" aria-pressed="false" role="button" style="margin-left: 0px; margin-right: 0px;"></div></div></div></div></div></div></div></section><section class="section with-yellow-color"><div class="container"><div class="padding"><div class="vertical-flex with-gap-4em is-align-center"><h2 class="heading is-extra-large-title"><span class="span-underline-1">Jste připraveni začít </span>svou cestu s námi?</h2><div class="overview-hero-buttons"><a href="pro-zajemce.html" class="button w-inline-block"><p class="main-button-name">Důležité informace pro zájemce</p><div class="main-button-icon"><img loading="lazy" src="images/67b351f4c755934221b66626_arrow-forward-fill0-wght400-grad0-opsz24-white.svg" alt="" class="icon in-main-button"></div><div class="main-button-shadow" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(-6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="main-button-line" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div></a></div></div></div></div></section><div class="footer-with-newsletter"><div class="footer-wrapper"><div class="footer-shadow is-2nd" style="opacity: 0;"></div><div class="footer-shadow" style="opacity: 0;"></div><div id="footer" class="footer"><div class="container"><div class="footer-layout"><div class="footer-main-section"><div class="footer-main-links"><a id="w-node-_9b0aa3b7-72b4-ad45-d170-22d194196833-559d9fce" href="index.html" aria-current="page" class="footer-nav-brand w-inline-block w--current"><img src="images/67c55ee11c9d998cbc1cec25_flow-white.svg" loading="lazy" alt="" class="logo-image-default footer-brand"></a><div id="w-node-c80660d1-7f36-bda5-1f8f-416bba2cdec7-559d9fce" class="footer-call-to-action-button" style="justify-self:start"><a href="pro-zajemce.html" class="button is-yellow w-inline-block"><p class="main-button-name">Pro zájemce</p><div class="main-button-icon is-2nd"><img loading="lazy" src="images/67b351f4c755934221b66627_arrow-forward-fill0-wght400-grad0-opsz24-purple.svg" alt="" class="icon in-main-button"></div><div class="main-button-shadow is-2nd" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(-6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div><div class="main-button-line is-2nd" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(6deg) skew(0deg, 0deg); transform-style: preserve-3d;"></div></a></div></div><div class="contact-content-grid"><div class="contact-content-block"><p class="heading is-small-title">Menu</p><div class="footer-main-links-wrapper"><a href="nase-skola.html" class="footer-main-link">Škola Flow</a><a href="pro-zajemce.html" class="footer-main-link">Pro zájemce</a><a href="kariera.html" class="footer-main-link">Kariéra</a><a href="blog.html" class="footer-main-link">Blog</a><a href="gdpr.html" class="footer-main-link">GDPR</a></div></div><div class="contact-content-block"><p class="heading is-small-title">Campus</p><div class="contact-content-wrapper"><p class="small-uppercase-title is-white">Aktuální campus</p><p class="paragraph is-white"><strong>Roh Přívozní 1064/2a a Jankovcovy 53<br>Praha 7 - Holešovice<br></strong></p></div><div class="contact-content-wrapper"><p class="small-uppercase-title is-white">Nový campus (od školního roku 26/27)</p><p class="paragraph is-white"><strong>Českomoravská 1a<br>Praha 9 - Balabenka<br></strong></p></div></div><div class="contact-content-block"><p class="heading is-small-title">Dejte nám vědět</p><div class="contact-links"><div class="contact-content-wrapper"><p class="small-uppercase-title is-white">Pro obecné informace</p><a href="mailto:info@skolaflow.cz" class="contact-link">info@skolaflow.cz</a></div><div class="contact-content-wrapper"><p class="small-uppercase-title is-white">Kontakt na pověřence GDPR:</p><a href="mailto:gdpr@skolaflow.cz" class="contact-link">gdpr@skolaflow.cz</a></div><div class="contact-content-wrapper"><p class="small-uppercase-title is-white">Sledujte nás</p><div class="contact-socials w-dyn-list"><div role="list" class="contact-socials-list w-dyn-items"><div role="listitem" class="contact-social-item w-dyn-item"><a href="https://www.facebook.com/skolaflowcz" target="_blank" class="contact-social-link w-inline-block"><img alt="Facebook" loading="lazy" src="images/67b351f4c755934221b6669f_facebook-logo-white.svg" class="icon is-contact-social-icon"></a></div><div role="listitem" class="contact-social-item w-dyn-item"><a href="https://www.linkedin.com/company/skolaflow/" target="_blank" class="contact-social-link w-inline-block"><img alt="LinkedIn" loading="lazy" src="images/67b351f4c755934221b666a1_linkedin-logo-white.svg" class="icon is-contact-social-icon"></a></div><div role="listitem" class="contact-social-item w-dyn-item"><a href="https://www.instagram.com/skolaflowcz" target="_blank" class="contact-social-link w-inline-block"><img alt="Instagram" loading="lazy" src="images/67b351f4c755934221b666a4_instagram-logo-white.svg" class="icon is-contact-social-icon"></a></div></div></div></div></div></div><div class="contact-content-block"><p class="heading is-small-title">Fakturační údaje</p><div class="contact-content-wrapper"><p class="paragraph is-white"><strong>Základní škola FLOW s.r.o.</strong><br>IČ: 08916403<br>Red IZO: 691016054 / IZO: 181129167<br>Datová schránka: uf3q7m6</p></div></div></div><div class="footer-contact-buttons"><img src="images/680935e767127338a262bfd9_EU_2BM_D9_86MT_20_D8_8CB.svg" loading="lazy" alt="EU" class="footer-logo"><img src="images/68093a79aace0042c9a41742_CC_partner_kulaty_20copy.svg" loading="lazy" alt="cambridge center" class="footer-logo cambridge"></div></div></div></div></div></div></div></main><div class="mesh-backgrounds-wrapper"></div></div><aside id="usercentrics-cmp-ui"></aside>
-<script src="js/main.js"></script>
+
+<!-- ===== HEADER ===== -->
+<!-- FLOW-NAV-START -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="site-header__brand" aria-label="FLOW — domů">
+      <img src="images/67c55ee11c9d998cbc1cec25_flow-white.svg" alt="FLOW">
+    </a>
+
+    <nav class="site-nav" aria-label="Hlavní navigace">
+      <a href="nase-skola.html" class="site-nav__link">O škole</a>
+      <a href="pro-zajemce.html" class="site-nav__link">Pro zájemce</a>
+      <a href="vzdelavaci-program.html" class="site-nav__link">Jak učíme</a>
+      <a href="materska-skola-little-flow.html" class="site-nav__link">Little FLOW</a>
+      <a href="novy-kampus.html" class="site-nav__link">Nový kampus</a>
+      <a href="en/" class="site-nav__link" lang="en" hreflang="en" title="English">EN</a>
+      <a href="chci-do-flow.html" class="site-nav__cta">Chci do FLOW →</a>
+    </nav>
+
+    <button class="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+  <nav class="mobile-drawer__inner" aria-label="Mobilní menu">
+    <a href="chci-do-flow.html" class="btn btn-primary">Chci do FLOW →</a>
+
+    <a href="nase-skola.html" class="mobile-drawer__link">O škole</a>
+    <a href="pro-zajemce.html" class="mobile-drawer__link">Pro zájemce</a>
+    <a href="vzdelavaci-program.html" class="mobile-drawer__link">Jak učíme</a>
+    <a href="materska-skola-little-flow.html" class="mobile-drawer__link">Little FLOW (MŠ)</a>
+    <a href="novy-kampus.html" class="mobile-drawer__link">Nový kampus</a>
+    <a href="pro-rodice-ve-flow.html" class="mobile-drawer__link">Pro rodiče ve FLOW</a>
+    <a href="blog.html" class="mobile-drawer__link">Blog</a>
+    <a href="kontakt.html" class="mobile-drawer__link">Kontakt</a>
+    <a href="en/" class="mobile-drawer__link" lang="en" hreflang="en">🇬🇧 English</a>
+
+  </nav>
+</aside>
+
+<!-- FLOW-NAV-END -->
 
 
-<script>
-(function(){
-  var blocks = [1,2,3,4].map(function(n){ return document.getElementById('sticky-block-'+n); });
-  var links  = document.querySelectorAll('.sticky-about-link');
-  if(!blocks[0] || !links.length) return;
+<!-- ===== MAIN ===== -->
+<main class="site-main">
 
-  var current = -1;
-  function update(){
-    var anchor = window.innerHeight * 0.45;
-    var idx = 0;
-    for (var i = 0; i < blocks.length; i++){
-      var b = blocks[i];
-      if (!b) continue;
-      var top = b.getBoundingClientRect().top;
-      if (top <= anchor) idx = i;
-    }
-    if (idx !== current){
-      current = idx;
-      links.forEach(function(l){ l.classList.remove('w--current'); });
-      var active = document.querySelector('.sticky-about-link[href="#sticky-block-'+(idx+1)+'"]');
-      if (active) active.classList.add('w--current');
-    }
-  }
+  <!-- HERO — B-ALT v2 (display H1 + montage + stats + section preview) -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero__grid">
 
-  var ticking = false;
-  function onScroll(){
-    if (!ticking){
-      window.requestAnimationFrame(function(){
-        update();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
+        <div>
+          <span class="hero__eyebrow">Přijímáme do ZŠ a MŠ · 2026/27</span>
+          <h1>Vracíme dětem <em>radost</em> do školních lavic.</h1>
+          <p class="lead">FLOW je soukromá ZŠ a MŠ v Praze 9 — místo, kde se učení potkává s radostí, projektovou prací a každodenní angličtinou. Stavíme školu, do které byste chtěli chodit sami.</p>
 
-  window.addEventListener('scroll', onScroll, {passive:true});
-  window.addEventListener('resize', onScroll);
-  update();
-})();
-</script>
-</body></html>
+          <div class="hero__ctas">
+            <a href="chci-do-flow.html" class="btn btn-primary">Chci do FLOW →</a>
+            <a href="pro-zajemce.html#form" class="btn btn-secondary btn-secondary--on-dark">Přijít na den otevřených dveří</a>
+          </div>
+
+          <div class="hero__stats">
+            <div class="hero__stat">
+              <span class="hero__stat-value">OD 2022</span>
+              <span class="hero__stat-label">Na českém trhu</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-value">MAX. 16</span>
+              <span class="hero__stat-label">Dětí ve třídě</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-value">AKREDITACE</span>
+              <span class="hero__stat-label">V rejstříku MŠMT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__montage">
+          <img src="images/nase-skola/skola-trida__index__index.jpg" alt="Třída ve FLOW — kruhový stůl a projektová výuka" loading="eager">
+          <img src="images/67b9973589795b248fa0db79_C0003.00_10_53_12.Still002__index__index__index.avif" alt="Dítě při projektovém učení" loading="eager">
+          <img src="images/67b99734c77e6cf3a3cfc9b0_C0003.00_11_35_14.Still008.avif" alt="Učení skrze hru a tvořivost" loading="eager">
+          <span class="hero__montage-pin">📍 Praha 9 · od září 2026</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section preview teaser — sedí MIMO hero (jinak overflow:hidden ořezává) -->
+  <div class="hero__preview-wrap">
+    <div class="container">
+      <div class="hero__preview">
+        <a href="vzdelavaci-program.html" class="hero__preview-card">
+          <div class="hero__preview-icon">🎓</div>
+          <h4>Jak učíme</h4>
+          <p>Projektová výuka, rozšířená angličtina a psychicky bezpečné prostředí</p>
+        </a>
+        <a href="nase-skola.html" class="hero__preview-card">
+          <div class="hero__preview-icon">🏫</div>
+          <h4>O škole</h4>
+          <p>1600+ m², malé třídy, škola a školka, cowork pro rodiče</p>
+        </a>
+        <a href="materska-skola-little-flow.html" class="hero__preview-card">
+          <div class="hero__preview-icon">🌱</div>
+          <h4>Little FLOW MŠ</h4>
+          <p>MŠ od září 2026, kapacita 24 dětí</p>
+        </a>
+        <a href="pro-zajemce.html" class="hero__preview-card">
+          <div class="hero__preview-icon">✨</div>
+          <h4>Pro zájemce</h4>
+          <p>Termíny, formulář a přihlášky k zápisům a přestupům</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENTO PILÍŘE -->
+  <section class="section" id="pilire">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Naše pilíře</span>
+        <h2 class="h-section">Čtyři důvody, proč si rodiče <em class="h-em">vybírají FLOW</em>.</h2>
+        <p class="lead text-center" style="margin-inline: auto;">Detaily o výuce pod každým pilířem. Kapacita je omezená, přihlaste se včas.</p>
+      </div>
+
+      <div class="bento">
+        <a href="vzdelavaci-program.html" class="bento-tile is-feature">
+          <div class="bento-tile-photo" style="background-image:url('images/6900ea6da2d51cf2c77b94c0_7710355f-01e2-4b9c-8076-33b960ec9a6f-min.png')"></div>
+          <div class="bento-tile-body">
+            <span class="bento-tile-num">01</span>
+            <h3>Projektová výuka</h3>
+            <p>10+ reálných projektů ročně. Děti aktivně tvoří, řeší problémy, prezentují. Učí se metodou „Learning By Doing“.</p>
+          </div>
+        </a>
+        <a href="anglictina-ve-flow.html" class="bento-tile is-med">
+          <div class="bento-tile-photo" style="background-image:url('images/6900e7a35cd867f4db8130b5_976cfb5-7254-4f4c-bf28-807ec288d4e8-min.png')"></div>
+          <div class="bento-tile-body">
+            <span class="bento-tile-num">02</span>
+            <h3>Rozšířená angličtina</h3>
+            <p>Denní angličtina od 1. třídy s native speakery. Příprava na Cambridge YLE přímo ve škole.</p>
+          </div>
+        </a>
+        <a href="informatika-a-digitalni-gramotnost.html" class="bento-tile is-wide">
+          <div class="bento-tile-photo" style="background-image:url('images/6900e0a2fa86f1de313db1af_45b8-b117-3bb0982b4780-min__index.png')"></div>
+          <div class="bento-tile-body">
+            <span class="bento-tile-num">03</span>
+            <h3>Programování</h3>
+            <p>Minimum obrazovek, učíme děti pomocí technologií tvořit, nikoli konzumovat.</p>
+          </div>
+        </a>
+        <a href="wellbeing.html" class="bento-tile is-compact">
+          <div class="bento-tile-photo" style="background-image:url('images/6900e0ba42c056bd73e0abfe_bc1cdc55-b18d-475b-9f02-70dd0cf043cb-min.png')"></div>
+          <div class="bento-tile-body">
+            <span class="bento-tile-num">04</span>
+            <h3>Bezpečí</h3>
+            <p>Interní speciální pedagožka, restorativní rozhovory, buddy systém. Bez trestů, s respektem.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- KURIKULUM STRIP -->
+  <section class="strip">
+    <div class="container">
+      <div class="strip__grid">
+        <div class="strip__photo">
+          <img src="images/6900e9bc037fde93cf0b78d9_aac6b437-883d-4c0d-beec-1500f0b1c186-min.png" alt="Děti pracují na projektu ve FLOW" loading="lazy">
+        </div>
+        <div>
+          <span class="eyebrow">Vzdělávací program</span>
+          <h2 class="h-section">Kurikulum reflektující <em class="h-em">reálný svět</em>.</h2>
+          <p class="lead" style="margin-bottom: var(--space-lg);">Nabízíme širokou škálu projektů, které nejen poskytují praktické zkušenosti, ale také rozvíjí digitální gramotnost — základní dovednosti pro úspěšnou budoucnost v digitálním věku.</p>
+          <a href="vzdelavaci-program.html" class="btn btn-primary">Vzdělávací program FLOW →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARV + VIDEO -->
+  <section class="video-section">
+    <div class="container">
+      <div class="video-section__head">
+        <span class="eyebrow">Slovo zakladatele</span>
+        <h2 class="h-section">Škola založena Foundery, <em class="h-em">pro budoucí Foundery</em>.</h2>
+        <p class="lead text-center" style="margin-inline: auto;">V tomto videu vám přibližujeme vizi FLOW, náš projektově orientovaný přístup. Jak učíme v 90min. blocích, jak začínáme den ranním kruhem, proč je pro nás důležitá digitální gramotnost od první třídy, vnitřní motivace a kritické myšlení.</p>
+      </div>
+      <div class="video-section__wrap">
+        <div class="video-loom">
+          <iframe src="https://www.loom.com/embed/b845c7d4d318477e94c1d97e551f11d3" frameborder="0" allow="autoplay; fullscreen" allowfullscreen title="FLOW — vize a projektová výuka"></iframe>
+        </div>
+        <div class="video-pill">
+          <div class="video-pill__avatar"><img src="images/Marv.jpeg" alt="Marv Shamma, zakladatel FLOW" loading="lazy"></div>
+          <div>
+            <span class="video-pill__name">Marv Shamma</span>
+            <span class="video-pill__role">Zakladatel FLOW</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIÁLY -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Rodiče mluví za nás</span>
+        <h2 class="h-section">Důvěra těch, kteří už <em class="h-em">FLOW vybrali</em>.</h2>
+        <p class="lead text-center" style="margin-inline: auto;">Tři pohledy — od učitele, který sleduje obor, a od rodičů, jejichž děti chodí do FLOW.</p>
+      </div>
+
+      <div class="testimonials__grid">
+        <article class="testimonial">
+          <span class="testimonial__quote" aria-hidden="true">“</span>
+          <p class="testimonial__text">Hodně mě baví lidi s vizí. Ještě víc lidi, co tu vizi i umějí naplňovat. A proto mě fakt baví pozorovat Marva Shammu a jeho školu FLOW.</p>
+          <div class="testimonial__author">
+            <span class="testimonial__name">Dan Pražák</span>
+            <span class="testimonial__role">učitel</span>
+          </div>
+        </article>
+
+        <article class="testimonial">
+          <span class="testimonial__quote" aria-hidden="true">“</span>
+          <p class="testimonial__text">Chtěla jsem pro syna školu, do které se bude těšit a učení ho bude bavit. Nejenže se těší, ale často se mu ani nechce z ní domů — protože i družina je super.</p>
+          <div class="testimonial__author">
+            <span class="testimonial__name">Veronika</span>
+            <span class="testimonial__role">maminka žáka</span>
+          </div>
+        </article>
+
+        <article class="testimonial">
+          <span class="testimonial__quote" aria-hidden="true">“</span>
+          <p class="testimonial__text">Naše dcera přestoupila ze státní školy do FLOW a rozdíl je nepřehlédnutelný. Každé ráno jde do školy s velkým nadšením a chválí všechny učitele.</p>
+          <div class="testimonial__author">
+            <span class="testimonial__name">Eva</span>
+            <span class="testimonial__role">maminka po přestupu</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALLBACK FORM -->
+  <section class="callback">
+    <div class="container--narrow">
+      <div class="callback__head">
+        <span class="eyebrow">Domluvíme si schůzku</span>
+        <h2 class="h-section">Domluvme si <em>schůzku</em>.</h2>
+        <p class="lead text-center" style="margin-inline: auto;">Nechte nám kontakt. Do 1 pracovního dne vám zavoláme a domluvíme termín osobní návštěvy nebo dne otevřených dveří.</p>
+      </div>
+
+      <form id="callback-form" class="callback__form" data-endpoint="https://script.google.com/macros/s/AKfycbxukkUNas85jri2zW6Jafx8zeOls4oEB9BupUV8yKbyIkVTFUfwNvhxgSmTOw7zGf6h/exec" novalidate>
+        <input type="hidden" name="source" value="homepage-callback">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="callback__honeypot" aria-hidden="true">
+
+        <div class="callback__grid">
+          <div class="form-field">
+            <label for="cc-name">Jméno</label>
+            <input class="form-input" id="cc-name" name="name" type="text" required placeholder="Jan Novák">
+          </div>
+          <div class="form-field">
+            <label for="cc-email">Email</label>
+            <input class="form-input" id="cc-email" name="email" type="email" required placeholder="vas@email.cz">
+          </div>
+          <div class="form-field">
+            <label for="cc-phone">Telefon</label>
+            <input class="form-input" id="cc-phone" name="phone" type="tel" required placeholder="+420 ___ ___ ___">
+          </div>
+        </div>
+
+        <div class="callback__submit-row">
+          <label class="form-gdpr callback__gdpr">
+            <input type="checkbox" required>
+            <span>Souhlasím se zpracováním osobních údajů dle <a href="gdpr.html">zásad GDPR</a>.</span>
+          </label>
+          <button type="submit" class="btn btn-primary">Zavolejte mi →</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ===== FOOTER ===== -->
+<!-- FLOW-FOOTER-START -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <div class="site-footer__top">
+      <a href="index.html" class="site-footer__brand" aria-label="FLOW — domů">
+        <img src="images/67c55ee11c9d998cbc1cec25_flow-white.svg" alt="FLOW">
+      </a>
+    </div>
+
+    <div class="site-footer__cols">
+      <div>
+        <p class="site-footer__heading">Menu</p>
+        <a href="nase-skola.html" class="site-footer__link">Škola FLOW</a>
+        <a href="pro-zajemce.html" class="site-footer__link">Pro zájemce</a>
+        <a href="pro-rodice-ve-flow.html" class="site-footer__link">Pro rodiče ve FLOW</a>
+        <a href="kariera.html" class="site-footer__link">Kariéra</a>
+        <a href="blog.html" class="site-footer__link">Blog</a>
+        <a href="kontakt.html" class="site-footer__link">Kontakt</a>
+        <a href="gdpr.html" class="site-footer__link">GDPR</a>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Kampus</p>
+        <p class="site-footer__small">Aktuální</p>
+        <p>Roh Přívozní 1064/2a a Jankovcovy 53<br>Praha 7 — Holešovice</p>
+        <p class="site-footer__small" style="margin-top:14px;">Nový (od šk. roku 2026/27)</p>
+        <p>Českomoravská 1a<br>Praha 9 — Balabenka</p>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Dejte nám vědět</p>
+        <p class="site-footer__small">Obecné info</p>
+        <a href="mailto:info@skolaflow.cz" class="site-footer__email">info@skolaflow.cz</a>
+        <p class="site-footer__small" style="margin-top:14px;">GDPR pověřenec</p>
+        <a href="mailto:gdpr@skolaflow.cz" class="site-footer__email">gdpr@skolaflow.cz</a>
+        <p class="site-footer__small" style="margin-top:14px;">Sledujte nás</p>
+        <div class="site-footer__socials">
+          <a href="https://www.facebook.com/skolaflowcz" target="_blank" rel="noopener" class="site-footer__social" aria-label="Facebook"><img src="images/67b351f4c755934221b6669f_facebook-logo-white.svg" alt="" loading="lazy"></a>
+          <a href="https://www.linkedin.com/company/skolaflow/" target="_blank" rel="noopener" class="site-footer__social" aria-label="LinkedIn"><img src="images/67b351f4c755934221b666a1_linkedin-logo-white.svg" alt="" loading="lazy"></a>
+          <a href="https://www.instagram.com/skolaflowcz" target="_blank" rel="noopener" class="site-footer__social" aria-label="Instagram"><img src="images/67b351f4c755934221b666a4_instagram-logo-white.svg" alt="" loading="lazy"></a>
+        </div>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Fakturační údaje</p>
+        <p><strong>Základní škola FLOW s.r.o.</strong><br>
+        IČ: 08916403<br>
+        Red IZO: 691016054 / IZO: 181129167<br>
+        Datová schránka: uf3q7m6</p>
+      </div>
+
+      <a href="chci-do-flow.html" class="btn btn-primary site-footer__cta">Chci do FLOW →</a>
+    </div>
+
+    <div class="site-footer__bottom-line">
+      <img src="images/680935e767127338a262bfd9_EU_2BM_D9_86MT_20_D8_8CB.svg" alt="EU spolufinancování + MŠMT" class="site-footer__partner site-footer__partner--mono" loading="lazy">
+      <img src="images/68093a79aace0042c9a41742_CC_partner_kulaty_20copy.svg" alt="Cambridge Center — partner institution" class="site-footer__partner" loading="lazy">
+    </div>
+
+    <p class="site-footer__legal">© <span id="footer-year">2026</span> Základní škola FLOW s.r.o. · Všechna práva vyhrazena</p>
+
+  </div>
+</footer>
+
+<!-- FB MESSENGER FAB — show on scroll, hide on body.no-messenger -->
+<a href="https://m.me/skolaflowcz" target="_blank" rel="noopener" class="msg-fab" aria-label="Napište nám na FB Messenger">
+  <svg class="msg-fab__svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.913 1.454 5.512 3.726 7.21V22l3.405-1.869c.909.252 1.872.387 2.869.387 5.523 0 10-4.145 10-9.259C22 6.145 17.523 2 12 2zm.99 12.452l-2.546-2.716L5.49 14.452l5.49-5.83 2.61 2.716 4.89-2.716-5.49 5.83z"/>
+  </svg>
+  <span class="msg-fab__dot" aria-hidden="true"></span>
+</a>
+
+<!-- FLOW-FOOTER-END -->
+
+<script src="assets/js/flow.js"></script>
+
+</body>
+</html>

@@ -20,22 +20,13 @@
 #    to the current EN page rather than the homepage so SEO
 #    signal is preserved)
 # ------------------------------------------------------------
-/en/admissions     /en/pro-zajemce                        301
-/en/contact        /en/kontakt                            301
-/en/our-team       /en/nas-tym                            301
-/en/for-parents    /en/pro-zajemce                        301
-/en/careers        /en/kariera                            301
-/en/fees-2025-26   /en/pro-zajemce/poplatky-2025-26       301
-/en/new-campus     /en/novy-kampus                        301
 
 # ------------------------------------------------------------
 # 3) Stray / preview / legacy pages
 # ------------------------------------------------------------
-/en.html                             /en/                       301
 /preview-booking                     /                          301
 /skolaflow_homepage                  /                          301
 /nas-model-vyuky-a-uceni-old         /vzdelavaci-program        301
-/en/nas-model-vyuky-a-uceni-old      /en/vzdelavaci-program     301
 
 # ------------------------------------------------------------
 # 4) Legacy Webflow CMS collection URLs
@@ -44,7 +35,6 @@
 #    redirect all to the team page.
 # ------------------------------------------------------------
 /teacher/*        /nas-tym          301
-/en/teacher/*     /en/nas-tym       301
 
 # ------------------------------------------------------------
 # 4b) /pro-rodice removed 2026-04-22 (page was behind Cloudflare
@@ -52,9 +42,15 @@
 #     in _backups/removed-2026-04-22/.
 # ------------------------------------------------------------
 /pro-rodice        /        301
-/en/pro-rodice     /en/     301
 
 # ------------------------------------------------------------
 # 5) Block direct access to backup snapshots
 # ------------------------------------------------------------
 /_backups/*   /   301
+
+# ------------------------------------------------------------
+# 6) EN folder — RE-ENABLED 2026-05-20
+#    Full EN translation lives in /en/. The old "redirect /en/* → /"
+#    rule was removed. /en (no trailing slash) → /en/ for consistency.
+# ------------------------------------------------------------
+/en      /en/    301

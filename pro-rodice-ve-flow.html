@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Pro rodiče ve FLOW — kalendář, demo days, kontakty | Praha 9</title>
+  <meta name="description" content="Praktický portál pro naše rodiny. Harmonogram šk. roku 2026/27, prázdniny, třídy + pedagogové, Edookit, kontakty, aktuality.">
+
+  <link rel="canonical" href="https://www.skolaflow.cz/pro-rodice-ve-flow">
+  <link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-rodice-ve-flow">
+  <link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-rodice-ve-flow">
+  <link rel="alternate" hreflang="x-default" href="https://www.skolaflow.cz/pro-rodice-ve-flow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pro rodiče ve FLOW — Praha 9">
+  <meta property="og:description" content="Praktický portál pro naše rodiny. Kalendář, třídy, kontakty.">
+  <meta property="og:image" content="https://www.skolaflow.cz/images/67f6bd29bd8f96e006163b1f_flow-cover.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pro rodiče ve FLOW">
+  <meta name="twitter:description" content="Praktický portál pro naše rodiny.">
+  <meta name="twitter:image" content="https://www.skolaflow.cz/images/67f6bd29bd8f96e006163b1f_flow-cover.webp">
+
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/67f6bc81331b2efe13fa1506_flow-fav.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M8J8ZP');
+  </script>
+
+  <link rel="stylesheet" href="assets/css/flow.css">
+
+  <!-- Page-specific CSS (Pro rodiče ve FLOW) -->
+  <style>
+    /* HERO */
+    .pr-hero {
+      background: var(--c-blue-deep);
+      color: var(--c-white);
+      padding: 80px 0 100px;
+      position: relative;
+      overflow: hidden;
+      border-bottom-left-radius: var(--r-section);
+      border-bottom-right-radius: var(--r-section);
+    }
+    .pr-hero::before {
+      content: ""; position: absolute;
+      top: -260px; right: -200px;
+      width: 760px; height: 760px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(122,182,221,0.32) 0%, rgba(122,182,221,0.1) 55%, rgba(122,182,221,0) 100%);
+      pointer-events: none;
+    }
+    .pr-hero__inner {
+      position: relative; z-index: 2;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .pr-hero__eyebrow {
+      display: inline-block;
+      border: 1px solid rgba(255, 216, 74, 0.4);
+      color: var(--c-yellow);
+      padding: 5px 16px;
+      border-radius: var(--r-pill);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+      font-family: var(--font-display);
+    }
+    .pr-hero h1 {
+      font-size: var(--fs-3xl);
+      color: var(--c-white);
+      margin-bottom: var(--space-md);
+      line-height: 1.1;
+    }
+    .pr-hero h1 em { font-style: normal; color: var(--c-yellow); }
+    .pr-hero p.lead {
+      color: rgba(255,255,255,0.85);
+      margin: 0 auto;
+      font-size: var(--fs-md);
+      max-width: 620px;
+    }
+    .pr-hero__quick {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: var(--space-lg);
+    }
+    .pr-hero__quick-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--c-white);
+      padding: 10px 16px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-sm);
+      text-decoration: none;
+      transition: background var(--t), border-color var(--t);
+    }
+    .pr-hero__quick-link:hover {
+      background: var(--c-yellow);
+      border-color: var(--c-yellow);
+      color: var(--c-blue-deep);
+    }
+
+    /* AKTUALITY — placeholder pro CMS update */
+    .pr-news {
+      padding: 80px 0;
+      background: var(--c-cream);
+    }
+    .pr-news__list {
+      max-width: 920px;
+      margin: var(--space-xl) auto 0;
+      display: grid;
+      gap: 18px;
+    }
+    .pr-news__placeholder {
+      padding: 40px;
+      background: var(--c-white);
+      border: 1.5px dashed rgba(20, 37, 107, 0.25);
+      border-radius: var(--r-card);
+      text-align: center;
+      color: var(--c-muted);
+    }
+    .pr-news__placeholder strong { color: var(--c-blue-deep); }
+    /* Aktuality polozky — editorial styl (no boxes) */
+    .pr-news__item {
+      padding: 28px 0;
+      border-top: 1px solid rgba(20, 37, 107, 0.12);
+    }
+    .pr-news__item:first-child { border-top: none; padding-top: 0; }
+    .pr-news__date {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-blue-deep);
+      border-bottom: 2px solid var(--c-yellow);
+      padding-bottom: 2px;
+      margin-bottom: 12px;
+    }
+    .pr-news__title {
+      font-size: clamp(1.4rem, 2vw, 1.75rem);
+      color: var(--c-blue);
+      margin: 0 0 10px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .pr-news__text {
+      font-size: 1rem;
+      line-height: 1.55;
+      color: var(--c-text);
+      margin: 0 0 12px;
+      white-space: pre-line;
+    }
+    .pr-news__link {
+      display: inline-block;
+      color: var(--c-blue);
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 2px solid var(--c-yellow);
+    }
+    .pr-news__link:hover { color: var(--c-blue-deep); }
+    .pr-news__empty {
+      text-align: center;
+      color: var(--c-muted);
+      font-style: italic;
+      padding: 20px 0;
+    }
+
+    /* KALENDÁŘ — harmonogram šk. roku */
+    .pr-cal {
+      padding: 100px 0;
+      background: var(--c-white);
+    }
+    .pr-cal__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      max-width: 1040px;
+      margin: var(--space-xl) auto 0;
+    }
+    .pr-cal__block h3 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--c-blue-deep);
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--c-yellow);
+      display: inline-block;
+    }
+    .pr-cal__row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-md);
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1.5px solid rgba(20, 37, 107, 0.1);
+    }
+    .pr-cal__row:last-child { border-bottom: none; }
+    .pr-cal__row-label {
+      font-size: var(--fs-md);
+      color: var(--c-blue-deep);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .pr-cal__row-date {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--c-blue);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .pr-cal__placeholder {
+      font-style: italic;
+      color: var(--c-muted);
+      font-size: 0.85rem;
+    }
+
+    /* TŘÍDY + PEDAGOGOVÉ */
+    .pr-classes {
+      padding: 100px 0;
+      background: var(--c-cream);
+    }
+    .pr-classes__grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-md);
+      max-width: 1040px;
+      margin: var(--space-xl) auto 0;
+    }
+    .pr-class {
+      padding: 24px 18px;
+      text-align: center;
+      border-top: 3px solid var(--c-yellow);
+      transition: border-color var(--t), transform var(--t);
+      background: var(--c-white);
+    }
+    .pr-class:hover {
+      border-top-color: var(--c-blue);
+      transform: translateY(-3px);
+    }
+    .pr-class--new { border-top-color: var(--c-blue); }
+    .pr-class__name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--c-blue-deep);
+      margin: 0 0 4px;
+      letter-spacing: -0.01em;
+    }
+    .pr-class__grade {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-blue);
+      margin-bottom: 14px;
+      padding: 2px 8px;
+      background: rgba(255, 216, 74, 0.2);
+      border-radius: var(--r-pill);
+    }
+    .pr-class__teacher-label {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-bottom: 4px;
+    }
+    .pr-class__teacher {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--c-blue-deep);
+      margin: 0;
+      line-height: 1.3;
+    }
+    .pr-class--new .pr-class__grade {
+      background: var(--c-blue-deep);
+      color: var(--c-yellow);
+    }
+
+    /* KONTAKTY */
+    .pr-contacts {
+      padding: 100px 0;
+      background: var(--c-white);
+    }
+    .pr-contacts__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      max-width: 880px;
+      margin: var(--space-xl) auto 0;
+    }
+    .pr-contact {
+      padding: 28px;
+      background: var(--c-cream);
+      border-radius: var(--r-card);
+      border: 1.5px solid rgba(20, 37, 107, 0.12);
+    }
+    .pr-contact__label {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-blue);
+      margin-bottom: 8px;
+    }
+    .pr-contact__value {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-base);
+      color: var(--c-blue-deep);
+      margin: 0 0 4px;
+    }
+    .pr-contact__value a {
+      color: var(--c-blue-deep);
+      text-decoration: none;
+      border-bottom: 2px solid var(--c-yellow);
+    }
+    .pr-contact__desc {
+      font-size: var(--fs-sm);
+      color: var(--c-muted);
+      line-height: 1.5;
+      margin: 4px 0 0;
+    }
+    .pr-edookit {
+      max-width: 880px;
+      margin: var(--space-md) auto 0;
+      padding: 28px 32px;
+      background: var(--c-yellow);
+      border: 2.5px solid var(--c-blue-deep);
+      border-radius: var(--r-card);
+      box-shadow: 6px 6px 0 0 var(--c-blue-deep);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-md);
+      align-items: center;
+    }
+    .pr-edookit__icon {
+      width: 56px; height: 56px;
+      background: var(--c-blue-deep);
+      color: var(--c-yellow);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .pr-edookit__head {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--c-blue-deep);
+      margin: 0 0 4px;
+    }
+    .pr-edookit__desc {
+      font-size: var(--fs-sm);
+      color: var(--c-blue-deep);
+      margin: 0;
+      opacity: 0.78;
+    }
+    .pr-edookit__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--c-blue-deep);
+      color: var(--c-yellow);
+      padding: 12px 20px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--fs-sm);
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: transform var(--t);
+    }
+    .pr-edookit__cta:hover { transform: translate(-1px, -1px); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .pr-classes__grid { grid-template-columns: repeat(3, 1fr); }
+      .pr-cal__grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+    }
+    @media (max-width: 880px) {
+      .pr-hero { padding: 56px 0 70px; border-radius: 0 0 24px 24px; }
+      .pr-news { padding: 56px 0; }
+      .pr-cal { padding: 64px 0; }
+      .pr-classes { padding: 64px 0; }
+      .pr-classes__grid { grid-template-columns: 1fr 1fr; }
+      .pr-contacts { padding: 64px 0; }
+      .pr-contacts__grid { grid-template-columns: 1fr; }
+      .pr-edookit {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 24px;
+      }
+      .pr-edookit__icon { margin: 0 auto; }
+    }
+    @media (max-width: 520px) {
+      .pr-classes__grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1250403810500269');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img alt="" height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1250403810500269&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8J8ZP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ===== HEADER ===== -->
+<!-- FLOW-NAV-START -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="site-header__brand" aria-label="FLOW — domů">
+      <img src="images/67c55ee11c9d998cbc1cec25_flow-white.svg" alt="FLOW">
+    </a>
+
+    <nav class="site-nav" aria-label="Hlavní navigace">
+      <a href="nase-skola.html" class="site-nav__link">O škole</a>
+      <a href="pro-zajemce.html" class="site-nav__link">Pro zájemce</a>
+      <a href="vzdelavaci-program.html" class="site-nav__link">Jak učíme</a>
+      <a href="materska-skola-little-flow.html" class="site-nav__link">Little FLOW</a>
+      <a href="novy-kampus.html" class="site-nav__link">Nový kampus</a>
+      <a href="en/pro-rodice-ve-flow" class="site-nav__link" lang="en" hreflang="en" title="English">EN</a>
+      <a href="chci-do-flow.html" class="site-nav__cta">Chci do FLOW →</a>
+    </nav>
+
+    <button class="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+  <nav class="mobile-drawer__inner" aria-label="Mobilní menu">
+    <a href="chci-do-flow.html" class="btn btn-primary">Chci do FLOW →</a>
+
+    <a href="nase-skola.html" class="mobile-drawer__link">O škole</a>
+    <a href="pro-zajemce.html" class="mobile-drawer__link">Pro zájemce</a>
+    <a href="vzdelavaci-program.html" class="mobile-drawer__link">Jak učíme</a>
+    <a href="materska-skola-little-flow.html" class="mobile-drawer__link">Little FLOW (MŠ)</a>
+    <a href="novy-kampus.html" class="mobile-drawer__link">Nový kampus</a>
+    <a href="pro-rodice-ve-flow.html" class="mobile-drawer__link">Pro rodiče ve FLOW</a>
+    <a href="blog.html" class="mobile-drawer__link">Blog</a>
+    <a href="kontakt.html" class="mobile-drawer__link">Kontakt</a>
+    <a href="en/pro-rodice-ve-flow" class="mobile-drawer__link" lang="en" hreflang="en">🇬🇧 English</a>
+
+  </nav>
+</aside>
+
+<!-- FLOW-NAV-END -->
+
+
+<!-- ===== MAIN ===== -->
+<main class="site-main">
+
+  <!-- HERO -->
+  <section class="pr-hero">
+    <div class="container">
+      <div class="pr-hero__inner">
+        <span class="pr-hero__eyebrow">Pro rodiče ve FLOW</span>
+        <h1>Vše, co potřebujete <em>na jednom místě</em>.</h1>
+        <p class="lead">Praktický portál pro naše rodiny — kalendář školního roku, prázdniny, třídy, pedagogové, kontakty a aktuality. Sensitive informace (hodnocení, omluvenky) zůstávají v Edookit.</p>
+        <div class="pr-hero__quick">
+          <a href="#aktuality" class="pr-hero__quick-link"><span aria-hidden="true">📢</span> Aktuality</a>
+          <a href="#kalendar" class="pr-hero__quick-link"><span aria-hidden="true">📅</span> Kalendář</a>
+          <a href="#tridy" class="pr-hero__quick-link"><span aria-hidden="true">👨‍🏫</span> Třídy</a>
+          <a href="#kontakty" class="pr-hero__quick-link"><span aria-hidden="true">✉️</span> Kontakty</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AKTUALITY — CMS placeholder (později hookem na Google Sheets) -->
+  <section class="pr-news" id="aktuality">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Aktuality</span>
+        <h2 class="h-section">Co je <em style="font-style:normal;color:var(--c-blue);">nového</em>.</h2>
+      </div>
+
+      <div class="pr-news__list" id="pr-news-list">
+        <!-- Aktuality budou fetchovány z Google Sheets CSV (jako Eventy). Zatím placeholder. -->
+        <div class="pr-news__placeholder">
+          <p><strong>Aktuality se zatím připravují.</strong></p>
+          <p>Brzy zde uvidíte aktuální dění ze školy — projekty, akce, oznámení. Aktualizováno přímo z Google Sheets, bez čekání na update webu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KALENDÁŘ — harmonogram + prázdniny 2026/27 -->
+  <section class="pr-cal" id="kalendar">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kalendář 2026/27</span>
+        <h2 class="h-section">Harmonogram školního roku a <em style="font-style:normal;color:var(--c-blue);">prázdniny</em>.</h2>
+      </div>
+
+      <div class="pr-cal__grid">
+
+        <!-- Harmonogram -->
+        <div class="pr-cal__block">
+          <h3>Harmonogram</h3>
+          <div class="pr-cal__row">
+            <span class="pr-cal__row-label">Zahájení školního roku</span>
+            <span class="pr-cal__row-date">úterý 1. 9. 2026</span>
+          </div>
+          <div class="pr-cal__row">
+            <span class="pr-cal__row-label">Konec 1. pololetí</span>
+            <span class="pr-cal__row-date">čtvrtek 28. 1. 2027</span>
+          </div>
+          <div class="pr-cal__row">
+            <span class="pr-cal__row-label">Konec 2. pololetí</span>
+            <span class="pr-cal__row-date">středa 30. 6. 2027</span>
+          </div>
+          <div class="pr-cal__row">
+            <span class="pr-cal__row-label">Ředitelská volna</span>
+            <span class="pr-cal__row-date">Bude oznámeno nejpozději 1 měsíc předem</span>
+          </div>
+        </div>
+
+        <!-- Prázdniny -->
+        <div class="pr-cal__block">
+          <h3>Prázdniny</h3>
+          <div class="pr-cal__row">
+            <span class="pr-cal__row-label">Podzimní prázdniny</span>
+            <span class="pr-cal__row-date">28.–30. 10. 2026</span>
+          </div>
+          <div class="pr-cal__row">
+            <span class="pr-cal__row-label">Vánoční prázdniny</span>
+            <span class="pr-cal__row-date">23. 12. 2026 – 3. 1. 2027</span>
+          </div>
+          <div class="pr-cal__row">
+            <span class="pr-cal__row-label">Pololetní prázdniny</span>
+            <span class="pr-cal__row-date">pátek 29. 1. 2027</span>
+          </div>
+          <div class="pr-cal__row">
+            <span class="pr-cal__row-label">Jarní prázdniny</span>
+            <span class="pr-cal__row-date">1.–7. 3. 2027</span>
+          </div>
+          <div class="pr-cal__row">
+            <span class="pr-cal__row-label">Velikonoční prázdniny</span>
+            <span class="pr-cal__row-date">čtvrtek 25. 3. 2027</span>
+          </div>
+          <div class="pr-cal__row">
+            <span class="pr-cal__row-label">Hlavní prázdniny</span>
+            <span class="pr-cal__row-date">1. 7. – 31. 8. 2027</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TŘÍDY + PEDAGOGOVÉ -->
+  <section class="pr-classes" id="tridy">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Třídy 2026/27</span>
+        <h2 class="h-section">Pět <em style="font-style:normal;color:var(--c-blue);">tříd</em> a jejich pedagogové.</h2>
+        <p class="lead" style="margin-inline:auto;text-align:center;">Plus další učitelé na různé předměty. Kompletní tým a fotky najdete na <a href="nas-tym.html" style="color:var(--c-blue);font-weight:700;border-bottom:2px solid var(--c-yellow);text-decoration:none;">Náš tým</a>.</p>
+      </div>
+
+      <div class="pr-classes__grid">
+
+        <article class="pr-class pr-class--new">
+          <h3 class="pr-class__name">Luna</h3>
+          <span class="pr-class__grade">Nová · 1. třída</span>
+          <span class="pr-class__teacher-label">Třídní</span>
+          <p class="pr-class__teacher">Doplníme</p>
+        </article>
+
+        <article class="pr-class">
+          <h3 class="pr-class__name">Artemis</h3>
+          <span class="pr-class__grade">Třída</span>
+          <span class="pr-class__teacher-label">Třídní</span>
+          <p class="pr-class__teacher">Petra</p>
+        </article>
+
+        <article class="pr-class">
+          <h3 class="pr-class__name">Orion</h3>
+          <span class="pr-class__grade">Třída</span>
+          <span class="pr-class__teacher-label">Třídní</span>
+          <p class="pr-class__teacher">Sabrina</p>
+        </article>
+
+        <article class="pr-class">
+          <h3 class="pr-class__name">Nebula</h3>
+          <span class="pr-class__grade">Třída</span>
+          <span class="pr-class__teacher-label">Třídní</span>
+          <p class="pr-class__teacher">Žofie</p>
+        </article>
+
+        <article class="pr-class">
+          <h3 class="pr-class__name">Andromeda</h3>
+          <span class="pr-class__grade">Třída</span>
+          <span class="pr-class__teacher-label">Třídní</span>
+          <p class="pr-class__teacher">Filip</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKTY + EDOOKIT -->
+  <section class="pr-contacts" id="kontakty">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kontakty</span>
+        <h2 class="h-section">Když potřebujete <em style="font-style:normal;color:var(--c-blue);">nás zastihnout</em>.</h2>
+      </div>
+
+      <div class="pr-contacts__grid">
+
+        <div class="pr-contact">
+          <span class="pr-contact__label">Obecné info</span>
+          <p class="pr-contact__value"><a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a></p>
+          <p class="pr-contact__desc">Pro běžné dotazy, omluvenky, organizační záležitosti.</p>
+        </div>
+
+        <div class="pr-contact">
+          <span class="pr-contact__label">Telefon</span>
+          <p class="pr-contact__value"><a href="tel:+420770673828">+420 770 673 828</a></p>
+          <p class="pr-contact__desc">Recepce školy, pracovní dny.</p>
+        </div>
+
+        <div class="pr-contact">
+          <span class="pr-contact__label">Nový kampus</span>
+          <p class="pr-contact__value"><a href="mailto:campus@skolaflow.cz">campus@skolaflow.cz</a></p>
+          <p class="pr-contact__desc">Dotazy specificky k novému kampusu na Balabence.</p>
+        </div>
+
+        <div class="pr-contact">
+          <span class="pr-contact__label">GDPR pověřenec</span>
+          <p class="pr-contact__value"><a href="mailto:gdpr@skolaflow.cz">gdpr@skolaflow.cz</a></p>
+          <p class="pr-contact__desc">Žádosti k osobním údajům, ochrana soukromí.</p>
+        </div>
+
+      </div>
+
+      <div class="pr-edookit">
+        <div class="pr-edookit__icon" aria-hidden="true">📊</div>
+        <div>
+          <h3 class="pr-edookit__head">Edookit — školní systém</h3>
+          <p class="pr-edookit__desc">Hodnocení, omluvenky, komunikace s pedagogy, sdílení materiálů. Vše citlivé je tady.</p>
+        </div>
+        <a href="https://flow.edookit.net" target="_blank" rel="noopener" class="pr-edookit__cta">Přihlásit se →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<!-- FLOW-FOOTER-START -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <div class="site-footer__top">
+      <a href="index.html" class="site-footer__brand" aria-label="FLOW — domů">
+        <img src="images/67c55ee11c9d998cbc1cec25_flow-white.svg" alt="FLOW">
+      </a>
+    </div>
+
+    <div class="site-footer__cols">
+      <div>
+        <p class="site-footer__heading">Menu</p>
+        <a href="nase-skola.html" class="site-footer__link">Škola FLOW</a>
+        <a href="pro-zajemce.html" class="site-footer__link">Pro zájemce</a>
+        <a href="pro-rodice-ve-flow.html" class="site-footer__link">Pro rodiče ve FLOW</a>
+        <a href="kariera.html" class="site-footer__link">Kariéra</a>
+        <a href="blog.html" class="site-footer__link">Blog</a>
+        <a href="kontakt.html" class="site-footer__link">Kontakt</a>
+        <a href="gdpr.html" class="site-footer__link">GDPR</a>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Kampus</p>
+        <p class="site-footer__small">Aktuální</p>
+        <p>Roh Přívozní 1064/2a a Jankovcovy 53<br>Praha 7 — Holešovice</p>
+        <p class="site-footer__small" style="margin-top:14px;">Nový (od šk. roku 2026/27)</p>
+        <p>Českomoravská 1a<br>Praha 9 — Balabenka</p>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Dejte nám vědět</p>
+        <p class="site-footer__small">Obecné info</p>
+        <a href="mailto:info@skolaflow.cz" class="site-footer__email">info@skolaflow.cz</a>
+        <p class="site-footer__small" style="margin-top:14px;">GDPR pověřenec</p>
+        <a href="mailto:gdpr@skolaflow.cz" class="site-footer__email">gdpr@skolaflow.cz</a>
+        <p class="site-footer__small" style="margin-top:14px;">Sledujte nás</p>
+        <div class="site-footer__socials">
+          <a href="https://www.facebook.com/skolaflowcz" target="_blank" rel="noopener" class="site-footer__social" aria-label="Facebook"><img src="images/67b351f4c755934221b6669f_facebook-logo-white.svg" alt="" loading="lazy"></a>
+          <a href="https://www.linkedin.com/company/skolaflow/" target="_blank" rel="noopener" class="site-footer__social" aria-label="LinkedIn"><img src="images/67b351f4c755934221b666a1_linkedin-logo-white.svg" alt="" loading="lazy"></a>
+          <a href="https://www.instagram.com/skolaflowcz" target="_blank" rel="noopener" class="site-footer__social" aria-label="Instagram"><img src="images/67b351f4c755934221b666a4_instagram-logo-white.svg" alt="" loading="lazy"></a>
+        </div>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Fakturační údaje</p>
+        <p><strong>Základní škola FLOW s.r.o.</strong><br>
+        IČ: 08916403<br>
+        Red IZO: 691016054 / IZO: 181129167<br>
+        Datová schránka: uf3q7m6</p>
+      </div>
+
+      <a href="chci-do-flow.html" class="btn btn-primary site-footer__cta">Chci do FLOW →</a>
+    </div>
+
+    <div class="site-footer__bottom-line">
+      <img src="images/680935e767127338a262bfd9_EU_2BM_D9_86MT_20_D8_8CB.svg" alt="EU spolufinancování + MŠMT" class="site-footer__partner site-footer__partner--mono" loading="lazy">
+      <img src="images/68093a79aace0042c9a41742_CC_partner_kulaty_20copy.svg" alt="Cambridge Center — partner institution" class="site-footer__partner" loading="lazy">
+    </div>
+
+    <p class="site-footer__legal">© <span id="footer-year">2026</span> Základní škola FLOW s.r.o. · Všechna práva vyhrazena</p>
+
+  </div>
+</footer>
+
+<!-- FB MESSENGER FAB — show on scroll, hide on body.no-messenger -->
+<a href="https://m.me/skolaflowcz" target="_blank" rel="noopener" class="msg-fab" aria-label="Napište nám na FB Messenger">
+  <svg class="msg-fab__svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.913 1.454 5.512 3.726 7.21V22l3.405-1.869c.909.252 1.872.387 2.869.387 5.523 0 10-4.145 10-9.259C22 6.145 17.523 2 12 2zm.99 12.452l-2.546-2.716L5.49 14.452l5.49-5.83 2.61 2.716 4.89-2.716-5.49 5.83z"/>
+  </svg>
+  <span class="msg-fab__dot" aria-hidden="true"></span>
+</a>
+
+<!-- FLOW-FOOTER-END -->
+
+<script src="assets/js/flow.js" defer></script>
+
+<!-- Aktuality CSV fetcher — Google Sheets "Aktuality" tab -->
+<script>
+(function () {
+  var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjlj0pNn0yU3jyhngYBQmmzVrqStYlXxw0-nOlbgv2ua0eCAkJTm44-jUjiXEp2SR4pJk_e9yaqQxN/pub?gid=360860866&single=true&output=csv';
+  var list = document.getElementById('pr-news-list');
+  if (!list) return;
+
+  var DAYS   = ['ne','po','út','st','čt','pá','so'];
+  var MONTHS = ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
+
+  function formatDate(iso) {
+    if (!iso) return '';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return iso;
+    return DAYS[d.getDay()] + ' ' + d.getDate() + '. ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  /* Proper CSV parser — handluje uvozovkami obalena pole (Google Sheets format) */
+  function parseCSV(text) {
+    var rows = [], row = [], cell = '', inQ = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (inQ) {
+        if (c === '"') {
+          if (text[i + 1] === '"') { cell += '"'; i++; }
+          else { inQ = false; }
+        } else { cell += c; }
+      } else {
+        if (c === '"') inQ = true;
+        else if (c === ',') { row.push(cell); cell = ''; }
+        else if (c === '\r') { /* skip */ }
+        else if (c === '\n') { row.push(cell); rows.push(row); row = []; cell = ''; }
+        else cell += c;
+      }
+    }
+    if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
+    return rows.filter(function (r) { return r.some(function (v) { return v && v.trim(); }); });
+  }
+
+  function mapRows(rows) {
+    if (rows.length < 2) return [];
+    var header = rows[0].map(function (h) { return (h || '').trim().toLowerCase(); });
+    var idx = {
+      date:   header.indexOf('date'),
+      title:  header.indexOf('title'),
+      text:   header.indexOf('text'),
+      link:   header.indexOf('link'),
+      active: header.indexOf('active')
+    };
+    return rows.slice(1).map(function (cells) {
+      return {
+        date:   idx.date   >= 0 ? (cells[idx.date]   || '').trim() : '',
+        title:  idx.title  >= 0 ? (cells[idx.title]  || '').trim() : '',
+        text:   idx.text   >= 0 ? (cells[idx.text]   || '').trim() : '',
+        link:   idx.link   >= 0 ? (cells[idx.link]   || '').trim() : '',
+        active: idx.active >= 0 ? (cells[idx.active] || '').trim().toUpperCase() : 'TRUE'
+      };
+    }).filter(function (r) { return r.active !== 'FALSE' && r.title; });
+  }
+
+  function normalizeLink(link) {
+    if (!link) return '';
+    if (/^https?:\/\//i.test(link)) return link;
+    if (/^www\./i.test(link)) return 'https://' + link;
+    if (/^mailto:|^tel:/i.test(link)) return link;
+    return link;
+  }
+
+  function escapeHTML(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function render(items) {
+    if (!items.length) {
+      list.innerHTML = '<p class="pr-news__empty">Aktuálně zde nic nového, ozveme se brzy.</p>';
+      return;
+    }
+    items.sort(function (a, b) {
+      var da = new Date(a.date).getTime() || 0;
+      var db = new Date(b.date).getTime() || 0;
+      return db - da;
+    });
+    list.innerHTML = items.map(function (it) {
+      var dateLabel = formatDate(it.date);
+      var linkHref = normalizeLink(it.link);
+      var linkHTML = linkHref ? '<a class="pr-news__link" href="' + escapeHTML(linkHref) + '" target="_blank" rel="noopener">Více info →</a>' : '';
+      var dateHTML = dateLabel ? '<span class="pr-news__date">' + escapeHTML(dateLabel) + '</span>' : '';
+      return '<article class="pr-news__item">' +
+        dateHTML +
+        '<h3 class="pr-news__title">' + escapeHTML(it.title) + '</h3>' +
+        (it.text ? '<p class="pr-news__text">' + escapeHTML(it.text) + '</p>' : '') +
+        linkHTML +
+        '</article>';
+    }).join('');
+  }
+
+  fetch(SHEET_CSV_URL + (SHEET_CSV_URL.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now())
+    .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+    .then(function (text) { render(mapRows(parseCSV(text))); })
+    .catch(function (err) { console.warn('Aktuality CSV fetch failed:', err); /* placeholder zustane */ });
+})();
+</script>
+
+</body>
+</html>

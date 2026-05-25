@@ -1,0 +1,1043 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Chci do FLOW — soukromá ZŠ a MŠ Praha 9 | 1 minuta a ozveme se</title>
+  <meta name="description" content="Hledáte školu, kam se vaše dítě bude těšit? FLOW — soukromá ZŠ a MŠ s projektovou výukou v Praze 9. Vyplňte 1minutový formulář a ozveme se s konkrétními kroky.">
+
+  <link rel="canonical" href="https://www.skolaflow.cz/chci-do-flow">
+  <link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/chci-do-flow">
+  <link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/chci-do-flow">
+  <link rel="alternate" hreflang="x-default" href="https://www.skolaflow.cz/chci-do-flow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Chci do FLOW — soukromá ZŠ a MŠ Praha 9">
+  <meta property="og:description" content="Soukromá ZŠ a MŠ s projektovou výukou. 1minutový formulář, ozveme se s konkrétními kroky.">
+  <meta property="og:image" content="https://www.skolaflow.cz/images/67f6bd29bd8f96e006163b1f_flow-cover.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chci do FLOW — soukromá ZŠ a MŠ Praha 9">
+  <meta name="twitter:description" content="Soukromá ZŠ a MŠ s projektovou výukou. 1minutový formulář.">
+  <meta name="twitter:image" content="https://www.skolaflow.cz/images/67f6bd29bd8f96e006163b1f_flow-cover.webp">
+
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/67f6bc81331b2efe13fa1506_flow-fav.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"School","name":"Základní škola FLOW","url":"https://www.skolaflow.cz/","description":"Soukromá ZŠ a MŠ s projektovou výukou v Praze 9. Přijímáme na školní rok 2026/27.","email":"info@skolaflow.cz","telephone":"+420770673828","address":{"@type":"PostalAddress","addressLocality":"Praha 9","addressCountry":"CZ"}}
+  </script>
+
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M8J8ZP');
+  </script>
+
+  <link rel="stylesheet" href="assets/css/flow.css">
+
+  <!-- Page-specific CSS (Chci do FLOW landing page) -->
+  <style>
+    /* HERO — Pattern A je v flow.css (.hero-a). Zde žádné overrides. */
+
+    /* KROK 1 — Choice cards */
+    .cdf-step {
+      padding: 90px 0 96px;
+      background: var(--c-cream);
+    }
+    .cdf-step--white { background: var(--c-white); }
+
+    .cdf-step__num {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--fs-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-blue);
+      margin-bottom: 12px;
+    }
+    .cdf-step__num::before {
+      content: "";
+      width: 28px; height: 2px;
+      background: var(--c-yellow);
+    }
+
+    .cdf-choice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+    }
+    .cdf-choice-card {
+      background: var(--c-white);
+      border: 2px solid var(--c-blue-deep);
+      border-radius: var(--r-card);
+      padding: 28px 26px 24px;
+      box-shadow: var(--sh-hard-sm);
+      text-decoration: none;
+      color: inherit;
+      transition: transform var(--t), box-shadow var(--t);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .cdf-choice-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 0 var(--c-blue-deep);
+    }
+    .cdf-choice-card__emoji {
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .cdf-choice-card h3 {
+      font-size: var(--fs-lg);
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+    .cdf-choice-card p {
+      color: var(--c-muted);
+      font-size: var(--fs-sm);
+      line-height: 1.55;
+      margin-bottom: var(--space-md);
+      flex-grow: 1;
+    }
+    .cdf-choice-card__cta {
+      font-weight: 800;
+      color: var(--c-blue-deep);
+      font-size: var(--fs-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    @media (max-width: 1024px) {
+      .cdf-choice-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .cdf-choice-grid { grid-template-columns: 1fr; }
+    }
+
+    /* WHY FLOW — Manifesto list (compact, typografie-led) */
+    .cdf-why-list {
+      max-width: 760px;
+      margin: var(--space-xl) auto 0;
+      background: var(--c-white);
+      border: 2px solid var(--c-blue-deep);
+      border-radius: var(--r-card);
+      box-shadow: var(--sh-hard);
+      overflow: hidden;
+    }
+    .cdf-why-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: var(--space-md);
+      align-items: baseline;
+      padding: 26px 32px 24px;
+      border-bottom: 1.5px solid rgba(20, 37, 107, 0.08);
+      transition: background var(--t);
+    }
+    .cdf-why-row:last-child { border-bottom: 0; }
+    .cdf-why-row:hover { background: rgba(255, 216, 74, 0.06); }
+    .cdf-why-row__num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2.4rem;
+      color: var(--c-yellow);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .cdf-why-row__content h3 {
+      font-size: var(--fs-lg);
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+    .cdf-why-row__content p {
+      color: var(--c-muted);
+      font-size: var(--fs-base);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media (max-width: 560px) {
+      .cdf-why-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 22px 22px 20px;
+      }
+      .cdf-why-row__num { font-size: 1.8rem; }
+    }
+
+    /* KROK 2 — 4-step process (cream bg per brand rules) */
+    /* .cdf-step--navy deprecated — sekce ted pouziva default .cdf-step (cream) */
+
+    .cdf-process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+      position: relative;
+    }
+    .cdf-process-grid::before {
+      content: "";
+      position: absolute;
+      top: 32px;
+      left: 8%; right: 8%;
+      height: 1.5px;
+      background: rgba(20, 37, 107, 0.15);
+      z-index: 1;
+    }
+    .cdf-process-card {
+      background: var(--c-white);
+      border: 2px solid var(--c-blue-deep);
+      border-radius: var(--r-card);
+      padding: 28px 24px 24px;
+      position: relative;
+      z-index: 2;
+      box-shadow: var(--sh-hard-sm);
+      transition: transform var(--t), box-shadow var(--t);
+    }
+    .cdf-process-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 0 var(--c-blue-deep);
+    }
+    .cdf-process-card__num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      background: var(--c-yellow);
+      color: var(--c-blue-deep);
+      border: 2px solid var(--c-blue-deep);
+      border-radius: 50%;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+    .cdf-process-card h3 {
+      color: var(--c-blue-deep);
+      font-size: var(--fs-base);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .cdf-process-card p {
+      color: var(--c-muted);
+      font-size: var(--fs-sm);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .cdf-process-grid { grid-template-columns: repeat(2, 1fr); }
+      .cdf-process-grid::before { display: none; }
+    }
+    @media (max-width: 560px) {
+      .cdf-process-grid { grid-template-columns: 1fr; }
+    }
+
+    /* KROK 3 — FORM */
+    .cdf-form-section {
+      padding: 96px 0 110px;
+      background: var(--c-white);
+      scroll-margin-top: 80px;
+    }
+    .cdf-form-card {
+      max-width: 760px;
+      margin: var(--space-xl) auto 0;
+      background: var(--c-white);
+      border: 2px solid var(--c-blue-deep);
+      border-radius: var(--r-card);
+      padding: 36px 40px 32px;
+      box-shadow: var(--sh-hard);
+    }
+
+    /* Radio + checkbox options (legend + opt) */
+    .cdf-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .cdf-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--c-border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: border-color var(--t), background var(--t);
+      font-size: var(--fs-sm);
+      color: var(--c-blue-deep);
+      font-weight: 500;
+    }
+    .cdf-opt:hover { border-color: var(--c-blue); }
+    .cdf-opt input { margin-top: 3px; accent-color: var(--c-blue); flex-shrink: 0; }
+    .cdf-opt:has(input:checked) {
+      border-color: var(--c-blue);
+      background: rgba(31, 58, 161, 0.04);
+      color: var(--c-blue-deep);
+      font-weight: 600;
+    }
+    .cdf-opt input:checked + span { font-weight: 700; }
+
+    .cdf-field { margin-bottom: var(--space-md); border: 0; padding: 0; min-inline-size: 0; }
+    .cdf-field legend {
+      display: block;
+      font-weight: 700;
+      color: var(--c-blue-deep);
+      margin-bottom: 10px;
+      padding: 0;
+      font-size: var(--fs-base);
+    }
+    .cdf-field-hint {
+      color: var(--c-muted);
+      font-weight: 500;
+      font-size: var(--fs-xs);
+      margin-left: 6px;
+    }
+    .cdf-req { color: var(--c-blue); margin-left: 3px; }
+
+    .cdf-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+    .cdf-row-2 .cdf-field { margin-bottom: 0; }
+
+    .cdf-honeypot {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .cdf-form-submit {
+      text-align: center;
+      margin-top: var(--space-lg);
+    }
+    .cdf-form-submit__note {
+      margin-top: 12px;
+      font-size: var(--fs-xs);
+      color: var(--c-muted);
+    }
+
+    /* Form-head (heading nad formularem) — schova se po submit */
+    .cdf-form-head { text-align: center; margin-bottom: 0; }
+
+    /* Form success state — 3 varianty inline */
+    .cdf-form-success { display: none; text-align: center; padding: 40px 20px; }
+    .cdf-form-success__icon {
+      width: 76px; height: 76px;
+      background: var(--c-yellow);
+      border: 2px solid var(--c-blue-deep);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-md);
+      box-shadow: var(--sh-hard-sm);
+      color: var(--c-blue-deep);
+    }
+    .cdf-form-success__icon svg { width: 38px; height: 38px; }
+
+    .cdf-form-success__event-card {
+      background: rgba(255, 216, 74, 0.12);
+      border: 2px solid var(--c-blue-deep);
+      border-radius: 18px;
+      padding: 22px 26px;
+      max-width: 520px;
+      margin: 0 auto var(--space-md);
+      text-align: left;
+      box-shadow: var(--sh-hard-sm);
+    }
+    .cdf-form-success__event-eyebrow {
+      font-size: var(--fs-xs);
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-blue);
+      margin-bottom: 8px;
+    }
+    .cdf-form-success__event-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--fs-lg);
+      color: var(--c-blue-deep);
+      margin-bottom: 6px;
+    }
+    .cdf-form-success__event-date {
+      font-size: var(--fs-sm);
+      color: var(--c-blue-deep);
+      font-weight: 600;
+      margin: 0;
+    }
+
+    @media (max-width: 720px) {
+      .cdf-options { grid-template-columns: 1fr; }
+      .cdf-row-2 { grid-template-columns: 1fr; gap: var(--space-md); }
+      .cdf-form-card { padding: 28px 22px 24px; }
+    }
+    @media (max-width: 880px) {
+      .cdf-form-section { padding: 64px 0 80px; }
+    }
+
+    @media (max-width: 880px) {
+      /* hero-a má vlastní mobile breakpoint v flow.css */
+      .cdf-step { padding: 64px 0 70px; }
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1250403810500269');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img alt="" height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1250403810500269&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8J8ZP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ===== HEADER ===== -->
+<!-- FLOW-NAV-START -->
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="site-header__brand" aria-label="FLOW — domů">
+      <img src="images/67c55ee11c9d998cbc1cec25_flow-white.svg" alt="FLOW">
+    </a>
+
+    <nav class="site-nav" aria-label="Hlavní navigace">
+      <a href="nase-skola.html" class="site-nav__link">O škole</a>
+      <a href="pro-zajemce.html" class="site-nav__link">Pro zájemce</a>
+      <a href="vzdelavaci-program.html" class="site-nav__link">Jak učíme</a>
+      <a href="materska-skola-little-flow.html" class="site-nav__link">Little FLOW</a>
+      <a href="novy-kampus.html" class="site-nav__link">Nový kampus</a>
+      <a href="en/chci-do-flow" class="site-nav__link" lang="en" hreflang="en" title="English">EN</a>
+      <a href="chci-do-flow.html" class="site-nav__cta">Chci do FLOW →</a>
+    </nav>
+
+    <button class="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+  <nav class="mobile-drawer__inner" aria-label="Mobilní menu">
+    <a href="chci-do-flow.html" class="btn btn-primary">Chci do FLOW →</a>
+
+    <a href="nase-skola.html" class="mobile-drawer__link">O škole</a>
+    <a href="pro-zajemce.html" class="mobile-drawer__link">Pro zájemce</a>
+    <a href="vzdelavaci-program.html" class="mobile-drawer__link">Jak učíme</a>
+    <a href="materska-skola-little-flow.html" class="mobile-drawer__link">Little FLOW (MŠ)</a>
+    <a href="novy-kampus.html" class="mobile-drawer__link">Nový kampus</a>
+    <a href="pro-rodice-ve-flow.html" class="mobile-drawer__link">Pro rodiče ve FLOW</a>
+    <a href="blog.html" class="mobile-drawer__link">Blog</a>
+    <a href="kontakt.html" class="mobile-drawer__link">Kontakt</a>
+    <a href="en/chci-do-flow" class="mobile-drawer__link" lang="en" hreflang="en">🇬🇧 English</a>
+
+  </nav>
+</aside>
+
+<!-- FLOW-NAV-END -->
+
+
+<!-- ===== MAIN ===== -->
+<main class="site-main">
+
+  <!-- HERO — Pattern A (.hero-a v flow.css) -->
+  <section class="hero-a">
+    <div class="container">
+      <div class="hero-a__grid">
+
+        <div>
+          <span class="hero-a__eyebrow">Přijímáme děti · 2026/27</span>
+          <h1>Hledáte školu, kam se vaše dítě bude <em>opravdu těšit</em>?</h1>
+          <p class="lead">FLOW je soukromá ZŠ a MŠ v Praze 9. Projektová výuka, denní angličtina, malé třídy a bezpečné prostředí. Vyplňte krátký formulář — ozveme se do 1 pracovního dne s konkrétními kroky.</p>
+
+          <div class="hero-a__badges">
+            <span class="hero-a__badge">Max. 16 dětí ve třídě</span>
+            <span class="hero-a__badge">Denní angličtina</span>
+            <span class="hero-a__badge">Nový kampus od září 2026</span>
+          </div>
+
+          <div class="hero-a__ctas">
+            <a href="#form" class="btn btn-primary">Chci zjistit možnosti →</a>
+            <a href="pro-zajemce.html#form" class="btn btn-secondary btn-secondary--on-dark">Přijít na den otevřených dveří</a>
+          </div>
+        </div>
+
+        <div class="hero-a__photo">
+          <img src="images/6900e9bc037fde93cf0b78d9_aac6b437-883d-4c0d-beec-1500f0b1c186-min.png" alt="Děti při projektové výuce ve FLOW" loading="eager">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- KROK 1 — CHOICE CARDS -->
+  <section class="cdf-step">
+    <div class="container">
+      <div class="section-head">
+        <span class="cdf-step__num">Krok 1 — výběr</span>
+        <h2 class="h-section">Co právě <em style="font-style:normal;color:var(--c-blue);">hledáte</em>?</h2>
+        <p class="lead" style="margin-inline:auto;text-align:center;">Vyberte, co vás zajímá — kliknutím přejdete rovnou k formuláři a my předvyplníme zbytek.</p>
+      </div>
+
+      <div class="cdf-choice-grid">
+
+        <a href="#form" class="cdf-choice-card" data-interest="MŠ Little FLOW">
+          <span class="cdf-choice-card__emoji" aria-hidden="true">🌱</span>
+          <h3>Mateřská škola</h3>
+          <p>Laskavý začátek, malá skupina, denní angličtina a bezpečná adaptace pro nejmenší.</p>
+          <span class="cdf-choice-card__cta">Zajímá mě MŠ →</span>
+        </a>
+
+        <a href="#form" class="cdf-choice-card" data-interest="1. třída ZŠ">
+          <span class="cdf-choice-card__emoji" aria-hidden="true">✏️</span>
+          <h3>1. třída ZŠ</h3>
+          <p>Klidný a radostný start do školy v malém kolektivu — pro budoucí prvňáčky 2026/27.</p>
+          <span class="cdf-choice-card__cta">Zajímá mě 1. třída →</span>
+        </a>
+
+        <a href="#form" class="cdf-choice-card" data-interest="Přestup do FLOW">
+          <span class="cdf-choice-card__emoji" aria-hidden="true">🔄</span>
+          <h3>Přestup do FLOW</h3>
+          <p>Když současná škola dítěti nesedí — přestoupit můžete kdykoli, vše vyřídíme za vás.</p>
+          <span class="cdf-choice-card__cta">Řeším přestup →</span>
+        </a>
+
+        <a href="#form" class="cdf-choice-card" data-interest="2. stupeň / 6.-9. třída">
+          <span class="cdf-choice-card__emoji" aria-hidden="true">🚀</span>
+          <h3>2. stupeň (6.–9. třída)</h3>
+          <p>Moderní vzdělávání s projektovou výukou, IT, angličtinou a přípravou na střední školy.</p>
+          <span class="cdf-choice-card__cta">Zajímá mě 2. stupeň →</span>
+        </a>
+
+        <a href="#form" class="cdf-choice-card" data-interest="Open Day">
+          <span class="cdf-choice-card__emoji" aria-hidden="true">🚪</span>
+          <h3>Den otevřených dveří</h3>
+          <p>Chci FLOW nejdřív poznat osobně. Přijdu se podívat, prohlédnu si školu a potkám tým.</p>
+          <span class="cdf-choice-card__cta">Chci na den otevřených dveří →</span>
+        </a>
+
+        <a href="#form" class="cdf-choice-card" data-interest="Poradenství">
+          <span class="cdf-choice-card__emoji" aria-hidden="true">💬</span>
+          <h3>Nejsem si jistý/á</h3>
+          <p>Nevíte, která cesta je pro vaše dítě nejlepší? Napište nám — poradíme s výběrem.</p>
+          <span class="cdf-choice-card__cta">Chci poradit →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+  <!-- WHY FLOW — 5 value pillars -->
+  <section class="cdf-step cdf-step--white">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Proč FLOW</span>
+        <h2 class="h-section">Proč rodiče volí <em style="font-style:normal;color:var(--c-blue);">FLOW</em></h2>
+      </div>
+
+      <div class="cdf-why-list">
+
+        <article class="cdf-why-row">
+          <div class="cdf-why-row__num">01</div>
+          <div class="cdf-why-row__content">
+            <h3>Malé třídy</h3>
+            <p>Max. 16 dětí ve třídě — víc prostoru pro otázky, chyby i růst. Učitelé znají každého žáka.</p>
+          </div>
+        </article>
+
+        <article class="cdf-why-row">
+          <div class="cdf-why-row__num">02</div>
+          <div class="cdf-why-row__content">
+            <h3>Denní angličtina</h3>
+            <p>Děti slyší a používají angličtinu napříč týdnem — v projektech, sportu i běžné komunikaci. Cambridge zkoušky přímo u nás.</p>
+          </div>
+        </article>
+
+        <article class="cdf-why-row">
+          <div class="cdf-why-row__num">03</div>
+          <div class="cdf-why-row__content">
+            <h3>Projektová výuka</h3>
+            <p>Děti zkoumají, tvoří a učí se přemýšlet v souvislostech — ne biflovat fakta.</p>
+          </div>
+        </article>
+
+        <article class="cdf-why-row">
+          <div class="cdf-why-row__num">04</div>
+          <div class="cdf-why-row__content">
+            <h3>Bezpečné prostředí</h3>
+            <p>Učitelé děti znají jménem. Pracujeme s důvěrou, vztahy a pravidelnou zpětnou vazbou — pro děti i rodiče.</p>
+          </div>
+        </article>
+
+        <article class="cdf-why-row">
+          <div class="cdf-why-row__num">05</div>
+          <div class="cdf-why-row__content">
+            <h3>Nový kampus od září 2026</h3>
+            <p>FLOW se přesouvá do nového, prostornějšího kampusu na Balabence (Praha 9) — větší zázemí pro výuku i volný čas.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+  <!-- KROK 2 — 4-STEP PROCESS -->
+  <section class="cdf-step">
+    <div class="container">
+      <div class="section-head">
+        <span class="cdf-step__num">Krok 2 — postup</span>
+        <h2 class="h-section">Jak to bude <em style="font-style:normal;color:var(--c-yellow);">probíhat</em></h2>
+        <p class="lead" style="margin-inline:auto;text-align:center;">Žádné dlouhé procesy. Čtyři jednoduché kroky a víte, jestli je FLOW pro vás.</p>
+      </div>
+
+      <div class="cdf-process-grid">
+
+        <article class="cdf-process-card">
+          <div class="cdf-process-card__num">1</div>
+          <h3>Vyplníte krátký formulář</h3>
+          <p>Pět polí, méně než minutu. Vyberte si rovnou termín návštěvy nebo nechte na nás.</p>
+        </article>
+
+        <article class="cdf-process-card">
+          <div class="cdf-process-card__num">2</div>
+          <h3>Ozveme se vám</h3>
+          <p>Do 1 pracovního dne se vám telefonicky nebo e-mailem ozveme a zjistíme, co hledáte.</p>
+        </article>
+
+        <article class="cdf-process-card">
+          <div class="cdf-process-card__num">3</div>
+          <h3>Domluvíme schůzku</h3>
+          <p>Den otevřených dveří, individuální prohlídka školy nebo online schůzka — podle vás.</p>
+        </article>
+
+        <article class="cdf-process-card">
+          <div class="cdf-process-card__num">4</div>
+          <h3>Společně se rozhodneme</h3>
+          <p>Zjistíme, jestli je FLOW správná cesta pro vaše dítě. Bez nátlaku, bez závazku.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+  <!-- KROK 3 — FORM -->
+  <section class="cdf-form-section" id="form">
+    <div class="container">
+      <div class="section-head cdf-form-head" id="form-head">
+        <span class="cdf-step__num">Krok 3 — méně než 1 minuta</span>
+        <h2 class="h-section">Napište nám, co <em style="font-style:normal;color:var(--c-blue);">hledáte</em></h2>
+        <p class="lead" style="margin-inline:auto;text-align:center;">Zabere to méně než minutu. Ozveme se vám do 1 pracovního dne s nejvhodnějším dalším krokem.</p>
+      </div>
+
+      <form id="chci_do_flow_form" class="cdf-form-card" novalidate>
+        <!-- Hidden tracking -->
+        <input type="hidden" name="utm_source"   id="utm_source">
+        <input type="hidden" name="utm_medium"   id="utm_medium">
+        <input type="hidden" name="utm_campaign" id="utm_campaign">
+        <input type="hidden" name="utm_content"  id="utm_content">
+        <input type="hidden" name="utm_term"     id="utm_term">
+        <input type="hidden" name="fbclid"       id="fbclid">
+        <input type="hidden" name="gclid"        id="gclid">
+        <input type="hidden" name="landing_page" id="landing_page">
+        <input type="hidden" name="referrer"     id="referrer">
+        <input type="hidden" name="submitted_at" id="submitted_at">
+        <input type="hidden" name="event_title"  id="cdf-event-title" value="">
+        <input type="hidden" name="event_date"   id="cdf-event-date" value="">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="cdf-honeypot" aria-hidden="true">
+
+        <!-- Interest radio -->
+        <fieldset class="cdf-field">
+          <legend>O co máte zájem? <span class="cdf-req">*</span></legend>
+          <div class="cdf-options" role="radiogroup">
+            <label class="cdf-opt"><input type="radio" name="interest" value="MŠ Little FLOW" required><span>Mateřská škola Little FLOW</span></label>
+            <label class="cdf-opt"><input type="radio" name="interest" value="1. třída ZŠ"><span>1. třída ZŠ</span></label>
+            <label class="cdf-opt"><input type="radio" name="interest" value="Přestup do FLOW"><span>Přestup do FLOW</span></label>
+            <label class="cdf-opt"><input type="radio" name="interest" value="2. stupeň / 6.-9. třída"><span>2. stupeň (6.–9. třída)</span></label>
+            <label class="cdf-opt"><input type="radio" name="interest" value="Open Day"><span>Den otevřených dveří</span></label>
+            <label class="cdf-opt"><input type="radio" name="interest" value="Poradenství"><span>Nejsem si jistý/á, chci poradit</span></label>
+          </div>
+        </fieldset>
+
+        <!-- Age + start -->
+        <div class="cdf-row-2">
+          <div class="cdf-field form-field">
+            <label for="cdf-age">Věk nebo ročník dítěte <span class="cdf-req">*</span></label>
+            <input id="cdf-age" name="child_age" class="form-input" type="text" placeholder="Např. 5 let, budoucí 1. třída, 4. třída…" required>
+          </div>
+          <div class="cdf-field form-field">
+            <label for="cdf-start">Od kdy hledáte školu? <span class="cdf-req">*</span></label>
+            <select id="cdf-start" name="desired_start" class="form-select" required>
+              <option value="" selected>Vyberte</option>
+              <option value="ASAP">Co nejdříve</option>
+              <option value="Září 2026">Od září 2026</option>
+              <option value="Później">Později</option>
+              <option value="Zjišťuji">Zatím jen zjišťujeme</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Priorities -->
+        <fieldset class="cdf-field">
+          <legend>Co je pro vás nejdůležitější? <span class="cdf-field-hint">(nepovinné, můžete zaškrtnout více)</span></legend>
+          <div class="cdf-options">
+            <label class="cdf-opt"><input type="checkbox" name="priorities" value="Malá třída"><span>Malá třída</span></label>
+            <label class="cdf-opt"><input type="checkbox" name="priorities" value="Angličtina"><span>Angličtina</span></label>
+            <label class="cdf-opt"><input type="checkbox" name="priorities" value="Bezpečné prostředí"><span>Bezpečné prostředí</span></label>
+            <label class="cdf-opt"><input type="checkbox" name="priorities" value="Projektová výuka"><span>Projektová výuka</span></label>
+            <label class="cdf-opt"><input type="checkbox" name="priorities" value="Přestup"><span>Přestup z jiné školy</span></label>
+            <label class="cdf-opt"><input type="checkbox" name="priorities" value="Příprava na SŠ"><span>Příprava na střední školu</span></label>
+            <label class="cdf-opt"><input type="checkbox" name="priorities" value="Školka a adaptace"><span>Školka a adaptace</span></label>
+            <label class="cdf-opt"><input type="checkbox" name="priorities" value="Nový kampus"><span>Nový kampus</span></label>
+          </div>
+        </fieldset>
+
+        <!-- Meeting / Event picker — populated from Google Sheet CSV -->
+        <div class="cdf-field form-field">
+          <label for="cdf-meeting">Pokud by vám sedl konkrétní termín, vyberte rovnou <span class="cdf-field-hint">(nepovinné)</span></label>
+          <select id="cdf-meeting" name="meeting" class="form-select">
+            <option value="" selected>— Zatím nechci konkrétní termín, jen mi zavolejte —</option>
+          </select>
+        </div>
+
+        <!-- Contact: name + email -->
+        <div class="cdf-row-2">
+          <div class="cdf-field form-field">
+            <label for="cdf-name">Vaše jméno <span class="cdf-req">*</span></label>
+            <input id="cdf-name" name="parent_name" class="form-input" type="text" autocomplete="name" placeholder="Jan Novák" required>
+          </div>
+          <div class="cdf-field form-field">
+            <label for="cdf-email">E-mail <span class="cdf-req">*</span></label>
+            <input id="cdf-email" name="email" class="form-input" type="email" inputmode="email" autocomplete="email" placeholder="vas@email.cz" required>
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="cdf-field form-field">
+          <label for="cdf-phone">Telefon <span class="cdf-req">*</span></label>
+          <input id="cdf-phone" name="phone" class="form-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="+420 ___ ___ ___" required>
+        </div>
+
+        <!-- Note -->
+        <div class="cdf-field form-field">
+          <label for="cdf-note">Je něco, co bychom měli vědět? <span class="cdf-field-hint">(nepovinné)</span></label>
+          <textarea id="cdf-note" name="note" class="form-textarea" rows="3" placeholder="Např. co aktuálně řešíte, kdy byste chtěli přijít, nebo jak vám můžeme pomoct."></textarea>
+        </div>
+
+        <!-- GDPR -->
+        <div class="cdf-field">
+          <label class="form-gdpr">
+            <input type="checkbox" name="gdpr_consent" required>
+            <span>Souhlasím se zpracováním osobních údajů za účelem kontaktování ohledně zájmu o FLOW. <a href="gdpr.html">Více informací.</a> <span class="cdf-req">*</span></span>
+          </label>
+        </div>
+
+        <div class="cdf-form-submit">
+          <button type="submit" class="btn btn-primary" id="submit-btn">Odeslat a domluvit další krok →</button>
+          <div class="cdf-form-submit__note">Žádné spamy. Ozveme se obvykle do 1 pracovního dne.</div>
+        </div>
+      </form>
+
+      <!-- Success state (3 varianty rendered by JS) -->
+      <div class="cdf-form-success" id="form-success" aria-live="polite"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<!-- FLOW-FOOTER-START -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <div class="site-footer__top">
+      <a href="index.html" class="site-footer__brand" aria-label="FLOW — domů">
+        <img src="images/67c55ee11c9d998cbc1cec25_flow-white.svg" alt="FLOW">
+      </a>
+    </div>
+
+    <div class="site-footer__cols">
+      <div>
+        <p class="site-footer__heading">Menu</p>
+        <a href="nase-skola.html" class="site-footer__link">Škola FLOW</a>
+        <a href="pro-zajemce.html" class="site-footer__link">Pro zájemce</a>
+        <a href="pro-rodice-ve-flow.html" class="site-footer__link">Pro rodiče ve FLOW</a>
+        <a href="kariera.html" class="site-footer__link">Kariéra</a>
+        <a href="blog.html" class="site-footer__link">Blog</a>
+        <a href="kontakt.html" class="site-footer__link">Kontakt</a>
+        <a href="gdpr.html" class="site-footer__link">GDPR</a>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Kampus</p>
+        <p class="site-footer__small">Aktuální</p>
+        <p>Roh Přívozní 1064/2a a Jankovcovy 53<br>Praha 7 — Holešovice</p>
+        <p class="site-footer__small" style="margin-top:14px;">Nový (od šk. roku 2026/27)</p>
+        <p>Českomoravská 1a<br>Praha 9 — Balabenka</p>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Dejte nám vědět</p>
+        <p class="site-footer__small">Obecné info</p>
+        <a href="mailto:info@skolaflow.cz" class="site-footer__email">info@skolaflow.cz</a>
+        <p class="site-footer__small" style="margin-top:14px;">GDPR pověřenec</p>
+        <a href="mailto:gdpr@skolaflow.cz" class="site-footer__email">gdpr@skolaflow.cz</a>
+        <p class="site-footer__small" style="margin-top:14px;">Sledujte nás</p>
+        <div class="site-footer__socials">
+          <a href="https://www.facebook.com/skolaflowcz" target="_blank" rel="noopener" class="site-footer__social" aria-label="Facebook"><img src="images/67b351f4c755934221b6669f_facebook-logo-white.svg" alt="" loading="lazy"></a>
+          <a href="https://www.linkedin.com/company/skolaflow/" target="_blank" rel="noopener" class="site-footer__social" aria-label="LinkedIn"><img src="images/67b351f4c755934221b666a1_linkedin-logo-white.svg" alt="" loading="lazy"></a>
+          <a href="https://www.instagram.com/skolaflowcz" target="_blank" rel="noopener" class="site-footer__social" aria-label="Instagram"><img src="images/67b351f4c755934221b666a4_instagram-logo-white.svg" alt="" loading="lazy"></a>
+        </div>
+      </div>
+
+      <div>
+        <p class="site-footer__heading">Fakturační údaje</p>
+        <p><strong>Základní škola FLOW s.r.o.</strong><br>
+        IČ: 08916403<br>
+        Red IZO: 691016054 / IZO: 181129167<br>
+        Datová schránka: uf3q7m6</p>
+      </div>
+
+      <a href="chci-do-flow.html" class="btn btn-primary site-footer__cta">Chci do FLOW →</a>
+    </div>
+
+    <div class="site-footer__bottom-line">
+      <img src="images/680935e767127338a262bfd9_EU_2BM_D9_86MT_20_D8_8CB.svg" alt="EU spolufinancování + MŠMT" class="site-footer__partner site-footer__partner--mono" loading="lazy">
+      <img src="images/68093a79aace0042c9a41742_CC_partner_kulaty_20copy.svg" alt="Cambridge Center — partner institution" class="site-footer__partner" loading="lazy">
+    </div>
+
+    <p class="site-footer__legal">© <span id="footer-year">2026</span> Základní škola FLOW s.r.o. · Všechna práva vyhrazena</p>
+
+  </div>
+</footer>
+
+<!-- FB MESSENGER FAB — show on scroll, hide on body.no-messenger -->
+<a href="https://m.me/skolaflowcz" target="_blank" rel="noopener" class="msg-fab" aria-label="Napište nám na FB Messenger">
+  <svg class="msg-fab__svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.913 1.454 5.512 3.726 7.21V22l3.405-1.869c.909.252 1.872.387 2.869.387 5.523 0 10-4.145 10-9.259C22 6.145 17.523 2 12 2zm.99 12.452l-2.546-2.716L5.49 14.452l5.49-5.83 2.61 2.716 4.89-2.716-5.49 5.83z"/>
+  </svg>
+  <span class="msg-fab__dot" aria-hidden="true"></span>
+</a>
+
+<!-- FLOW-FOOTER-END -->
+
+<script src="assets/js/flow.js" defer></script>
+
+<script>
+/* ─────────────────────────────────────────────────
+   chci-do-flow.html — form submit handler
+   POST → Apps Script endpoint → Sheet + email + thank-you
+   ───────────────────────────────────────────────── */
+(function () {
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxukkUNas85jri2zW6Jafx8zeOls4oEB9BupUV8yKbyIkVTFUfwNvhxgSmTOw7zGf6h/exec';
+
+  var form    = document.getElementById('chci_do_flow_form');
+  var success = document.getElementById('form-success');
+  var btn     = document.getElementById('submit-btn');
+  if (!form) return;
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, function (c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  /* Auto-fill UTM/tracking hidden fields z URL na page load */
+  (function fillTrackingFields() {
+    var qs = new URLSearchParams(window.location.search);
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'].forEach(function (key) {
+      var el = document.getElementById(key);
+      if (el) el.value = qs.get(key) || '';
+    });
+    var lp = document.getElementById('landing_page');
+    if (lp) lp.value = window.location.pathname;
+    var ref = document.getElementById('referrer');
+    if (ref) ref.value = document.referrer || '';
+  })();
+
+  /* Choice cards click → prefill interest radio */
+  document.querySelectorAll('.cdf-choice-card[data-interest]').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      var interest = card.getAttribute('data-interest');
+      var radio = form.querySelector('input[name="interest"][value="' + interest + '"]');
+      if (radio) {
+        radio.checked = true;
+        radio.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    });
+  });
+
+  /* CMS Dropdown — fetch terminy z Google Sheets CSV */
+  (function fillMeetingDropdown() {
+    var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjlj0pNn0yU3jyhngYBQmmzVrqStYlXxw0-nOlbgv2ua0eCAkJTm44-jUjiXEp2SR4pJk_e9yaqQxN/pub?gid=724100504&single=true&output=csv';
+    var select = document.getElementById('cdf-meeting');
+    var hiddenTitle = document.getElementById('cdf-event-title');
+    var hiddenDate  = document.getElementById('cdf-event-date');
+    if (!select) return;
+
+    var FALLBACK = [
+      { type: 'zs-od',  title: 'Den otevřených dveří ZŠ FLOW',          date: '2026-09-17', time: '17:00' },
+      { type: 'ms-od',  title: 'Den otevřených dveří Little FLOW (MŠ)', date: '2026-06-04', time: '17:00' },
+      { type: 'kafe',   title: 'Káva s ředitelem',                       date: '',           time: 'sjednáme termín' },
+      { type: 'online', title: 'Online schůzka',                         date: '',           time: 'sjednáme termín' }
+    ];
+    var MONTHS = ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
+    var DAYS   = ['ne','po','út','st','čt','pá','so'];
+
+    function formatLabel(row) {
+      if (!row.date) return row.title + ' — ' + (row.time || 'sjednáme termín');
+      var d = new Date(row.date);
+      if (isNaN(d.getTime())) return row.title;
+      return row.title + ' — ' + DAYS[d.getDay()] + ' ' + d.getDate() + '. ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear() + (row.time ? ' · ' + row.time : '');
+    }
+
+    function populate(rows) {
+      while (select.options.length > 1) select.remove(1);
+      rows.forEach(function (row) {
+        var opt = document.createElement('option');
+        opt.value = row.type;
+        opt.textContent = formatLabel(row);
+        opt.dataset.title = row.title;
+        opt.dataset.dateLabel = formatLabel(row).split(' — ').slice(1).join(' — ') || (row.time || '');
+        select.appendChild(opt);
+      });
+      var none = document.createElement('option');
+      none.value = 'none';
+      none.textContent = 'Žádný termín mi nevyhovuje — najděte mi jiný';
+      none.dataset.title = '';
+      none.dataset.dateLabel = '';
+      select.appendChild(none);
+    }
+
+    function parseCSV(text) {
+      var lines = text.split(/\r?\n/).filter(Boolean);
+      if (lines.length < 2) return [];
+      var header = lines[0].split(',').map(function (h) { return h.trim().toLowerCase(); });
+      var idx = { type: header.indexOf('type'), title: header.indexOf('title'), date: header.indexOf('date'), time: header.indexOf('time'), active: header.indexOf('active') };
+      return lines.slice(1).map(function (line) {
+        var cells = line.split(',');
+        return {
+          type: idx.type >= 0 ? (cells[idx.type] || '').trim() : '',
+          title: idx.title >= 0 ? (cells[idx.title] || '').trim() : '',
+          date: idx.date >= 0 ? (cells[idx.date] || '').trim() : '',
+          time: idx.time >= 0 ? (cells[idx.time] || '').trim() : '',
+          active: idx.active >= 0 ? (cells[idx.active] || '').trim().toUpperCase() : 'TRUE'
+        };
+      }).filter(function (r) { return r.active !== 'FALSE' && r.title; });
+    }
+
+    select.addEventListener('change', function () {
+      var opt = select.options[select.selectedIndex];
+      if (!opt) return;
+      if (hiddenTitle) hiddenTitle.value = opt.dataset.title || '';
+      if (hiddenDate)  hiddenDate.value  = opt.dataset.dateLabel || '';
+    });
+
+    fetch(SHEET_CSV_URL + (SHEET_CSV_URL.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now())
+      .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+      .then(function (text) {
+        var rows = parseCSV(text);
+        populate(rows.length ? rows : FALLBACK);
+      })
+      .catch(function (err) {
+        console.warn('CSV fetch failed:', err);
+        populate(FALLBACK);
+      });
+  })();
+
+  /* Form submit */
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    var origBtnText = btn ? btn.innerHTML : '';
+    if (btn) { btn.disabled = true; btn.innerHTML = 'Odesílám…'; }
+
+    var whenEl = document.getElementById('submitted_at');
+    if (whenEl) whenEl.value = new Date().toISOString();
+
+    var data = new FormData(form);
+    data.append('source', 'chci-do-flow-form');
+
+    fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', body: data })
+      .then(function () {
+        var meeting = data.get('meeting') || '';
+        var eventTitle = data.get('event_title') || '';
+        var eventDate  = data.get('event_date') || '';
+
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            event: 'chci_do_flow_submit',
+            interest: data.get('interest') || '',
+            meeting_type: meeting
+          });
+        }
+
+        form.style.display = 'none';
+        var head = document.getElementById('form-head');
+        if (head) head.style.display = 'none';
+
+        if (success) {
+          success.style.display = 'block';
+
+          var checkIcon = '<div class="cdf-form-success__icon" aria-hidden="true">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">' +
+              '<path d="M5 12.5l5 5L20 7"/>' +
+            '</svg></div>';
+
+          var html;
+          if (meeting && meeting !== 'none') {
+            html = checkIcon +
+              '<h2 class="h-section" style="margin-bottom:14px;">Skvěle, máme vás <em style="font-style:normal;color:var(--c-blue);">zapsané</em>!</h2>' +
+              '<div class="cdf-form-success__event-card">' +
+                '<p class="cdf-form-success__event-eyebrow">Vaše rezervace</p>' +
+                '<p class="cdf-form-success__event-title">' + escapeHtml(eventTitle) + '</p>' +
+                (eventDate ? '<p class="cdf-form-success__event-date">' + escapeHtml(eventDate) + '</p>' : '') +
+              '</div>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto 12px;text-align:center;">Potvrzení i s detaily místa konání vám posíláme e-mailem.</p>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto;text-align:center;">Pokud by se vám termín nakonec nehodil, dejte nám prosím vědět na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
+          } else if (meeting === 'none') {
+            html = checkIcon +
+              '<h2 class="h-section" style="margin-bottom:14px;">Děkujeme, ozveme se s <em style="font-style:normal;color:var(--c-blue);">termíny</em>!</h2>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto 14px;text-align:center;">Žádný z aktuálních termínů vám nevyhovuje — <strong>do jednoho pracovního dne</strong> se vám ozveme s alternativami.</p>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto;text-align:center;">Pokud máte preferovaný formát nebo čas, napište nám na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
+          } else {
+            html = checkIcon +
+              '<h2 class="h-section" style="margin-bottom:14px;">Hotovo, máme vaše <em style="font-style:normal;color:var(--c-blue);">údaje</em>!</h2>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto;text-align:center;">Ozveme se vám do <strong>jednoho pracovního dne</strong> s nejvhodnějším dalším krokem. Mezitím vám posíláme potvrzení e-mailem.</p>';
+          }
+
+          html += '<p style="margin-top:28px;"><a href="index.html" style="color:var(--c-blue);font-weight:700;text-decoration:none;border-bottom:2px solid var(--c-yellow);padding-bottom:2px;">← Zpět na web FLOW</a></p>';
+
+          success.innerHTML = html;
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      })
+      .catch(function (err) {
+        console.error('chci-do-flow submit error:', err);
+        if (btn) { btn.disabled = false; btn.innerHTML = origBtnText; }
+        alert('Nepodařilo se odeslat. Zkuste prosím znovu nebo napište přímo na info@skolaflow.cz.');
+      });
+  });
+})();
+</script>
+
+</body>
+</html>
