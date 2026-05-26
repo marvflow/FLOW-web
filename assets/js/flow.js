@@ -9,6 +9,9 @@
 (function () {
   'use strict';
 
+  // ───── Jazyk: detekce z <html lang="..."> (EN web pouziva stejny script)
+  var IS_EN = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
+
   // ───── Footer dynamic year
   function setFooterYear() {
     var el = document.getElementById('footer-year');
@@ -74,8 +77,11 @@
             '<path d="M5 12.5l5 5L20 7"/>' +
           '</svg>' +
         '</div>' +
-        '<h3>Děkujeme' + (firstName ? ', ' + firstName : '') + '!</h3>' +
-        '<p>Vaše zpráva u nás přistála. Ozveme se vám do <strong>jednoho pracovního dne</strong>.</p>';
+        (IS_EN
+          ? '<h3>Thanks' + (firstName ? ', ' + firstName : '') + '!</h3>' +
+            '<p>Your message landed safely. We\'ll get back to you within <strong>one business day</strong>.</p>'
+          : '<h3>Děkujeme' + (firstName ? ', ' + firstName : '') + '!</h3>' +
+            '<p>Vaše zpráva u nás přistála. Ozveme se vám do <strong>jednoho pracovního dne</strong>.</p>');
       form.parentNode.replaceChild(success, form);
       success.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -87,7 +93,7 @@
       var name = form.name ? form.name.value.trim() : '';
       var btn = form.querySelector('button[type=submit]');
       var origLabel = btn ? btn.innerHTML : '';
-      if (btn) { btn.disabled = true; btn.innerHTML = 'Odesílám…'; }
+      if (btn) { btn.disabled = true; btn.innerHTML = IS_EN ? 'Submitting…' : 'Odesílám…'; }
 
       var data = new FormData(form);
       fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data })
@@ -117,7 +123,9 @@
         .catch(function (err) {
           console.error('Form submit error:', err);
           if (btn) { btn.disabled = false; btn.innerHTML = origLabel; }
-          alert('Nepodařilo se odeslat. Zkuste prosím znovu nebo nám napište přímo na info@skolaflow.cz.');
+          alert(IS_EN
+            ? 'Submission failed. Please try again or write directly to info@skolaflow.cz.'
+            : 'Nepodařilo se odeslat. Zkuste prosím znovu nebo nám napište přímo na info@skolaflow.cz.');
         });
     });
   }
@@ -131,20 +139,37 @@
     var hiddenTitle = document.getElementById('form-closer-event-title');
     var hiddenDate  = document.getElementById('form-closer-event-date');
 
-    var FALLBACK = [
+    var FALLBACK = IS_EN ? [
+      { type: 'zs-od',  title: 'Open Day at FLOW Elementary',            date: '2026-09-17', time: '17:00' },
+      { type: 'ms-od',  title: 'Open Day at Little FLOW (Kindergarten)', date: '2026-06-04', time: '17:00' },
+      { type: 'kafe',   title: 'Coffee with the Director',                date: '',           time: "we'll arrange a date" },
+      { type: 'online', title: 'Online meeting',                          date: '',           time: "we'll arrange a date" }
+    ] : [
       { type: 'zs-od',  title: 'Den otevřených dveří ZŠ FLOW',          date: '2026-09-17', time: '17:00' },
       { type: 'ms-od',  title: 'Den otevřených dveří Little FLOW (MŠ)', date: '2026-06-04', time: '17:00' },
       { type: 'kafe',   title: 'Káva s ředitelem',                       date: '',           time: 'sjednáme termín' },
       { type: 'online', title: 'Online schůzka',                         date: '',           time: 'sjednáme termín' }
     ];
-    var MONTHS = ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
-    var DAYS   = ['ne','po','út','st','čt','pá','so'];
+    var MONTHS = IS_EN
+      ? ['January','February','March','April','May','June','July','August','September','October','November','December']
+      : ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
+    var DAYS = IS_EN
+      ? ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+      : ['ne','po','út','st','čt','pá','so'];
+    var DEFAULT_TIME_LABEL = IS_EN ? "we'll arrange a date" : 'sjednáme termín';
 
     function formatLabel(row) {
-      if (!row.date) return row.title + ' — ' + (row.time || 'sjednáme termín');
+      // EN-aware: pokud CSV poskytuje title_en, pouzij ho na EN webu
+      var title = (IS_EN && row.title_en) ? row.title_en : row.title;
+      var time  = (IS_EN && row.time_en)  ? row.time_en  : row.time;
+      if (!row.date) return title + ' — ' + (time || DEFAULT_TIME_LABEL);
       var d = new Date(row.date);
-      if (isNaN(d.getTime())) return row.title;
-      return row.title + ' — ' + DAYS[d.getDay()] + ' ' + d.getDate() + '. ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear() + (row.time ? ' · ' + row.time : '');
+      if (isNaN(d.getTime())) return title;
+      // EN format: "Wed 17 September 2026 · 17:00" (bez tecky); CS: "st 17. září 2026 · 17:00"
+      var dateStr = IS_EN
+        ? DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear()
+        : DAYS[d.getDay()] + ' ' + d.getDate() + '. ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+      return title + ' — ' + dateStr + (time ? ' · ' + time : '');
     }
 
     function populate(rows) {
@@ -153,13 +178,15 @@
         var opt = document.createElement('option');
         opt.value = row.type;
         opt.textContent = formatLabel(row);
-        opt.dataset.title = row.title;
-        opt.dataset.dateLabel = formatLabel(row).split(' — ').slice(1).join(' — ') || (row.time || '');
+        opt.dataset.title = (IS_EN && row.title_en) ? row.title_en : row.title;
+        opt.dataset.dateLabel = formatLabel(row).split(' — ').slice(1).join(' — ') || ((IS_EN && row.time_en) ? row.time_en : (row.time || ''));
         select.appendChild(opt);
       });
       var none = document.createElement('option');
       none.value = 'none';
-      none.textContent = 'Žádný termín mi nevyhovuje — kontaktujte mě, najdeme jiný';
+      none.textContent = IS_EN
+        ? 'None of these works — please contact me, we\'ll find another'
+        : 'Žádný termín mi nevyhovuje — kontaktujte mě, najdeme jiný';
       none.dataset.title = '';
       none.dataset.dateLabel = '';
       select.appendChild(none);
@@ -169,14 +196,24 @@
       var lines = text.split(/\r?\n/).filter(Boolean);
       if (lines.length < 2) return [];
       var header = lines[0].split(',').map(function (h) { return h.trim().toLowerCase(); });
-      var idx = { type: header.indexOf('type'), title: header.indexOf('title'), date: header.indexOf('date'), time: header.indexOf('time'), active: header.indexOf('active') };
+      var idx = {
+        type: header.indexOf('type'),
+        title: header.indexOf('title'),
+        title_en: header.indexOf('title_en'),
+        date: header.indexOf('date'),
+        time: header.indexOf('time'),
+        time_en: header.indexOf('time_en'),
+        active: header.indexOf('active')
+      };
       return lines.slice(1).map(function (line) {
         var cells = line.split(',');
         return {
           type: idx.type >= 0 ? (cells[idx.type] || '').trim() : '',
           title: idx.title >= 0 ? (cells[idx.title] || '').trim() : '',
+          title_en: idx.title_en >= 0 ? (cells[idx.title_en] || '').trim() : '',
           date: idx.date >= 0 ? (cells[idx.date] || '').trim() : '',
           time: idx.time >= 0 ? (cells[idx.time] || '').trim() : '',
+          time_en: idx.time_en >= 0 ? (cells[idx.time_en] || '').trim() : '',
           active: idx.active >= 0 ? (cells[idx.active] || '').trim().toUpperCase() : 'TRUE'
         };
       }).filter(function (r) { return r.active !== 'FALSE' && r.title; });

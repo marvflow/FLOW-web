@@ -736,7 +736,7 @@
         <div class="cdf-field form-field">
           <label for="cdf-meeting">If a specific date works, pick it now <span class="cdf-field-hint">(optional)</span></label>
           <select id="cdf-meeting" name="meeting" class="form-select">
-            <option value="" selected>— No specific date yet, just call me —</option>
+            <option value="" disabled selected>— Select from the menu below —</option>
           </select>
         </div>
 
@@ -917,19 +917,19 @@
     if (!select) return;
 
     var FALLBACK = [
-      { type: 'zs-od',  title: 'Den otevřených dveří ZŠ FLOW',          date: '2026-09-17', time: '17:00' },
-      { type: 'ms-od',  title: 'Den otevřených dveří Little FLOW (MŠ)', date: '2026-06-04', time: '17:00' },
-      { type: 'kafe',   title: 'Káva s ředitelem',                       date: '',           time: 'sjednáme termín' },
-      { type: 'online', title: 'Online schůzka',                         date: '',           time: 'sjednáme termín' }
+      { type: 'zs-od',  title: 'Open Day at FLOW Elementary',            date: '2026-09-17', time: '17:00' },
+      { type: 'ms-od',  title: 'Open Day at Little FLOW (Kindergarten)', date: '2026-06-04', time: '17:00' },
+      { type: 'kafe',   title: 'Coffee with the Director',                date: '',           time: "we'll arrange a date" },
+      { type: 'online', title: 'Online meeting',                          date: '',           time: "we'll arrange a date" }
     ];
-    var MONTHS = ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
-    var DAYS   = ['ne','po','út','st','čt','pá','so'];
+    var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
     function formatLabel(row) {
-      if (!row.date) return row.title + ' — ' + (row.time || 'sjednáme termín');
+      if (!row.date) return row.title + ' — ' + (row.time || "we'll arrange a date");
       var d = new Date(row.date);
       if (isNaN(d.getTime())) return row.title;
-      return row.title + ' — ' + DAYS[d.getDay()] + ' ' + d.getDate() + '. ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear() + (row.time ? ' · ' + row.time : '');
+      return row.title + ' — ' + DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear() + (row.time ? ' · ' + row.time : '');
     }
 
     function populate(rows) {
@@ -944,7 +944,7 @@
       });
       var none = document.createElement('option');
       none.value = 'none';
-      none.textContent = 'Žádný termín mi nevyhovuje — najděte mi jiný';
+      none.textContent = 'None of these works — please find me another';
       none.dataset.title = '';
       none.dataset.dateLabel = '';
       select.appendChild(none);
@@ -992,7 +992,7 @@
     if (!form.checkValidity()) { form.reportValidity(); return; }
 
     var origBtnText = btn ? btn.innerHTML : '';
-    if (btn) { btn.disabled = true; btn.innerHTML = 'Odesílám…'; }
+    if (btn) { btn.disabled = true; btn.innerHTML = 'Submitting…'; }
 
     var whenEl = document.getElementById('submitted_at');
     if (whenEl) whenEl.value = new Date().toISOString();
@@ -1029,26 +1029,26 @@
           var html;
           if (meeting && meeting !== 'none') {
             html = checkIcon +
-              '<h2 class="h-section" style="margin-bottom:14px;">Skvěle, máme vás <em style="font-style:normal;color:var(--c-blue);">zapsané</em>!</h2>' +
+              '<h2 class="h-section" style="margin-bottom:14px;">Great, you\'re <em style="font-style:normal;color:var(--c-blue);">booked in</em>!</h2>' +
               '<div class="cdf-form-success__event-card">' +
-                '<p class="cdf-form-success__event-eyebrow">Vaše rezervace</p>' +
+                '<p class="cdf-form-success__event-eyebrow">Your booking</p>' +
                 '<p class="cdf-form-success__event-title">' + escapeHtml(eventTitle) + '</p>' +
                 (eventDate ? '<p class="cdf-form-success__event-date">' + escapeHtml(eventDate) + '</p>' : '') +
               '</div>' +
-              '<p class="lead" style="max-width:560px;margin:0 auto 12px;text-align:center;">Potvrzení i s detaily místa konání vám posíláme e-mailem.</p>' +
-              '<p class="lead" style="max-width:560px;margin:0 auto;text-align:center;">Pokud by se vám termín nakonec nehodil, dejte nám prosím vědět na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
+              '<p class="lead" style="max-width:560px;margin:0 auto 12px;text-align:center;">We\'re sending a confirmation with venue details by e-mail.</p>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto;text-align:center;">If the date no longer fits you, please let us know at <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
           } else if (meeting === 'none') {
             html = checkIcon +
-              '<h2 class="h-section" style="margin-bottom:14px;">Děkujeme, ozveme se s <em style="font-style:normal;color:var(--c-blue);">termíny</em>!</h2>' +
-              '<p class="lead" style="max-width:560px;margin:0 auto 14px;text-align:center;">Žádný z aktuálních termínů vám nevyhovuje — <strong>do jednoho pracovního dne</strong> se vám ozveme s alternativami.</p>' +
-              '<p class="lead" style="max-width:560px;margin:0 auto;text-align:center;">Pokud máte preferovaný formát nebo čas, napište nám na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
+              '<h2 class="h-section" style="margin-bottom:14px;">Thanks — we\'ll get back with <em style="font-style:normal;color:var(--c-blue);">dates</em>!</h2>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto 14px;text-align:center;">None of the current dates worked for you — we\'ll get back within <strong>one business day</strong> with alternatives.</p>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto;text-align:center;">If you have a preferred format or time, write to us at <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
           } else {
             html = checkIcon +
-              '<h2 class="h-section" style="margin-bottom:14px;">Hotovo, máme vaše <em style="font-style:normal;color:var(--c-blue);">údaje</em>!</h2>' +
-              '<p class="lead" style="max-width:560px;margin:0 auto;text-align:center;">Ozveme se vám do <strong>jednoho pracovního dne</strong> s nejvhodnějším dalším krokem. Mezitím vám posíláme potvrzení e-mailem.</p>';
+              '<h2 class="h-section" style="margin-bottom:14px;">Done — we have your <em style="font-style:normal;color:var(--c-blue);">details</em>!</h2>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto;text-align:center;">We\'ll get back to you within <strong>one business day</strong> with the best next step. Meanwhile we\'re sending a confirmation by e-mail.</p>';
           }
 
-          html += '<p style="margin-top:28px;"><a href="index.html" style="color:var(--c-blue);font-weight:700;text-decoration:none;border-bottom:2px solid var(--c-yellow);padding-bottom:2px;">← Zpět na web FLOW</a></p>';
+          html += '<p style="margin-top:28px;"><a href="index.html" style="color:var(--c-blue);font-weight:700;text-decoration:none;border-bottom:2px solid var(--c-yellow);padding-bottom:2px;">← Back to FLOW website</a></p>';
 
           success.innerHTML = html;
           success.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1057,7 +1057,7 @@
       .catch(function (err) {
         console.error('chci-do-flow submit error:', err);
         if (btn) { btn.disabled = false; btn.innerHTML = origBtnText; }
-        alert('Nepodařilo se odeslat. Zkuste prosím znovu nebo napište přímo na info@skolaflow.cz.');
+        alert('Submission failed. Please try again or write directly to info@skolaflow.cz.');
       });
   });
 })();
