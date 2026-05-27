@@ -277,6 +277,16 @@
   </url>
 
   <url>
+    <loc>https://www.skolaflow.cz/pro-zajemce/dny-na-zkousku</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/dny-na-zkousku" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/dny-na-zkousku" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.skolaflow.cz/pro-zajemce/dny-na-zkousku" />
+  </url>
+
+  <url>
     <loc>https://www.skolaflow.cz/pro-zajemce/zapisy</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
@@ -531,6 +541,15 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/prestupy" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/prestupy" />
+  </url>
+
+  <url>
+    <loc>https://www.skolaflow.cz/en/pro-zajemce/dny-na-zkousku</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/pro-zajemce/dny-na-zkousku" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/pro-zajemce/dny-na-zkousku" />
   </url>
 
   <url>
