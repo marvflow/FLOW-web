@@ -613,7 +613,37 @@
           </div>
         </fieldset>
 
-        <!-- Sekce 2: Organizace dne -->
+        <!-- Sekce 2: Termin + organizace dne -->
+        <fieldset class="dnz-form__fieldset">
+          <legend class="dnz-form__legend">Termín a délka pobytu</legend>
+          <span class="dnz-form__legend-sub">Termín je nezávazný — potvrdíme ho po interním schválení školy a domluvíme se s vámi.</span>
+
+          <div class="dnz-field">
+            <label>Kolik dní by dítě chtělo vyzkoušet?</label>
+            <div class="dnz-radios">
+              <label><input type="radio" name="pocet_dnu" value="1"> 1 den</label>
+              <label><input type="radio" name="pocet_dnu" value="2"> 2 dny</label>
+              <label><input type="radio" name="pocet_dnu" value="3" checked> 3 dny <span style="font-size:0.78rem;color:var(--c-muted);">(doporučeno)</span></label>
+            </div>
+          </div>
+
+          <div class="dnz-row-2">
+            <div class="dnz-field">
+              <label for="dnz-preferred-date">Preferovaný termín začátku
+                <span class="dnz-field__hint">nezávazné, můžeme upravit</span>
+              </label>
+              <input class="form-input" id="dnz-preferred-date" name="preferred_date" type="date">
+            </div>
+            <div class="dnz-field">
+              <label for="dnz-alt-date">Alternativní termín
+                <span class="dnz-field__hint">pro případ, že první termín nepůjde</span>
+              </label>
+              <input class="form-input" id="dnz-alt-date" name="alt_date" type="date">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Sekce 3: Organizace dne -->
         <fieldset class="dnz-form__fieldset">
           <legend class="dnz-form__legend">Organizace dne</legend>
           <span class="dnz-form__legend-sub">Družiny jsou zdarma po dobu zkušebních dní. Pomůže nám vědět, zda je dítě bude využívat.</span>
@@ -742,8 +772,9 @@
           </svg>
         </div>
         <h2 class="h-section" style="margin-bottom:14px;">Děkujeme, máme vaše <em style="font-style:normal;color:var(--c-blue);">odpovědi</em>!</h2>
-        <p class="lead" style="max-width:560px;margin:0 auto 14px;text-align:center;">Ozveme se vám do <strong>jednoho pracovního dne</strong> s návrhem termínu zkušebních dní a dalšími praktickými detaily.</p>
-        <p style="margin-top:24px;"><a href="prestupy.html" style="color:var(--c-blue);font-weight:700;text-decoration:none;border-bottom:2px solid var(--c-yellow);padding-bottom:2px;">← Zpět na přestupy</a></p>
+        <p class="lead" style="max-width:580px;margin:0 auto 14px;text-align:center;">Vaše žádost teď prochází <strong>interním schválením školy</strong> — pedagog třídy a vedení společně potvrdí, že navržený termín sedí na obě strany.</p>
+        <p class="lead" style="max-width:580px;margin:0 auto;text-align:center;">Jakmile bude termín schválen, <strong>ozveme se vám e-mailem nebo telefonem</strong> s potvrzením a praktickými detaily. Typicky do 2 pracovních dnů.</p>
+        <p style="margin-top:28px;"><a href="prestupy.html" style="color:var(--c-blue);font-weight:700;text-decoration:none;border-bottom:2px solid var(--c-yellow);padding-bottom:2px;">← Zpět na přestupy</a></p>
       </div>
     </div>
   </section>
