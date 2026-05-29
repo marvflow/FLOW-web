@@ -415,6 +415,120 @@
     }
     .pr-edookit__cta:hover { transform: translate(-1px, -1px); }
 
+    /* AKCE PRO RODICE (group eventy) + 1-on-1 SCHUZKY */
+    .pr-akce { padding: 90px 0; background: var(--c-cream); }
+    .pr-1on1 { padding: 90px 0; background: var(--c-white); }
+    .pr-akce__intro, .pr-1on1__intro {
+      max-width: 720px;
+      margin: 0 auto var(--space-md);
+      text-align: center;
+    }
+    .pr-form-card {
+      max-width: 720px;
+      margin: var(--space-xl) auto 0;
+      background: var(--c-white);
+      border: 1.5px solid var(--c-border);
+      border-radius: var(--r-card);
+      padding: 36px 32px 28px;
+      box-shadow: 6px 6px 0 0 var(--c-blue-deep);
+    }
+    .pr-akce .pr-form-card { background: var(--c-white); }
+    .pr-form__field { margin-bottom: var(--space-sm); position: relative; }
+    .pr-form__field:last-child { margin-bottom: 0; }
+    .pr-form__field label {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-sm);
+      color: var(--c-blue-deep);
+      margin-bottom: 6px;
+    }
+    .pr-form__hint {
+      display: block;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.82rem;
+      color: var(--c-muted);
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+    .pr-req { color: var(--c-blue); }
+    .pr-form__row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm);
+    }
+    .pr-form__radios {
+      display: flex; flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .pr-form__radios label {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px;
+      background: var(--c-cream);
+      border: 1.5px solid var(--c-border);
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: var(--fs-sm);
+      color: var(--c-blue-deep);
+      cursor: pointer;
+      margin-bottom: 0;
+      transition: border-color var(--t);
+    }
+    .pr-form__radios label:hover { border-color: var(--c-blue-deep); }
+    .pr-form__radios input { accent-color: var(--c-blue); margin: 0; }
+    .pr-form__slot {
+      margin-bottom: 12px;
+      padding: 14px;
+      background: var(--c-cream);
+      border-radius: 12px;
+      border: 1px solid var(--c-border);
+    }
+    .pr-form__slot-label {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.78rem;
+      color: var(--c-blue);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .pr-form__slot-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 10px;
+    }
+    .pr-form__honeypot {
+      position: absolute !important;
+      left: -9999px !important;
+      width: 1px !important; height: 1px !important;
+      overflow: hidden !important;
+    }
+    .pr-form__success {
+      display: none;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 48px 32px;
+      background: var(--c-white);
+      border: 1.5px solid var(--c-border);
+      border-radius: var(--r-card);
+    }
+    .pr-akce .pr-form__success { background: var(--c-white); }
+    .pr-form__success-icon {
+      width: 56px; height: 56px;
+      margin: 0 auto 14px;
+      background: var(--c-yellow);
+      border: 2px solid var(--c-blue-deep);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--c-blue-deep);
+    }
+    .pr-form__success-icon svg { width: 32px; height: 32px; }
+
     /* Responsive */
     @media (max-width: 1024px) {
       .pr-classes__grid { grid-template-columns: repeat(3, 1fr); }
@@ -424,6 +538,9 @@
       .pr-hero { padding: 56px 0 70px; border-radius: 0 0 24px 24px; }
       .pr-news { padding: 56px 0; }
       .pr-cal { padding: 64px 0; }
+      .pr-akce, .pr-1on1 { padding: 56px 0; }
+      .pr-form-card { padding: 24px 20px 22px; }
+      .pr-form__row-2, .pr-form__slot-grid { grid-template-columns: 1fr; }
       .pr-classes { padding: 64px 0; }
       .pr-classes__grid { grid-template-columns: 1fr 1fr; }
       .pr-contacts { padding: 64px 0; }
@@ -524,6 +641,8 @@
         <div class="pr-hero__quick">
           <a href="#aktuality" class="pr-hero__quick-link"><span aria-hidden="true">📢</span> Aktuality</a>
           <a href="#kalendar" class="pr-hero__quick-link"><span aria-hidden="true">📅</span> Kalendář</a>
+          <a href="#akce" class="pr-hero__quick-link"><span aria-hidden="true">🎟️</span> Akce</a>
+          <a href="#schuzka" class="pr-hero__quick-link"><span aria-hidden="true">💬</span> Schůzka 1-on-1</a>
           <a href="#tridy" class="pr-hero__quick-link"><span aria-hidden="true">👨‍🏫</span> Třídy</a>
           <a href="#kontakty" class="pr-hero__quick-link"><span aria-hidden="true">✉️</span> Kontakty</a>
         </div>
@@ -609,6 +728,202 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- AKCE PRO RODICE — registrace na rodicovske schuzky, kavu s vedenim, besidky… -->
+  <section class="pr-akce" id="akce">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Nadcházející akce</span>
+        <h2 class="h-section">Přihlaste se na <em style="font-style:normal;color:var(--c-blue);">akci</em>.</h2>
+      </div>
+      <div class="pr-akce__intro">
+        <p class="lead">Rodičovské schůzky, káva s vedením, besídky a další akce pro rodiče. Vyberte ze seznamu a vyplňte krátký formulář — ozveme se s potvrzením.</p>
+      </div>
+
+      <form id="akce-form" class="pr-form-card" novalidate>
+        <input type="hidden" name="source" value="rodicovska-akce-form">
+        <input type="hidden" name="lang" value="cs">
+        <input type="hidden" name="event_title" id="akce-event-title" value="">
+        <input type="hidden" name="event_date" id="akce-event-date" value="">
+        <input type="hidden" name="event_type" id="akce-event-type" value="">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="pr-form__honeypot" aria-hidden="true">
+
+        <div class="pr-form__field">
+          <label for="akce-event">Vyberte akci <span class="pr-req">*</span></label>
+          <select class="form-select" id="akce-event" name="event_choice" required>
+            <option value="" disabled selected>— Načítám akce —</option>
+          </select>
+        </div>
+
+        <div class="pr-form__row-2">
+          <div class="pr-form__field">
+            <label for="akce-name">Jméno rodiče <span class="pr-req">*</span></label>
+            <input class="form-input" id="akce-name" name="parent_name" type="text" required autocomplete="name" placeholder="Jan Novák">
+          </div>
+          <div class="pr-form__field">
+            <label for="akce-child">Dítě / třída
+              <span class="pr-form__hint">např. Karel, 2. třída (Artemis)</span>
+            </label>
+            <input class="form-input" id="akce-child" name="child_class" type="text" placeholder="">
+          </div>
+        </div>
+
+        <div class="pr-form__row-2">
+          <div class="pr-form__field">
+            <label for="akce-email">E-mail <span class="pr-req">*</span></label>
+            <input class="form-input" id="akce-email" name="email" type="email" required inputmode="email" autocomplete="email" placeholder="vas@email.cz">
+          </div>
+          <div class="pr-form__field">
+            <label for="akce-phone">Telefon
+              <span class="pr-form__hint">nepovinné</span>
+            </label>
+            <input class="form-input" id="akce-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+420 ___ ___ ___">
+          </div>
+        </div>
+
+        <div class="pr-form__field">
+          <label for="akce-note">Poznámka
+            <span class="pr-form__hint">nepovinné — počet osob, dietní omezení, dotaz…</span>
+          </label>
+          <textarea class="form-textarea" id="akce-note" name="note" rows="2"></textarea>
+        </div>
+
+        <div class="pr-form__field" style="margin-top:18px;">
+          <label class="form-gdpr">
+            <input type="checkbox" name="gdpr_consent" required>
+            <span>Souhlasím se zpracováním osobních údajů dle <a href="gdpr.html">zásad GDPR</a>. <span class="pr-req">*</span></span>
+          </label>
+        </div>
+
+        <div style="margin-top:18px;">
+          <button type="submit" class="btn btn-primary" id="akce-submit-btn">Přihlásit se na akci →</button>
+          <p style="margin-top:10px;font-size:0.85rem;color:var(--c-muted);">Po přihlášení vám pošleme potvrzení e-mailem.</p>
+        </div>
+      </form>
+
+      <div class="pr-form__success" id="akce-success" aria-live="polite">
+        <div class="pr-form__success-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l5 5L20 7"/></svg>
+        </div>
+        <h2 class="h-section" style="margin-bottom:14px;">Děkujeme, máme vaše <em style="font-style:normal;color:var(--c-blue);">přihlášení</em>!</h2>
+        <p class="lead" style="max-width:520px;margin:0 auto;text-align:center;">Potvrzení s detaily akce vám posíláme e-mailem. Pokud byste se nakonec nemohli zúčastnit, dejte nám prosím vědět na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHŮZKA 1-on-1 — s vedením, třídním pedagogem nebo specialistou -->
+  <section class="pr-1on1" id="schuzka">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Schůzka 1-on-1</span>
+        <h2 class="h-section">Domluvte si <em style="font-style:normal;color:var(--c-blue);">schůzku</em>.</h2>
+      </div>
+      <div class="pr-1on1__intro">
+        <p class="lead">Chcete probrat něco osobně? Vyplňte krátký formulář — vyberte koho chcete potkat a navrhněte tři termíny, které vám sedí. Ozveme se s potvrzením do 2 pracovních dnů.</p>
+      </div>
+
+      <form id="schuzka-form" class="pr-form-card" novalidate>
+        <input type="hidden" name="source" value="schuzka-vedeni-form">
+        <input type="hidden" name="lang" value="cs">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="pr-form__honeypot" aria-hidden="true">
+
+        <div class="pr-form__row-2">
+          <div class="pr-form__field">
+            <label for="schuzka-name">Jméno rodiče <span class="pr-req">*</span></label>
+            <input class="form-input" id="schuzka-name" name="parent_name" type="text" required autocomplete="name" placeholder="Jan Novák">
+          </div>
+          <div class="pr-form__field">
+            <label for="schuzka-child">Dítě / třída
+              <span class="pr-form__hint">např. Karel, 2. třída (Artemis)</span>
+            </label>
+            <input class="form-input" id="schuzka-child" name="child_class" type="text" placeholder="">
+          </div>
+        </div>
+
+        <div class="pr-form__row-2">
+          <div class="pr-form__field">
+            <label for="schuzka-email">E-mail <span class="pr-req">*</span></label>
+            <input class="form-input" id="schuzka-email" name="email" type="email" required inputmode="email" autocomplete="email" placeholder="vas@email.cz">
+          </div>
+          <div class="pr-form__field">
+            <label for="schuzka-phone">Telefon <span class="pr-req">*</span></label>
+            <input class="form-input" id="schuzka-phone" name="phone" type="tel" required inputmode="tel" autocomplete="tel" placeholder="+420 ___ ___ ___">
+          </div>
+        </div>
+
+        <div class="pr-form__field">
+          <label>S kým chcete mluvit? <span class="pr-req">*</span></label>
+          <div class="pr-form__radios">
+            <label><input type="radio" name="s_kym" value="vedeni" required> Vedení školy</label>
+            <label><input type="radio" name="s_kym" value="tridni"> Třídní pedagog</label>
+            <label><input type="radio" name="s_kym" value="specialni"> Speciální pedagog</label>
+          </div>
+        </div>
+
+        <div class="pr-form__field">
+          <label for="schuzka-tema">Téma schůzky <span class="pr-req">*</span></label>
+          <textarea class="form-textarea" id="schuzka-tema" name="tema" rows="3" required placeholder="Stručně popište, o čem chcete mluvit, ať se můžeme připravit."></textarea>
+        </div>
+
+        <div class="pr-form__field">
+          <label>Navrhněte tři termíny <span class="pr-req">*</span>
+            <span class="pr-form__hint">vybereme jeden, který vyhovuje oběma stranám</span>
+          </label>
+
+          <div class="pr-form__slot">
+            <span class="pr-form__slot-label">Termín 1 (povinný)</span>
+            <div class="pr-form__slot-grid">
+              <input class="form-input" name="termin_1_date" type="date" required>
+              <input class="form-input" name="termin_1_time" type="time" required>
+            </div>
+          </div>
+          <div class="pr-form__slot">
+            <span class="pr-form__slot-label">Termín 2</span>
+            <div class="pr-form__slot-grid">
+              <input class="form-input" name="termin_2_date" type="date">
+              <input class="form-input" name="termin_2_time" type="time">
+            </div>
+          </div>
+          <div class="pr-form__slot">
+            <span class="pr-form__slot-label">Termín 3</span>
+            <div class="pr-form__slot-grid">
+              <input class="form-input" name="termin_3_date" type="date">
+              <input class="form-input" name="termin_3_time" type="time">
+            </div>
+          </div>
+        </div>
+
+        <div class="pr-form__field">
+          <label>Jak vás máme kontaktovat pro potvrzení? <span class="pr-req">*</span></label>
+          <div class="pr-form__radios">
+            <label><input type="radio" name="kontakt_pref" value="email" required> E-mail</label>
+            <label><input type="radio" name="kontakt_pref" value="telefon"> Telefon</label>
+            <label><input type="radio" name="kontakt_pref" value="oba"> Oba</label>
+          </div>
+        </div>
+
+        <div class="pr-form__field" style="margin-top:18px;">
+          <label class="form-gdpr">
+            <input type="checkbox" name="gdpr_consent" required>
+            <span>Souhlasím se zpracováním osobních údajů dle <a href="gdpr.html">zásad GDPR</a>. <span class="pr-req">*</span></span>
+          </label>
+        </div>
+
+        <div style="margin-top:18px;">
+          <button type="submit" class="btn btn-primary" id="schuzka-submit-btn">Odeslat žádost o schůzku →</button>
+          <p style="margin-top:10px;font-size:0.85rem;color:var(--c-muted);">Ozveme se vám do 2 pracovních dnů s potvrzeným termínem.</p>
+        </div>
+      </form>
+
+      <div class="pr-form__success" id="schuzka-success" aria-live="polite">
+        <div class="pr-form__success-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l5 5L20 7"/></svg>
+        </div>
+        <h2 class="h-section" style="margin-bottom:14px;">Děkujeme, máme vaši <em style="font-style:normal;color:var(--c-blue);">žádost</em>!</h2>
+        <p class="lead" style="max-width:520px;margin:0 auto;text-align:center;">Ozveme se vám do <strong>2 pracovních dnů</strong> s potvrzeným termínem schůzky. Pokud by se v mezičase změnily plány, dejte nám prosím vědět na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>
       </div>
     </div>
   </section>
@@ -893,6 +1208,177 @@
     .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
     .then(function (text) { render(mapRows(parseCSV(text))); })
     .catch(function (err) { console.warn('Aktuality CSV fetch failed:', err); /* placeholder zustane */ });
+})();
+</script>
+
+<!-- AKCE form — CMS dropdown fetcher + submit handler -->
+<script>
+(function () {
+  var form = document.getElementById('akce-form');
+  if (!form) return;
+  var btn = document.getElementById('akce-submit-btn');
+  var success = document.getElementById('akce-success');
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxukkUNas85jri2zW6Jafx8zeOls4oEB9BupUV8yKbyIkVTFUfwNvhxgSmTOw7zGf6h/exec';
+
+  // TODO: Marv replace s realnou CSV URL pro RodicovskeAkce tab v Eventy Sheet (Publish to web → CSV)
+  var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjlj0pNn0yU3jyhngYBQmmzVrqStYlXxw0-nOlbgv2ua0eCAkJTm44-jUjiXEp2SR4pJk_e9yaqQxN/pub?gid=RODICOVSKEAKCE_GID_HERE&single=true&output=csv';
+
+  var FALLBACK = [
+    { type: 'rodic-schuzka', title: 'Rodičovská schůzka — 1. pololetí', date: '2026-10-15', time: '17:00', popis: '' },
+    { type: 'kava-vedeni',   title: 'Káva s vedením', date: '2026-09-25', time: '17:00', popis: 'Neformální setkání s vedením školy.' }
+  ];
+  var DAYS   = ['ne','po','út','st','čt','pá','so'];
+  var MONTHS = ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
+
+  function formatLabel(row) {
+    var label = row.title;
+    if (row.date) {
+      var d = new Date(row.date);
+      if (!isNaN(d.getTime())) label += ' — ' + DAYS[d.getDay()] + ' ' + d.getDate() + '. ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear() + (row.time ? ' · ' + row.time : '');
+    }
+    return label;
+  }
+
+  function parseCSV(text) {
+    var rows = [], row = [], cell = '', inQ = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (inQ) {
+        if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else inQ = false; }
+        else cell += c;
+      } else {
+        if (c === '"') inQ = true;
+        else if (c === ',') { row.push(cell); cell = ''; }
+        else if (c === '\r') {}
+        else if (c === '\n') { row.push(cell); rows.push(row); row = []; cell = ''; }
+        else cell += c;
+      }
+    }
+    if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
+    return rows.filter(function (r) { return r.some(function (v) { return v && v.trim(); }); });
+  }
+
+  function mapRows(rows) {
+    if (rows.length < 2) return [];
+    var header = rows[0].map(function (h) { return (h || '').trim().toLowerCase(); });
+    var idx = {
+      type:    header.indexOf('type'),
+      title:   header.indexOf('title'),
+      date:    header.indexOf('date'),
+      time:    header.indexOf('time'),
+      popis:   header.indexOf('popis'),
+      active:  header.indexOf('active')
+    };
+    return rows.slice(1).map(function (cells) {
+      return {
+        type:   idx.type   >= 0 ? (cells[idx.type]   || '').trim() : '',
+        title:  idx.title  >= 0 ? (cells[idx.title]  || '').trim() : '',
+        date:   idx.date   >= 0 ? (cells[idx.date]   || '').trim() : '',
+        time:   idx.time   >= 0 ? (cells[idx.time]   || '').trim() : '',
+        popis:  idx.popis  >= 0 ? (cells[idx.popis]  || '').trim() : '',
+        active: idx.active >= 0 ? (cells[idx.active] || '').trim().toUpperCase() : 'TRUE'
+      };
+    }).filter(function (r) { return r.active !== 'FALSE' && r.title; });
+  }
+
+  var select = document.getElementById('akce-event');
+  var hTitle = document.getElementById('akce-event-title');
+  var hDate  = document.getElementById('akce-event-date');
+  var hType  = document.getElementById('akce-event-type');
+
+  function populate(rows) {
+    while (select.options.length > 1) select.remove(1);
+    if (!rows.length) {
+      select.options[0].textContent = '— Žádné akce nejsou aktuálně dostupné —';
+      return;
+    }
+    select.options[0].textContent = '— Vyberte akci ze seznamu —';
+    rows.forEach(function (row) {
+      var opt = document.createElement('option');
+      opt.value = row.type || row.title;
+      opt.textContent = formatLabel(row);
+      opt.dataset.title = row.title;
+      opt.dataset.date  = row.date || '';
+      opt.dataset.type  = row.type || '';
+      select.appendChild(opt);
+    });
+  }
+
+  select.addEventListener('change', function () {
+    var opt = select.options[select.selectedIndex];
+    if (!opt) return;
+    if (hTitle) hTitle.value = opt.dataset.title || '';
+    if (hDate)  hDate.value  = opt.dataset.date  || '';
+    if (hType)  hType.value  = opt.dataset.type  || '';
+  });
+
+  // Pokud URL obsahuje placeholder, pouzij FALLBACK rovnou
+  if (SHEET_CSV_URL.indexOf('RODICOVSKEAKCE_GID_HERE') > -1) {
+    populate(FALLBACK);
+  } else {
+    fetch(SHEET_CSV_URL + (SHEET_CSV_URL.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now())
+      .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+      .then(function (text) {
+        var rows = mapRows(parseCSV(text));
+        populate(rows.length ? rows : FALLBACK);
+      })
+      .catch(function (err) { console.warn('Akce CSV fetch failed:', err); populate(FALLBACK); });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    var orig = btn ? btn.innerHTML : '';
+    if (btn) { btn.disabled = true; btn.innerHTML = 'Odesílám…'; }
+    var data = new FormData(form);
+    fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', body: data })
+      .then(function () {
+        if (window.dataLayer) window.dataLayer.push({ event: 'rodicovska_akce_submit', source: 'rodicovska-akce-form' });
+        if (window.fbq && window.__flowConsent && window.__flowConsent.marketing) {
+          window.fbq('track', 'Lead', { content_name: 'rodicovska-akce', content_category: 'Parent event registration' });
+        }
+        form.style.display = 'none';
+        if (success) { success.style.display = 'block'; success.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      })
+      .catch(function (err) {
+        console.error('akce submit error:', err);
+        if (btn) { btn.disabled = false; btn.innerHTML = orig; }
+        alert('Nepodařilo se odeslat. Zkuste prosím znovu nebo napište přímo na info@skolaflow.cz.');
+      });
+  });
+})();
+</script>
+
+<!-- SCHŮZKA 1-on-1 form — submit handler -->
+<script>
+(function () {
+  var form = document.getElementById('schuzka-form');
+  if (!form) return;
+  var btn = document.getElementById('schuzka-submit-btn');
+  var success = document.getElementById('schuzka-success');
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxukkUNas85jri2zW6Jafx8zeOls4oEB9BupUV8yKbyIkVTFUfwNvhxgSmTOw7zGf6h/exec';
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    var orig = btn ? btn.innerHTML : '';
+    if (btn) { btn.disabled = true; btn.innerHTML = 'Odesílám…'; }
+    var data = new FormData(form);
+    fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', body: data })
+      .then(function () {
+        if (window.dataLayer) window.dataLayer.push({ event: 'schuzka_vedeni_submit', source: 'schuzka-vedeni-form' });
+        if (window.fbq && window.__flowConsent && window.__flowConsent.marketing) {
+          window.fbq('track', 'Lead', { content_name: 'schuzka-vedeni', content_category: 'Parent 1-on-1 meeting request' });
+        }
+        form.style.display = 'none';
+        if (success) { success.style.display = 'block'; success.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      })
+      .catch(function (err) {
+        console.error('schuzka submit error:', err);
+        if (btn) { btn.disabled = false; btn.innerHTML = orig; }
+        alert('Nepodařilo se odeslat. Zkuste prosím znovu nebo napište přímo na info@skolaflow.cz.');
+      });
+  });
 })();
 </script>
 
