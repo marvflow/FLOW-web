@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>FLOW Admin Dashboard</title>
+
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --c-blue-deep: #14256b;
+      --c-blue: #2a4ec7;
+      --c-yellow: #ffd84a;
+      --c-cream: #fff8e6;
+      --c-white: #ffffff;
+      --c-text: #14256b;
+      --c-muted: #6b7280;
+      --c-border: #e5e7eb;
+      --c-success: #10b981;
+      --c-warning: #f59e0b;
+      --c-danger: #ef4444;
+      --c-bg: #f6f7fb;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 12px rgba(20,37,107,.08);
+      --shadow-lg: 0 10px 28px rgba(20,37,107,.12);
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 16px;
+      --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--c-bg);
+      color: var(--c-text);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ===== HEADER ===== */
+    .dash-header {
+      background: var(--c-blue-deep);
+      color: var(--c-white);
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .dash-header__left { display: flex; align-items: center; gap: 16px; }
+    .dash-header__logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.01em;
+    }
+    .dash-header__logo span { color: var(--c-yellow); }
+    .dash-header__title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.92rem;
+      opacity: 0.78;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .dash-header__right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+    }
+    .dash-header__time { opacity: 0.75; }
+    .dash-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--c-yellow);
+      color: var(--c-blue-deep);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .dash-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .dash-btn--ghost {
+      background: rgba(255,255,255,0.08);
+      color: var(--c-white);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .dash-btn--ghost:hover { background: rgba(255,255,255,0.18); }
+
+    /* ===== MAIN ===== */
+    .dash-main { padding: 26px 28px 80px; max-width: 1480px; margin: 0 auto; }
+
+    /* Stat cards */
+    .dash-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .stat-card {
+      background: var(--c-white);
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-md);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-card__label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-bottom: 6px;
+    }
+    .stat-card__value {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: var(--c-blue-deep);
+      line-height: 1.05;
+    }
+    .stat-card__sub {
+      font-size: 0.78rem;
+      color: var(--c-muted);
+      margin-top: 4px;
+    }
+    .stat-card--accent { border-left: 4px solid var(--c-yellow); }
+    .stat-card--blue { border-left: 4px solid var(--c-blue); }
+    .stat-card--green { border-left: 4px solid var(--c-success); }
+    .stat-card--orange { border-left: 4px solid var(--c-warning); }
+
+    /* Filters */
+    .dash-filters {
+      background: var(--c-white);
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-md);
+      padding: 16px;
+      margin-bottom: 18px;
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .dash-filters__field { display: flex; flex-direction: column; gap: 4px; }
+    .dash-filters__field label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+    }
+    .dash-input, .dash-select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1.5px solid var(--c-border);
+      border-radius: var(--r-sm);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--c-text);
+      background: var(--c-white);
+      transition: border-color 0.15s;
+    }
+    .dash-input:focus, .dash-select:focus {
+      outline: none;
+      border-color: var(--c-blue);
+    }
+    .dash-filters__count {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: var(--c-muted);
+      padding: 0 8px;
+      align-self: end;
+      padding-bottom: 11px;
+    }
+
+    /* Table */
+    .dash-table-wrap {
+      background: var(--c-white);
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .dash-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+    .dash-table thead {
+      background: #f9fafb;
+      border-bottom: 2px solid var(--c-border);
+    }
+    .dash-table th {
+      text-align: left;
+      padding: 12px 14px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .dash-table th:hover { color: var(--c-blue-deep); }
+    .dash-table th.sort-asc::after  { content: " ↑"; color: var(--c-blue); }
+    .dash-table th.sort-desc::after { content: " ↓"; color: var(--c-blue); }
+    .dash-table td {
+      padding: 12px 14px;
+      border-top: 1px solid #f3f4f6;
+      vertical-align: top;
+    }
+    .dash-table tbody tr {
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    .dash-table tbody tr:hover { background: var(--c-cream); }
+    .dash-table tbody tr.is-new { font-weight: 600; }
+    .dash-cell-date {
+      font-family: var(--font-display);
+      font-weight: 700;
+      white-space: nowrap;
+      color: var(--c-blue-deep);
+    }
+    .dash-cell-date small {
+      display: block;
+      font-weight: 500;
+      color: var(--c-muted);
+      font-size: 0.74rem;
+      margin-top: 2px;
+    }
+    .dash-cell-name strong { color: var(--c-blue-deep); }
+    .dash-cell-name small {
+      display: block;
+      color: var(--c-muted);
+      font-size: 0.76rem;
+      margin-top: 2px;
+    }
+    .dash-cell-detail {
+      max-width: 320px;
+      font-size: 0.82rem;
+      color: var(--c-text);
+      opacity: 0.84;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .badge--registrace      { background: #ede9fe; color: #5b21b6; }
+    .badge--prestup         { background: #fee2e2; color: #b91c1c; }
+    .badge--kariera         { background: #d1fae5; color: #047857; }
+    .badge--little-flow     { background: #fef3c7; color: #b45309; }
+    .badge--dny             { background: #fce7f3; color: #be185d; }
+    .badge--akce            { background: #dbeafe; color: #1e40af; }
+    .badge--schuzka         { background: #cffafe; color: #155e75; }
+    .badge--hp              { background: #f3f4f6; color: #4b5563; }
+    .badge--chci            { background: var(--c-cream); color: var(--c-blue-deep); border: 1px solid var(--c-yellow); }
+    .badge--unknown         { background: #fee2e2; color: #b91c1c; }
+    .badge--status-novy     { background: #fef3c7; color: #92400e; }
+    .badge--status-praci    { background: #dbeafe; color: #1e40af; }
+    .badge--status-vyresen  { background: #d1fae5; color: #047857; }
+    .badge--status-zruseny  { background: #f3f4f6; color: #6b7280; }
+    .badge--lang { background: #f3f4f6; color: #6b7280; font-size: 0.65rem; padding: 2px 7px; }
+
+    .dash-empty {
+      padding: 64px 20px;
+      text-align: center;
+      color: var(--c-muted);
+    }
+    .dash-empty__icon { font-size: 2.5rem; margin-bottom: 10px; opacity: 0.4; }
+
+    /* Loading */
+    .dash-loading {
+      padding: 80px 20px;
+      text-align: center;
+      color: var(--c-muted);
+      font-family: var(--font-display);
+      font-weight: 700;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 37, 107, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.is-open { display: flex; }
+    .modal {
+      background: var(--c-white);
+      border-radius: var(--r-lg);
+      max-width: 720px;
+      width: 100%;
+      max-height: 88vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(20, 37, 107, 0.4);
+    }
+    .modal__header {
+      padding: 22px 26px;
+      border-bottom: 1px solid var(--c-border);
+      background: var(--c-blue-deep);
+      color: var(--c-white);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .modal__title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+    .modal__subtitle {
+      font-size: 0.82rem;
+      opacity: 0.78;
+      margin-top: 4px;
+    }
+    .modal__close {
+      background: transparent;
+      border: none;
+      color: var(--c-white);
+      font-size: 1.6rem;
+      cursor: pointer;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.15s;
+    }
+    .modal__close:hover { background: rgba(255,255,255,0.18); }
+    .modal__body {
+      padding: 24px 26px;
+      overflow-y: auto;
+    }
+    .modal__row {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px dashed #f3f4f6;
+    }
+    .modal__row:last-child { border-bottom: none; }
+    .modal__row-label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.74rem;
+      color: var(--c-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .modal__row-value {
+      font-size: 0.9rem;
+      color: var(--c-blue-deep);
+      word-break: break-word;
+      white-space: pre-line;
+    }
+    .modal__row-value a { color: var(--c-blue); text-decoration: none; }
+    .modal__row-value a:hover { text-decoration: underline; }
+    .modal__actions {
+      padding: 16px 26px;
+      border-top: 1px solid var(--c-border);
+      background: #f9fafb;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .modal-btn {
+      padding: 9px 16px;
+      border-radius: var(--r-sm);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      border: 1.5px solid var(--c-border);
+      background: var(--c-white);
+      color: var(--c-blue-deep);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .modal-btn:hover { border-color: var(--c-blue); background: var(--c-cream); }
+    .modal-btn--primary {
+      background: var(--c-blue-deep);
+      color: var(--c-white);
+      border-color: var(--c-blue-deep);
+    }
+    .modal-btn--primary:hover { background: var(--c-blue); border-color: var(--c-blue); }
+
+    /* Error banner */
+    .error-banner {
+      background: var(--c-danger);
+      color: var(--c-white);
+      padding: 14px 20px;
+      text-align: center;
+      font-weight: 600;
+      display: none;
+    }
+    .error-banner.is-visible { display: block; }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .dash-filters { grid-template-columns: 1fr 1fr; }
+      .dash-filters__count { grid-column: 1 / -1; }
+      .dash-table { font-size: 0.78rem; }
+      .dash-table th, .dash-table td { padding: 10px 8px; }
+      .dash-table th:nth-child(3),
+      .dash-table td:nth-child(3),
+      .dash-table th:nth-child(4),
+      .dash-table td:nth-child(4) { display: none; }
+    }
+    @media (max-width: 560px) {
+      .dash-main { padding: 16px 12px 80px; }
+      .dash-header { padding: 16px 14px; }
+      .dash-header__logo { font-size: 1.1rem; }
+      .modal__row { grid-template-columns: 1fr; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="error-banner" class="error-banner"></div>
+
+<!-- HEADER -->
+<header class="dash-header">
+  <div class="dash-header__left">
+    <div class="dash-header__logo">F<span>L</span>OW</div>
+    <div class="dash-header__title">Admin Dashboard</div>
+  </div>
+  <div class="dash-header__right">
+    <div class="dash-header__time" id="last-refresh">—</div>
+    <button class="dash-btn dash-btn--ghost" id="btn-refresh" type="button">↻ Refresh</button>
+    <a class="dash-btn" href="https://docs.google.com/spreadsheets/d/1C7OpnUzNHdaU0TftMOPwVxpS2hBrjj5B1yK-4Gb73Ks/edit" target="_blank" rel="noopener">Open Sheet ↗</a>
+    <button class="dash-btn dash-btn--ghost" onclick="logoutDashboard()" type="button">Logout</button>
+  </div>
+</header>
+
+<main class="dash-main">
+
+  <!-- STATS -->
+  <section class="dash-stats" id="stats">
+    <div class="stat-card stat-card--accent">
+      <div class="stat-card__label">Dnes</div>
+      <div class="stat-card__value" id="stat-today">—</div>
+      <div class="stat-card__sub">novych prihlasek</div>
+    </div>
+    <div class="stat-card stat-card--blue">
+      <div class="stat-card__label">Tento týden</div>
+      <div class="stat-card__value" id="stat-week">—</div>
+      <div class="stat-card__sub">posledních 7 dní</div>
+    </div>
+    <div class="stat-card stat-card--green">
+      <div class="stat-card__label">Tento měsíc</div>
+      <div class="stat-card__value" id="stat-month">—</div>
+      <div class="stat-card__sub">posledních 30 dní</div>
+    </div>
+    <div class="stat-card stat-card--orange">
+      <div class="stat-card__label">Status: Nový</div>
+      <div class="stat-card__value" id="stat-novy">—</div>
+      <div class="stat-card__sub">vyzaduje odpoved</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card__label">Celkem</div>
+      <div class="stat-card__value" id="stat-total">—</div>
+      <div class="stat-card__sub">vsech zaznamu</div>
+    </div>
+  </section>
+
+  <!-- FILTERS -->
+  <section class="dash-filters">
+    <div class="dash-filters__field">
+      <label for="f-search">Hledat (jmeno, email, detail)</label>
+      <input class="dash-input" id="f-search" type="search" placeholder="napr. Marv Shamma anebo @gmail.com">
+    </div>
+    <div class="dash-filters__field">
+      <label for="f-type">Typ</label>
+      <select class="dash-select" id="f-type">
+        <option value="">Vsechny typy</option>
+      </select>
+    </div>
+    <div class="dash-filters__field">
+      <label for="f-status">Status</label>
+      <select class="dash-select" id="f-status">
+        <option value="">Vsechny</option>
+        <option value="Nový">Nový</option>
+        <option value="V práci">V práci</option>
+        <option value="Vyřešeno">Vyřešeno</option>
+        <option value="Zrušeno">Zrušeno</option>
+      </select>
+    </div>
+    <div class="dash-filters__field">
+      <label for="f-period">Období</label>
+      <select class="dash-select" id="f-period">
+        <option value="">Vsechno</option>
+        <option value="today">Dnes</option>
+        <option value="7d">Posledních 7 dní</option>
+        <option value="30d">Posledních 30 dní</option>
+        <option value="90d">Posledních 90 dní</option>
+      </select>
+    </div>
+    <div class="dash-filters__count" id="filter-count">— záznamů</div>
+  </section>
+
+  <!-- TABLE -->
+  <section class="dash-table-wrap">
+    <table class="dash-table" id="table">
+      <thead>
+        <tr>
+          <th data-sort="datum" class="sort-desc">Datum</th>
+          <th data-sort="typ">Typ</th>
+          <th data-sort="jmeno">Jméno</th>
+          <th data-sort="email">E-mail</th>
+          <th>Detail</th>
+          <th data-sort="status">Status</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr><td colspan="6" class="dash-loading">Načítám…</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal__header">
+      <div>
+        <div class="modal__title" id="modal-title">Detail</div>
+        <div class="modal__subtitle" id="modal-subtitle"></div>
+      </div>
+      <button class="modal__close" type="button" id="modal-close" aria-label="Zavrit">×</button>
+    </div>
+    <div class="modal__body" id="modal-body"></div>
+    <div class="modal__actions" id="modal-actions"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// CONFIG — token chrani access k Apps Script JSON endpointu.
+// Pri prvnim loadu se Marv/Lisa/Julie zepta na token (prompt),
+// pak se zapamatuje v localStorage. Backend kontroluje token,
+// invalid -> 401. Token rotujeme zmenou v Apps Script + tady.
+// ═══════════════════════════════════════════════════════════════════
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec';
+
+function getDashboardToken() {
+  var t = localStorage.getItem('flow_dashboard_token');
+  if (t) return t;
+  t = prompt('Zadej heslo pro FLOW Admin Dashboard:');
+  if (!t) {
+    document.body.innerHTML = '<div style="padding:60px 20px;text-align:center;font-family:sans-serif;color:#14256b;"><h2>Pristup zamitnut</h2><p>Refresh stranku a zadej spravne heslo.</p></div>';
+    throw new Error('No token entered');
+  }
+  localStorage.setItem('flow_dashboard_token', t.trim());
+  return t.trim();
+}
+var DASHBOARD_TOKEN = getDashboardToken();
+
+// Logout button v hlavicce — vymaze token z localStorage
+function logoutDashboard() {
+  if (confirm('Odhlasit z dashboardu? (heslo se zase zepta pri pristim loadu)')) {
+    localStorage.removeItem('flow_dashboard_token');
+    location.reload();
+  }
+}
+
+// State
+var STATE = {
+  rows: [],
+  filtered: [],
+  sortKey: 'datum',
+  sortDir: 'desc'
+};
+
+var TYP_BADGE_CLASS = {
+  'Registrace': 'badge--registrace',
+  'Přestup': 'badge--prestup',
+  'Kariéra': 'badge--kariera',
+  'Little FLOW (MŠ)': 'badge--little-flow',
+  'Dny na zkoušku': 'badge--dny',
+  'Akce pro rodiče': 'badge--akce',
+  'Schůzka 1-on-1': 'badge--schuzka',
+  'HP Callback': 'badge--hp',
+  'Chci do FLOW': 'badge--chci',
+  'NEZNÁMÝ': 'badge--unknown'
+};
+
+function badgeClassForTyp(typ) {
+  if (!typ) return 'badge--unknown';
+  for (var k in TYP_BADGE_CLASS) {
+    if (typ.indexOf(k) === 0) return TYP_BADGE_CLASS[k];
+  }
+  return 'badge--unknown';
+}
+
+function badgeClassForStatus(status) {
+  var s = String(status || '').toLowerCase();
+  if (s.indexOf('nov') === 0 || s === 'new') return 'badge--status-novy';
+  if (s.indexOf('prác') > -1 || s.indexOf('prac') > -1 || s.indexOf('progress') > -1) return 'badge--status-praci';
+  if (s.indexOf('vyřeš') === 0 || s.indexOf('vyres') === 0 || s.indexOf('done') === 0 || s.indexOf('resolved') === 0) return 'badge--status-vyresen';
+  if (s.indexOf('zruš') === 0 || s.indexOf('zrus') === 0 || s.indexOf('cancel') === 0) return 'badge--status-zruseny';
+  return 'badge--status-novy';
+}
+
+function showError(msg) {
+  var el = document.getElementById('error-banner');
+  el.textContent = msg;
+  el.classList.add('is-visible');
+}
+
+function hideError() {
+  document.getElementById('error-banner').classList.remove('is-visible');
+}
+
+function fmtDateTime(d) {
+  if (!d) return '';
+  var dt = new Date(d);
+  if (isNaN(dt.getTime())) return String(d);
+  var days = ['ne','po','út','st','čt','pá','so'];
+  var months = ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
+  var h = dt.getHours().toString().padStart(2,'0');
+  var m = dt.getMinutes().toString().padStart(2,'0');
+  return days[dt.getDay()] + ' ' + dt.getDate() + '. ' + months[dt.getMonth()] + ' ' + dt.getFullYear() + ' · ' + h + ':' + m;
+}
+function fmtDateShort(d) {
+  if (!d) return '';
+  var dt = new Date(d);
+  if (isNaN(dt.getTime())) return String(d);
+  var h = dt.getHours().toString().padStart(2,'0');
+  var m = dt.getMinutes().toString().padStart(2,'0');
+  return dt.getDate() + '.' + (dt.getMonth()+1) + '. ' + dt.getFullYear();
+}
+function fmtTime(d) {
+  if (!d) return '';
+  var dt = new Date(d);
+  if (isNaN(dt.getTime())) return '';
+  var h = dt.getHours().toString().padStart(2,'0');
+  var m = dt.getMinutes().toString().padStart(2,'0');
+  return h + ':' + m;
+}
+function relativeDays(d) {
+  var dt = new Date(d).getTime();
+  if (isNaN(dt)) return Infinity;
+  return (Date.now() - dt) / (1000 * 60 * 60 * 24);
+}
+
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+
+function buildBadge(label, cssClass) {
+  return '<span class="badge ' + cssClass + '">' + escapeHtml(label) + '</span>';
+}
+
+// ───────── Fetch & normalize data ─────────
+function fetchData() {
+  var tbody = document.getElementById('tbody');
+  tbody.innerHTML = '<tr><td colspan="6" class="dash-loading">Načítám…</td></tr>';
+  hideError();
+  var url = APPS_SCRIPT_URL + '?action=dashboard&token=' + encodeURIComponent(DASHBOARD_TOKEN) + '&t=' + Date.now();
+  return fetch(url)
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      if (data && data.error) throw new Error(data.error);
+      STATE.rows = normalizeRows(data);
+      computeStats();
+      populateTypeFilter();
+      applyFiltersAndRender();
+      document.getElementById('last-refresh').textContent = 'Aktualizováno: ' + fmtTime(new Date());
+    })
+    .catch(function (err) {
+      console.error('fetch failed:', err);
+      showError('Nepodařilo se načíst data: ' + err.message);
+      tbody.innerHTML = '<tr><td colspan="6" class="dash-empty"><div class="dash-empty__icon">⚠️</div>Chyba pri nacitani. Zkus refresh.</td></tr>';
+    });
+}
+
+function normalizeRows(data) {
+  // Data je objekt { dashboard: [...], registrace: [...], prestupy: [...], ... }
+  // Dashboard tab uz ma sloucene radky, pouzij prednostne.
+  if (data.dashboard && data.dashboard.length) {
+    return data.dashboard.map(function (r) {
+      return {
+        datum: r['Datum'] || r['Datum registrace'] || '',
+        typ: r['Typ'] || '',
+        jmeno: r['Jméno'] || '',
+        email: r['E-mail'] || '',
+        detail: r['Detail'] || '',
+        status: r['Status'] || 'Nový',
+        lang: r['Jazyk'] || 'cs',
+        source: 'Dashboard',
+        raw: r
+      };
+    });
+  }
+  // Fallback: merge ze vsech tabu
+  var all = [];
+  var tabs = ['registrace','prestupy','kariera','littleFLOW','dnyNaZkousku','rodicovskeAkceReg','schuzkaVedeni'];
+  tabs.forEach(function (tab) {
+    if (!data[tab]) return;
+    data[tab].forEach(function (r) {
+      all.push({
+        datum: r['Datum registrace'] || '',
+        typ: tab,
+        jmeno: r['Jméno'] || r['Jméno rodiče'] || '',
+        email: r['E-mail'] || '',
+        detail: r['Typ eventu'] || r['Ročník'] || r['Pozice'] || r['Akce (label)'] || r['S kým'] || '',
+        status: r['Status'] || 'Nový',
+        lang: r['Jazyk'] || 'cs',
+        source: tab,
+        raw: r
+      });
+    });
+  });
+  return all;
+}
+
+// ───────── Stats ─────────
+function computeStats() {
+  var today = 0, week = 0, month = 0, novy = 0;
+  STATE.rows.forEach(function (r) {
+    var d = relativeDays(r.datum);
+    if (d < 1) today++;
+    if (d < 7) week++;
+    if (d < 30) month++;
+    var s = String(r.status || '').toLowerCase();
+    if (s.indexOf('nov') === 0 || s === 'new' || !s) novy++;
+  });
+  document.getElementById('stat-today').textContent = today;
+  document.getElementById('stat-week').textContent = week;
+  document.getElementById('stat-month').textContent = month;
+  document.getElementById('stat-novy').textContent = novy;
+  document.getElementById('stat-total').textContent = STATE.rows.length;
+}
+
+// ───────── Type filter dropdown ─────────
+function populateTypeFilter() {
+  var select = document.getElementById('f-type');
+  var types = {};
+  STATE.rows.forEach(function (r) { if (r.typ) types[r.typ] = true; });
+  var current = select.value;
+  select.innerHTML = '<option value="">Vsechny typy</option>';
+  Object.keys(types).sort().forEach(function (t) {
+    var opt = document.createElement('option');
+    opt.value = t; opt.textContent = t;
+    if (t === current) opt.selected = true;
+    select.appendChild(opt);
+  });
+}
+
+// ───────── Filter, sort, render ─────────
+function applyFiltersAndRender() {
+  var search = document.getElementById('f-search').value.trim().toLowerCase();
+  var typ = document.getElementById('f-type').value;
+  var status = document.getElementById('f-status').value;
+  var period = document.getElementById('f-period').value;
+
+  var filtered = STATE.rows.filter(function (r) {
+    if (typ && r.typ.indexOf(typ) !== 0) return false;
+    if (status && String(r.status).toLowerCase() !== status.toLowerCase()) return false;
+    if (period) {
+      var d = relativeDays(r.datum);
+      if (period === 'today' && d >= 1) return false;
+      if (period === '7d' && d >= 7) return false;
+      if (period === '30d' && d >= 30) return false;
+      if (period === '90d' && d >= 90) return false;
+    }
+    if (search) {
+      var hay = (r.jmeno + ' ' + r.email + ' ' + r.detail + ' ' + r.typ).toLowerCase();
+      if (hay.indexOf(search) === -1) return false;
+    }
+    return true;
+  });
+
+  // Sort
+  var key = STATE.sortKey, dir = STATE.sortDir;
+  filtered.sort(function (a, b) {
+    var av = a[key], bv = b[key];
+    if (key === 'datum') { av = new Date(av).getTime() || 0; bv = new Date(bv).getTime() || 0; }
+    else { av = String(av || '').toLowerCase(); bv = String(bv || '').toLowerCase(); }
+    if (av < bv) return dir === 'asc' ? -1 : 1;
+    if (av > bv) return dir === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  STATE.filtered = filtered;
+  renderTable();
+
+  document.getElementById('filter-count').textContent = filtered.length + ' z ' + STATE.rows.length + ' záznamů';
+}
+
+function renderTable() {
+  var tbody = document.getElementById('tbody');
+  if (!STATE.filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="6" class="dash-empty"><div class="dash-empty__icon">📭</div>Žádné záznamy odpovídající filtrům.</td></tr>';
+    return;
+  }
+  var html = STATE.filtered.map(function (r, idx) {
+    var isNew = String(r.status || '').toLowerCase().indexOf('nov') === 0;
+    return '<tr data-idx="' + idx + '"' + (isNew ? ' class="is-new"' : '') + '>' +
+      '<td><div class="dash-cell-date">' + escapeHtml(fmtDateShort(r.datum)) + '<small>' + escapeHtml(fmtTime(r.datum)) + '</small></div></td>' +
+      '<td>' + buildBadge(r.typ, badgeClassForTyp(r.typ)) + '</td>' +
+      '<td class="dash-cell-name"><strong>' + escapeHtml(r.jmeno || '—') + '</strong>' + (r.lang === 'en' ? ' ' + buildBadge('EN', 'badge--lang') : '') + '</td>' +
+      '<td><a href="mailto:' + escapeHtml(r.email) + '" onclick="event.stopPropagation()">' + escapeHtml(r.email || '—') + '</a></td>' +
+      '<td class="dash-cell-detail">' + escapeHtml(r.detail || '—') + '</td>' +
+      '<td>' + buildBadge(r.status || 'Nový', badgeClassForStatus(r.status)) + '</td>' +
+    '</tr>';
+  }).join('');
+  tbody.innerHTML = html;
+}
+
+// ───────── Sort header click ─────────
+document.querySelectorAll('th[data-sort]').forEach(function (th) {
+  th.addEventListener('click', function () {
+    var key = th.dataset.sort;
+    if (STATE.sortKey === key) {
+      STATE.sortDir = STATE.sortDir === 'asc' ? 'desc' : 'asc';
+    } else {
+      STATE.sortKey = key;
+      STATE.sortDir = 'desc';
+    }
+    document.querySelectorAll('th').forEach(function (h) { h.classList.remove('sort-asc', 'sort-desc'); });
+    th.classList.add(STATE.sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+    applyFiltersAndRender();
+  });
+});
+
+// ───────── Filter inputs ─────────
+['f-search','f-type','f-status','f-period'].forEach(function (id) {
+  document.getElementById(id).addEventListener('input', applyFiltersAndRender);
+  document.getElementById(id).addEventListener('change', applyFiltersAndRender);
+});
+
+// ───────── Refresh button ─────────
+document.getElementById('btn-refresh').addEventListener('click', fetchData);
+
+// ───────── Modal ─────────
+function openModal(row) {
+  document.getElementById('modal-title').textContent = row.typ + ' — ' + (row.jmeno || 'bez jména');
+  document.getElementById('modal-subtitle').textContent = fmtDateTime(row.datum);
+
+  var body = document.getElementById('modal-body');
+  var rawKeys = Object.keys(row.raw || {});
+  var rowsHtml = rawKeys.filter(function (k) {
+    return row.raw[k] !== '' && row.raw[k] !== null && row.raw[k] !== undefined;
+  }).map(function (k) {
+    var v = row.raw[k];
+    if (v instanceof Date || /^\d{4}-\d{2}-\d{2}T/.test(String(v))) v = fmtDateTime(v);
+    var vStr = String(v);
+    // Linkify email/url
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vStr)) {
+      vStr = '<a href="mailto:' + escapeHtml(vStr) + '">' + escapeHtml(vStr) + '</a>';
+    } else if (/^https?:\/\//.test(vStr)) {
+      vStr = '<a href="' + escapeHtml(vStr) + '" target="_blank" rel="noopener">' + escapeHtml(vStr) + '</a>';
+    } else {
+      vStr = escapeHtml(vStr);
+    }
+    return '<div class="modal__row"><div class="modal__row-label">' + escapeHtml(k) + '</div><div class="modal__row-value">' + vStr + '</div></div>';
+  }).join('');
+  body.innerHTML = rowsHtml;
+
+  var actions = document.getElementById('modal-actions');
+  var mailto = row.email ? 'mailto:' + encodeURIComponent(row.email) + '?subject=' + encodeURIComponent('FLOW: ' + row.typ) : '';
+  actions.innerHTML = (mailto ? '<a class="modal-btn modal-btn--primary" href="' + mailto + '">📧 Odpovedet e-mailem</a>' : '') +
+    '<a class="modal-btn" href="https://docs.google.com/spreadsheets/d/1C7OpnUzNHdaU0TftMOPwVxpS2hBrjj5B1yK-4Gb73Ks/edit" target="_blank" rel="noopener">Otevrit Sheet ↗</a>' +
+    '<button class="modal-btn" type="button" onclick="document.getElementById(\'modal-backdrop\').classList.remove(\'is-open\')">Zavřít</button>';
+
+  document.getElementById('modal-backdrop').classList.add('is-open');
+}
+document.getElementById('modal-close').addEventListener('click', function () {
+  document.getElementById('modal-backdrop').classList.remove('is-open');
+});
+document.getElementById('modal-backdrop').addEventListener('click', function (e) {
+  if (e.target === this) this.classList.remove('is-open');
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') document.getElementById('modal-backdrop').classList.remove('is-open');
+});
+document.getElementById('tbody').addEventListener('click', function (e) {
+  var tr = e.target.closest('tr[data-idx]');
+  if (!tr) return;
+  openModal(STATE.filtered[parseInt(tr.dataset.idx, 10)]);
+});
+
+// ───────── Init ─────────
+fetchData();
+// Auto-refresh kazde 2 minuty
+setInterval(fetchData, 2 * 60 * 1000);
+</script>
+
+</body>
+</html>
