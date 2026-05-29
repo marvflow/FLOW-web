@@ -748,6 +748,7 @@
         <input type="hidden" name="lang" value="cs">
         <input type="hidden" name="event_title" id="akce-event-title" value="">
         <input type="hidden" name="event_date" id="akce-event-date" value="">
+        <input type="hidden" name="event_time" id="akce-event-time" value="">
         <input type="hidden" name="event_type" id="akce-event-type" value="">
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="pr-form__honeypot" aria-hidden="true">
 
@@ -1284,6 +1285,7 @@
   var select = document.getElementById('akce-event');
   var hTitle = document.getElementById('akce-event-title');
   var hDate  = document.getElementById('akce-event-date');
+  var hTime  = document.getElementById('akce-event-time');
   var hType  = document.getElementById('akce-event-type');
 
   function populate(rows) {
@@ -1299,6 +1301,7 @@
       opt.textContent = formatLabel(row);
       opt.dataset.title = row.title;
       opt.dataset.date  = row.date || '';
+      opt.dataset.time  = row.time || '';
       opt.dataset.type  = row.type || '';
       select.appendChild(opt);
     });
@@ -1309,6 +1312,7 @@
     if (!opt) return;
     if (hTitle) hTitle.value = opt.dataset.title || '';
     if (hDate)  hDate.value  = opt.dataset.date  || '';
+    if (hTime)  hTime.value  = opt.dataset.time  || '';
     if (hType)  hType.value  = opt.dataset.type  || '';
   });
 
