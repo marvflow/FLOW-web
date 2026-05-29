@@ -392,6 +392,78 @@
     }
     .modal__row-value a { color: var(--c-blue); text-decoration: none; }
     .modal__row-value a:hover { text-decoration: underline; }
+    .modal__workflow {
+      padding: 18px 26px;
+      border-top: 1px solid var(--c-border);
+      background: #f9fafb;
+    }
+    .modal__workflow-section {
+      margin-bottom: 16px;
+    }
+    .modal__workflow-section:last-child { margin-bottom: 0; }
+    .modal__workflow-label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-bottom: 8px;
+    }
+    .modal__status-btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .status-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1.5px solid var(--c-border);
+      background: var(--c-white);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: var(--c-text);
+    }
+    .status-btn:hover { transform: translateY(-1px); }
+    .status-btn.is-active {
+      box-shadow: 0 2px 6px rgba(20,37,107,0.18);
+    }
+    .status-btn.is-active[data-status="Nový"] { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+    .status-btn.is-active[data-status="V práci"] { background: #dbeafe; color: #1e40af; border-color: #93c5fd; }
+    .status-btn.is-active[data-status="Vyřešeno"] { background: #d1fae5; color: #047857; border-color: #6ee7b7; }
+    .status-btn.is-active[data-status="Zrušeno"] { background: #f3f4f6; color: #6b7280; border-color: #d1d5db; }
+    .modal__notes-input {
+      width: 100%;
+      min-height: 90px;
+      padding: 10px 12px;
+      border: 1.5px solid var(--c-border);
+      border-radius: var(--r-sm);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--c-text);
+      resize: vertical;
+    }
+    .modal__notes-input:focus { outline: none; border-color: var(--c-blue); }
+    .modal__notes-meta {
+      font-size: 0.72rem;
+      color: var(--c-muted);
+      margin-top: 4px;
+    }
+    .modal__save-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      align-items: center;
+    }
+    .modal__save-status {
+      font-size: 0.78rem;
+      color: var(--c-muted);
+    }
+    .modal__save-status.is-success { color: var(--c-success); }
+    .modal__save-status.is-error { color: var(--c-danger); }
     .modal__actions {
       padding: 16px 26px;
       border-top: 1px solid var(--c-border);
@@ -399,6 +471,12 @@
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
+    }
+    @media print {
+      .dash-header, .dash-filters, .modal-backdrop { display: none !important; }
+      body { background: white; }
+      .dash-table-wrap { box-shadow: none; border: 1px solid #ccc; }
+      .stat-card { box-shadow: none; border: 1px solid #ccc; }
     }
     .modal-btn {
       padding: 9px 16px;
@@ -466,6 +544,8 @@
   </div>
   <div class="dash-header__right">
     <div class="dash-header__time" id="last-refresh">—</div>
+    <button class="dash-btn dash-btn--ghost" id="btn-export-csv" type="button">⬇ CSV</button>
+    <button class="dash-btn dash-btn--ghost" id="btn-print" type="button">🖨 Tisk</button>
     <button class="dash-btn dash-btn--ghost" id="btn-refresh" type="button">↻ Refresh</button>
     <a class="dash-btn" href="https://docs.google.com/spreadsheets/d/1C7OpnUzNHdaU0TftMOPwVxpS2hBrjj5B1yK-4Gb73Ks/edit" target="_blank" rel="noopener">Open Sheet ↗</a>
     <button class="dash-btn dash-btn--ghost" onclick="logoutDashboard()" type="button">Logout</button>
@@ -570,6 +650,26 @@
       <button class="modal__close" type="button" id="modal-close" aria-label="Zavrit">×</button>
     </div>
     <div class="modal__body" id="modal-body"></div>
+    <div class="modal__workflow" id="modal-workflow">
+      <div class="modal__workflow-section">
+        <div class="modal__workflow-label">Status</div>
+        <div class="modal__status-btns" id="modal-status-btns">
+          <button class="status-btn" type="button" data-status="Nový">Nový</button>
+          <button class="status-btn" type="button" data-status="V práci">V práci</button>
+          <button class="status-btn" type="button" data-status="Vyřešeno">Vyřešeno</button>
+          <button class="status-btn" type="button" data-status="Zrušeno">Zrušeno</button>
+        </div>
+      </div>
+      <div class="modal__workflow-section">
+        <div class="modal__workflow-label">Tve poznamky</div>
+        <textarea class="modal__notes-input" id="modal-notes" placeholder="napr. 'Zavolal jsem 28.5. v 16:00, dohodli jsme se na schuzce pristi tyden'..."></textarea>
+        <div class="modal__notes-meta" id="modal-notes-meta">—</div>
+        <div class="modal__save-row">
+          <button class="modal-btn modal-btn--primary" type="button" id="modal-save-notes">💾 Ulozit poznamky</button>
+          <span class="modal__save-status" id="modal-save-status"></span>
+        </div>
+      </div>
+    </div>
     <div class="modal__actions" id="modal-actions"></div>
   </div>
 </div>
@@ -879,39 +979,7 @@ document.querySelectorAll('th[data-sort]').forEach(function (th) {
 // ───────── Refresh button ─────────
 document.getElementById('btn-refresh').addEventListener('click', fetchData);
 
-// ───────── Modal ─────────
-function openModal(row) {
-  document.getElementById('modal-title').textContent = row.typ + ' — ' + (row.jmeno || 'bez jména');
-  document.getElementById('modal-subtitle').textContent = fmtDateTime(row.datum);
-
-  var body = document.getElementById('modal-body');
-  var rawKeys = Object.keys(row.raw || {});
-  var rowsHtml = rawKeys.filter(function (k) {
-    return row.raw[k] !== '' && row.raw[k] !== null && row.raw[k] !== undefined;
-  }).map(function (k) {
-    var v = row.raw[k];
-    if (v instanceof Date || /^\d{4}-\d{2}-\d{2}T/.test(String(v))) v = fmtDateTime(v);
-    var vStr = String(v);
-    // Linkify email/url
-    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vStr)) {
-      vStr = '<a href="mailto:' + escapeHtml(vStr) + '">' + escapeHtml(vStr) + '</a>';
-    } else if (/^https?:\/\//.test(vStr)) {
-      vStr = '<a href="' + escapeHtml(vStr) + '" target="_blank" rel="noopener">' + escapeHtml(vStr) + '</a>';
-    } else {
-      vStr = escapeHtml(vStr);
-    }
-    return '<div class="modal__row"><div class="modal__row-label">' + escapeHtml(k) + '</div><div class="modal__row-value">' + vStr + '</div></div>';
-  }).join('');
-  body.innerHTML = rowsHtml;
-
-  var actions = document.getElementById('modal-actions');
-  var mailto = row.email ? 'mailto:' + encodeURIComponent(row.email) + '?subject=' + encodeURIComponent('FLOW: ' + row.typ) : '';
-  actions.innerHTML = (mailto ? '<a class="modal-btn modal-btn--primary" href="' + mailto + '">📧 Odpovedet e-mailem</a>' : '') +
-    '<a class="modal-btn" href="https://docs.google.com/spreadsheets/d/1C7OpnUzNHdaU0TftMOPwVxpS2hBrjj5B1yK-4Gb73Ks/edit" target="_blank" rel="noopener">Otevrit Sheet ↗</a>' +
-    '<button class="modal-btn" type="button" onclick="document.getElementById(\'modal-backdrop\').classList.remove(\'is-open\')">Zavřít</button>';
-
-  document.getElementById('modal-backdrop').classList.add('is-open');
-}
+// ───────── Modal close handlers ─────────
 document.getElementById('modal-close').addEventListener('click', function () {
   document.getElementById('modal-backdrop').classList.remove('is-open');
 });
@@ -925,6 +993,178 @@ document.getElementById('tbody').addEventListener('click', function (e) {
   var tr = e.target.closest('tr[data-idx]');
   if (!tr) return;
   openModal(STATE.filtered[parseInt(tr.dataset.idx, 10)]);
+});
+
+// ═══════════════════════════════════════════════════════════════════
+// v1.1 — STATUS UPDATE + NOTES SAVE
+// ═══════════════════════════════════════════════════════════════════
+var CURRENT_ROW = null;
+
+function openModal(row) {
+  CURRENT_ROW = row;
+  document.getElementById('modal-title').textContent = row.typ + ' — ' + (row.jmeno || 'bez jména');
+  document.getElementById('modal-subtitle').textContent = fmtDateTime(row.datum);
+
+  var body = document.getElementById('modal-body');
+  var rawKeys = Object.keys(row.raw || {});
+  var hidden = { 'ID': true, 'Poznámky': true, 'Naposled změněno': true };
+  var rowsHtml = rawKeys.filter(function (k) {
+    if (hidden[k]) return false;
+    return row.raw[k] !== '' && row.raw[k] !== null && row.raw[k] !== undefined;
+  }).map(function (k) {
+    var v = row.raw[k];
+    if (v instanceof Date || /^\d{4}-\d{2}-\d{2}T/.test(String(v))) v = fmtDateTime(v);
+    var vStr = String(v);
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vStr)) {
+      vStr = '<a href="mailto:' + escapeHtml(vStr) + '">' + escapeHtml(vStr) + '</a>';
+    } else if (/^https?:\/\//.test(vStr)) {
+      vStr = '<a href="' + escapeHtml(vStr) + '" target="_blank" rel="noopener">' + escapeHtml(vStr) + '</a>';
+    } else {
+      vStr = escapeHtml(vStr);
+    }
+    return '<div class="modal__row"><div class="modal__row-label">' + escapeHtml(k) + '</div><div class="modal__row-value">' + vStr + '</div></div>';
+  }).join('');
+  body.innerHTML = rowsHtml;
+
+  // Status buttons — zvyrazni aktualni status
+  var curStatus = String(row.status || 'Nový');
+  document.querySelectorAll('#modal-status-btns .status-btn').forEach(function (b) {
+    if (b.dataset.status === curStatus) b.classList.add('is-active');
+    else b.classList.remove('is-active');
+  });
+
+  // Notes pole
+  var notes = (row.raw && row.raw['Poznámky']) || '';
+  document.getElementById('modal-notes').value = notes;
+  var lastUpdated = row.raw && row.raw['Naposled změněno'];
+  document.getElementById('modal-notes-meta').textContent =
+    lastUpdated ? 'Naposled aktualizovano: ' + fmtDateTime(lastUpdated) : 'Zadne dosavadni zmeny';
+  document.getElementById('modal-save-status').textContent = '';
+  document.getElementById('modal-save-status').className = 'modal__save-status';
+
+  // Disable workflow controls pokud chybi ID (stara data pred v2.6)
+  var hasId = row.raw && row.raw['ID'];
+  document.getElementById('modal-workflow').style.opacity = hasId ? '1' : '0.5';
+  document.getElementById('modal-workflow').style.pointerEvents = hasId ? 'auto' : 'none';
+  if (!hasId) {
+    document.getElementById('modal-save-status').textContent = 'Status/notes editing dostupne jen u zaznamu od v2.6 (po pristim form submitu).';
+    document.getElementById('modal-save-status').className = 'modal__save-status is-error';
+  }
+
+  var actions = document.getElementById('modal-actions');
+  var mailto = row.email ? 'mailto:' + encodeURIComponent(row.email) + '?subject=' + encodeURIComponent('FLOW: ' + row.typ) : '';
+  actions.innerHTML = (mailto ? '<a class="modal-btn modal-btn--primary" href="' + mailto + '">📧 Odpovedet e-mailem</a>' : '') +
+    '<a class="modal-btn" href="https://docs.google.com/spreadsheets/d/1C7OpnUzNHdaU0TftMOPwVxpS2hBrjj5B1yK-4Gb73Ks/edit" target="_blank" rel="noopener">Otevrit Sheet ↗</a>' +
+    '<button class="modal-btn" type="button" onclick="document.getElementById(\'modal-backdrop\').classList.remove(\'is-open\')">Zavřít</button>';
+
+  document.getElementById('modal-backdrop').classList.add('is-open');
+}
+
+// Status button click -> POST update
+document.getElementById('modal-status-btns').addEventListener('click', function (e) {
+  var btn = e.target.closest('.status-btn');
+  if (!btn || !CURRENT_ROW) return;
+  var newStatus = btn.dataset.status;
+  postUpdate({ status: newStatus }).then(function (ok) {
+    if (ok) {
+      CURRENT_ROW.status = newStatus;
+      CURRENT_ROW.raw['Status'] = newStatus;
+      document.querySelectorAll('#modal-status-btns .status-btn').forEach(function (b) {
+        b.classList.toggle('is-active', b.dataset.status === newStatus);
+      });
+      // Update v tabulce hned
+      applyFiltersAndRender();
+      computeStats();
+    }
+  });
+});
+
+// Save notes button
+document.getElementById('modal-save-notes').addEventListener('click', function () {
+  if (!CURRENT_ROW) return;
+  var notes = document.getElementById('modal-notes').value;
+  postUpdate({ notes: notes }).then(function (ok) {
+    if (ok) {
+      CURRENT_ROW.raw['Poznámky'] = notes;
+      CURRENT_ROW.raw['Naposled změněno'] = new Date().toISOString();
+      document.getElementById('modal-notes-meta').textContent =
+        'Naposled aktualizovano: ' + fmtDateTime(new Date());
+    }
+  });
+});
+
+function postUpdate(payload) {
+  var id = CURRENT_ROW && CURRENT_ROW.raw && CURRENT_ROW.raw['ID'];
+  if (!id) return Promise.resolve(false);
+  var statusEl = document.getElementById('modal-save-status');
+  statusEl.textContent = 'Ukladam…';
+  statusEl.className = 'modal__save-status';
+  var body = new FormData();
+  body.append('_dashboard_action', 'update');
+  body.append('token', DASHBOARD_TOKEN);
+  body.append('id', id);
+  Object.keys(payload).forEach(function (k) { body.append(k, payload[k]); });
+  return fetch(APPS_SCRIPT_URL, { method: 'POST', body: body })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (data && data.ok) {
+        statusEl.textContent = '✓ Ulozeno';
+        statusEl.className = 'modal__save-status is-success';
+        setTimeout(function () { statusEl.textContent = ''; }, 2500);
+        return true;
+      }
+      statusEl.textContent = '✗ Chyba: ' + (data.error || 'unknown');
+      statusEl.className = 'modal__save-status is-error';
+      return false;
+    })
+    .catch(function (err) {
+      statusEl.textContent = '✗ Chyba: ' + err.message;
+      statusEl.className = 'modal__save-status is-error';
+      return false;
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// v1.1 — CSV EXPORT + PRINT
+// ═══════════════════════════════════════════════════════════════════
+document.getElementById('btn-export-csv').addEventListener('click', function () {
+  if (!STATE.filtered.length) {
+    alert('Neni co exportovat — filtrovany seznam je prazdny.');
+    return;
+  }
+  var header = ['Datum','Typ','Jmeno','E-mail','Detail','Status','Jazyk','Poznamky'];
+  var rows = STATE.filtered.map(function (r) {
+    return [
+      fmtDateTime(r.datum),
+      r.typ,
+      r.jmeno,
+      r.email,
+      r.detail,
+      r.status || 'Nový',
+      r.lang,
+      (r.raw && r.raw['Poznámky']) || ''
+    ];
+  });
+  var csv = header.concat(rows).map(function (row) {
+    return row.map(function (cell) {
+      var s = String(cell == null ? '' : cell).replace(/"/g, '""');
+      return '"' + s + '"';
+    }).join(',');
+  }).join('\n');
+  var bom = '﻿'; // Excel UTF-8 BOM
+  var blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'flow-dashboard-' + new Date().toISOString().slice(0,10) + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function () { URL.revokeObjectURL(url); }, 100);
+});
+
+document.getElementById('btn-print').addEventListener('click', function () {
+  window.print();
 });
 
 // ───────── Init ─────────
