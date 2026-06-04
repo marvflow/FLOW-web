@@ -238,6 +238,65 @@
       });
   }
 
+  // ───── Little FLOW — hero open-day kartička (data-driven z Eventy CSV)
+  // Zobrazí se POUZE pokud v Eventy sheetu existuje řádek type=ms-od s active≠FALSE a vyplněným datem.
+  // Jinak (FALSE / chybí / fetch selže) zůstane kartička skrytá — žádný zásah do kódu není potřeba.
+  function initLittleFlowOpenDay() {
+    var card = document.getElementById('lf-openday');
+    if (!card) return;
+
+    var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjlj0pNn0yU3jyhngYBQmmzVrqStYlXxw0-nOlbgv2ua0eCAkJTm44-jUjiXEp2SR4pJk_e9yaqQxN/pub?gid=724100504&single=true&output=csv';
+    var MONTHS = IS_EN
+      ? ['January','February','March','April','May','June','July','August','September','October','November','December']
+      : ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
+    var DAYS = IS_EN
+      ? ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+      : ['ne','po','út','st','čt','pá','so'];
+
+    var dateEl = document.getElementById('lf-openday-date');
+    var metaEl = document.getElementById('lf-openday-meta');
+
+    function reveal(d, time) {
+      var dateStr = IS_EN
+        ? DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear()
+        : DAYS[d.getDay()] + ' ' + d.getDate() + '. ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+      dateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);   // "po" → "Po"
+      if (dateEl) dateEl.textContent = dateStr;
+      // Místo: do otevření nového kampusu (1. 9. 2026) jsou všechny DOD ve staré budově v Holešovicích
+      var oldCampus = d < new Date('2026-09-01T00:00:00');
+      var place = IS_EN
+        ? (oldCampus ? 'Přívozní 1064/2A, Prague 7 Holešovice' : 'Českomoravská 1a, Prague 9 Balabenka')
+        : (oldCampus ? 'Přívozní 1064/2A, Praha 7 Holešovice'  : 'Českomoravská 1a, Praha 9 Balabenka');
+      if (metaEl) metaEl.textContent = (time ? (IS_EN ? 'from ' : 'od ') + time + ' · ' : '') + place;
+      card.hidden = false;
+    }
+
+    fetch(SHEET_CSV_URL + (SHEET_CSV_URL.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now())
+      .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+      .then(function (text) {
+        var lines = text.split(/\r?\n/).filter(Boolean);
+        if (lines.length < 2) return;
+        var header = lines[0].split(',').map(function (h) { return h.trim().toLowerCase(); });
+        var iType = header.indexOf('type'), iDate = header.indexOf('date'),
+            iTime = header.indexOf('time'), iActive = header.indexOf('active');
+        var today = new Date(); today.setHours(0, 0, 0, 0);
+        var best = null;
+        for (var k = 1; k < lines.length; k++) {
+          var c = lines[k].split(',');
+          var type = iType >= 0 ? (c[iType] || '').trim() : '';
+          var active = iActive >= 0 ? (c[iActive] || '').trim().toUpperCase() : 'TRUE';
+          if (type !== 'ms-od' || active === 'FALSE') continue;
+          var date = iDate >= 0 ? (c[iDate] || '').trim() : '';
+          if (!date) continue;
+          var d = new Date(date + 'T00:00:00');
+          if (isNaN(d.getTime()) || d < today) continue;       // schovej minulé termíny
+          if (!best || d < best.d) best = { d: d, time: iTime >= 0 ? (c[iTime] || '').trim() : '' };
+        }
+        if (best) reveal(best.d, best.time);                    // jinak kartička zůstane skrytá
+      })
+      .catch(function (err) { console.warn('Little FLOW open-day CSV fetch failed:', err); });
+  }
+
   // ───── Lightbox (gallery klik → full photo modal s prev/next navigaci)
   function initLightbox() {
     var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox]'));
@@ -434,6 +493,7 @@
     initMobileNav();
     initCallbackForm();
     initFormCloserDropdown();
+    initLittleFlowOpenDay();
     initLightbox();
     initSmoothScroll();
     initSmartHideNav();

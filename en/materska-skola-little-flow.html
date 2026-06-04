@@ -311,7 +311,7 @@
       <a href="nase-skola" class="site-nav__link">About</a>
       <a href="pro-zajemce" class="site-nav__link">Applicants</a>
       <a href="vzdelavaci-program" class="site-nav__link">How we teach</a>
-      <a href="materska-skola-little-flow" class="site-nav__link">Little FLOW</a>
+      <a href="materska-skola-little-flow" class="site-nav__link site-nav__link--ms"><span class="nav-ms__txt">Little FLOW</span></a>
       <a href="novy-kampus" class="site-nav__link">New campus</a>
       <a href="../materska-skola-little-flow" class="site-nav__link" lang="cs" hreflang="cs" title="Česky">CZ</a>
       <a href="chci-do-flow" class="site-nav__cta">Join FLOW →</a>
@@ -358,6 +358,13 @@
             <span class="hero-a__badge">Small groups</span>
             <span class="hero-a__badge">Daily English</span>
             <span class="hero-a__badge">Prague 9 · Balabenka</span>
+          </div>
+          <!-- Open-day line — populated & revealed by flow.js from Eventy CSV (row ms-od). Hidden if no active future date. -->
+          <div class="lf-openday" id="lf-openday" hidden>
+            <span class="lf-openday__ico" aria-hidden="true">📅</span>
+            <span class="lf-openday__label">Next open day</span>
+            <span class="lf-openday__date" id="lf-openday-date"></span>
+            <span class="lf-openday__meta" id="lf-openday-meta"></span>
           </div>
           <div class="hero-a__ctas">
             <a href="#form" class="btn btn-primary">Schedule a meeting →</a>

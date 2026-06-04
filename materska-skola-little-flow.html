@@ -312,7 +312,7 @@
       <a href="nase-skola" class="site-nav__link">O škole</a>
       <a href="pro-zajemce" class="site-nav__link">Pro zájemce</a>
       <a href="vzdelavaci-program" class="site-nav__link">Jak učíme</a>
-      <a href="materska-skola-little-flow" class="site-nav__link">Little FLOW</a>
+      <a href="materska-skola-little-flow" class="site-nav__link site-nav__link--ms"><span class="nav-ms__tag">MŠ</span><span class="nav-ms__txt">Little FLOW</span></a>
       <a href="novy-kampus" class="site-nav__link">Nový kampus</a>
       <a href="en/materska-skola-little-flow" class="site-nav__link" lang="en" hreflang="en" title="English">EN</a>
       <a href="chci-do-flow" class="site-nav__cta">Chci do FLOW →</a>
@@ -361,9 +361,16 @@
             <span class="hero-a__badge">Denní angličtina</span>
             <span class="hero-a__badge">Praha 9 · Balabenka</span>
           </div>
+          <!-- Open-day řádek — naplní a odkryje flow.js z Eventy CSV (řádek ms-od). Skrytý pokud není aktivní budoucí termín. -->
+          <div class="lf-openday" id="lf-openday" hidden>
+            <span class="lf-openday__ico" aria-hidden="true">📅</span>
+            <span class="lf-openday__label">Nejbližší den otevřených dveří</span>
+            <span class="lf-openday__date" id="lf-openday-date"></span>
+            <span class="lf-openday__meta" id="lf-openday-meta"></span>
+          </div>
           <div class="hero-a__ctas">
             <a href="#form" class="btn btn-primary">Sjednat schůzku →</a>
-            <a href="pro-zajemce.html#form" class="btn btn-secondary btn-secondary--on-dark">Den otevřených dveří</a>
+            <a href="pro-zajemce.html#form" class="btn btn-secondary btn-secondary--on-dark">Chci na den otevřených dveří</a>
           </div>
         </div>
         <div class="hero-a__photo">

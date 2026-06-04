@@ -1452,3 +1452,57 @@ body.no-messenger .msg-fab { display: none; }
   .bento-tile.is-wide,
   .bento-tile.is-compact { grid-column: span 1; grid-row: span 1; }
 }
+
+/* ============================================================
+   NAV — zvýraznění "MŠ Little FLOW" (tag + žluté podtržení)
+   ============================================================ */
+.site-nav__link--ms { color: var(--c-white); font-weight: 700; }
+.nav-ms__tag {
+  display: inline-block;
+  background: var(--c-yellow);
+  color: var(--c-blue-deep);
+  font-family: var(--font-display);
+  font-size: 0.62em;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 5px;
+  border-radius: 4px;
+  margin-right: 7px;
+  vertical-align: 1px;
+}
+.nav-ms__txt { border-bottom: 2px solid var(--c-yellow); padding-bottom: 2px; }
+.site-nav__link--ms:hover .nav-ms__tag { background: var(--c-blue-deep); color: var(--c-yellow); }
+.site-nav__link--ms:hover .nav-ms__txt { border-bottom-color: var(--c-blue-deep); }
+
+/* ============================================================
+   HERO — Little FLOW open-day inline řádek (data-driven z Eventy CSV)
+   skrytý dokud JS nenajde aktivní budoucí řádek type=ms-od
+   ============================================================ */
+.lf-openday {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 3px 10px;
+  margin: 0 0 var(--space-md);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+.lf-openday[hidden] { display: none; }
+.lf-openday__ico { font-style: normal; align-self: center; }
+.lf-openday__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+.lf-openday__date {
+  color: var(--c-white);
+  font-weight: 700;
+  border-bottom: 2px solid var(--c-yellow);
+  padding-bottom: 1px;
+}
+.lf-openday__meta { color: rgba(255, 255, 255, 0.7); }
