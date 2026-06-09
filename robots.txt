@@ -6,8 +6,11 @@ Disallow: /preview-booking
 Disallow: /nas-model-vyuky-a-uceni-old
 Disallow: /en/nas-model-vyuky-a-uceni-old
 Disallow: /skolaflow_homepage
-Disallow: /pro-rodice
-Disallow: /en/pro-rodice
+# Note: /pro-rodice and /en/pro-rodice are legacy URLs already redirected
+# via _redirects (301 to /). We removed the Disallow entries because they
+# matched as a prefix and accidentally blocked /pro-rodice-ve-flow and
+# /en/pro-rodice-ve-flow, which are valid production pages in sitemap.xml.
+# The 301 redirects in _redirects make these robots.txt blocks redundant.
 Disallow: /_backups/
 
 Sitemap: https://www.skolaflow.cz/sitemap.xml
