@@ -262,11 +262,10 @@
         : DAYS[d.getDay()] + ' ' + d.getDate() + '. ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
       dateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);   // "po" → "Po"
       if (dateEl) dateEl.textContent = dateStr;
-      // Místo: do otevření nového kampusu (1. 9. 2026) jsou všechny DOD ve staré budově v Holešovicích
-      var oldCampus = d < new Date('2026-09-01T00:00:00');
+      // Místo: všechny DOD probíhají v kampusu na Balabence
       var place = IS_EN
-        ? (oldCampus ? 'Přívozní 1064/2A, Prague 7 Holešovice' : 'Českomoravská 1a, Prague 9 Balabenka')
-        : (oldCampus ? 'Přívozní 1064/2A, Praha 7 Holešovice'  : 'Českomoravská 1a, Praha 9 Balabenka');
+        ? 'Českomoravská 1a, 190 00 Prague 9 — Balabenka'
+        : 'Českomoravská 1a, 190 00 Praha 9 — Balabenka';
       if (metaEl) metaEl.textContent = (time ? (IS_EN ? 'from ' : 'od ') + time + ' · ' : '') + place;
       card.hidden = false;
     }
