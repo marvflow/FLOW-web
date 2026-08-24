@@ -74,6 +74,8 @@
     .dash-header__right {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
       gap: 12px;
       font-size: 0.85rem;
     }
@@ -260,6 +262,10 @@
       font-size: 0.82rem;
       color: var(--c-text);
       opacity: 0.84;
+    }
+    .dash-cell-phone {
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
     }
     .badge {
       display: inline-block;
@@ -517,14 +523,20 @@
     @media (max-width: 900px) {
       .dash-filters { grid-template-columns: 1fr 1fr; }
       .dash-filters__count { grid-column: 1 / -1; }
+      /* Tabulka scrolluje uvnitr sve karty — stranka sama uz vodorovne neujizdi. */
+      .dash-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
       .dash-table { font-size: 0.78rem; }
       .dash-table th, .dash-table td { padding: 10px 8px; }
-      .dash-table th:nth-child(3),
-      .dash-table td:nth-child(3),
+      /* Na mobilu schovej E-mail a Detail — jmeno a telefon jsou to, s cim se pracuje. */
       .dash-table th:nth-child(4),
-      .dash-table td:nth-child(4) { display: none; }
+      .dash-table td:nth-child(4),
+      .dash-table th:nth-child(6),
+      .dash-table td:nth-child(6) { display: none; }
     }
     @media (max-width: 560px) {
+      /* Na uzkem telefonu jde stranou i Typ — zbyde Datum, Jmeno, Telefon, Status. */
+      .dash-table th:nth-child(2),
+      .dash-table td:nth-child(2) { display: none; }
       .dash-main { padding: 16px 12px 80px; }
       .dash-header { padding: 16px 14px; }
       .dash-header__logo { font-size: 1.1rem; }
@@ -586,8 +598,8 @@
   <!-- FILTERS -->
   <section class="dash-filters">
     <div class="dash-filters__field">
-      <label for="f-search">Hledat (jmeno, email, detail)</label>
-      <input class="dash-input" id="f-search" type="search" placeholder="napr. Marv Shamma anebo @gmail.com">
+      <label for="f-search">Hledat (jmeno, email, telefon, detail)</label>
+      <input class="dash-input" id="f-search" type="search" placeholder="napr. Marv Shamma, @gmail.com nebo 777123456">
     </div>
     <div class="dash-filters__field">
       <label for="f-type">Typ</label>
@@ -627,12 +639,13 @@
           <th data-sort="typ">Typ</th>
           <th data-sort="jmeno">Jméno</th>
           <th data-sort="email">E-mail</th>
+          <th data-sort="telefon">Telefon</th>
           <th>Detail</th>
           <th data-sort="status">Status</th>
         </tr>
       </thead>
       <tbody id="tbody">
-        <tr><td colspan="6" class="dash-loading">Načítám…</td></tr>
+        <tr><td colspan="7" class="dash-loading">Načítám…</td></tr>
       </tbody>
     </table>
   </section>
@@ -797,7 +810,7 @@ function buildBadge(label, cssClass) {
 // ───────── Fetch & normalize data ─────────
 function fetchData() {
   var tbody = document.getElementById('tbody');
-  tbody.innerHTML = '<tr><td colspan="6" class="dash-loading">Načítám…</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="7" class="dash-loading">Načítám…</td></tr>';
   hideError();
   var url = APPS_SCRIPT_URL + '?action=dashboard&token=' + encodeURIComponent(DASHBOARD_TOKEN) + '&t=' + Date.now();
   return fetch(url)
@@ -816,20 +829,60 @@ function fetchData() {
     .catch(function (err) {
       console.error('fetch failed:', err);
       showError('Nepodařilo se načíst data: ' + err.message);
-      tbody.innerHTML = '<tr><td colspan="6" class="dash-empty"><div class="dash-empty__icon">⚠️</div>Chyba pri nacitani. Zkus refresh.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="7" class="dash-empty"><div class="dash-empty__icon">⚠️</div>Chyba pri nacitani. Zkus refresh.</td></tr>';
     });
+}
+
+// ───────── Telefon: normalizace + odkaz ─────────
+// Sheet obcas ulozi cislo jako number (spadne plus i uvodni nula) nebo jako #ERROR!.
+function phoneDigits(v) {
+  var p = String(v == null ? '' : v).replace(/\D/g, '');
+  if (p.indexOf('00420') === 0) p = p.slice(5);
+  else if (p.indexOf('420') === 0 && p.length === 12) p = p.slice(3);
+  return p;
+}
+function fmtPhone(v) {
+  var raw = String(v == null ? '' : v).trim();
+  if (!raw || raw.charAt(0) === '#') return '';
+  var p = phoneDigits(raw);
+  if (p.length === 9) return '+420 ' + p.slice(0, 3) + ' ' + p.slice(3, 6) + ' ' + p.slice(6);
+  if (p.length > 9)  return '+' + p;
+  return p ? raw : '';
+}
+function telHref(v) {
+  var p = phoneDigits(v);
+  if (!p) return '';
+  return 'tel:' + (p.length === 9 ? '+420' + p : '+' + p);
+}
+
+// Dashboard tab sloupec Telefon nema — dotahujeme ho z detailnich tabu podle e-mailu.
+function buildPhoneIndex(data) {
+  var tabs = ['registrace','prestupy','kariera','littleFLOW','dnyNaZkousku','rodicovskeAkceReg','schuzkaVedeni'];
+  var idx = {};
+  tabs.forEach(function (tab) {
+    (data[tab] || []).forEach(function (r) {
+      var email = String(r['E-mail'] || '').trim().toLowerCase();
+      var tel = fmtPhone(r['Telefon']);
+      if (email && tel && !idx[email]) idx[email] = tel;
+    });
+  });
+  return idx;
 }
 
 function normalizeRows(data) {
   // Data je objekt { dashboard: [...], registrace: [...], prestupy: [...], ... }
   // Dashboard tab uz ma sloucene radky, pouzij prednostne.
+  var phoneIdx = buildPhoneIndex(data);
   if (data.dashboard && data.dashboard.length) {
     return data.dashboard.map(function (r) {
+      var tel = fmtPhone(r['Telefon']) || phoneIdx[String(r['E-mail'] || '').trim().toLowerCase()] || '';
+      if (tel && !r['Telefon']) r['Telefon'] = tel;   // at ho ukaze i detail modal
       return {
         datum: r['Datum'] || r['Datum registrace'] || '',
         typ: r['Typ'] || '',
         jmeno: r['Jméno'] || '',
         email: r['E-mail'] || '',
+        telefon: tel,
         detail: r['Detail'] || '',
         status: r['Status'] || 'Nový',
         lang: r['Jazyk'] || 'cs',
@@ -849,6 +902,7 @@ function normalizeRows(data) {
         typ: tab,
         jmeno: r['Jméno'] || r['Jméno rodiče'] || '',
         email: r['E-mail'] || '',
+        telefon: fmtPhone(r['Telefon']),
         detail: r['Typ eventu'] || r['Ročník'] || r['Pozice'] || r['Akce (label)'] || r['S kým'] || '',
         status: r['Status'] || 'Nový',
         lang: r['Jazyk'] || 'cs',
@@ -911,7 +965,7 @@ function applyFiltersAndRender() {
       if (period === '90d' && d >= 90) return false;
     }
     if (search) {
-      var hay = (r.jmeno + ' ' + r.email + ' ' + r.detail + ' ' + r.typ).toLowerCase();
+      var hay = (r.jmeno + ' ' + r.email + ' ' + (r.telefon || '') + ' ' + (r.telefon || '').replace(/\D/g, '') + ' ' + r.detail + ' ' + r.typ).toLowerCase();
       if (hay.indexOf(search) === -1) return false;
     }
     return true;
@@ -937,7 +991,7 @@ function applyFiltersAndRender() {
 function renderTable() {
   var tbody = document.getElementById('tbody');
   if (!STATE.filtered.length) {
-    tbody.innerHTML = '<tr><td colspan="6" class="dash-empty"><div class="dash-empty__icon">📭</div>Žádné záznamy odpovídající filtrům.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" class="dash-empty"><div class="dash-empty__icon">📭</div>Žádné záznamy odpovídající filtrům.</td></tr>';
     return;
   }
   var html = STATE.filtered.map(function (r, idx) {
@@ -947,6 +1001,9 @@ function renderTable() {
       '<td>' + buildBadge(r.typ, badgeClassForTyp(r.typ)) + '</td>' +
       '<td class="dash-cell-name"><strong>' + escapeHtml(r.jmeno || '—') + '</strong>' + (r.lang === 'en' ? ' ' + buildBadge('EN', 'badge--lang') : '') + '</td>' +
       '<td><a href="mailto:' + escapeHtml(r.email) + '" onclick="event.stopPropagation()">' + escapeHtml(r.email || '—') + '</a></td>' +
+      '<td class="dash-cell-phone">' + (r.telefon
+          ? '<a href="' + escapeHtml(telHref(r.telefon)) + '" onclick="event.stopPropagation()">' + escapeHtml(r.telefon) + '</a>'
+          : '—') + '</td>' +
       '<td class="dash-cell-detail">' + escapeHtml(r.detail || '—') + '</td>' +
       '<td>' + buildBadge(r.status || 'Nový', badgeClassForStatus(r.status)) + '</td>' +
     '</tr>';
@@ -1132,13 +1189,14 @@ document.getElementById('btn-export-csv').addEventListener('click', function () 
     alert('Neni co exportovat — filtrovany seznam je prazdny.');
     return;
   }
-  var header = ['Datum','Typ','Jmeno','E-mail','Detail','Status','Jazyk','Poznamky'];
+  var header = ['Datum','Typ','Jmeno','E-mail','Telefon','Detail','Status','Jazyk','Poznamky'];
   var rows = STATE.filtered.map(function (r) {
     return [
       fmtDateTime(r.datum),
       r.typ,
       r.jmeno,
       r.email,
+      r.telefon || '',
       r.detail,
       r.status || 'Nový',
       r.lang,
