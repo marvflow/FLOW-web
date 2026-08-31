@@ -263,6 +263,17 @@
       color: var(--c-text);
       opacity: 0.84;
     }
+    .dash-cell-msg {
+      margin-top: 5px;
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--c-muted);
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
     .dash-cell-phone {
       white-space: nowrap;
       font-variant-numeric: tabular-nums;
@@ -598,7 +609,7 @@
   <!-- FILTERS -->
   <section class="dash-filters">
     <div class="dash-filters__field">
-      <label for="f-search">Hledat (jmeno, email, telefon, detail)</label>
+      <label for="f-search">Hledat (jmeno, email, telefon, zprava)</label>
       <input class="dash-input" id="f-search" type="search" placeholder="napr. Marv Shamma, @gmail.com nebo 777123456">
     </div>
     <div class="dash-filters__field">
@@ -855,6 +866,45 @@ function telHref(v) {
   return 'tel:' + (p.length === 9 ? '+420' + p : '+' + p);
 }
 
+// Kde v kterem tabu lezi text, ktery zajemce sam napsal.
+// Prvni neprazdne pole vyhrava — to je to, co chces videt pred telefonatem.
+var MSG_FIELDS = {
+  registrace:        ['__detail_poznamka__'],
+  prestupy:          ['Poznámka'],
+  kariera:           ['Zpráva'],
+  littleFLOW:        ['Poznámka'],
+  dnyNaZkousku:      ['Co vedlo k FLOW', 'Specifické potřeby', 'Očekávání od školy'],
+  rodicovskeAkceReg: ['Poznámka'],
+  schuzkaVedeni:     ['Téma', 'Poznámka']
+};
+
+// U chci-do-flow je poznamka zabalena uvnitr sloupce Detail.
+function noteFromDetail(det) {
+  var m = /Poznámka:\s*([\s\S]*?)(?:\n[a-z_]+:|$)/.exec(String(det || ''));
+  return m ? m[1].replace(/\s+/g, ' ').trim() : '';
+}
+function pickMessage(tab, r) {
+  var fields = MSG_FIELDS[tab] || [];
+  for (var i = 0; i < fields.length; i++) {
+    var v = fields[i] === '__detail_poznamka__'
+      ? noteFromDetail(r['Detail'])
+      : String(r[fields[i]] == null ? '' : r[fields[i]]).replace(/\s+/g, ' ').trim();
+    if (v && v !== '-' && v !== '—' && v.charAt(0) !== '#') return v;
+  }
+  return '';
+}
+function buildMessageIndex(data) {
+  var idx = {};
+  Object.keys(MSG_FIELDS).forEach(function (tab) {
+    (data[tab] || []).forEach(function (r) {
+      var email = String(r['E-mail'] || '').trim().toLowerCase();
+      var msg = pickMessage(tab, r);
+      if (email && msg && !idx[email]) idx[email] = msg;
+    });
+  });
+  return idx;
+}
+
 // Dashboard tab sloupec Telefon nema — dotahujeme ho z detailnich tabu podle e-mailu.
 function buildPhoneIndex(data) {
   var tabs = ['registrace','prestupy','kariera','littleFLOW','dnyNaZkousku','rodicovskeAkceReg','schuzkaVedeni'];
@@ -873,16 +923,21 @@ function normalizeRows(data) {
   // Data je objekt { dashboard: [...], registrace: [...], prestupy: [...], ... }
   // Dashboard tab uz ma sloucene radky, pouzij prednostne.
   var phoneIdx = buildPhoneIndex(data);
+  var msgIdx = buildMessageIndex(data);
   if (data.dashboard && data.dashboard.length) {
     return data.dashboard.map(function (r) {
-      var tel = fmtPhone(r['Telefon']) || phoneIdx[String(r['E-mail'] || '').trim().toLowerCase()] || '';
+      var email = String(r['E-mail'] || '').trim().toLowerCase();
+      var tel = fmtPhone(r['Telefon']) || phoneIdx[email] || '';
+      var msg = msgIdx[email] || '';
       if (tel && !r['Telefon']) r['Telefon'] = tel;   // at ho ukaze i detail modal
+      if (msg && !r['Zpráva'])  r['Zpráva']  = msg;
       return {
         datum: r['Datum'] || r['Datum registrace'] || '',
         typ: r['Typ'] || '',
         jmeno: r['Jméno'] || '',
         email: r['E-mail'] || '',
         telefon: tel,
+        zprava: msg,
         detail: r['Detail'] || '',
         status: r['Status'] || 'Nový',
         lang: r['Jazyk'] || 'cs',
@@ -903,6 +958,7 @@ function normalizeRows(data) {
         jmeno: r['Jméno'] || r['Jméno rodiče'] || '',
         email: r['E-mail'] || '',
         telefon: fmtPhone(r['Telefon']),
+        zprava: pickMessage(tab, r),
         detail: r['Typ eventu'] || r['Ročník'] || r['Pozice'] || r['Akce (label)'] || r['S kým'] || '',
         status: r['Status'] || 'Nový',
         lang: r['Jazyk'] || 'cs',
@@ -965,7 +1021,7 @@ function applyFiltersAndRender() {
       if (period === '90d' && d >= 90) return false;
     }
     if (search) {
-      var hay = (r.jmeno + ' ' + r.email + ' ' + (r.telefon || '') + ' ' + (r.telefon || '').replace(/\D/g, '') + ' ' + r.detail + ' ' + r.typ).toLowerCase();
+      var hay = (r.jmeno + ' ' + r.email + ' ' + (r.telefon || '') + ' ' + (r.telefon || '').replace(/\D/g, '') + ' ' + r.detail + ' ' + (r.zprava || '') + ' ' + r.typ).toLowerCase();
       if (hay.indexOf(search) === -1) return false;
     }
     return true;
@@ -1004,7 +1060,8 @@ function renderTable() {
       '<td class="dash-cell-phone">' + (r.telefon
           ? '<a href="' + escapeHtml(telHref(r.telefon)) + '" onclick="event.stopPropagation()">' + escapeHtml(r.telefon) + '</a>'
           : '—') + '</td>' +
-      '<td class="dash-cell-detail">' + escapeHtml(r.detail || '—') + '</td>' +
+      '<td class="dash-cell-detail">' + escapeHtml(r.detail || '—') +
+          (r.zprava ? '<div class="dash-cell-msg" title="' + escapeHtml(r.zprava) + '">„' + escapeHtml(r.zprava) + '"</div>' : '') + '</td>' +
       '<td>' + buildBadge(r.status || 'Nový', badgeClassForStatus(r.status)) + '</td>' +
     '</tr>';
   }).join('');
@@ -1189,7 +1246,7 @@ document.getElementById('btn-export-csv').addEventListener('click', function () 
     alert('Neni co exportovat — filtrovany seznam je prazdny.');
     return;
   }
-  var header = ['Datum','Typ','Jmeno','E-mail','Telefon','Detail','Status','Jazyk','Poznamky'];
+  var header = ['Datum','Typ','Jmeno','E-mail','Telefon','Detail','Zprava','Status','Jazyk','Poznamky'];
   var rows = STATE.filtered.map(function (r) {
     return [
       fmtDateTime(r.datum),
@@ -1198,6 +1255,7 @@ document.getElementById('btn-export-csv').addEventListener('click', function () 
       r.email,
       r.telefon || '',
       r.detail,
+      r.zprava || '',
       r.status || 'Nový',
       r.lang,
       (r.raw && r.raw['Poznámky']) || ''
