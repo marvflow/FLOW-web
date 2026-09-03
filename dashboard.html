@@ -736,6 +736,38 @@ var STATE = {
   sortDir: 'desc'
 };
 
+// ───────── Cache + stav nacitani ─────────
+// Apps Script odpovida 5-7 s a posila ~158 kB. Bez cache znamena kazde
+// otevreni dashboardu 7 sekund prazdne obrazovky. S cache se vykresli
+// hned a aktualni data dojedou na pozadi.
+var CACHE_KEY = 'flow_dashboard_cache_v1';
+var PENDING_DATA = null;   // data, ktera dosla s otevrenym detailem
+var SAVE_DIRTY = false;    // v detailu se neco ulozilo -> po zavreni obnov
+
+function readCache() {
+  try {
+    var raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    var o = JSON.parse(raw);
+    return (o && o.data) ? o : null;
+  } catch (e) { return null; }
+}
+function writeCache(data) {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), data: data }));
+  } catch (e) { /* plna quota nebo privatni okno — cache je jen bonus */ }
+}
+function modalIsOpen() {
+  return document.getElementById('modal-backdrop').classList.contains('is-open');
+}
+// Vsechna zavreni detailu vedou sem, at je jedno misto, kde dobehnou
+// odlozena data a pripadny refresh po ulozeni.
+function closeModal() {
+  document.getElementById('modal-backdrop').classList.remove('is-open');
+  if (PENDING_DATA) { applyData(PENDING_DATA); }
+  if (SAVE_DIRTY) { SAVE_DIRTY = false; fetchData({ silent: true }); }
+}
+
 var TYP_BADGE_CLASS = {
   'Registrace': 'badge--registrace',
   'Přestup': 'badge--prestup',
@@ -819,28 +851,61 @@ function buildBadge(label, cssClass) {
 }
 
 // ───────── Fetch & normalize data ─────────
-function fetchData() {
+// Vykresli data. S otevrenym detailem si je odlozi — jinak by se pod
+// modalem prestavela tabulka, CURRENT_ROW by ukazoval na zahozeny objekt
+// a zmena statusu by se "neulozila".
+function applyData(data) {
+  if (modalIsOpen()) { PENDING_DATA = data; return; }
+  PENDING_DATA = null;
+  STATE.rows = normalizeRows(data);
+  computeStats();
+  populateTypeFilter();
+  applyFiltersAndRender();
+  document.getElementById('last-refresh').textContent = 'Aktualizováno: ' + fmtTime(new Date());
+}
+
+function fetchData(opts) {
+  opts = opts || {};
   var tbody = document.getElementById('tbody');
-  tbody.innerHTML = '<tr><td colspan="7" class="dash-loading">Načítám…</td></tr>';
+  // Tabulku vymaz JEN kdyz jeste neni co ukazat. Refresh na pozadi
+  // necha stara data na obrazovce, dokud nedojdou nova.
+  if (!STATE.rows.length) {
+    tbody.innerHTML = '<tr><td colspan="7" class="dash-loading">Načítám…</td></tr>';
+  } else if (!opts.silent) {
+    document.getElementById('last-refresh').textContent = 'Aktualizuji…';
+  }
   hideError();
+
+  var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+  var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 20000) : null;
+  var fopts = ctrl ? { signal: ctrl.signal } : {};
+
   var url = APPS_SCRIPT_URL + '?action=dashboard&token=' + encodeURIComponent(DASHBOARD_TOKEN) + '&t=' + Date.now();
-  return fetch(url)
+  return fetch(url, fopts)
     .then(function (r) {
+      if (timer) clearTimeout(timer);
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
     })
     .then(function (data) {
       if (data && data.error) throw new Error(data.error);
-      STATE.rows = normalizeRows(data);
-      computeStats();
-      populateTypeFilter();
-      applyFiltersAndRender();
-      document.getElementById('last-refresh').textContent = 'Aktualizováno: ' + fmtTime(new Date());
+      writeCache(data);
+      applyData(data);
     })
     .catch(function (err) {
+      if (timer) clearTimeout(timer);
       console.error('fetch failed:', err);
-      showError('Nepodařilo se načíst data: ' + err.message);
-      tbody.innerHTML = '<tr><td colspan="7" class="dash-empty"><div class="dash-empty__icon">⚠️</div>Chyba pri nacitani. Zkus refresh.</td></tr>';
+      var msg = (err && err.name === 'AbortError')
+        ? 'Server neodpověděl do 20 sekund.'
+        : 'Nepodařilo se načíst data: ' + err.message;
+      if (STATE.rows.length) {
+        // Radsi trochu stara data na obrazovce nez prazdna tabulka.
+        showError(msg + ' Zobrazuji naposledy načtená data — zkus Refresh.');
+        document.getElementById('last-refresh').textContent = 'Neaktuální — načtení selhalo';
+      } else {
+        showError(msg);
+        tbody.innerHTML = '<tr><td colspan="7" class="dash-empty"><div class="dash-empty__icon">⚠️</div>Chyba pri nacitani. Zkus Refresh.</td></tr>';
+      }
     });
 }
 
@@ -1095,13 +1160,13 @@ document.getElementById('btn-refresh').addEventListener('click', fetchData);
 
 // ───────── Modal close handlers ─────────
 document.getElementById('modal-close').addEventListener('click', function () {
-  document.getElementById('modal-backdrop').classList.remove('is-open');
+  closeModal();
 });
 document.getElementById('modal-backdrop').addEventListener('click', function (e) {
-  if (e.target === this) this.classList.remove('is-open');
+  if (e.target === this) closeModal();
 });
 document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') document.getElementById('modal-backdrop').classList.remove('is-open');
+  if (e.key === 'Escape' && modalIsOpen()) closeModal();
 });
 document.getElementById('tbody').addEventListener('click', function (e) {
   var tr = e.target.closest('tr[data-idx]');
@@ -1169,7 +1234,7 @@ function openModal(row) {
   var mailto = row.email ? 'mailto:' + encodeURIComponent(row.email) + '?subject=' + encodeURIComponent('FLOW: ' + row.typ) : '';
   actions.innerHTML = (mailto ? '<a class="modal-btn modal-btn--primary" href="' + mailto + '">📧 Odpovedet e-mailem</a>' : '') +
     '<a class="modal-btn" href="https://docs.google.com/spreadsheets/d/1C7OpnUzNHdaU0TftMOPwVxpS2hBrjj5B1yK-4Gb73Ks/edit" target="_blank" rel="noopener">Otevrit Sheet ↗</a>' +
-    '<button class="modal-btn" type="button" onclick="document.getElementById(\'modal-backdrop\').classList.remove(\'is-open\')">Zavřít</button>';
+    '<button class="modal-btn" type="button" onclick="closeModal()">Zavřít</button>';
 
   document.getElementById('modal-backdrop').classList.add('is-open');
 }
@@ -1208,33 +1273,65 @@ document.getElementById('modal-save-notes').addEventListener('click', function (
 });
 
 function postUpdate(payload) {
-  var id = CURRENT_ROW && CURRENT_ROW.raw && CURRENT_ROW.raw['ID'];
-  if (!id) return Promise.resolve(false);
   var statusEl = document.getElementById('modal-save-status');
-  statusEl.textContent = 'Ukladam…';
+  var id = CURRENT_ROW && CURRENT_ROW.raw && CURRENT_ROW.raw['ID'];
+
+  function ok(note) {
+    SAVE_DIRTY = true;
+    statusEl.textContent = note || '✓ Uloženo';
+    statusEl.className = 'modal__save-status is-success';
+    setTimeout(function () { statusEl.textContent = ''; }, 4000);
+    return true;
+  }
+  function fail(msg) {
+    statusEl.textContent = '✗ ' + msg;
+    statusEl.className = 'modal__save-status is-error';
+    return false;
+  }
+
+  // Driv to tise nedelalo nic. Aspon to rekni.
+  if (!id) return Promise.resolve(fail('Tenhle záznam nemá ID, uložit ho nejde (vznikl před verzí 2.6).'));
+
+  statusEl.textContent = 'Ukládám…';
   statusEl.className = 'modal__save-status';
+
   var body = new FormData();
   body.append('_dashboard_action', 'update');
   body.append('token', DASHBOARD_TOKEN);
   body.append('id', id);
   Object.keys(payload).forEach(function (k) { body.append(k, payload[k]); });
-  return fetch(APPS_SCRIPT_URL, { method: 'POST', body: body })
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      if (data && data.ok) {
-        statusEl.textContent = '✓ Ulozeno';
-        statusEl.className = 'modal__save-status is-success';
-        setTimeout(function () { statusEl.textContent = ''; }, 2500);
-        return true;
-      }
-      statusEl.textContent = '✗ Chyba: ' + (data.error || 'unknown');
-      statusEl.className = 'modal__save-status is-error';
-      return false;
+
+  var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+  var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 20000) : null;
+  var fopts = { method: 'POST', body: body };
+  if (ctrl) fopts.signal = ctrl.signal;
+
+  return fetch(APPS_SCRIPT_URL, fopts)
+    .then(function (r) {
+      if (timer) clearTimeout(timer);
+      // Apps Script na POST odpovida 302 na googleusercontent a to, co
+      // dojde, nemusi byt JSON. Nespolehej na r.json() — spadlo by to
+      // i u zapisu, ktery na serveru probehl.
+      return r.text().then(function (txt) {
+        var data = null;
+        try { data = JSON.parse(txt); } catch (e) { /* neni JSON */ }
+        if (data && data.ok) return ok();
+        if (data && data.error) return fail('Chyba: ' + data.error);
+        return ok('✓ Odesláno — ověřím při dalším načtení');
+      });
     })
     .catch(function (err) {
-      statusEl.textContent = '✗ Chyba: ' + err.message;
-      statusEl.className = 'modal__save-status is-error';
-      return false;
+      if (timer) clearTimeout(timer);
+      console.warn('postUpdate:', err);
+      if (err && err.name === 'AbortError') {
+        return fail('Server neodpověděl do 20 s. Zkus to znovu.');
+      }
+      if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+        return fail('Nejsi online. Zkus to znovu, až bude připojení.');
+      }
+      // POST odesel, jen nam prohlizec nedovolil precist odpoved.
+      // Rikat tomu chyba by byla lez — pravda se ukaze pri dalsim nacteni.
+      return ok('✓ Odesláno — ověřím při dalším načtení');
     });
 }
 
@@ -1284,9 +1381,29 @@ document.getElementById('btn-print').addEventListener('click', function () {
 });
 
 // ───────── Init ─────────
-fetchData();
-// Auto-refresh kazde 2 minuty
-setInterval(fetchData, 2 * 60 * 1000);
+// Nejdriv vykresli z cache (okamzite), pak dotahni aktualni data.
+(function () {
+  var cached = readCache();
+  if (cached && cached.data) {
+    try {
+      applyData(cached.data);
+      document.getElementById('last-refresh').textContent =
+        'Z posledního načtení (' + fmtTime(new Date(cached.at)) + ') — aktualizuji…';
+    } catch (e) { console.warn('cache render failed:', e); }
+  }
+  fetchData();
+})();
+
+// Auto-refresh kazdych 10 minut. Driv to bylo kazde 2 minuty, coz znamenalo
+// 158 kB a 5-7 s cekani porad dokola — a tabulka pritom mizela pod rukama.
+setInterval(function () { fetchData({ silent: true }); }, 10 * 60 * 1000);
+
+// Kdyz se vratis na zalozku a data jsou starsi nez 2 minuty, obnov je.
+document.addEventListener('visibilitychange', function () {
+  if (document.visibilityState !== 'visible') return;
+  var c = readCache();
+  if (!c || (Date.now() - c.at) > 2 * 60 * 1000) fetchData({ silent: true });
+});
 </script>
 
 </body>
