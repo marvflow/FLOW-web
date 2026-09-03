@@ -742,7 +742,54 @@ var STATE = {
 // hned a aktualni data dojedou na pozadi.
 var CACHE_KEY = 'flow_dashboard_cache_v1';
 var PENDING_DATA = null;   // data, ktera dosla s otevrenym detailem
-var SAVE_DIRTY = false;    // v detailu se neco ulozilo -> po zavreni obnov
+
+// ───────── Fronta nepotvrzenych zapisu ─────────
+// Apps Script zapis provede, ale odpoved se necha precist NIKDY a trva
+// 3-36 s. Nema smysl na ni cekat. Misto toho si drzime, co jsme poslali,
+// a prekreslujeme to pres serverova data, dokud je server nedozene.
+var PW_KEY = 'flow_dashboard_pending_v1';
+var PW_MAX_AGE = 30 * 60 * 1000;   // po pul hodine to vzdame a verime serveru
+
+function readPending() {
+  try { return JSON.parse(localStorage.getItem(PW_KEY) || '{}') || {}; }
+  catch (e) { return {}; }
+}
+function writePending(o) {
+  try { localStorage.setItem(PW_KEY, JSON.stringify(o)); } catch (e) {}
+}
+function setPending(id, patch) {
+  var p = readPending();
+  var cur = p[id] || {};
+  Object.keys(patch).forEach(function (k) { cur[k] = patch[k]; });
+  cur.at = Date.now();
+  p[id] = cur;
+  writePending(p);
+}
+// Co uz server ma, z fronty vyhod. Stare zaznamy taky.
+function reconcilePending(rows) {
+  var p = readPending(), changed = false, now = Date.now();
+  rows.forEach(function (r) {
+    var id = r.raw && r.raw['ID'];
+    if (!id || !p[id]) return;
+    var e = p[id];
+    var statusOk = (e.status === undefined) || (String(r.raw['Status'] || '') === String(e.status));
+    var notesOk  = (e.notes  === undefined) || (String(r.raw['Poznámky'] || '') === String(e.notes));
+    if ((statusOk && notesOk) || (now - (e.at || 0)) > PW_MAX_AGE) { delete p[id]; changed = true; }
+  });
+  if (changed) writePending(p);
+}
+// Zbytek fronty prekresli pres serverova data.
+function applyPending(rows) {
+  var p = readPending();
+  rows.forEach(function (r) {
+    var id = r.raw && r.raw['ID'];
+    if (!id || !p[id]) return;
+    var e = p[id];
+    if (e.status !== undefined) { r.status = e.status; r.raw['Status'] = e.status; }
+    if (e.notes  !== undefined) { r.raw['Poznámky'] = e.notes; }
+  });
+}
+function pendingCount() { return Object.keys(readPending()).length; }
 
 function readCache() {
   try {
@@ -765,7 +812,8 @@ function modalIsOpen() {
 function closeModal() {
   document.getElementById('modal-backdrop').classList.remove('is-open');
   if (PENDING_DATA) { applyData(PENDING_DATA); }
-  if (SAVE_DIRTY) { SAVE_DIRTY = false; fetchData({ silent: true }); }
+  // Zadny refresh po ulozeni. Lokalni stav je spravny a refresh by
+  // znamenal dalsich 5-35 s cekani na Apps Script.
 }
 
 var TYP_BADGE_CLASS = {
@@ -858,6 +906,8 @@ function applyData(data) {
   if (modalIsOpen()) { PENDING_DATA = data; return; }
   PENDING_DATA = null;
   STATE.rows = normalizeRows(data);
+  reconcilePending(STATE.rows);   // co uz server ma, zahod z fronty
+  applyPending(STATE.rows);       // zbytek prekresli pres serverova data
   computeStats();
   populateTypeFilter();
   applyFiltersAndRender();
@@ -877,7 +927,9 @@ function fetchData(opts) {
   hideError();
 
   var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
-  var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 20000) : null;
+  // 45 s, ne 20 — Apps Script umi odpovidat i 35 s. Nic to neblokuje,
+  // tabulka je mezitim videt z cache.
+  var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 45000) : null;
   var fopts = ctrl ? { signal: ctrl.signal } : {};
 
   var url = APPS_SCRIPT_URL + '?action=dashboard&token=' + encodeURIComponent(DASHBOARD_TOKEN) + '&t=' + Date.now();
@@ -896,7 +948,7 @@ function fetchData(opts) {
       if (timer) clearTimeout(timer);
       console.error('fetch failed:', err);
       var msg = (err && err.name === 'AbortError')
-        ? 'Server neodpověděl do 20 sekund.'
+        ? 'Server neodpověděl do 45 sekund.'
         : 'Nepodařilo se načíst data: ' + err.message;
       if (STATE.rows.length) {
         // Radsi trochu stara data na obrazovce nez prazdna tabulka.
@@ -1244,95 +1296,65 @@ document.getElementById('modal-status-btns').addEventListener('click', function 
   var btn = e.target.closest('.status-btn');
   if (!btn || !CURRENT_ROW) return;
   var newStatus = btn.dataset.status;
-  postUpdate({ status: newStatus }).then(function (ok) {
-    if (ok) {
-      CURRENT_ROW.status = newStatus;
-      CURRENT_ROW.raw['Status'] = newStatus;
-      document.querySelectorAll('#modal-status-btns .status-btn').forEach(function (b) {
-        b.classList.toggle('is-active', b.dataset.status === newStatus);
-      });
-      // Update v tabulce hned
-      applyFiltersAndRender();
-      computeStats();
-    }
+  if (!sendUpdate({ status: newStatus })) return;
+  document.querySelectorAll('#modal-status-btns .status-btn').forEach(function (b) {
+    b.classList.toggle('is-active', b.dataset.status === newStatus);
   });
+  applyFiltersAndRender();
+  computeStats();
 });
 
 // Save notes button
 document.getElementById('modal-save-notes').addEventListener('click', function () {
   if (!CURRENT_ROW) return;
   var notes = document.getElementById('modal-notes').value;
-  postUpdate({ notes: notes }).then(function (ok) {
-    if (ok) {
-      CURRENT_ROW.raw['Poznámky'] = notes;
-      CURRENT_ROW.raw['Naposled změněno'] = new Date().toISOString();
-      document.getElementById('modal-notes-meta').textContent =
-        'Naposled aktualizovano: ' + fmtDateTime(new Date());
-    }
-  });
+  if (!sendUpdate({ notes: notes })) return;
+  document.getElementById('modal-notes-meta').textContent =
+    'Naposled aktualizovano: ' + fmtDateTime(new Date());
 });
 
-function postUpdate(payload) {
+// Odesle zmenu a NECEKA na nic. Zapis do Sheetu probehne (overeno
+// 3. 9. 2026 dvema testy zvenci), jen odpoved Apps Scriptu se necha
+// precist a trva 3-36 s. Cekat na ni znamena rozbite UI.
+function sendUpdate(payload) {
   var statusEl = document.getElementById('modal-save-status');
   var id = CURRENT_ROW && CURRENT_ROW.raw && CURRENT_ROW.raw['ID'];
 
-  function ok(note) {
-    SAVE_DIRTY = true;
-    statusEl.textContent = note || '✓ Uloženo';
-    statusEl.className = 'modal__save-status is-success';
-    setTimeout(function () { statusEl.textContent = ''; }, 4000);
-    return true;
-  }
-  function fail(msg) {
-    statusEl.textContent = '✗ ' + msg;
+  if (!id) {
+    statusEl.textContent = '✗ Tenhle záznam nemá ID, uložit ho nejde (vznikl před verzí 2.6).';
     statusEl.className = 'modal__save-status is-error';
     return false;
   }
 
-  // Driv to tise nedelalo nic. Aspon to rekni.
-  if (!id) return Promise.resolve(fail('Tenhle záznam nemá ID, uložit ho nejde (vznikl před verzí 2.6).'));
+  // 1) lokalne hned
+  setPending(id, payload);
+  if (payload.status !== undefined) {
+    CURRENT_ROW.status = payload.status;
+    CURRENT_ROW.raw['Status'] = payload.status;
+  }
+  if (payload.notes !== undefined) {
+    CURRENT_ROW.raw['Poznámky'] = payload.notes;
+    CURRENT_ROW.raw['Naposled změněno'] = new Date().toISOString();
+  }
 
-  statusEl.textContent = 'Ukládám…';
-  statusEl.className = 'modal__save-status';
-
+  // 2) POST odejde na pozadi, nikdo ho necte
   var body = new FormData();
   body.append('_dashboard_action', 'update');
   body.append('token', DASHBOARD_TOKEN);
   body.append('id', id);
   Object.keys(payload).forEach(function (k) { body.append(k, payload[k]); });
+  try {
+    fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: body })
+      .catch(function (err) { console.warn('update POST:', err); });
+  } catch (err) {
+    console.warn('update POST throw:', err);
+  }
 
-  var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
-  var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 20000) : null;
-  var fopts = { method: 'POST', body: body };
-  if (ctrl) fopts.signal = ctrl.signal;
-
-  return fetch(APPS_SCRIPT_URL, fopts)
-    .then(function (r) {
-      if (timer) clearTimeout(timer);
-      // Apps Script na POST odpovida 302 na googleusercontent a to, co
-      // dojde, nemusi byt JSON. Nespolehej na r.json() — spadlo by to
-      // i u zapisu, ktery na serveru probehl.
-      return r.text().then(function (txt) {
-        var data = null;
-        try { data = JSON.parse(txt); } catch (e) { /* neni JSON */ }
-        if (data && data.ok) return ok();
-        if (data && data.error) return fail('Chyba: ' + data.error);
-        return ok('✓ Odesláno — ověřím při dalším načtení');
-      });
-    })
-    .catch(function (err) {
-      if (timer) clearTimeout(timer);
-      console.warn('postUpdate:', err);
-      if (err && err.name === 'AbortError') {
-        return fail('Server neodpověděl do 20 s. Zkus to znovu.');
-      }
-      if (typeof navigator !== 'undefined' && navigator.onLine === false) {
-        return fail('Nejsi online. Zkus to znovu, až bude připojení.');
-      }
-      // POST odesel, jen nam prohlizec nedovolil precist odpoved.
-      // Rikat tomu chyba by byla lez — pravda se ukaze pri dalsim nacteni.
-      return ok('✓ Odesláno — ověřím při dalším načtení');
-    });
+  // 3) potvrzeni okamzite
+  statusEl.textContent = '✓ Uloženo';
+  statusEl.className = 'modal__save-status is-success';
+  setTimeout(function () { statusEl.textContent = ''; }, 2500);
+  return true;
 }
 
 // ═══════════════════════════════════════════════════════════════════
