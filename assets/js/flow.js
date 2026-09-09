@@ -148,11 +148,19 @@
             });
           }
 
-          // 2) FB Pixel Lead event — consent-gated
+          // 2) FB Pixel — consent-gated. Lead i CompleteRegistration naraz.
+          //    CompleteRegistration visel do 9. 9. 2026 jen na /dekujeme-za-zajem,
+          //    kam ale zadny formular neposila — kampane tedy optimalizovaly
+          //    na event, ktery se nikdy nestal. Lead zustava kvuli publikum.
           if (window.fbq && window.__flowConsent && window.__flowConsent.marketing) {
             window.fbq('track', 'Lead', {
               content_name: pagePath,
               content_category: 'Callback form submit'
+            });
+            window.fbq('track', 'CompleteRegistration', {
+              content_name: pagePath,
+              content_category: 'Callback form submit',
+              status: 'submitted'
             });
           }
 

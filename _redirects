@@ -28,6 +28,10 @@
 /skolaflow_homepage                  /                          301
 /nas-model-vyuky-a-uceni-old         /vzdelavaci-program        301
 
+# Slavnostní otevření kampusu (14. 6. 2026) — akce proběhla.
+# Kampus má vlastní stránku, tak ať tam návštěvník dojde.
+/slavnostni-otevreni                 /novy-kampus               301
+
 # ------------------------------------------------------------
 # 4) Legacy Webflow CMS collection URLs
 #    /teacher/[slug] was the old per-teacher profile route

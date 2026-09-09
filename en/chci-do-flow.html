@@ -1013,6 +1013,23 @@
           });
         }
 
+        // FB Pixel — consent-gated. Tahle stranka je cil Meta kampani a do
+        // 9. 9. 2026 z ni neodchazel zadny konverzni event, jen PageView.
+        // content_name se bere z URL (stejne jako ve flow.js), aby sla CS a EN
+        // verze v Meta reportu rozlisit: 'chci-do-flow' vs 'en/chci-do-flow'.
+        if (window.fbq && window.__flowConsent && window.__flowConsent.marketing) {
+          var fbPage = window.location.pathname.replace(/^\/|\.html$|\/$/g, '') || 'chci-do-flow';
+          window.fbq('track', 'Lead', {
+            content_name: fbPage,
+            content_category: 'Chci do FLOW form submit'
+          });
+          window.fbq('track', 'CompleteRegistration', {
+            content_name: fbPage,
+            content_category: 'Chci do FLOW form submit',
+            status: (meeting && meeting !== 'none') ? 'booked' : 'submitted'
+          });
+        }
+
         form.style.display = 'none';
         var head = document.getElementById('form-head');
         if (head) head.style.display = 'none';
