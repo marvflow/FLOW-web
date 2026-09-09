@@ -12,6 +12,10 @@
   // ───── Jazyk: detekce z <html lang="..."> (EN web pouziva stejny script)
   var IS_EN = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
 
+  // ───── Rezervace prohlidky (Google Calendar appointment schedule)
+  // 60 min osobne v kampusu na Balabence. Menit na jednom miste.
+  var BOOKING_URL = 'https://calendar.app.google/1fSvBc6DYFKzNgc97';
+
   // ───── Footer dynamic year
   function setFooterYear() {
     var el = document.getElementById('footer-year');
@@ -67,21 +71,55 @@
       return;
     }
 
+    function esc(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
     function showSuccess(name) {
       var firstName = (name || '').split(' ')[0].trim();
+
+      // Vybral si konkretni termin? Pak mu rezervacni odkaz nenabizej —
+      // termin uz ma a jen by ho to zmatlo.
+      var sel = form.querySelector('[name="meeting"]');
+      var picked = '';
+      if (sel && sel.value && sel.value !== 'none' && sel.selectedIndex > 0) {
+        picked = (sel.options[sel.selectedIndex].textContent || '').trim();
+      }
+
+      var icon = '<div class="form-success__icon" aria-hidden="true">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M5 12.5l5 5L20 7"/>' +
+        '</svg>' +
+      '</div>';
+
+      var body;
+      if (picked) {
+        // Cesky BEZ jmena. Pati pad se u libovolnych jmen (vcetne cizich)
+        // spolehlive odvodit neda a "Dekujeme, Petr!" je proste spatne.
+        body = IS_EN
+          ? '<h3>You\'re on the list' + (firstName ? ', ' + firstName : '') + '!</h3>' +
+            '<p class="form-success__event">' + esc(picked) + '</p>' +
+            '<p>We\'re sending you a confirmation with the details by email.</p>'
+          : '<h3>Máme vás zapsané!</h3>' +
+            '<p class="form-success__event">' + esc(picked) + '</p>' +
+            '<p>Potvrzení s detaily vám posíláme e-mailem.</p>';
+      } else {
+        body = IS_EN
+          ? '<h3>Thanks' + (firstName ? ', ' + firstName : '') + '!</h3>' +
+            '<p>Pick a time that suits you — an hour at our Balabenka campus. We\'ll walk you through the school and talk about what you\'re looking for.</p>' +
+            '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Book a campus visit</a></p>' +
+            '<p class="form-success__fallback">If none of the times work, write to <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>'
+          : '<h3>Děkujeme za zájem!</h3>' +
+            '<p>Vyberte si termín, který vám sedne — hodina u nás na Balabence. Projdeme spolu školu a probereme, co pro dítě hledáte.</p>' +
+            '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Vybrat termín prohlídky</a></p>' +
+            '<p class="form-success__fallback">Kdyby vám žádný termín nesedl, napište na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
+      }
+
       var success = document.createElement('div');
       success.className = 'form-success';
-      success.innerHTML =
-        '<div class="form-success__icon" aria-hidden="true">' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">' +
-            '<path d="M5 12.5l5 5L20 7"/>' +
-          '</svg>' +
-        '</div>' +
-        (IS_EN
-          ? '<h3>Thanks' + (firstName ? ', ' + firstName : '') + '!</h3>' +
-            '<p>Your message landed safely. We\'ll get back to you within <strong>one business day</strong>.</p>'
-          : '<h3>Děkujeme' + (firstName ? ', ' + firstName : '') + '!</h3>' +
-            '<p>Vaše zpráva u nás přistála. Ozveme se vám do <strong>jednoho pracovního dne</strong>.</p>');
+      success.innerHTML = icon + body;
       form.parentNode.replaceChild(success, form);
       success.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -139,16 +177,14 @@
     var hiddenTitle = document.getElementById('form-closer-event-title');
     var hiddenDate  = document.getElementById('form-closer-event-date');
 
+    // Pouzije se, kdyz nejde nacist sheet. ZADNA PEVNA DATA — driv tu visel
+    // termin ze 4. cervna a pri vypadku se nabizel jako platny.
     var FALLBACK = IS_EN ? [
-      { type: 'zs-od',  title: 'Open Day at FLOW Elementary',            date: '2026-09-17', time: '17:00' },
-      { type: 'ms-od',  title: 'Open Day at Little FLOW (Kindergarten)', date: '2026-06-04', time: '17:00' },
-      { type: 'kafe',   title: 'Coffee with the Director',                date: '',           time: "we'll arrange a date" },
-      { type: 'online', title: 'Online meeting',                          date: '',           time: "we'll arrange a date" }
+      { type: 'kafe',   title: 'Coffee with school leadership', date: '', time: "we'll arrange a date" },
+      { type: 'online', title: 'Online meeting',                date: '', time: "we'll arrange a date" }
     ] : [
-      { type: 'zs-od',  title: 'Den otevřených dveří ZŠ FLOW',          date: '2026-09-17', time: '17:00' },
-      { type: 'ms-od',  title: 'Den otevřených dveří Little FLOW (MŠ)', date: '2026-06-04', time: '17:00' },
-      { type: 'kafe',   title: 'Káva s ředitelem',                       date: '',           time: 'sjednáme termín' },
-      { type: 'online', title: 'Online schůzka',                         date: '',           time: 'sjednáme termín' }
+      { type: 'kafe',   title: 'Káva s vedením školy', date: '', time: 'sjednáme termín' },
+      { type: 'online', title: 'Online schůzka',       date: '', time: 'sjednáme termín' }
     ];
     var MONTHS = IS_EN
       ? ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -163,7 +199,7 @@
       var title = (IS_EN && row.title_en) ? row.title_en : row.title;
       var time  = (IS_EN && row.time_en)  ? row.time_en  : row.time;
       if (!row.date) return title + ' — ' + (time || DEFAULT_TIME_LABEL);
-      var d = new Date(row.date);
+      var d = new Date(row.date + 'T00:00:00');   // lokalni pulnoc, jinak je v USA o den driv
       if (isNaN(d.getTime())) return title;
       // EN format: "Wed 17 September 2026 · 17:00" (bez tecky); CS: "st 17. září 2026 · 17:00"
       var dateStr = IS_EN
@@ -216,7 +252,13 @@
           time_en: idx.time_en >= 0 ? (cells[idx.time_en] || '').trim() : '',
           active: idx.active >= 0 ? (cells[idx.active] || '').trim().toUpperCase() : 'TRUE'
         };
-      }).filter(function (r) { return r.active !== 'FALSE' && r.title; });
+      }).filter(function (r) {
+        if (r.active === 'FALSE' || !r.title) return false;
+        if (!r.date) return true;                 // kafe/online — bez data, plati vzdy
+        var d = new Date(r.date + 'T00:00:00');   // lokalni pulnoc, ne UTC
+        var today = new Date(); today.setHours(0, 0, 0, 0);
+        return !isNaN(d.getTime()) && d >= today; // minule terminy uz nenabizej
+      });
     }
 
     select.addEventListener('change', function () {
