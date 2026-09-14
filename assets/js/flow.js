@@ -191,11 +191,11 @@
     // Pouzije se, kdyz nejde nacist sheet. ZADNA PEVNA DATA — driv tu visel
     // termin ze 4. cervna a pri vypadku se nabizel jako platny.
     var FALLBACK = IS_EN ? [
-      { type: 'kafe',   title: 'Coffee with school leadership', date: '', time: "we'll arrange a date" },
-      { type: 'online', title: 'Online meeting',                date: '', time: "we'll arrange a date" }
+      { type: 'kafe',   title: 'School tour with the leadership team', date: '', time: 'Tue and Thu, 9:00–9:45 or 10:45–11:30' },
+      { type: 'online', title: 'Online meeting with the leadership team', date: '', time: 'Tue and Thu, 10:00–10:30' }
     ] : [
-      { type: 'kafe',   title: 'Káva s vedením školy', date: '', time: 'sjednáme termín' },
-      { type: 'online', title: 'Online schůzka',       date: '', time: 'sjednáme termín' }
+      { type: 'kafe',   title: 'Prohlídka školy s vedením', date: '', time: 'út a čt, 9:00–9:45 nebo 10:45–11:30' },
+      { type: 'online', title: 'Online schůzka s vedením',  date: '', time: 'út a čt, 10:00–10:30' }
     ];
     var MONTHS = IS_EN
       ? ['January','February','March','April','May','June','July','August','September','October','November','December']
