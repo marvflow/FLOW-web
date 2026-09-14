@@ -790,7 +790,7 @@
 
           <div class="kr-form__submit-row">
             <label class="kr-form__gdpr">
-              <input type="checkbox" required>
+              <input type="checkbox" name="gdpr_consent" required>
               <span>I consent to personal data processing per the <a href="gdpr">GDPR policy</a> for the purpose of recruitment.</span>
             </label>
             <button type="submit" class="btn btn-primary">Submit →</button>
@@ -898,6 +898,10 @@
   form.addEventListener('submit', async function(e){
     e.preventDefault();
     if (form._gotcha && form._gotcha.value) return; // honeypot
+    // Formular ma novalidate (kvuli vlastnimu vzhledu chyb), takze se
+    // povinna pole musi zkontrolovat rucne - jinak projde prazdne odeslani
+    // vcetne nezaskrtnuteho GDPR souhlasu.
+    if (!form.checkValidity()) { form.reportValidity(); return; }
 
     const originalLabel = btn.textContent;
     btn.disabled = true;
