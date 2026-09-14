@@ -14,7 +14,8 @@
 
   // ───── Rezervace prohlidky (Google Calendar appointment schedule)
   // 60 min osobne v kampusu na Balabence. Menit na jednom miste.
-  var BOOKING_URL = 'https://calendar.app.google/1fSvBc6DYFKzNgc97';
+  var BOOKING_URL = 'https://calendar.app.google/YVTTWSvt6Zj56ykV8';
+  var ONLINE_URL  = 'https://calendar.app.google/UytpdiarvKwDieUe6';
 
   // ───── Footer dynamic year
   function setFooterYear() {
@@ -101,20 +102,22 @@
         body = IS_EN
           ? '<h3>You\'re on the list' + (firstName ? ', ' + firstName : '') + '!</h3>' +
             '<p class="form-success__event">' + esc(picked) + '</p>' +
-            '<p>We\'re sending you a confirmation with the details by email.</p>'
+            '<p>We\'re sending you a confirmation with the details by email.</p>' +
+            '<p class="form-success__fallback">Want to talk before then? <a href="' + ONLINE_URL + '" target="_blank" rel="noopener">Book an online meeting</a>.</p>'
           : '<h3>Máme vás zapsané!</h3>' +
             '<p class="form-success__event">' + esc(picked) + '</p>' +
-            '<p>Potvrzení s detaily vám posíláme e-mailem.</p>';
+            '<p>Potvrzení s detaily vám posíláme e-mailem.</p>' +
+            '<p class="form-success__fallback">Chcete si popovídat ještě předtím? <a href="' + ONLINE_URL + '" target="_blank" rel="noopener">Domluvte si online schůzku</a>.</p>';
       } else {
         body = IS_EN
           ? '<h3>Thanks' + (firstName ? ', ' + firstName : '') + '!</h3>' +
             '<p>Pick a time that suits you — an hour at our Balabenka campus. We\'ll walk you through the school and talk about what you\'re looking for.</p>' +
             '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Book a campus visit</a></p>' +
-            '<p class="form-success__fallback">If none of the times work, write to <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>'
+            '<p class="form-success__fallback">Or <a href="' + ONLINE_URL + '" target="_blank" rel="noopener">book an online meeting</a> straight away. If none of the times work, write to <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>'
           : '<h3>Děkujeme za zájem!</h3>' +
             '<p>Vyberte si termín, který vám sedne — hodina u nás na Balabence. Projdeme spolu školu a probereme, co pro dítě hledáte.</p>' +
             '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Vybrat termín prohlídky</a></p>' +
-            '<p class="form-success__fallback">Kdyby vám žádný termín nesedl, napište na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
+            '<p class="form-success__fallback">Nebo si rovnou <a href="' + ONLINE_URL + '" target="_blank" rel="noopener">domluvte online schůzku</a>. Kdyby nesedl žádný termín, napište na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
       }
 
       var success = document.createElement('div');
