@@ -566,7 +566,7 @@
     <div class="dash-header__title">Admin Dashboard</div>
   </div>
   <div class="dash-header__right">
-    <div class="dash-header__time" id="last-refresh">—</div>
+    <div class="dash-header__time" id="last-refresh"></div>
     <button class="dash-btn dash-btn--ghost" id="btn-export-csv" type="button">⬇ CSV</button>
     <button class="dash-btn dash-btn--ghost" id="btn-print" type="button">🖨 Tisk</button>
     <button class="dash-btn dash-btn--ghost" id="btn-refresh" type="button">↻ Refresh</button>
@@ -581,27 +581,27 @@
   <section class="dash-stats" id="stats">
     <div class="stat-card stat-card--accent">
       <div class="stat-card__label">Dnes</div>
-      <div class="stat-card__value" id="stat-today">—</div>
+      <div class="stat-card__value" id="stat-today"></div>
       <div class="stat-card__sub">novych prihlasek</div>
     </div>
     <div class="stat-card stat-card--blue">
       <div class="stat-card__label">Tento týden</div>
-      <div class="stat-card__value" id="stat-week">—</div>
+      <div class="stat-card__value" id="stat-week"></div>
       <div class="stat-card__sub">posledních 7 dní</div>
     </div>
     <div class="stat-card stat-card--green">
       <div class="stat-card__label">Tento měsíc</div>
-      <div class="stat-card__value" id="stat-month">—</div>
+      <div class="stat-card__value" id="stat-month"></div>
       <div class="stat-card__sub">posledních 30 dní</div>
     </div>
     <div class="stat-card stat-card--orange">
       <div class="stat-card__label">Status: Nový</div>
-      <div class="stat-card__value" id="stat-novy">—</div>
+      <div class="stat-card__value" id="stat-novy"></div>
       <div class="stat-card__sub">vyzaduje odpoved</div>
     </div>
     <div class="stat-card">
       <div class="stat-card__label">Celkem</div>
-      <div class="stat-card__value" id="stat-total">—</div>
+      <div class="stat-card__value" id="stat-total"></div>
       <div class="stat-card__sub">vsech zaznamu</div>
     </div>
   </section>
@@ -638,7 +638,7 @@
         <option value="90d">Posledních 90 dní</option>
       </select>
     </div>
-    <div class="dash-filters__count" id="filter-count">— záznamů</div>
+    <div class="dash-filters__count" id="filter-count">záznamů</div>
   </section>
 
   <!-- TABLE -->
@@ -687,7 +687,7 @@
       <div class="modal__workflow-section">
         <div class="modal__workflow-label">Tve poznamky</div>
         <textarea class="modal__notes-input" id="modal-notes" placeholder="napr. 'Zavolal jsem 28.5. v 16:00, dohodli jsme se na schuzce pristi tyden'..."></textarea>
-        <div class="modal__notes-meta" id="modal-notes-meta">—</div>
+        <div class="modal__notes-meta" id="modal-notes-meta"></div>
         <div class="modal__save-row">
           <button class="modal-btn modal-btn--primary" type="button" id="modal-save-notes">💾 Ulozit poznamky</button>
           <span class="modal__save-status" id="modal-save-status"></span>

@@ -111,11 +111,11 @@
       } else {
         body = IS_EN
           ? '<h3>Thanks' + (firstName ? ', ' + firstName : '') + '!</h3>' +
-            '<p>Pick a time that suits you — an hour at our Balabenka campus. We\'ll walk you through the school and talk about what you\'re looking for.</p>' +
+            '<p>Pick a time that suits you, an hour at our Balabenka campus. We\'ll walk you through the school and talk about what you\'re looking for.</p>' +
             '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Book a campus visit</a></p>' +
             '<p class="form-success__fallback">Or <a href="' + ONLINE_URL + '" target="_blank" rel="noopener">book an online meeting</a> straight away. If none of the times work, write to <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>'
           : '<h3>Děkujeme za zájem!</h3>' +
-            '<p>Vyberte si termín, který vám sedne — hodina u nás na Balabence. Projdeme spolu školu a probereme, co pro dítě hledáte.</p>' +
+            '<p>Vyberte si termín, který vám sedne, hodina u nás na Balabence. Projdeme spolu školu a probereme, co pro dítě hledáte.</p>' +
             '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Vybrat termín prohlídky</a></p>' +
             '<p class="form-success__fallback">Nebo si rovnou <a href="' + ONLINE_URL + '" target="_blank" rel="noopener">domluvte online schůzku</a>. Kdyby nesedl žádný termín, napište na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
       }
@@ -205,18 +205,25 @@
       : ['ne','po','út','st','čt','pá','so'];
     var DEFAULT_TIME_LABEL = IS_EN ? "we'll arrange a date" : 'sjednáme termín';
 
-    function formatLabel(row) {
-      // EN-aware: pokud CSV poskytuje title_en, pouzij ho na EN webu
-      var title = (IS_EN && row.title_en) ? row.title_en : row.title;
-      var time  = (IS_EN && row.time_en)  ? row.time_en  : row.time;
-      if (!row.date) return title + ' — ' + (time || DEFAULT_TIME_LABEL);
+    // Datova cast bez titulku. Drive se vytahovala pres split(' — '), coz se
+    // rozbilo, jakmile titulek sam obsahoval oddelovac.
+    function formatDatePart(row) {
+      var time = (IS_EN && row.time_en) ? row.time_en : row.time;
+      if (!row.date) return time || DEFAULT_TIME_LABEL;
       var d = new Date(row.date + 'T00:00:00');   // lokalni pulnoc, jinak je v USA o den driv
-      if (isNaN(d.getTime())) return title;
-      // EN format: "Wed 17 September 2026 · 17:00" (bez tecky); CS: "st 17. září 2026 · 17:00"
+      if (isNaN(d.getTime())) return '';
+      // EN format: "Wed 7 October 2026 · 16:00" (bez tecky); CS: "st 7. října 2026 · 16:00"
       var dateStr = IS_EN
         ? DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear()
         : DAYS[d.getDay()] + ' ' + d.getDate() + '. ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
-      return title + ' — ' + dateStr + (time ? ' · ' + time : '');
+      return dateStr + (time ? ' · ' + time : '');
+    }
+
+    function formatLabel(row) {
+      // EN-aware: pokud CSV poskytuje title_en, pouzij ho na EN webu
+      var title = (IS_EN && row.title_en) ? row.title_en : row.title;
+      var part  = formatDatePart(row);
+      return part ? title + ', ' + part : title;
     }
 
     function populate(rows) {
@@ -226,14 +233,14 @@
         opt.value = row.type;
         opt.textContent = formatLabel(row);
         opt.dataset.title = (IS_EN && row.title_en) ? row.title_en : row.title;
-        opt.dataset.dateLabel = formatLabel(row).split(' — ').slice(1).join(' — ') || ((IS_EN && row.time_en) ? row.time_en : (row.time || ''));
+        opt.dataset.dateLabel = formatDatePart(row) || ((IS_EN && row.time_en) ? row.time_en : (row.time || ''));
         select.appendChild(opt);
       });
       var none = document.createElement('option');
       none.value = 'none';
       none.textContent = IS_EN
-        ? 'None of these works — please contact me, we\'ll find another'
-        : 'Žádný termín mi nevyhovuje — kontaktujte mě, najdeme jiný';
+        ? 'None of these works, please contact me and we\'ll find another'
+        : 'Žádný termín mi nevyhovuje, kontaktujte mě a najdeme jiný';
       none.dataset.title = '';
       none.dataset.dateLabel = '';
       select.appendChild(none);
@@ -317,8 +324,8 @@
       if (dateEl) dateEl.textContent = dateStr;
       // Místo: všechny DOD probíhají v kampusu na Balabence
       var place = IS_EN
-        ? 'Českomoravská 1a, 190 00 Prague 9 — Balabenka'
-        : 'Českomoravská 1a, 190 00 Praha 9 — Balabenka';
+        ? 'Českomoravská 1a, 190 00 Prague 9, Balabenka'
+        : 'Českomoravská 1a, 190 00 Praha 9, Balabenka';
       if (metaEl) metaEl.textContent = (time ? (IS_EN ? 'from ' : 'od ') + time + ' · ' : '') + place;
       card.hidden = false;
     }
