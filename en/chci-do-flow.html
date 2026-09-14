@@ -958,14 +958,20 @@
       var lines = text.split(/\r?\n/).filter(Boolean);
       if (lines.length < 2) return [];
       var header = lines[0].split(',').map(function (h) { return h.trim().toLowerCase(); });
-      var idx = { type: header.indexOf('type'), title: header.indexOf('title'), date: header.indexOf('date'), time: header.indexOf('time'), active: header.indexOf('active') };
+      // title_en / time_en jsou volitelne sloupce v Eventy sheetu. Kdyz chybi,
+      // spadne se zpet na ceske hodnoty, aby anglicka stranka nezustala prazdna.
+      var idx = { type: header.indexOf('type'), title: header.indexOf('title'), title_en: header.indexOf('title_en'), date: header.indexOf('date'), time: header.indexOf('time'), time_en: header.indexOf('time_en'), active: header.indexOf('active') };
       return lines.slice(1).map(function (line) {
         var cells = line.split(',');
+        var titleEn = idx.title_en >= 0 ? (cells[idx.title_en] || '').trim() : '';
+        var titleCs = idx.title    >= 0 ? (cells[idx.title]    || '').trim() : '';
+        var timeEn  = idx.time_en  >= 0 ? (cells[idx.time_en]  || '').trim() : '';
+        var timeCs  = idx.time     >= 0 ? (cells[idx.time]     || '').trim() : '';
         return {
           type: idx.type >= 0 ? (cells[idx.type] || '').trim() : '',
-          title: idx.title >= 0 ? (cells[idx.title] || '').trim() : '',
+          title: titleEn || titleCs,
           date: idx.date >= 0 ? (cells[idx.date] || '').trim() : '',
-          time: idx.time >= 0 ? (cells[idx.time] || '').trim() : '',
+          time: timeEn || timeCs,
           active: idx.active >= 0 ? (cells[idx.active] || '').trim().toUpperCase() : 'TRUE'
         };
       }).filter(function (r) {
