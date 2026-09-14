@@ -1318,7 +1318,13 @@
         popis:  idx.popis  >= 0 ? (cells[idx.popis]  || '').trim() : '',
         active: idx.active >= 0 ? (cells[idx.active] || '').trim().toUpperCase() : 'TRUE'
       };
-    }).filter(function (r) { return r.active !== 'FALSE' && r.title; });
+    }).filter(function (r) {
+      if (r.active === 'FALSE' || !r.title) return false;
+      if (!r.date) return true;                 // bez data (kava, online) plati vzdy
+      var d = new Date(r.date + 'T00:00:00');   // lokalni pulnoc, ne UTC
+      var today = new Date(); today.setHours(0, 0, 0, 0);
+      return !isNaN(d.getTime()) && d >= today; // propadle terminy uz nenabizej
+    });
   }
 
   var select = document.getElementById('akce-event');
