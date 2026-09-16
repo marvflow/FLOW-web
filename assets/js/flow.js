@@ -274,10 +274,33 @@
       select.appendChild(none);
     }
 
+    /* Poradny CSV parser: pole s carkou uvnitr Google Sheets obaluje
+       uvozovkami, naivni split(',') takovy radek rozseka. */
+    function splitCsvRows(text) {
+      var rows = [], row = [], cell = '', inQ = false;
+      for (var i = 0; i < text.length; i++) {
+        var c = text[i];
+        if (inQ) {
+          if (c === '"') {
+            if (text[i + 1] === '"') { cell += '"'; i++; }
+            else { inQ = false; }
+          } else { cell += c; }
+        } else {
+          if (c === '"') inQ = true;
+          else if (c === ',') { row.push(cell); cell = ''; }
+          else if (c === '\r') { /* skip */ }
+          else if (c === '\n') { row.push(cell); rows.push(row); row = []; cell = ''; }
+          else cell += c;
+        }
+      }
+      if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
+      return rows.filter(function (r) { return r.some(function (v) { return v && v.trim(); }); });
+    }
+
     function parseCSV(text) {
-      var lines = text.split(/\r?\n/).filter(Boolean);
+      var lines = splitCsvRows(text);
       if (lines.length < 2) return [];
-      var header = lines[0].split(',').map(function (h) { return h.trim().toLowerCase(); });
+      var header = lines[0].map(function (h) { return (h || '').trim().toLowerCase(); });
       var idx = {
         type: header.indexOf('type'),
         title: header.indexOf('title'),
@@ -287,8 +310,7 @@
         time_en: header.indexOf('time_en'),
         active: header.indexOf('active')
       };
-      return lines.slice(1).map(function (line) {
-        var cells = line.split(',');
+      return lines.slice(1).map(function (cells) {
         return {
           type: idx.type >= 0 ? (cells[idx.type] || '').trim() : '',
           title: idx.title >= 0 ? (cells[idx.title] || '').trim() : '',
@@ -361,15 +383,15 @@
     fetch(SHEET_CSV_URL + (SHEET_CSV_URL.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now())
       .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
       .then(function (text) {
-        var lines = text.split(/\r?\n/).filter(Boolean);
+        var lines = splitCsvRows(text);
         if (lines.length < 2) return;
-        var header = lines[0].split(',').map(function (h) { return h.trim().toLowerCase(); });
+        var header = lines[0].map(function (h) { return (h || '').trim().toLowerCase(); });
         var iType = header.indexOf('type'), iDate = header.indexOf('date'),
             iTime = header.indexOf('time'), iActive = header.indexOf('active');
         var today = new Date(); today.setHours(0, 0, 0, 0);
         var best = null;
         for (var k = 1; k < lines.length; k++) {
-          var c = lines[k].split(',');
+          var c = lines[k];
           var type = iType >= 0 ? (c[iType] || '').trim() : '';
           var active = iActive >= 0 ? (c[iActive] || '').trim().toUpperCase() : 'TRUE';
           if (type !== 'ms-od' || active === 'FALSE') continue;

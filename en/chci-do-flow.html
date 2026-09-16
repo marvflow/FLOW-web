@@ -954,15 +954,37 @@
       select.appendChild(none);
     }
 
+    /* Poradny CSV parser: pole s carkou uvnitr Google Sheets obaluje
+       uvozovkami, naivni split(',') takovy radek rozseka. */
+    function splitCsvRows(text) {
+      var rows = [], row = [], cell = '', inQ = false;
+      for (var i = 0; i < text.length; i++) {
+        var c = text[i];
+        if (inQ) {
+          if (c === '"') {
+            if (text[i + 1] === '"') { cell += '"'; i++; }
+            else { inQ = false; }
+          } else { cell += c; }
+        } else {
+          if (c === '"') inQ = true;
+          else if (c === ',') { row.push(cell); cell = ''; }
+          else if (c === '\r') { /* skip */ }
+          else if (c === '\n') { row.push(cell); rows.push(row); row = []; cell = ''; }
+          else cell += c;
+        }
+      }
+      if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
+      return rows.filter(function (r) { return r.some(function (v) { return v && v.trim(); }); });
+    }
+
     function parseCSV(text) {
-      var lines = text.split(/\r?\n/).filter(Boolean);
+      var lines = splitCsvRows(text);
       if (lines.length < 2) return [];
-      var header = lines[0].split(',').map(function (h) { return h.trim().toLowerCase(); });
+      var header = lines[0].map(function (h) { return (h || '').trim().toLowerCase(); });
       // title_en / time_en jsou volitelne sloupce v Eventy sheetu. Kdyz chybi,
       // spadne se zpet na ceske hodnoty, aby anglicka stranka nezustala prazdna.
       var idx = { type: header.indexOf('type'), title: header.indexOf('title'), title_en: header.indexOf('title_en'), date: header.indexOf('date'), time: header.indexOf('time'), time_en: header.indexOf('time_en'), active: header.indexOf('active') };
-      return lines.slice(1).map(function (line) {
-        var cells = line.split(',');
+      return lines.slice(1).map(function (cells) {
         var titleEn = idx.title_en >= 0 ? (cells[idx.title_en] || '').trim() : '';
         var titleCs = idx.title    >= 0 ? (cells[idx.title]    || '').trim() : '';
         var timeEn  = idx.time_en  >= 0 ? (cells[idx.time_en]  || '').trim() : '';
