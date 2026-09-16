@@ -386,17 +386,26 @@
     var panel    = sec.querySelector('.meet__panel');
     var slots    = sec.querySelector('[data-meet-slots]');
     var slotsLbl = sec.querySelector('[data-meet-slots-label]');
+    var embed    = sec.querySelector('[data-meet-embed]');
+    var form     = sec.querySelector('#callback-form');
     var pTitle   = sec.querySelector('[data-meet-title]');
     var pNote    = sec.querySelector('[data-meet-note]');
     if (!select || !panel) return;
+
+    // Prohlidka a online schuzka nemaji pevny termin: zajemce si vybira slot
+    // primo v rezervacnim okne Google Kalendare, formular se u nich neukazuje.
+    var BOOK = {
+      'kafe':   'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3N93cfV77dKYDuMRGazbi1HrqazS5qtbeQ4IvREGidzIVdASo24Lxb420L5FMr2sBF2Qkgd69C?gv=true',
+      'online': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1KmkQl_AsS1m_MeKTfNXHyUoZuaHh52N1FkV7qpxW4nrAYW9OEwYCLmBJHR96Xi09Gqnzy-MNF?gv=true'
+    };
 
     var COPY = {
       'zs-od':  { t: 'Den otevřených dveří',
                   n: 'Vyberte si termín a nechte nám kontakt. Potvrzení vám pošleme e-mailem.' },
       'kafe':   { t: 'School Tour s vedením ZŠ FLOW',
-                  n: 'Nechte nám kontakt a hned potom si vyberete konkrétní čas v rezervačním okně.' },
+                  n: 'Vyberte si čas, který vám sedne. Potvrzení vám přijde e-mailem z našeho kalendáře.' },
       'online': { t: 'Online schůzka s vedením',
-                  n: 'Nechte nám kontakt a hned potom si vyberete konkrétní čas v rezervačním okně.' }
+                  n: 'Vyberte si čas, který vám sedne. Odkaz na hovor vám přijde e-mailem z našeho kalendáře.' }
     };
     var NONE_NOTE = 'Ozveme se do jednoho pracovního dne a domluvíme termín, který vám sedne. Nebo si vyberte School Tour, ta je každé úterý a čtvrtek.';
 
@@ -471,11 +480,21 @@
       var isDod = type === 'zs-od';
       slots.hidden = !isDod;
       slotsLbl.hidden = !isDod;
+      if (form) form.hidden = !isDod;
+      if (embed) embed.hidden = isDod;
+
       if (isDod) {
+        if (embed) embed.innerHTML = '';
         buildSlots();
       } else {
         var idx = optionsOf(type);
         if (idx.length) pickIndex(idx[0]);
+        if (embed && BOOK[type]) {
+          embed.innerHTML =
+            '<iframe src="' + BOOK[type] + '" title="' +
+            (type === 'online' ? 'Rezervace online schůzky' : 'Rezervace termínu prohlídky') +
+            '" width="100%" height="620" frameborder="0" style="border:0"></iframe>';
+        }
       }
       panel.hidden = false;
       panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

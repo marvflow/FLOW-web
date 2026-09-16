@@ -1574,8 +1574,15 @@ body.no-messenger .msg-fab { display: none; }
 .meet__slots-label { display: block; margin-top: 20px; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); }
 .meet__slots { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 10px; }
 /* Vlastni display prebiji [hidden] z prohlizece, tohle to vraci zpatky.
-   Bez toho visel nadpis "Vyberte termin" i u prohlidky a online schuzky. */
-.meet__slots-label[hidden], .meet__slots[hidden] { display: none; }
+   Bez toho visel nadpis "Vyberte termin" i u prohlidky a online schuzky.
+   Plosne pro celou sekci, at se stejna past neopakuje u dalsiho prvku. */
+.meet [hidden] { display: none !important; }
+
+/* Rezervacni okno Google Kalendare uvnitr panelu */
+.meet__embed { margin-top: 20px; border: 1px solid var(--c-border); border-radius: 16px; overflow: hidden; background: var(--c-white); }
+.meet__embed iframe { display: block; width: 100%; max-width: 100%; height: 620px; border: 0; }
+.meet__embed-done { margin-top: 18px; text-align: center; }
+@media (max-width: 640px) { .meet__embed iframe { height: 560px; } }
 .meet__slot {
   font-family: var(--font-body); font-size: var(--fs-sm); font-weight: 700;
   padding: 9px 16px; border-radius: var(--r-pill); cursor: pointer;

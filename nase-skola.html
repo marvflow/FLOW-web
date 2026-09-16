@@ -87,7 +87,7 @@
   </script>
   <link rel="stylesheet" href="assets/css/cmp.css">
 
-  <link rel="stylesheet" href="assets/css/flow.css?v=20260916b">
+  <link rel="stylesheet" href="assets/css/flow.css?v=20260916c">
 
   <!-- Page-specific CSS (O škole — prostředí a koncepce) -->
   <style>
@@ -692,6 +692,9 @@
       <span class="meet__slots-label" data-meet-slots-label hidden>Vyberte termín</span>
       <div class="meet__slots" data-meet-slots role="group" aria-label="Termíny dne otevřených dveří" hidden></div>
 
+      <!-- Rezervacni okno pro prohlidku a online schuzku. Naplni ho flow.js. -->
+      <div class="meet__embed" data-meet-embed hidden></div>
+
       <form id="callback-form" class="form-closer__card" style="margin-top:22px;" data-endpoint="https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec" novalidate>
         <input type="hidden" name="source" value="nase-skola-form">
         <input type="hidden" name="event_title" id="form-closer-event-title" value="">
@@ -812,7 +815,7 @@
 
 <!-- FLOW-FOOTER-END -->
 
-<script defer src="assets/js/cmp.js?v=20260916b"></script>
-<script src="assets/js/flow.js?v=20260916b" defer></script>
+<script defer src="assets/js/cmp.js?v=20260916c"></script>
+<script src="assets/js/flow.js?v=20260916c" defer></script>
 </body>
 </html>
