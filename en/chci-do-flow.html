@@ -916,7 +916,7 @@
     if (!select) return;
 
     var FALLBACK = [
-      { type: 'kafe',   title: 'School tour with the leadership team', date: '', time: 'Tue and Thu, 9:00–9:45 or 10:45–11:30' },
+      { type: 'kafe',   title: 'School Tour with FLOW leadership', date: '', time: 'Tue and Thu, 9:00–9:45 or 10:45–11:30' },
       { type: 'online', title: 'Online meeting with the leadership team', date: '', time: 'Tue and Thu, 10:00–10:30' }
     ];
     var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -1059,8 +1059,18 @@
               '<path d="M5 12.5l5 5L20 7"/>' +
             '</svg></div>';
 
+          // 'kafe' = school tour: no fixed date, the visitor picks a slot here.
+          var tourEmbed = '<div class="form-success__embed">' +
+            '<iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3N93cfV77dKYDuMRGazbi1HrqazS5qtbeQ4IvREGidzIVdASo24Lxb420L5FMr2sBF2Qkgd69C?gv=true" title="Book a school tour" width="100%" height="600" frameborder="0" style="border:0"></iframe>' +
+          '</div>';
+
           var html;
-          if (meeting && meeting !== 'none') {
+          if (meeting === 'kafe') {
+            html = checkIcon +
+              '<h2 class="h-section" style="margin-bottom:14px;">One last step, <em style="font-style:normal;color:var(--c-blue);">pick a time</em></h2>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto 14px;text-align:center;">We run tours on Tuesdays and Thursdays. Choose a slot below and we\'ll email you a confirmation.</p>' +
+              tourEmbed;
+          } else if (meeting && meeting !== 'none') {
             html = checkIcon +
               '<h2 class="h-section" style="margin-bottom:14px;">Great, you\'re <em style="font-style:normal;color:var(--c-blue);">booked in</em>!</h2>' +
               '<div class="cdf-form-success__event-card">' +

@@ -16,6 +16,9 @@
   // 60 min osobne v kampusu na Balabence. Menit na jednom miste.
   var BOOKING_URL = 'https://calendar.app.google/YVTTWSvt6Zj56ykV8';
   var ONLINE_URL  = 'https://calendar.app.google/UytpdiarvKwDieUe6';
+  // Rezervacni okno prohlidek. Vklada se primo do potvrzeni, protoze po
+  // vyberu 'prohlidka' zajemce jeste zapsany neni, musi si zvolit slot.
+  var TOUR_EMBED  = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3N93cfV77dKYDuMRGazbi1HrqazS5qtbeQ4IvREGidzIVdASo24Lxb420L5FMr2sBF2Qkgd69C?gv=true';
 
   // ───── Footer dynamic year
   function setFooterYear() {
@@ -95,8 +98,25 @@
         '</svg>' +
       '</div>';
 
+      // 'kafe' = prohlidka s vedenim. Nema pevny termin, slot si vybira sam.
+      var isTour = sel && sel.value === 'kafe';
+
+      var embed = '<div class="form-success__embed">' +
+        '<iframe src="' + TOUR_EMBED + '" title="' +
+        (IS_EN ? 'Book a school tour' : 'Rezervace termínu prohlídky') +
+        '" width="100%" height="600" frameborder="0" style="border:0"></iframe>' +
+      '</div>';
+
       var body;
-      if (picked) {
+      if (isTour) {
+        body = IS_EN
+          ? '<h3>One last step, pick a time</h3>' +
+            '<p>We run tours on Tuesdays and Thursdays. Choose a slot below and we\'ll email you a confirmation.</p>' +
+            embed
+          : '<h3>Ještě si vyberte čas</h3>' +
+            '<p>Prohlídky vedeme v úterý a ve čtvrtek. Vyberte si níže termín, který vám sedne, potvrzení vám přijde e-mailem.</p>' +
+            embed;
+      } else if (picked) {
         // Cesky BEZ jmena. Pati pad se u libovolnych jmen (vcetne cizich)
         // spolehlive odvodit neda a "Dekujeme, Petr!" je proste spatne.
         body = IS_EN
@@ -191,10 +211,10 @@
     // Pouzije se, kdyz nejde nacist sheet. ZADNA PEVNA DATA — driv tu visel
     // termin ze 4. cervna a pri vypadku se nabizel jako platny.
     var FALLBACK = IS_EN ? [
-      { type: 'kafe',   title: 'School tour with the leadership team', date: '', time: 'Tue and Thu, 9:00–9:45 or 10:45–11:30' },
+      { type: 'kafe',   title: 'School Tour with FLOW leadership', date: '', time: 'Tue and Thu, 9:00–9:45 or 10:45–11:30' },
       { type: 'online', title: 'Online meeting with the leadership team', date: '', time: 'Tue and Thu, 10:00–10:30' }
     ] : [
-      { type: 'kafe',   title: 'Prohlídka školy s vedením', date: '', time: 'út a čt, 9:00–9:45 nebo 10:45–11:30' },
+      { type: 'kafe',   title: 'School Tour s vedením ZŠ FLOW', date: '', time: 'út a čt, 9:00–9:45 nebo 10:45–11:30' },
       { type: 'online', title: 'Online schůzka s vedením',  date: '', time: 'út a čt, 10:00–10:30' }
     ];
     var MONTHS = IS_EN

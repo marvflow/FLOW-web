@@ -915,7 +915,7 @@
     if (!select) return;
 
     var FALLBACK = [
-      { type: 'kafe',   title: 'Prohlídka školy s vedením', date: '', time: 'út a čt, 9:00–9:45 nebo 10:45–11:30' },
+      { type: 'kafe',   title: 'School Tour s vedením ZŠ FLOW', date: '', time: 'út a čt, 9:00–9:45 nebo 10:45–11:30' },
       { type: 'online', title: 'Online schůzka s vedením',  date: '', time: 'út a čt, 10:00–10:30' }
     ];
     var MONTHS = ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
@@ -1052,8 +1052,19 @@
               '<path d="M5 12.5l5 5L20 7"/>' +
             '</svg></div>';
 
+          // 'kafe' = prohlidka s vedenim: pevny termin nema, slot si vybere
+          // rovnou tady v rezervacnim okne.
+          var tourEmbed = '<div class="form-success__embed">' +
+            '<iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3N93cfV77dKYDuMRGazbi1HrqazS5qtbeQ4IvREGidzIVdASo24Lxb420L5FMr2sBF2Qkgd69C?gv=true" title="Rezervace termínu prohlídky" width="100%" height="600" frameborder="0" style="border:0"></iframe>' +
+          '</div>';
+
           var html;
-          if (meeting && meeting !== 'none') {
+          if (meeting === 'kafe') {
+            html = checkIcon +
+              '<h2 class="h-section" style="margin-bottom:14px;">Ještě si <em style="font-style:normal;color:var(--c-blue);">vyberte čas</em></h2>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto 14px;text-align:center;">Prohlídky vedeme v úterý a ve čtvrtek. Vyberte si níže termín, který vám sedne, potvrzení vám přijde e-mailem.</p>' +
+              tourEmbed;
+          } else if (meeting && meeting !== 'none') {
             html = checkIcon +
               '<h2 class="h-section" style="margin-bottom:14px;">Skvěle, máme vás <em style="font-style:normal;color:var(--c-blue);">zapsané</em>!</h2>' +
               '<div class="cdf-form-success__event-card">' +
