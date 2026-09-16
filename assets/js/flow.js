@@ -111,9 +111,9 @@
       if (form.hasAttribute('data-callback-form')) {
         body = IS_EN
           ? '<h3>Thank you' + (firstName ? ', ' + firstName : '') + '!</h3>' +
-            '<p>We\'ll call you within one business day.</p>'
+            '<p>We\'ll give you a call soon.</p>'
           : '<h3>Děkujeme, máme to!</h3>' +
-            '<p>Zavoláme vám do 1 pracovního dne.</p>';
+            '<p>Brzy vám zavoláme.</p>';
       } else if (bookType) {
         var isOnline = bookType === 'online';
         var embedTitle = IS_EN
@@ -425,8 +425,8 @@
                   n: 'Vyberte si čas, který vám sedne. Odkaz na hovor vám přijde e-mailem z našeho kalendáře.' }
     };
     var NONE_NOTE = IS_EN
-      ? 'We\'ll get back to you within one business day to find a date that works. Or choose a School Tour, we run them every Tuesday and Thursday.'
-      : 'Ozveme se do jednoho pracovního dne a domluvíme termín, který vám sedne. Nebo si vyberte School Tour, ta je každé úterý a čtvrtek.';
+      ? 'We\'ll get back to you to find a date that works. Or choose a School Tour, we run them every Tuesday and Thursday.'
+      : 'Ozveme se vám a domluvíme termín, který vám sedne. Nebo si vyberte School Tour, ta je každé úterý a čtvrtek.';
 
     function optionsOf(type) {
       var out = [];
