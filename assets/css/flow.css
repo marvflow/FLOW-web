@@ -1539,3 +1539,62 @@ body.no-messenger .msg-fab { display: none; }
   line-height: 1.55;
 }
 .site-footer__eu-text strong { color: rgba(255, 255, 255, 0.9); font-weight: 700; }
+
+/* ─────── MEET — jednotna sekce "Pojdme se poznat" ───────
+   Nahrazuje form-closer: tri pojmenovane cesty misto formulare
+   s rozbalovatkem. Formular zustava, jen se otevre az pod vybranou cestou. */
+.meet { padding: 90px 0 100px; background: var(--c-cream); scroll-margin-top: 80px; }
+.meet__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.meet__path {
+  padding: 0 30px; border-left: 1px solid var(--c-border);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+}
+.meet__path:first-child { border-left: 0; padding-left: 0; }
+.meet__path:last-child { padding-right: 0; }
+.meet__num { font-family: var(--font-display); font-weight: 800; font-size: 2.2rem; color: var(--c-yellow); line-height: 1; }
+.meet__name { font-family: var(--font-display); font-size: 1.22rem; font-weight: 800; color: var(--c-blue-deep); }
+.meet__when { font-size: var(--fs-sm); color: var(--c-blue); font-weight: 700; border-bottom: 2px solid var(--c-yellow); padding-bottom: 2px; }
+.meet__desc { font-size: var(--fs-sm); color: var(--c-muted); margin: 0; }
+.meet__desc b { color: var(--c-blue); font-weight: 700; }
+.meet__cta {
+  margin-top: auto; padding: 14px 0 3px; background: none; border: 0; cursor: pointer;
+  font-family: var(--font-body); font-weight: 800; font-size: var(--fs-sm);
+  color: var(--c-blue-deep); border-bottom: 2px solid var(--c-yellow);
+}
+.meet__cta:hover { color: var(--c-blue); }
+.meet__path[aria-expanded="true"] .meet__cta { color: var(--c-blue); }
+
+.meet__panel {
+  margin-top: 40px; background: var(--c-white); border: 1px solid var(--c-border);
+  border-radius: var(--r-card); padding: 30px 28px 28px; box-shadow: var(--sh-card);
+}
+.meet__panel-head { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; color: var(--c-blue-deep); margin: 0 0 6px; }
+.meet__panel-note { font-size: var(--fs-sm); color: var(--c-muted); margin: 0; }
+
+.meet__slots-label { display: block; margin-top: 20px; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); }
+.meet__slots { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 10px; }
+.meet__slot {
+  font-family: var(--font-body); font-size: var(--fs-sm); font-weight: 700;
+  padding: 9px 16px; border-radius: var(--r-pill); cursor: pointer;
+  border: 2px solid var(--c-border); background: var(--c-white); color: var(--c-text);
+  transition: border-color var(--t-fast), background var(--t-fast);
+}
+.meet__slot:hover { border-color: var(--c-blue-soft); }
+.meet__slot[aria-pressed="true"] { background: var(--c-yellow); border-color: var(--c-blue-deep); color: var(--c-blue-deep); }
+.meet__slot--none { font-weight: 600; color: var(--c-muted); border-style: dashed; }
+.meet__slot--none[aria-pressed="true"] { background: var(--c-yellow-soft); color: var(--c-blue-deep); }
+
+.meet__foot { margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--c-border); text-align: center; font-size: var(--fs-sm); color: var(--c-muted); }
+.meet__foot a { color: var(--c-blue); font-weight: 700; }
+
+/* Rozbalovatko terminu uvnitr sekce nahradily pilulky, ale zustava v DOM
+   jako zdroj pravdy pro odeslani. Skryte dostupne, ne display:none. */
+.meet .form-closer__select-field { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 860px) {
+  .meet { padding: 60px 0 70px; }
+  .meet__grid { grid-template-columns: 1fr; gap: 0; }
+  .meet__path { border-left: 0; border-top: 1px solid var(--c-border); padding: 22px 0 0; }
+  .meet__path:first-child { border-top: 0; padding-top: 0; }
+  .meet__panel { padding: 24px 20px; }
+}

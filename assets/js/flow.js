@@ -360,16 +360,149 @@
       .then(function (text) {
         var rows = parseCSV(text);
         populate(rows.length ? rows : FALLBACK);
+        select.dispatchEvent(new CustomEvent('flow:options-ready', { bubbles: true }));
       })
       .catch(function (err) {
         console.warn('Form Closer CSV fetch failed:', err);
         populate(FALLBACK);
+        select.dispatchEvent(new CustomEvent('flow:options-ready', { bubbles: true }));
       });
   }
 
   // ───── Little FLOW — hero open-day kartička (data-driven z Eventy CSV)
   // Zobrazí se POUZE pokud v Eventy sheetu existuje řádek type=ms-od s active≠FALSE a vyplněným datem.
   // Jinak (FALSE / chybí / fetch selže) zůstane kartička skrytá — žádný zásah do kódu není potřeba.
+
+  // ───── MEET — jednotna sekce "Pojdme se poznat"
+  // Tri cesty misto rozbalovatka. Rozbalovatko zustava v DOM jako zdroj pravdy
+  // (plni ho initFormCloserDropdown a cte z nej odesilani), pilulky a tlacitka
+  // cest do nej jen prepinaji vyber pres selectedIndex — jednotlive terminy
+  // maji stejnou value 'zs-od', takze podle hodnoty rozlisit nejdou.
+  function initMeetSection() {
+    var sec = document.querySelector('.meet');
+    if (!sec) return;
+
+    var select   = sec.querySelector('[name="meeting"]');
+    var panel    = sec.querySelector('.meet__panel');
+    var slots    = sec.querySelector('[data-meet-slots]');
+    var slotsLbl = sec.querySelector('[data-meet-slots-label]');
+    var pTitle   = sec.querySelector('[data-meet-title]');
+    var pNote    = sec.querySelector('[data-meet-note]');
+    if (!select || !panel) return;
+
+    var COPY = {
+      'zs-od':  { t: 'Den otevřených dveří',
+                  n: 'Vyberte si termín a nechte nám kontakt. Potvrzení vám pošleme e-mailem.' },
+      'kafe':   { t: 'School Tour s vedením ZŠ FLOW',
+                  n: 'Nechte nám kontakt a hned potom si vyberete konkrétní čas v rezervačním okně.' },
+      'online': { t: 'Online schůzka s vedením',
+                  n: 'Nechte nám kontakt a hned potom si vyberete konkrétní čas v rezervačním okně.' }
+    };
+    var NONE_NOTE = 'Ozveme se do jednoho pracovního dne a domluvíme termín, který vám sedne. Nebo si vyberte School Tour, ta je každé úterý a čtvrtek.';
+
+    function optionsOf(type) {
+      var out = [];
+      for (var i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === type) out.push(i);
+      }
+      return out;
+    }
+
+    function pickIndex(i) {
+      select.selectedIndex = i;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    // Karta 01: nejblizsi termin a kolik jich je celkem
+    function fillNext() {
+      var idx = optionsOf('zs-od');
+      var when  = sec.querySelector('[data-meet-next]');
+      var count = sec.querySelector('[data-meet-count]');
+      if (!idx.length) {
+        if (when) when.textContent = 'termín domluvíme individuálně';
+        if (count) count.textContent = '';
+        return;
+      }
+      var first = select.options[idx[0]];
+      if (when) when.textContent = 'nejbližší: ' + (first.dataset.dateLabel || first.textContent);
+      if (count) {
+        count.textContent = idx.length > 1
+          ? ('Vypsáno ' + idx.length + ' termínů, vyberete si v dalším kroku.')
+          : '';
+      }
+    }
+
+    function buildSlots() {
+      var idx = optionsOf('zs-od');
+      slots.innerHTML = '';
+      idx.forEach(function (i, k) {
+        var o = select.options[i];
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'meet__slot';
+        b.setAttribute('aria-pressed', String(k === 0));
+        b.dataset.index = String(i);
+        b.textContent = o.dataset.dateLabel || o.textContent;
+        slots.appendChild(b);
+      });
+      var noneIdx = optionsOf('none');
+      if (noneIdx.length) {
+        var nb = document.createElement('button');
+        nb.type = 'button';
+        nb.className = 'meet__slot meet__slot--none';
+        nb.setAttribute('aria-pressed', 'false');
+        nb.dataset.index = String(noneIdx[0]);
+        nb.dataset.none = '1';
+        nb.textContent = 'Žádný mi nevyhovuje';
+        slots.appendChild(nb);
+      }
+      if (idx.length) pickIndex(idx[0]);
+    }
+
+    function openPath(type) {
+      var c = COPY[type];
+      if (!c) return;
+      sec.querySelectorAll('.meet__path').forEach(function (p) {
+        p.setAttribute('aria-expanded', String(p.dataset.path === type));
+      });
+      pTitle.textContent = c.t;
+      pNote.textContent = c.n;
+
+      var isDod = type === 'zs-od';
+      slots.hidden = !isDod;
+      slotsLbl.hidden = !isDod;
+      if (isDod) {
+        buildSlots();
+      } else {
+        var idx = optionsOf(type);
+        if (idx.length) pickIndex(idx[0]);
+      }
+      panel.hidden = false;
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    sec.addEventListener('click', function (e) {
+      var cta = e.target.closest('.meet__cta');
+      if (cta) {
+        var path = cta.closest('.meet__path');
+        if (path) openPath(path.dataset.path);
+        return;
+      }
+      var slot = e.target.closest('.meet__slot');
+      if (slot) {
+        slots.querySelectorAll('.meet__slot').forEach(function (s) { s.setAttribute('aria-pressed', 'false'); });
+        slot.setAttribute('aria-pressed', 'true');
+        pickIndex(parseInt(slot.dataset.index, 10));
+        pNote.textContent = slot.dataset.none ? NONE_NOTE : COPY['zs-od'].n;
+      }
+    });
+
+    document.addEventListener('flow:options-ready', function () {
+      fillNext();
+      if (!panel.hidden && !slots.hidden) buildSlots();
+    });
+  }
+
   function initLittleFlowOpenDay() {
     var card = document.getElementById('lf-openday');
     if (!card) return;
@@ -621,6 +754,7 @@
     initMobileNav();
     initCallbackForm();
     initFormCloserDropdown();
+    initMeetSection();
     initLittleFlowOpenDay();
     initLightbox();
     initSmoothScroll();
