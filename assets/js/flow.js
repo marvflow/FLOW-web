@@ -124,6 +124,10 @@
               ? 'Online schůzky vedeme v úterý a ve čtvrtek. Vyberte si níže termín, odkaz vám přijde e-mailem.'
               : 'Prohlídky vedeme v úterý a ve čtvrtek. Vyberte si níže termín, který vám sedne, potvrzení vám přijde e-mailem.') + '</p>' +
             embed;
+        body += '<p class="form-success__cta">' +
+          '<button type="button" class="btn btn-primary" data-booking-done>' +
+          (IS_EN ? 'I\'ve booked my slot' : 'Mám rezervováno') +
+          '</button></p>';
       } else if (picked) {
         // Cesky BEZ jmena. Pati pad se u libovolnych jmen (vcetne cizich)
         // spolehlive odvodit neda a "Dekujeme, Petr!" je proste spatne.
@@ -153,6 +157,21 @@
       success.innerHTML = icon + body;
       form.parentNode.replaceChild(success, form);
       success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // Po kliknuti sbalime rezervacni okno do klidneho potvrzeni.
+      var doneBtn = success.querySelector('[data-booking-done]');
+      if (doneBtn) {
+        doneBtn.addEventListener('click', function () {
+          success.innerHTML = icon + (IS_EN
+            ? '<h3>All set!</h3>' +
+              '<p>Your confirmation is on its way by email from our calendar. We look forward to meeting you.</p>' +
+              '<p class="form-success__fallback">If anything changes, write to <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>'
+            : '<h3>Máme to!</h3>' +
+              '<p>Potvrzení termínu vám přijde e-mailem z našeho kalendáře. Těšíme se na vás.</p>' +
+              '<p class="form-success__fallback">Kdyby se něco změnilo, napište na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>');
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      }
     }
 
     form.addEventListener('submit', function (e) {

@@ -1089,7 +1089,8 @@
                 : 'Prohlídky vedeme v úterý a ve čtvrtek. Vyberte si níže termín, který vám sedne, potvrzení vám přijde e-mailem.') + '</p>' +
               '<div class="form-success__embed"><iframe src="' + bookingEmbed[bookType] +
               '" title="' + (isOnline ? 'Rezervace online schůzky' : 'Rezervace termínu prohlídky') +
-              '" width="100%" height="600" frameborder="0" style="border:0"></iframe></div>';
+              '" width="100%" height="600" frameborder="0" style="border:0"></iframe></div>' +
+              '<p class="form-success__cta" style="margin-top:22px;"><button type="button" class="btn btn-primary" data-booking-done>Mám rezervováno</button></p>';
           } else if (meeting && meeting !== 'none') {
             html = checkIcon +
               '<h2 class="h-section" style="margin-bottom:14px;">Skvěle, máme vás <em style="font-style:normal;color:var(--c-blue);">zapsané</em>!</h2>' +
@@ -1116,6 +1117,19 @@
 
           success.innerHTML = html;
           success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          // Rezervacni okno je na domene Google, stranka se o dokoncene
+          // rezervaci nedozvi. Potvrzeni proto odklika navstevnik sam.
+          var doneBtn = success.querySelector('[data-booking-done]');
+          if (doneBtn) {
+            doneBtn.addEventListener('click', function () {
+              success.innerHTML = checkIcon +
+                '<h2 class="h-section" style="margin-bottom:14px;">Máme <em style="font-style:normal;color:var(--c-blue);">to</em>!</h2>' +
+                '<p class="lead" style="max-width:560px;margin:0 auto 14px;text-align:center;">Potvrzení termínu vám přijde e-mailem z našeho kalendáře. Těšíme se na vás.</p>' +
+                '<p class="lead" style="max-width:560px;margin:0 auto;text-align:center;">Kdyby se něco změnilo, napište na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
+              success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+          }
         }
       })
       .catch(function (err) {
