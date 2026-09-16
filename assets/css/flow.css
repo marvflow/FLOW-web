@@ -318,7 +318,8 @@ em.highlight::after,
   transform: translateY(-100%);
 }
 .site-header__inner {
-  width: min(var(--container-wide), 92%);
+  /* stejná šířka jako .container, ať logo a CTA lícují s obsahem (Marv 16. 9. 2026) */
+  width: min(var(--container), 92%);
   margin-inline: auto;
   padding: 24px 0;
   display: flex;
