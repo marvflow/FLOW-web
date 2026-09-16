@@ -399,7 +399,14 @@
       'online': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1KmkQl_AsS1m_MeKTfNXHyUoZuaHh52N1FkV7qpxW4nrAYW9OEwYCLmBJHR96Xi09Gqnzy-MNF?gv=true'
     };
 
-    var COPY = {
+    var COPY = IS_EN ? {
+      'zs-od':  { t: 'Open Day',
+                  n: 'Pick a date and leave us your details. We\'ll email you a confirmation.' },
+      'kafe':   { t: 'School Tour with FLOW leadership',
+                  n: 'Pick a time that suits you. The confirmation will arrive by email from our calendar.' },
+      'online': { t: 'Online meeting with the leadership team',
+                  n: 'Pick a time that suits you. The call link will arrive by email from our calendar.' }
+    } : {
       'zs-od':  { t: 'Den otevřených dveří',
                   n: 'Vyberte si termín a nechte nám kontakt. Potvrzení vám pošleme e-mailem.' },
       'kafe':   { t: 'School Tour s vedením ZŠ FLOW',
@@ -407,7 +414,9 @@
       'online': { t: 'Online schůzka s vedením',
                   n: 'Vyberte si čas, který vám sedne. Odkaz na hovor vám přijde e-mailem z našeho kalendáře.' }
     };
-    var NONE_NOTE = 'Ozveme se do jednoho pracovního dne a domluvíme termín, který vám sedne. Nebo si vyberte School Tour, ta je každé úterý a čtvrtek.';
+    var NONE_NOTE = IS_EN
+      ? 'We\'ll get back to you within one business day to find a date that works. Or choose a School Tour, we run them every Tuesday and Thursday.'
+      : 'Ozveme se do jednoho pracovního dne a domluvíme termín, který vám sedne. Nebo si vyberte School Tour, ta je každé úterý a čtvrtek.';
 
     function optionsOf(type) {
       var out = [];
@@ -428,15 +437,15 @@
       var when  = sec.querySelector('[data-meet-next]');
       var count = sec.querySelector('[data-meet-count]');
       if (!idx.length) {
-        if (when) when.textContent = 'termín domluvíme individuálně';
+        if (when) when.textContent = IS_EN ? 'we\'ll arrange a date with you' : 'termín domluvíme individuálně';
         if (count) count.textContent = '';
         return;
       }
       var first = select.options[idx[0]];
-      if (when) when.textContent = 'nejbližší: ' + (first.dataset.dateLabel || first.textContent);
+      if (when) when.textContent = (IS_EN ? 'next: ' : 'nejbližší: ') + (first.dataset.dateLabel || first.textContent);
       if (count) {
         count.textContent = idx.length > 1
-          ? ('Vypsáno ' + idx.length + ' termínů, vyberete si v dalším kroku.')
+          ? (IS_EN ? (idx.length + ' dates available, you\'ll choose in the next step.') : ('Vypsáno ' + idx.length + ' termínů, vyberete si v dalším kroku.'))
           : '';
       }
     }
@@ -462,7 +471,7 @@
         nb.setAttribute('aria-pressed', 'false');
         nb.dataset.index = String(noneIdx[0]);
         nb.dataset.none = '1';
-        nb.textContent = 'Žádný mi nevyhovuje';
+        nb.textContent = IS_EN ? 'None of these work' : 'Žádný mi nevyhovuje';
         slots.appendChild(nb);
       }
       if (idx.length) pickIndex(idx[0]);
@@ -492,7 +501,8 @@
         if (embed && BOOK[type]) {
           embed.innerHTML =
             '<iframe src="' + BOOK[type] + '" title="' +
-            (type === 'online' ? 'Rezervace online schůzky' : 'Rezervace termínu prohlídky') +
+            (IS_EN ? (type === 'online' ? 'Book an online meeting' : 'Book a school tour')
+                   : (type === 'online' ? 'Rezervace online schůzky' : 'Rezervace termínu prohlídky')) +
             '" width="100%" height="620" frameborder="0" style="border:0"></iframe>';
         }
       }

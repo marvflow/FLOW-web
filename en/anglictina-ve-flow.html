@@ -52,7 +52,7 @@
   </script>
   <link rel="stylesheet" href="../assets/css/cmp.css">
 
-  <link rel="stylesheet" href="../assets/css/flow.css?v=20260916c">
+  <link rel="stylesheet" href="../assets/css/flow.css?v=20260916d">
 
   <!-- Page-specific CSS (Angličtina ve FLOW) -->
   <style>
@@ -641,51 +641,91 @@
 
   <!-- FORM CLOSER -->
   <!-- FLOW-FORM-START source="anglictina-form" -->
-<section class="form-closer" id="form">
-  <div class="container--narrow">
+<section class="meet" id="form">
+  <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Let's schedule a meeting</span>
-      <h2 class="h-section">Choose a <em>date</em> and we'll get back to you.</h2>
-      <p class="lead">A short form, 5 fields. Within 1 business day we'll confirm or suggest an alternative.</p>
-      <p class="lead">Or pick a time right away: <a href="https://calendar.app.google/YVTTWSvt6Zj56ykV8" target="_blank" rel="noopener">a school tour with the leadership team</a> (Tue and Thu, 9:00–9:45 or 10:45–11:30) &middot; <a href="https://calendar.app.google/UytpdiarvKwDieUe6" target="_blank" rel="noopener">an online meeting</a> (Tue and Thu, 10:00–10:30).</p>
+      <span class="eyebrow">Let's get to know each other</span>
+      <h2 class="h-section">Come and see <em style="font-style:normal;color:var(--c-blue);">how we teach</em>.</h2>
+      <p class="lead" style="margin-inline:auto;text-align:center;">Three ways to get to know us. Choose what suits you.</p>
     </div>
 
-    <form id="callback-form" class="form-closer__card" data-endpoint="https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec" novalidate>
-      <input type="hidden" name="source" value="anglictina-form">
-      <input type="hidden" name="lang" value="en">
-      <input type="hidden" name="event_title" id="form-closer-event-title" value="">
-      <input type="hidden" name="event_date" id="form-closer-event-date" value="">
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-closer__honeypot" aria-hidden="true">
+    <div class="meet__grid">
 
-      <div class="form-closer__grid">
-        <div class="form-field">
-          <label for="form-closer-name">Name</label>
-          <input class="form-input" id="form-closer-name" name="name" type="text" required placeholder="John Smith">
-        </div>
-        <div class="form-field">
-          <label for="form-closer-email">Email</label>
-          <input class="form-input" id="form-closer-email" name="email" type="email" required placeholder="you@email.com">
-        </div>
-        <div class="form-field">
-          <label for="form-closer-phone">Phone <span class="form-closer__field-hint">(optional)</span></label>
-          <input class="form-input" id="form-closer-phone" name="phone" type="tel" placeholder="+420 ___ ___ ___">
-        </div>
-        <div class="form-field form-closer__select-field">
-          <label for="form-closer-meeting">Preferred date</label>
-          <select class="form-select" id="form-closer-meeting" name="meeting" required>
-            <option value="" disabled selected>Choose a date or meeting type</option>
-          </select>
-        </div>
-      </div>
+      <article class="meet__path" data-path="zs-od" aria-expanded="false">
+        <span class="meet__num">01</span>
+        <span class="meet__name">Open Day</span>
+        <span class="meet__when" data-meet-next>loading dates…</span>
+        <p class="meet__desc">For parents and children. Walk through the school, meet the team and see classes in action. <b data-meet-count></b></p>
+        <button type="button" class="meet__cta">Choose a date →</button>
+      </article>
 
-      <div class="form-closer__submit-row">
-        <label class="form-gdpr">
-          <input type="checkbox" name="gdpr_consent" required>
-          <span>I consent to personal data processing per the <a href="gdpr">GDPR policy</a>.</span>
-        </label>
-        <button type="submit" class="btn btn-primary">Submit →</button>
-      </div>
-    </form>
+      <article class="meet__path" data-path="kafe" aria-expanded="false">
+        <span class="meet__num">02</span>
+        <span class="meet__name">School Tour with leadership</span>
+        <span class="meet__when">Tue and Thu · 9:00–9:45 or 10:45–11:30</span>
+        <p class="meet__desc">A personal tour with the school leadership. Room to ask anything about your child.</p>
+        <button type="button" class="meet__cta">Choose a time →</button>
+      </article>
+
+      <article class="meet__path" data-path="online" aria-expanded="false">
+        <span class="meet__num">03</span>
+        <span class="meet__name">Online meeting</span>
+        <span class="meet__when">Tue and Thu · 10:00–10:30</span>
+        <p class="meet__desc">When you'd rather not travel. A short call to talk about what you're looking for.</p>
+        <button type="button" class="meet__cta">Choose a time →</button>
+      </article>
+
+    </div>
+
+    <div class="meet__panel" id="meet-panel" hidden>
+      <h3 class="meet__panel-head" data-meet-title></h3>
+      <p class="meet__panel-note" data-meet-note></p>
+
+      <span class="meet__slots-label" data-meet-slots-label hidden>Choose a date</span>
+      <div class="meet__slots" data-meet-slots role="group" aria-label="Open Day dates" hidden></div>
+
+      <!-- Rezervacni okno pro prohlidku a online schuzku. Naplni ho flow.js. -->
+      <div class="meet__embed" data-meet-embed hidden></div>
+
+      <form id="callback-form" class="form-closer__card" style="margin-top:22px;" data-endpoint="https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec" novalidate>
+        <input type="hidden" name="source" value="anglictina-form">
+        <input type="hidden" name="lang" value="en">
+        <input type="hidden" name="event_title" id="form-closer-event-title" value="">
+        <input type="hidden" name="event_date" id="form-closer-event-date" value="">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-closer__honeypot" aria-hidden="true">
+
+        <div class="form-closer__grid">
+          <div class="form-field">
+            <label for="form-closer-name">Name</label>
+            <input class="form-input" id="form-closer-name" name="name" type="text" required placeholder="John Smith">
+          </div>
+          <div class="form-field">
+            <label for="form-closer-email">Email</label>
+            <input class="form-input" id="form-closer-email" name="email" type="email" required placeholder="you@email.com">
+          </div>
+          <div class="form-field">
+            <label for="form-closer-phone">Phone <span class="form-closer__field-hint">(optional)</span></label>
+            <input class="form-input" id="form-closer-phone" name="phone" type="tel" placeholder="+420 ___ ___ ___">
+          </div>
+          <div class="form-field form-closer__select-field">
+            <label for="form-closer-meeting">Preferred date</label>
+            <select class="form-select" id="form-closer-meeting" name="meeting" required>
+              <option value="" disabled selected>Choose a date or meeting type</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-closer__submit-row">
+          <label class="form-gdpr">
+            <input type="checkbox" name="gdpr_consent" required>
+            <span>I consent to personal data processing per the <a href="gdpr">GDPR policy</a>.</span>
+          </label>
+          <button type="submit" class="btn btn-primary">Submit →</button>
+        </div>
+      </form>
+    </div>
+
+    <p class="meet__foot">None of these work? Write to <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a> or call <a href="tel:+420770673828">+420 770 673 828</a>.</p>
   </div>
 </section>
 
@@ -770,6 +810,6 @@
 <!-- FLOW-FOOTER-EN-END -->
 
 <script defer src="../assets/js/cmp.js?v=20260916c"></script>
-<script src="../assets/js/flow.js?v=20260916c" defer></script>
+<script src="../assets/js/flow.js?v=20260916d" defer></script>
 </body>
 </html>
