@@ -16,9 +16,12 @@
   // 60 min osobne v kampusu na Balabence. Menit na jednom miste.
   var BOOKING_URL = 'https://calendar.app.google/YVTTWSvt6Zj56ykV8';
   var ONLINE_URL  = 'https://calendar.app.google/UytpdiarvKwDieUe6';
-  // Rezervacni okno prohlidek. Vklada se primo do potvrzeni, protoze po
-  // vyberu 'prohlidka' zajemce jeste zapsany neni, musi si zvolit slot.
-  var TOUR_EMBED  = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3N93cfV77dKYDuMRGazbi1HrqazS5qtbeQ4IvREGidzIVdASo24Lxb420L5FMr2sBF2Qkgd69C?gv=true';
+  // Rezervacni okna. Vkladaji se primo do potvrzeni, protoze u techto dvou
+  // typu zajemce jeste zapsany neni, musi si nejdriv zvolit slot.
+  var BOOKING_EMBED = {
+    'kafe':   'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3N93cfV77dKYDuMRGazbi1HrqazS5qtbeQ4IvREGidzIVdASo24Lxb420L5FMr2sBF2Qkgd69C?gv=true',
+    'online': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1KmkQl_AsS1m_MeKTfNXHyUoZuaHh52N1FkV7qpxW4nrAYW9OEwYCLmBJHR96Xi09Gqnzy-MNF?gv=true'
+  };
 
   // ───── Footer dynamic year
   function setFooterYear() {
@@ -98,23 +101,28 @@
         '</svg>' +
       '</div>';
 
-      // 'kafe' = prohlidka s vedenim. Nema pevny termin, slot si vybira sam.
-      var isTour = sel && sel.value === 'kafe';
-
-      var embed = '<div class="form-success__embed">' +
-        '<iframe src="' + TOUR_EMBED + '" title="' +
-        (IS_EN ? 'Book a school tour' : 'Rezervace termínu prohlídky') +
-        '" width="100%" height="600" frameborder="0" style="border:0"></iframe>' +
-      '</div>';
+      var bookType = sel && BOOKING_EMBED[sel.value] ? sel.value : '';
 
       var body;
-      if (isTour) {
+      if (bookType) {
+        var isOnline = bookType === 'online';
+        var embedTitle = IS_EN
+          ? (isOnline ? 'Book an online meeting' : 'Book a school tour')
+          : (isOnline ? 'Rezervace online schůzky' : 'Rezervace termínu prohlídky');
+        var embed = '<div class="form-success__embed">' +
+          '<iframe src="' + BOOKING_EMBED[bookType] + '" title="' + embedTitle +
+          '" width="100%" height="600" frameborder="0" style="border:0"></iframe>' +
+        '</div>';
         body = IS_EN
           ? '<h3>One last step, pick a time</h3>' +
-            '<p>We run tours on Tuesdays and Thursdays. Choose a slot below and we\'ll email you a confirmation.</p>' +
+            '<p>' + (isOnline
+              ? 'We hold online meetings on Tuesdays and Thursdays. Choose a slot below and we\'ll email you the link.'
+              : 'We run tours on Tuesdays and Thursdays. Choose a slot below and we\'ll email you a confirmation.') + '</p>' +
             embed
           : '<h3>Ještě si vyberte čas</h3>' +
-            '<p>Prohlídky vedeme v úterý a ve čtvrtek. Vyberte si níže termín, který vám sedne, potvrzení vám přijde e-mailem.</p>' +
+            '<p>' + (isOnline
+              ? 'Online schůzky vedeme v úterý a ve čtvrtek. Vyberte si níže termín, odkaz vám přijde e-mailem.'
+              : 'Prohlídky vedeme v úterý a ve čtvrtek. Vyberte si níže termín, který vám sedne, potvrzení vám přijde e-mailem.') + '</p>' +
             embed;
       } else if (picked) {
         // Cesky BEZ jmena. Pati pad se u libovolnych jmen (vcetne cizich)

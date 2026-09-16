@@ -1059,17 +1059,22 @@
               '<path d="M5 12.5l5 5L20 7"/>' +
             '</svg></div>';
 
-          // 'kafe' = school tour: no fixed date, the visitor picks a slot here.
-          var tourEmbed = '<div class="form-success__embed">' +
-            '<iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3N93cfV77dKYDuMRGazbi1HrqazS5qtbeQ4IvREGidzIVdASo24Lxb420L5FMr2sBF2Qkgd69C?gv=true" title="Book a school tour" width="100%" height="600" frameborder="0" style="border:0"></iframe>' +
-          '</div>';
+          // Neither the tour nor the online meeting has a fixed date. The
+          // visitor picks a slot right here in the booking window.
+          var bookingEmbed = { 'kafe': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3N93cfV77dKYDuMRGazbi1HrqazS5qtbeQ4IvREGidzIVdASo24Lxb420L5FMr2sBF2Qkgd69C?gv=true', 'online': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1KmkQl_AsS1m_MeKTfNXHyUoZuaHh52N1FkV7qpxW4nrAYW9OEwYCLmBJHR96Xi09Gqnzy-MNF?gv=true' };
+          var bookType = bookingEmbed[meeting] ? meeting : '';
 
           var html;
-          if (meeting === 'kafe') {
+          if (bookType) {
+            var isOnline = bookType === 'online';
             html = checkIcon +
               '<h2 class="h-section" style="margin-bottom:14px;">One last step, <em style="font-style:normal;color:var(--c-blue);">pick a time</em></h2>' +
-              '<p class="lead" style="max-width:560px;margin:0 auto 14px;text-align:center;">We run tours on Tuesdays and Thursdays. Choose a slot below and we\'ll email you a confirmation.</p>' +
-              tourEmbed;
+              '<p class="lead" style="max-width:560px;margin:0 auto 14px;text-align:center;">' + (isOnline
+                ? 'We hold online meetings on Tuesdays and Thursdays. Choose a slot below and we\'ll email you the link.'
+                : 'We run tours on Tuesdays and Thursdays. Choose a slot below and we\'ll email you a confirmation.') + '</p>' +
+              '<div class="form-success__embed"><iframe src="' + bookingEmbed[bookType] +
+              '" title="' + (isOnline ? 'Book an online meeting' : 'Book a school tour') +
+              '" width="100%" height="600" frameborder="0" style="border:0"></iframe></div>';
           } else if (meeting && meeting !== 'none') {
             html = checkIcon +
               '<h2 class="h-section" style="margin-bottom:14px;">Great, you\'re <em style="font-style:normal;color:var(--c-blue);">booked in</em>!</h2>' +
