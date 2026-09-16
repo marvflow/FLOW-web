@@ -1091,50 +1091,90 @@
 
 <!-- FORM CLOSER -->
   <!-- FLOW-FORM-START source="kurikulum-form" -->
-<section class="form-closer" id="form">
-  <div class="container--narrow">
+<section class="meet" id="form">
+  <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Domluvíme si schůzku</span>
-      <h2 class="h-section">Vyberte si <em>termín</em>, ozveme se vám.</h2>
-      <p class="lead">Krátký formulář: 5 polí, do 1 pracovního dne potvrdíme nebo navrhneme alternativu.</p>
-      <p class="lead">Nebo si rovnou vyberte čas: <a href="https://calendar.app.google/YVTTWSvt6Zj56ykV8" target="_blank" rel="noopener">prohlídka školy s vedením</a> (út a čt, 9:00–9:45 nebo 10:45–11:30) &middot; <a href="https://calendar.app.google/UytpdiarvKwDieUe6" target="_blank" rel="noopener">online schůzka</a> (út a čt, 10:00–10:30).</p>
+      <span class="eyebrow">Pojďme se poznat</span>
+      <h2 class="h-section">Přijďte se podívat, <em style="font-style:normal;color:var(--c-blue);">jak učíme</em>.</h2>
+      <p class="lead" style="margin-inline:auto;text-align:center;">Tři cesty, jak nás poznat. Vyberte si, co se vám hodí.</p>
     </div>
 
-    <form id="callback-form" class="form-closer__card" data-endpoint="https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec" novalidate>
-      <input type="hidden" name="source" value="kurikulum-form">
-      <input type="hidden" name="event_title" id="form-closer-event-title" value="">
-      <input type="hidden" name="event_date" id="form-closer-event-date" value="">
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-closer__honeypot" aria-hidden="true">
+    <div class="meet__grid">
 
-      <div class="form-closer__grid">
-        <div class="form-field">
-          <label for="form-closer-name">Jméno</label>
-          <input class="form-input" id="form-closer-name" name="name" type="text" required placeholder="Jan Novák">
-        </div>
-        <div class="form-field">
-          <label for="form-closer-email">E-mail</label>
-          <input class="form-input" id="form-closer-email" name="email" type="email" required placeholder="vas@email.cz">
-        </div>
-        <div class="form-field">
-          <label for="form-closer-phone">Telefon <span class="form-closer__field-hint">(nepovinné)</span></label>
-          <input class="form-input" id="form-closer-phone" name="phone" type="tel" placeholder="+420 ___ ___ ___">
-        </div>
-        <div class="form-field form-closer__select-field">
-          <label for="form-closer-meeting">Vybírám termín</label>
-          <select class="form-select" id="form-closer-meeting" name="meeting" required>
-            <option value="" disabled selected>Vyberte termín nebo typ setkání</option>
-          </select>
-        </div>
-      </div>
+      <article class="meet__path" data-path="zs-od" aria-expanded="false">
+        <span class="meet__num">01</span>
+        <span class="meet__name">Den otevřených dveří</span>
+        <span class="meet__when" data-meet-next>termíny načítáme…</span>
+        <p class="meet__desc">Pro rodiče i děti. Projdete si školu, potkáte tým, uvidíte třídy v provozu. <b data-meet-count></b></p>
+        <button type="button" class="meet__cta">Vybrat termín →</button>
+      </article>
 
-      <div class="form-closer__submit-row">
-        <label class="form-gdpr">
-          <input type="checkbox" name="gdpr_consent" required>
-          <span>Souhlasím se zpracováním osobních údajů dle <a href="gdpr">zásad GDPR</a>.</span>
-        </label>
-        <button type="submit" class="btn btn-primary">Odeslat zájem →</button>
-      </div>
-    </form>
+      <article class="meet__path" data-path="kafe" aria-expanded="false">
+        <span class="meet__num">02</span>
+        <span class="meet__name">School Tour s vedením</span>
+        <span class="meet__when">út a čt · 9:00–9:45 nebo 10:45–11:30</span>
+        <p class="meet__desc">Osobní prohlídka s vedením školy. Prostor ptát se na cokoli, co řešíte u svého dítěte.</p>
+        <button type="button" class="meet__cta">Vybrat čas →</button>
+      </article>
+
+      <article class="meet__path" data-path="online" aria-expanded="false">
+        <span class="meet__num">03</span>
+        <span class="meet__name">Online schůzka</span>
+        <span class="meet__when">út a čt · 10:00–10:30</span>
+        <p class="meet__desc">Když se nechcete nikam trmácet. Krátký hovor, ve kterém probereme, co pro dítě hledáte.</p>
+        <button type="button" class="meet__cta">Vybrat čas →</button>
+      </article>
+
+    </div>
+
+    <div class="meet__panel" id="meet-panel" hidden>
+      <h3 class="meet__panel-head" data-meet-title></h3>
+      <p class="meet__panel-note" data-meet-note></p>
+
+      <span class="meet__slots-label" data-meet-slots-label hidden>Vyberte termín</span>
+      <div class="meet__slots" data-meet-slots role="group" aria-label="Termíny dne otevřených dveří" hidden></div>
+
+      <!-- Rezervacni okno pro prohlidku a online schuzku. Naplni ho flow.js. -->
+      <div class="meet__embed" data-meet-embed hidden></div>
+
+      <form id="callback-form" class="form-closer__card" style="margin-top:22px;" data-endpoint="https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec" novalidate>
+        <input type="hidden" name="source" value="kurikulum-form">
+        <input type="hidden" name="event_title" id="form-closer-event-title" value="">
+        <input type="hidden" name="event_date" id="form-closer-event-date" value="">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-closer__honeypot" aria-hidden="true">
+
+        <div class="form-closer__grid">
+          <div class="form-field">
+            <label for="form-closer-name">Jméno</label>
+            <input class="form-input" id="form-closer-name" name="name" type="text" required placeholder="Jan Novák">
+          </div>
+          <div class="form-field">
+            <label for="form-closer-email">E-mail</label>
+            <input class="form-input" id="form-closer-email" name="email" type="email" required placeholder="vas@email.cz">
+          </div>
+          <div class="form-field">
+            <label for="form-closer-phone">Telefon <span class="form-closer__field-hint">(nepovinné)</span></label>
+            <input class="form-input" id="form-closer-phone" name="phone" type="tel" placeholder="+420 ___ ___ ___">
+          </div>
+          <div class="form-field form-closer__select-field">
+            <label for="form-closer-meeting">Vybírám termín</label>
+            <select class="form-select" id="form-closer-meeting" name="meeting" required>
+              <option value="" disabled selected>Vyberte termín nebo typ setkání</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-closer__submit-row">
+          <label class="form-gdpr">
+            <input type="checkbox" name="gdpr_consent" required>
+            <span>Souhlasím se zpracováním osobních údajů dle <a href="gdpr">zásad GDPR</a>.</span>
+          </label>
+          <button type="submit" class="btn btn-primary">Odeslat zájem →</button>
+        </div>
+      </form>
+    </div>
+
+    <p class="meet__foot">Nehodí se ani jedno? Napište na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a> nebo volejte <a href="tel:+420770673828">+420 770 673 828</a>.</p>
   </div>
 </section>
 
