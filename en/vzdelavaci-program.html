@@ -52,7 +52,7 @@
   </script>
   <link rel="stylesheet" href="../assets/css/cmp.css">
 
-  <link rel="stylesheet" href="../assets/css/flow.css?v=20260916d">
+  <link rel="stylesheet" href="../assets/css/flow.css?v=20260916e">
 
   <!-- Page-specific CSS (Vzdělávací program) -->
   <style>
@@ -107,6 +107,7 @@
     }
 
     /* BENTO ROZCESTNIK — 5 subjects (3 + 2 grid) */
+    /* BENTO ROZCESTNIK — směr A (editorial karty), Marv schválil 16. 9. 2026 */
     .vp-bento {
       padding: 100px 0 110px;
       background: var(--c-white);
@@ -114,91 +115,84 @@
     .vp-bento-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      gap: var(--space-md);
-      grid-auto-rows: 280px;
+      gap: 48px var(--space-md);
       margin-top: var(--space-xl);
     }
     .vp-bento-tile {
       grid-column: span 2;
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--r-card);
-      border: 2px solid var(--c-blue-deep);
-      box-shadow: var(--sh-hard);
-      text-decoration: none;
-      color: var(--c-white);
-      transition: transform var(--t), box-shadow var(--t);
       display: flex;
-      align-items: flex-end;
-    }
-    .vp-bento-tile:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 8px 8px 0 0 var(--c-blue-deep);
+      flex-direction: column;
+      text-decoration: none;
+      color: var(--c-text);
     }
     .vp-bento-tile:nth-child(4),
     .vp-bento-tile:nth-child(5) { grid-column: span 3; }
 
     .vp-bento-tile__photo {
-      position: absolute;
-      inset: 0;
+      aspect-ratio: 4 / 3;
+      border-radius: 22px;
       background-size: cover;
       background-position: center;
-      z-index: 1;
+      margin-bottom: 20px;
+      transition: transform var(--t);
     }
-    .vp-bento-tile__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(20, 37, 107, 0.15) 0%, rgba(20, 37, 107, 0.4) 50%, rgba(20, 37, 107, 0.92) 100%);
-      z-index: 2;
-    }
+    .vp-bento-tile:nth-child(4) .vp-bento-tile__photo,
+    .vp-bento-tile:nth-child(5) .vp-bento-tile__photo { aspect-ratio: 16 / 9; }
+    .vp-bento-tile:hover .vp-bento-tile__photo { transform: translateY(-4px); }
+    .vp-bento-tile__overlay { display: none; }
+
     .vp-bento-tile__body {
-      position: relative;
-      z-index: 3;
-      padding: 26px 26px 24px;
-      width: 100%;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 14px;
+      align-items: baseline;
+      border-top: 1px solid var(--c-border);
+      padding-top: 16px;
     }
     .vp-bento-tile__num {
-      display: inline-block;
+      grid-row: span 3;
       font-family: var(--font-display);
       font-weight: 800;
-      font-size: var(--fs-xs);
-      letter-spacing: 0.12em;
-      color: var(--c-yellow);
-      margin-bottom: 8px;
+      font-size: var(--fs-sm);
+      letter-spacing: 0.1em;
+      color: var(--c-blue);
     }
     .vp-bento-tile h3 {
-      color: var(--c-white);
+      color: var(--c-blue-deep);
       font-size: var(--fs-xl);
       line-height: 1.2;
       margin-bottom: 8px;
     }
     .vp-bento-tile p {
-      color: rgba(255, 255, 255, 0.88);
+      grid-column: 2;
+      color: var(--c-muted);
       font-size: var(--fs-sm);
-      line-height: 1.45;
+      line-height: 1.5;
       margin-bottom: 14px;
-      max-width: 380px;
+      max-width: 420px;
     }
     .vp-bento-tile__cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      color: var(--c-yellow);
+      grid-column: 2;
+      justify-self: start;
+      color: var(--c-blue-deep);
       font-weight: 800;
       font-size: var(--fs-sm);
+      border-bottom: 3px solid var(--c-yellow);
+      padding-bottom: 2px;
     }
+    .vp-bento-tile:hover .vp-bento-tile__cta { color: var(--c-blue); }
 
     @media (max-width: 1024px) {
-      .vp-bento-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 240px;
-      }
+      .vp-bento-grid { grid-template-columns: repeat(2, 1fr); }
       .vp-bento-tile,
-      .vp-bento-tile:nth-child(4),
-      .vp-bento-tile:nth-child(5) { grid-column: span 1; }
+      .vp-bento-tile:nth-child(4) { grid-column: span 1; }
+      .vp-bento-tile:nth-child(5) { grid-column: span 2; }
     }
     @media (max-width: 560px) {
-      .vp-bento-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+      .vp-bento-grid { grid-template-columns: 1fr; gap: 40px; }
+      .vp-bento-tile:nth-child(5) { grid-column: span 1; }
+      .vp-bento-tile:nth-child(4) .vp-bento-tile__photo,
+      .vp-bento-tile:nth-child(5) .vp-bento-tile__photo { aspect-ratio: 4 / 3; }
       .vp-bento { padding: 64px 0 70px; }
     }
 

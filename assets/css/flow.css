@@ -221,63 +221,47 @@ em.highlight::after,
 .card--soft { box-shadow: var(--sh-soft); border: 1.5px solid var(--c-border); }
 
 
-/* —— Bento tile (s foto bg) —— */
+/* —— Bento tile: editorial karty (směr A, Marv 16. 9. 2026) ——
+   Čistá fotka bez modrého filtru, pod ní linka, číslo, nadpis a popis. */
 .bento {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-auto-rows: 200px;
-  gap: 18px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 44px 24px;
 }
 .bento-tile {
-  position: relative;
-  border-radius: var(--r-card);
-  overflow: hidden;
-  border: 2px solid var(--c-blue-deep);
-  box-shadow: 5px 5px 0 0 var(--c-blue-deep);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   text-decoration: none;
-  transition: transform var(--t), box-shadow var(--t);
-  color: var(--c-white);
+  color: var(--c-text);
 }
-.bento-tile:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 0 var(--c-blue-deep); }
 .bento-tile-photo {
-  position: absolute;
-  inset: 0;
+  aspect-ratio: 4 / 5;
+  border-radius: 22px;
   background-size: cover;
   background-position: center;
-  z-index: 0;
-  transition: transform var(--t-slow);
+  margin-bottom: 18px;
+  transition: transform var(--t);
 }
-.bento-tile-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(20, 37, 107, 0) 25%, rgba(20, 37, 107, 0.85) 100%);
+.bento-tile:hover .bento-tile-photo { transform: translateY(-4px); }
+.bento-tile-body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 12px;
+  align-items: baseline;
+  border-top: 1px solid var(--c-border);
+  padding-top: 14px;
 }
-.bento-tile:hover .bento-tile-photo { transform: scale(1.05); }
-.bento-tile-body { position: relative; z-index: 2; padding: var(--space-md); }
 .bento-tile-num {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 38px; height: 38px;
-  background: var(--c-yellow); color: var(--c-blue-deep);
-  border-radius: 50%;
-  border: 2px solid var(--c-blue-deep);
+  grid-row: span 2;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: var(--fs-sm);
-  margin-bottom: 12px;
+  letter-spacing: 0.1em;
+  color: var(--c-blue);
 }
-.bento-tile h3 { color: var(--c-white); font-size: var(--fs-lg); margin: 0 0 6px; }
-.bento-tile p { color: rgba(255, 255, 255, 0.9); font-size: var(--fs-sm); margin: 0; line-height: 1.45; }
-.bento-tile.is-feature { grid-column: span 3; grid-row: span 2; }
-.bento-tile.is-feature .bento-tile-body { padding: 34px; }
-.bento-tile.is-feature h3 { font-size: 1.85rem; }
-.bento-tile.is-med { grid-column: span 3; grid-row: span 1; }
-.bento-tile.is-wide { grid-column: span 2; grid-row: span 1; }
-.bento-tile.is-compact { grid-column: span 1; grid-row: span 1; }
-.bento-tile.is-compact p { display: none; }
+.bento-tile h3 { color: var(--c-blue-deep); font-size: var(--fs-lg); line-height: 1.2; margin: 0 0 6px; }
+.bento-tile p { grid-column: 2; color: var(--c-muted); font-size: var(--fs-sm); margin: 0; line-height: 1.5; }
+.bento-tile:hover h3 { color: var(--c-blue); }
 
 
 /* —— Form —— */
@@ -1454,22 +1438,13 @@ body.no-messenger .msg-fab { display: none; }
   .burger { display: block; }
   .site-footer__cols { grid-template-columns: 1fr 1fr; gap: var(--space-md) 20px; }
   .site-footer__top { flex-direction: column; align-items: flex-start; gap: var(--space-md); }
-  .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
-  .bento-tile.is-feature { grid-column: span 2; grid-row: span 2; }
-  .bento-tile.is-med { grid-column: span 2; }
-  .bento-tile.is-wide,
-  .bento-tile.is-compact { grid-column: span 1; }
-  .bento-tile.is-compact p { display: block; }
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .bento-tile-photo { aspect-ratio: 4 / 3; }
   .section { padding: var(--space-xl) 0; }
 }
 
 @media (max-width: 560px) {
-  .bento { grid-template-columns: 1fr; }
-  .bento-tile,
-  .bento-tile.is-feature,
-  .bento-tile.is-med,
-  .bento-tile.is-wide,
-  .bento-tile.is-compact { grid-column: span 1; grid-row: span 1; }
+  .bento { grid-template-columns: 1fr; gap: 36px; }
 }
 
 /* ============================================================
