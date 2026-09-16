@@ -68,9 +68,13 @@
   }
 
   // ───── Callback form handler (Apps Script endpoint)
+  // Stejny handler pro hlavni formular (#callback-form) i doplnkovy
+  // "zavolejte mi" pod sekci Pojdme se poznat na homepage ([data-callback-form]).
   function initCallbackForm() {
-    var form = document.getElementById('callback-form');
-    if (!form) return;
+    document.querySelectorAll('#callback-form, [data-callback-form]').forEach(setupCallbackForm);
+  }
+
+  function setupCallbackForm(form) {
 
     var SCRIPT_URL = form.dataset.endpoint;
     if (!SCRIPT_URL) {
@@ -104,7 +108,13 @@
       var bookType = sel && BOOKING_EMBED[sel.value] ? sel.value : '';
 
       var body;
-      if (bookType) {
+      if (form.hasAttribute('data-callback-form')) {
+        body = IS_EN
+          ? '<h3>Thank you' + (firstName ? ', ' + firstName : '') + '!</h3>' +
+            '<p>We\'ll call you within one business day.</p>'
+          : '<h3>Děkujeme, máme to!</h3>' +
+            '<p>Zavoláme vám do 1 pracovního dne.</p>';
+      } else if (bookType) {
         var isOnline = bookType === 'online';
         var embedTitle = IS_EN
           ? (isOnline ? 'Book an online meeting' : 'Book a school tour')
@@ -532,6 +542,22 @@
     });
   }
 
+  // Homepage: rozbalovaci "zavolejte mi" pod tremi cestami
+  function initMeetCallback() {
+    var btn = document.querySelector('.meet__callback-toggle');
+    var form = document.getElementById('phone-callback-form');
+    if (!btn || !form) return;
+    btn.addEventListener('click', function () {
+      form.hidden = !form.hidden;
+      btn.setAttribute('aria-expanded', String(!form.hidden));
+      if (!form.hidden) {
+        var first = form.querySelector('input[name="name"]');
+        if (first) first.focus({ preventScroll: true });
+        form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  }
+
   function initLittleFlowOpenDay() {
     var card = document.getElementById('lf-openday');
     if (!card) return;
@@ -784,6 +810,7 @@
     initCallbackForm();
     initFormCloserDropdown();
     initMeetSection();
+    initMeetCallback();
     initLittleFlowOpenDay();
     initLightbox();
     initSmoothScroll();

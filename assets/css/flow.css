@@ -1570,6 +1570,20 @@ body.no-messenger .msg-fab { display: none; }
 .meet__slot--none { font-weight: 600; color: var(--c-muted); border-style: dashed; }
 .meet__slot--none[aria-pressed="true"] { background: var(--c-yellow-soft); color: var(--c-blue-deep); }
 
+/* Homepage: "zavolejte mi" pod tremi cestami */
+.meet__callback { margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--c-border); text-align: center; }
+.meet__callback-q { font-size: var(--fs-base); color: var(--c-muted); margin: 0; }
+.meet__callback-toggle { background: none; border: 0; padding: 0 0 2px; margin-left: 6px; font: inherit; font-weight: 800; color: var(--c-blue-deep); border-bottom: 3px solid var(--c-yellow); cursor: pointer; }
+.meet__callback-toggle:hover { color: var(--c-blue); }
+.meet__callback-form { max-width: 900px; margin: 26px auto 0; text-align: left; }
+.meet__callback-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.meet__callback-row { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap; margin-top: 18px; }
+.meet__callback-note { margin: 12px 0 0; font-size: var(--fs-sm); color: var(--c-muted); }
+.meet__callback .form-success { margin: 26px auto 0; }
+@media (max-width: 720px) {
+  .meet__callback-grid { grid-template-columns: 1fr; }
+  .meet__callback-row .btn { width: 100%; justify-content: center; }
+}
 .meet__foot { margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--c-border); text-align: center; font-size: var(--fs-sm); color: var(--c-muted); }
 .meet__foot a { color: var(--c-blue); font-weight: 700; }
 

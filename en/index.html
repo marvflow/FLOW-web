@@ -168,7 +168,7 @@
   </script>
   <link rel="stylesheet" href="../assets/css/cmp.css">
 
-  <link rel="stylesheet" href="../assets/css/flow.css?v=20260916f">
+  <link rel="stylesheet" href="../assets/css/flow.css?v=20260916g">
 
   <!-- Page-specific CSS (homepage) -->
   <style>
@@ -774,44 +774,123 @@
     </div>
   </section>
 
-  <!-- CALLBACK FORM -->
-  <section class="callback">
-    <div class="container--narrow">
-      <div class="callback__head">
-        <span class="eyebrow">Schedule a meeting</span>
-        <h2 class="h-section">Let's <em>schedule a meeting</em>.</h2>
-        <p class="lead text-center" style="margin-inline: auto;">Leave us your contact. We'll call you within one business day to arrange a personal visit or an Open Day.</p>
-      </div>
+  <!-- POJĎME SE POZNAT + zavolejte mi (Marv 16. 9. 2026) -->
+<section class="meet" id="form">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Let's get to know each other</span>
+      <h2 class="h-section">Come and see <em style="font-style:normal;color:var(--c-blue);">how we teach</em>.</h2>
+      <p class="lead" style="margin-inline:auto;text-align:center;">Three ways to get to know us. Choose what suits you.</p>
+    </div>
 
-      <form id="callback-form" class="callback__form" data-endpoint="https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec" novalidate>
-        <input type="hidden" name="source" value="homepage-callback">
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="callback__honeypot" aria-hidden="true">
+    <div class="meet__grid">
 
-        <div class="callback__grid">
+      <article class="meet__path" data-path="zs-od" aria-expanded="false">
+        <span class="meet__num">01</span>
+        <span class="meet__name">Open Day</span>
+        <span class="meet__when" data-meet-next>loading dates…</span>
+        <p class="meet__desc">For parents and children. Walk through the school, meet the team and see classes in action. <b data-meet-count></b></p>
+        <button type="button" class="meet__cta">Choose a date →</button>
+      </article>
+
+      <article class="meet__path" data-path="kafe" aria-expanded="false">
+        <span class="meet__num">02</span>
+        <span class="meet__name">School Tour with leadership</span>
+        <span class="meet__when">Tue and Thu · 9:00–9:45 or 10:45–11:30</span>
+        <p class="meet__desc">A personal tour with the school leadership. Room to ask anything about your child.</p>
+        <button type="button" class="meet__cta">Choose a time →</button>
+      </article>
+
+      <article class="meet__path" data-path="online" aria-expanded="false">
+        <span class="meet__num">03</span>
+        <span class="meet__name">Online meeting</span>
+        <span class="meet__when">Tue and Thu · 10:00–10:30</span>
+        <p class="meet__desc">When you'd rather not travel. A short call to talk about what you're looking for.</p>
+        <button type="button" class="meet__cta">Choose a time →</button>
+      </article>
+
+    </div>
+
+    <div class="meet__panel" id="meet-panel" hidden>
+      <h3 class="meet__panel-head" data-meet-title></h3>
+      <p class="meet__panel-note" data-meet-note></p>
+
+      <span class="meet__slots-label" data-meet-slots-label hidden>Choose a date</span>
+      <div class="meet__slots" data-meet-slots role="group" aria-label="Open Day dates" hidden></div>
+
+      <!-- Rezervacni okno pro prohlidku a online schuzku. Naplni ho flow.js. -->
+      <div class="meet__embed" data-meet-embed hidden></div>
+
+      <form id="callback-form" class="form-closer__card" style="margin-top:22px;" data-endpoint="https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec" novalidate>
+        <input type="hidden" name="source" value="homepage-form">
+        <input type="hidden" name="lang" value="en">
+        <input type="hidden" name="event_title" id="form-closer-event-title" value="">
+        <input type="hidden" name="event_date" id="form-closer-event-date" value="">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-closer__honeypot" aria-hidden="true">
+
+        <div class="form-closer__grid">
           <div class="form-field">
-            <label for="cc-name">Name</label>
-            <input class="form-input" id="cc-name" name="name" type="text" required placeholder="John Smith">
+            <label for="form-closer-name">Name</label>
+            <input class="form-input" id="form-closer-name" name="name" type="text" required placeholder="John Smith">
           </div>
           <div class="form-field">
-            <label for="cc-email">Email</label>
-            <input class="form-input" id="cc-email" name="email" type="email" required placeholder="you@email.com">
+            <label for="form-closer-email">Email</label>
+            <input class="form-input" id="form-closer-email" name="email" type="email" required placeholder="you@email.com">
           </div>
           <div class="form-field">
-            <label for="cc-phone">Phone</label>
-            <input class="form-input" id="cc-phone" name="phone" type="tel" required placeholder="+420 ___ ___ ___">
+            <label for="form-closer-phone">Phone <span class="form-closer__field-hint">(optional)</span></label>
+            <input class="form-input" id="form-closer-phone" name="phone" type="tel" placeholder="+420 ___ ___ ___">
+          </div>
+          <div class="form-field form-closer__select-field">
+            <label for="form-closer-meeting">Preferred date</label>
+            <select class="form-select" id="form-closer-meeting" name="meeting" required>
+              <option value="" disabled selected>Choose a date or meeting type</option>
+            </select>
           </div>
         </div>
 
-        <div class="callback__submit-row">
-          <label class="form-gdpr callback__gdpr">
+        <div class="form-closer__submit-row">
+          <label class="form-gdpr">
+            <input type="checkbox" name="gdpr_consent" required>
+            <span>I consent to personal data processing per the <a href="gdpr">GDPR policy</a>.</span>
+          </label>
+          <button type="submit" class="btn btn-primary">Submit →</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="meet__callback">
+      <p class="meet__callback-q">Rather not pick a time? <button type="button" class="meet__callback-toggle" aria-expanded="false" aria-controls="phone-callback-form">Leave your details and we'll call you →</button></p>
+      <form id="phone-callback-form" class="meet__callback-form" data-callback-form data-endpoint="https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec" hidden novalidate>
+        <input type="hidden" name="source" value="homepage-callback">
+        <input type="hidden" name="lang" value="en">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-closer__honeypot" aria-hidden="true">
+        <div class="meet__callback-grid">
+          <div class="form-field">
+            <label for="pc-name">Name</label>
+            <input class="form-input" id="pc-name" name="name" type="text" required placeholder="John Smith">
+          </div>
+          <div class="form-field">
+            <label for="pc-email">Email</label>
+            <input class="form-input" id="pc-email" name="email" type="email" required placeholder="you@email.com">
+          </div>
+          <div class="form-field">
+            <label for="pc-phone">Phone</label>
+            <input class="form-input" id="pc-phone" name="phone" type="tel" required placeholder="+420 ___ ___ ___">
+          </div>
+        </div>
+        <div class="meet__callback-row">
+          <label class="form-gdpr">
             <input type="checkbox" name="gdpr_consent" required>
             <span>I consent to personal data processing per the <a href="gdpr">GDPR policy</a>.</span>
           </label>
           <button type="submit" class="btn btn-primary">Call me →</button>
         </div>
+        <p class="meet__callback-note">We'll get back to you within one business day.</p>
       </form>
     </div>
-  </section>
+  </div>
+</section>
 
 </main>
 
@@ -893,7 +972,7 @@
 <!-- FLOW-FOOTER-EN-END -->
 
 <script defer src="../assets/js/cmp.js?v=20260916c"></script>
-<script src="../assets/js/flow.js?v=20260916d"></script>
+<script src="../assets/js/flow.js?v=20260916g"></script>
 
 </body>
 </html>
