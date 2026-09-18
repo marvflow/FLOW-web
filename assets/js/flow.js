@@ -565,6 +565,8 @@
     if (!pop) return;
 
     var KEY = 'flow-dod-pop';
+    var SNOOZE_CLOSE = 6 / 24;   // po zavreni: 6 hodin
+    var SNOOZE_CLICK = 30;       // po kliknuti na rezervaci: 30 dni
     function snoozed() {
       try { return Date.now() < (parseInt(localStorage.getItem(KEY), 10) || 0); } catch (e) { return false; }
     }
@@ -606,20 +608,21 @@
 
     pop.addEventListener('click', function (e) {
       if (e.target.closest('[data-dod-go]')) {
-        close(30);
+        close(SNOOZE_CLICK);
         if (window.dataLayer) window.dataLayer.push({ event: 'dod_popup_click' });
         var cta = document.querySelector('.meet__path[data-path="zs-od"] .meet__cta');
         if (cta) setTimeout(function () { cta.click(); }, 400);
         return;
       }
-      if (e.target.closest('[data-dod-close]')) close(7);
+      if (e.target.closest('[data-dod-close]')) close(SNOOZE_CLOSE);
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && pop.classList.contains('is-open')) close(7);
+      if (e.key === 'Escape' && pop.classList.contains('is-open')) close(SNOOZE_CLOSE);
     });
 
-    document.addEventListener('flow:options-ready', function () { setTimeout(show, 6000); });
-    setTimeout(show, 9000);
+    // Marv 18. 9.: ukazat hned po prichodu na HP, po zavreni klid 6 hodin.
+    document.addEventListener('flow:options-ready', show);
+    setTimeout(show, 2500);   // pojistka, kdyby sheet nacital dele
     window.addEventListener('scroll', function () {
       if (window.scrollY > document.body.scrollHeight * 0.3) show();
     }, { passive: true });
