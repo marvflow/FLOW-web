@@ -168,7 +168,7 @@
   </script>
   <link rel="stylesheet" href="assets/css/cmp.css">
 
-  <link rel="stylesheet" href="assets/css/flow.css?v=20260916g">
+  <link rel="stylesheet" href="assets/css/flow.css?v=20260918a">
 
   <!-- Page-specific CSS (homepage) -->
   <style>
@@ -891,6 +891,27 @@
 </section>
 
 </main>
+<!-- POPUP: Den otevřených dveří -->
+<div class="dod-pop" id="dod-pop" role="dialog" aria-modal="true" aria-labelledby="dod-pop-title">
+  <div class="dod-pop__backdrop" data-dod-close></div>
+  <div class="dod-pop__card">
+    <button class="dod-pop__close" type="button" aria-label="Zavřít" data-dod-close>&times;</button>
+    <div class="dod-pop__photo" style="background-image:url('images/deti-programovani-2026.jpg')"></div>
+    <div class="dod-pop__body">
+      <span class="dod-pop__eyebrow">Přijímáme do ZŠ a MŠ · 2026/27</span>
+      <h2 id="dod-pop-title">Přijďte na <em>den otevřených dveří</em>.</h2>
+      <p class="dod-pop__lead">Projdete si školu v běžném provozu, potkáte učitele i vedení a zeptáte se na cokoli. Pro rodiče i děti.</p>
+      <p class="dod-pop__date" data-dod-date>Nejbližší termín</p>
+      <p class="dod-pop__cap">Kapacita je omezená, přihlaste se včas.</p>
+      <div class="dod-pop__cta">
+        <a href="#form" class="btn btn-primary" data-dod-go>Rezervovat místo →</a>
+        <button type="button" class="dod-pop__later" data-dod-close>Teď ne, díky</button>
+      </div>
+      <p class="dod-pop__note">Nehodí se vám termín? Níže na stránce si vyberete prohlídku s vedením nebo online schůzku.</p>
+    </div>
+  </div>
+</div>
+
 
 
 <!-- ===== FOOTER ===== -->
@@ -969,7 +990,7 @@
 <!-- FLOW-FOOTER-END -->
 
 <script defer src="assets/js/cmp.js?v=20260916c"></script>
-<script src="assets/js/flow.js?v=20260916g"></script>
+<script src="assets/js/flow.js?v=20260918a"></script>
 
 </body>
 </html>

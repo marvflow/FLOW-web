@@ -558,6 +558,73 @@
     });
   }
 
+  // ───── Popup Den otevřených dveří (jen homepage)
+  // Termín tahá ze stejného selectu jako sekce .meet — nic se nepíše ručně.
+  function initDodPopup() {
+    var pop = document.getElementById('dod-pop');
+    if (!pop) return;
+
+    var KEY = 'flow-dod-pop';
+    function snoozed() {
+      try { return Date.now() < (parseInt(localStorage.getItem(KEY), 10) || 0); } catch (e) { return false; }
+    }
+    function snooze(days) {
+      try { localStorage.setItem(KEY, String(Date.now() + days * 864e5)); } catch (e) {}
+    }
+    if (snoozed()) return;
+
+    var shown = false;
+
+    function fillDate() {
+      var sel = document.getElementById('form-closer-meeting');
+      if (!sel) return false;
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value === 'zs-od') {
+          var label = sel.options[i].dataset.dateLabel || sel.options[i].textContent;
+          var el = pop.querySelector('[data-dod-date]');
+          if (el) el.textContent = (IS_EN ? 'Next date: ' : 'Nejbližší termín: ') + label;
+          return true;
+        }
+      }
+      return false;   // v sheetu není žádný termín DOD
+    }
+
+    function close(days) {
+      pop.classList.remove('is-open');
+      document.body.style.overflow = '';
+      snooze(days);
+    }
+
+    function show() {
+      if (shown || snoozed()) return;
+      if (!fillDate()) return;
+      shown = true;
+      pop.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      if (window.dataLayer) window.dataLayer.push({ event: 'dod_popup_shown' });
+    }
+
+    pop.addEventListener('click', function (e) {
+      if (e.target.closest('[data-dod-go]')) {
+        close(30);
+        if (window.dataLayer) window.dataLayer.push({ event: 'dod_popup_click' });
+        var cta = document.querySelector('.meet__path[data-path="zs-od"] .meet__cta');
+        if (cta) setTimeout(function () { cta.click(); }, 400);
+        return;
+      }
+      if (e.target.closest('[data-dod-close]')) close(7);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && pop.classList.contains('is-open')) close(7);
+    });
+
+    document.addEventListener('flow:options-ready', function () { setTimeout(show, 6000); });
+    setTimeout(show, 9000);
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > document.body.scrollHeight * 0.3) show();
+    }, { passive: true });
+  }
+
   function initLittleFlowOpenDay() {
     var card = document.getElementById('lf-openday');
     if (!card) return;
@@ -811,6 +878,7 @@
     initFormCloserDropdown();
     initMeetSection();
     initMeetCallback();
+    initDodPopup();
     initLittleFlowOpenDay();
     initLightbox();
     initSmoothScroll();

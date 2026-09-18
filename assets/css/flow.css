@@ -1432,6 +1432,68 @@ body.no-messenger .msg-fab { display: none; }
 }
 
 
+/* ───── POPUP: Den otevřených dveří (homepage, Marv 18. 9. 2026) ─────
+   Termín se bere ze stejného zdroje jako sekce .meet (Eventy sheet).
+   Žádný termín v sheetu = popup se neukáže. */
+.dod-pop { position: fixed; inset: 0; z-index: 9000; display: none; }
+.dod-pop.is-open { display: block; }
+.dod-pop__backdrop { position: absolute; inset: 0; background: rgba(20, 37, 107, 0.55); }
+.dod-pop__card {
+  position: relative;
+  z-index: 2;
+  width: min(920px, 92vw);
+  margin: min(12vh, 90px) auto 0;
+  background: var(--c-white);
+  border: 2px solid var(--c-blue-deep);
+  border-radius: 28px;
+  box-shadow: 10px 10px 0 0 var(--c-yellow);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+.dod-pop__photo { background-size: cover; background-position: 40% center; min-height: 360px; }
+.dod-pop__body { padding: 34px 34px 30px; }
+.dod-pop__eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-blue-deep);
+  border-bottom: 3px solid var(--c-yellow);
+  padding-bottom: 3px;
+  margin-bottom: 16px;
+}
+.dod-pop h2 { font-size: 1.9rem; line-height: 1.15; color: var(--c-blue-deep); margin: 0 0 12px; }
+.dod-pop h2 em { font-style: normal; color: var(--c-blue); }
+.dod-pop__lead { color: var(--c-muted); font-size: var(--fs-base); line-height: 1.5; margin: 0 0 18px; }
+.dod-pop__date { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--c-blue-deep); margin: 0 0 6px; }
+.dod-pop__cap { font-size: var(--fs-sm); color: var(--c-muted); margin: 0 0 20px; }
+.dod-pop__cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.dod-pop__later {
+  background: none; border: 0; padding: 0;
+  font: inherit; font-size: var(--fs-sm);
+  color: var(--c-muted); text-decoration: underline; cursor: pointer;
+}
+.dod-pop__later:hover { color: var(--c-blue); }
+.dod-pop__close {
+  position: absolute; top: 12px; right: 14px; z-index: 3;
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 0; background: rgba(255, 255, 255, 0.92);
+  color: var(--c-blue-deep); font-size: 22px; line-height: 1; cursor: pointer;
+}
+.dod-pop__note { margin: 16px 0 0; font-size: var(--fs-xs); color: var(--c-muted); }
+@media (max-width: 760px) {
+  .dod-pop__card { grid-template-columns: 1fr; margin-top: 7vh; max-height: 88vh; overflow-y: auto; }
+  .dod-pop__photo { min-height: 140px; }
+  .dod-pop__body { padding: 24px 22px 26px; }
+  .dod-pop h2 { font-size: 1.5rem; }
+  .dod-pop__cta { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .dod-pop__cta .btn { width: 100%; justify-content: center; }
+}
+
+
 /* ───── 7. MEDIA QUERIES ───────────────────────────────────── */
 @media (max-width: 880px) {
   .site-header__inner { padding: 16px 0; }
