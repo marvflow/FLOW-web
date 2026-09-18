@@ -1437,7 +1437,14 @@ body.no-messenger .msg-fab { display: none; }
    Žádný termín v sheetu = popup se neukáže. */
 .dod-pop { position: fixed; inset: 0; z-index: 9000; display: none; }
 .dod-pop.is-open { display: block; }
-.dod-pop__backdrop { position: absolute; inset: 0; background: rgba(20, 37, 107, 0.55); }
+.dod-pop__backdrop {
+  position: absolute;
+  inset: 0;
+  /* Tmave pozadi + rozostreni, aby popup nesplyval s modrym hero (Marv 18. 9.) */
+  background: rgba(8, 15, 48, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
 .dod-pop__card {
   position: relative;
   z-index: 2;
