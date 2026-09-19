@@ -143,18 +143,6 @@
       font-weight: 600;
     }
     .nt-hero__badge::before { content: "✓ "; color: var(--c-yellow); font-weight: 800; }
-    .nt-hero__photo {
-      border-radius: 24px;
-      overflow: hidden;
-      border: 2px solid var(--c-yellow);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
-      aspect-ratio: 21/9;
-      margin-top: var(--space-md);
-    }
-    .nt-hero__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    @media (max-width: 720px) {
-      .nt-hero__photo { aspect-ratio: 16/9; border-radius: 18px; }
-    }
 
     /* INTRO */
     .nt-intro {
@@ -347,7 +335,6 @@
     @media (max-width: 880px) {
       .nt-hero { padding: 56px 0 70px; border-radius: 0 0 24px 24px; }
       .nt-hero__grid { grid-template-columns: 1fr; gap: var(--space-lg); }
-      .nt-hero__photo { max-width: 420px; margin: 0 auto; }
       .nt-intro { padding: 64px 0; }
       .nt-intro__text { font-size: 1.3rem; }
       .nt-team { padding: 64px 0; }
@@ -464,9 +451,6 @@
           </div>
         </div>
 
-        <div class="nt-hero__photo">
-          <img src="../images/nase-skola/tym/flow-team.jpg" alt="FLOW teaching team" loading="eager">
-        </div>
 
       </div>
     </div>
@@ -562,13 +546,13 @@
           <p class="nt-card__role">Class teacher, Andromeda (upper school)</p>
         </article>
         <article class="nt-card" data-category="ucitele">
-          <div class="nt-card__photo nt-card__photo--ph" aria-hidden="true"><span>PH</span></div>
+          <div class="nt-card__photo"><img src="../images/nase-skola/tym/petr-2026.jpg?v=3" alt="Petr Hodonský" loading="lazy" width="500" height="500"></div>
           <span class="nt-card__cat">Teachers</span>
           <h3 class="nt-card__name">Petr Hodonský</h3>
           <p class="nt-card__role">Czech language, upper school</p>
         </article>
         <article class="nt-card" data-category="ucitele">
-          <div class="nt-card__photo"><img src="../images/nase-skola/tym/filip.jpg?v=3" alt="Filip Brunclík" loading="lazy" width="500" height="500"></div>
+          <div class="nt-card__photo"><img src="../images/nase-skola/tym/filip-2026.jpg?v=3" alt="Filip Brunclík" loading="lazy" width="500" height="500"></div>
           <span class="nt-card__cat">Teachers</span>
           <h3 class="nt-card__name">Filip Brunclík</h3>
           <p class="nt-card__role">PE teacher</p>
@@ -588,19 +572,19 @@
 
         <!-- LANGUAGES -->
         <article class="nt-card" data-category="jazyky">
-          <div class="nt-card__photo"><img src="../images/nase-skola/tym/kathleen.jpg?v=3" alt="Kathleen Moore" loading="lazy" width="500" height="500"></div>
+          <div class="nt-card__photo"><img src="../images/nase-skola/tym/kathleen-2026.jpg?v=3" alt="Kathleen Moore" loading="lazy" width="500" height="500"></div>
           <span class="nt-card__cat">Languages</span>
           <h3 class="nt-card__name">Kathleen Moore</h3>
           <p class="nt-card__role">English Teacher</p>
         </article>
         <article class="nt-card" data-category="jazyky">
-          <div class="nt-card__photo"><img src="../images/nase-skola/tym/karlie.jpg?v=3" alt="Karlienke Durandt" loading="lazy" width="500" height="500"></div>
+          <div class="nt-card__photo"><img src="../images/nase-skola/tym/karlie-2026.jpg?v=3" alt="Karlienke Durandt" loading="lazy" width="500" height="500"></div>
           <span class="nt-card__cat">Languages</span>
           <h3 class="nt-card__name">Karlienke Durandt</h3>
           <p class="nt-card__role">English Teacher</p>
         </article>
         <article class="nt-card" data-category="jazyky">
-          <div class="nt-card__photo"><img src="../images/nase-skola/tym/jelena.jpg?v=3" alt="Jelena Radojevic" loading="lazy" width="500" height="500"></div>
+          <div class="nt-card__photo"><img src="../images/nase-skola/tym/jelena-2026.jpg?v=3" alt="Jelena Radojevic" loading="lazy" width="500" height="500"></div>
           <span class="nt-card__cat">Languages</span>
           <h3 class="nt-card__name">Jelena Radojevic</h3>
           <p class="nt-card__role">English Teacher</p>
@@ -634,7 +618,7 @@
 
         <!-- SUPPORT -->
         <article class="nt-card" data-category="podpora">
-          <div class="nt-card__photo"><img src="../images/nase-skola/tym/stella.jpg?v=3" alt="Stella Viková" loading="lazy" width="500" height="500"></div>
+          <div class="nt-card__photo"><img src="../images/nase-skola/tym/stella-2026.jpg?v=3" alt="Stella Viková" loading="lazy" width="500" height="500"></div>
           <span class="nt-card__cat">Support</span>
           <h3 class="nt-card__name">Stella Viková</h3>
           <p class="nt-card__role">Special-needs teacher</p>
