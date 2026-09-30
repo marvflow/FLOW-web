@@ -586,6 +586,22 @@
     });
   }
 
+  // ───── ZAPISY BAR — pruh nad menu. Zavreni = 7 dni klid, po 8. 2. 2027 se neukaze.
+  function initZapisBar() {
+    var bar = document.querySelector('[data-zapis-bar]');
+    if (!bar) return;
+    var KEY = 'flow-zapis-bar';
+    var END = new Date('2027-02-08T00:00:00');
+    var hide = Date.now() >= END.getTime();
+    try { if (Date.now() < (parseInt(localStorage.getItem(KEY), 10) || 0)) hide = true; } catch (e) {}
+    if (hide) { bar.hidden = true; return; }
+    var btn = bar.querySelector('.zapis-bar__close');
+    if (btn) btn.addEventListener('click', function () {
+      bar.hidden = true;
+      try { localStorage.setItem(KEY, String(Date.now() + 7 * 864e5)); } catch (e) {}
+    });
+  }
+
   // Homepage: rozbalovaci "zavolejte mi" pod tremi cestami
   function initMeetCallback() {
     var btn = document.querySelector('.meet__callback-toggle');
@@ -925,6 +941,7 @@
     initFormCloserDropdown();
     initMeetSection();
     initBookSection();
+    initZapisBar();
     initMeetCallback();
     initDodPopup();
     initLittleFlowOpenDay();

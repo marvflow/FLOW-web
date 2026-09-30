@@ -168,7 +168,7 @@
   </script>
   <link rel="stylesheet" href="assets/css/cmp.css">
 
-  <link rel="stylesheet" href="assets/css/flow.css?v=20260918c">
+  <link rel="stylesheet" href="assets/css/flow.css?v=20261001a">
 
   <!-- Page-specific CSS (homepage) -->
   <style>
@@ -229,6 +229,9 @@
       max-width: 540px;
       line-height: 1.55;
     }
+    .hero__zapis { display: inline-block; margin-top: 18px; color: var(--c-white); text-decoration: none; font-size: var(--fs-sm); border-bottom: 2px solid var(--c-yellow); padding-bottom: 2px; }
+    .hero__zapis strong { color: var(--c-yellow); font-weight: 800; }
+    .hero__zapis:hover { color: var(--c-yellow); }
     .hero__ctas {
       display: flex; flex-wrap: wrap;
       gap: var(--space-sm);
@@ -534,6 +537,12 @@
 
 <!-- ===== HEADER ===== -->
 <!-- FLOW-NAV-START -->
+<div class="zapis-bar" data-zapis-bar>
+  <div class="zapis-bar__inner">
+    <a href="pro-zajemce/zapisy" class="zapis-bar__link"><strong>Zápisy do 1. třídy 2027/28:</strong> <span class="zapis-bar__dates">17. a 21. ledna, 4. a 7. února</span> <span class="zapis-bar__cta">Rezervovat →</span></a>
+    <button type="button" class="zapis-bar__close" aria-label="Zavřít">×</button>
+  </div>
+</div>
 <header class="site-header">
   <div class="site-header__inner">
     <a href="./" class="site-header__brand" aria-label="FLOW, domů">
@@ -594,6 +603,7 @@
             <a href="chci-do-flow" class="btn btn-primary">Chci do FLOW →</a>
             <a href="pro-zajemce.html#form" class="btn btn-secondary btn-secondary--on-dark">Přijít na den otevřených dveří</a>
           </div>
+          <a href="pro-zajemce/zapisy" class="hero__zapis"><strong>Zápisy 2027/28</strong> · 17. a 21. ledna, 4. a 7. února →</a>
 
           <div class="hero__stats">
             <div class="hero__stat">
@@ -639,7 +649,7 @@
         <a href="https://www.littleflow.cz/" class="hero__preview-card">
           <div class="hero__preview-icon">🌱</div>
           <h4>Little FLOW MŠ</h4>
-          <p>MŠ od září 2026, kapacita 24 dětí</p>
+          <p>Česko-anglická školka pro děti 2–6 let</p>
         </a>
         <a href="pro-zajemce" class="hero__preview-card">
           <div class="hero__preview-icon">✨</div>
@@ -992,7 +1002,7 @@
 <!-- FLOW-FOOTER-END -->
 
 <script defer src="assets/js/cmp.js?v=20260916c"></script>
-<script src="assets/js/flow.js?v=20260918c"></script>
+<script src="assets/js/flow.js?v=20261001a"></script>
 
 </body>
 </html>

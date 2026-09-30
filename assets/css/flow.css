@@ -1667,3 +1667,16 @@ body.no-messenger .msg-fab { display: none; }
   .meet__path:first-child { border-top: 0; padding-top: 0; }
   .meet__panel { padding: 24px 20px; }
 }
+
+/* ───── ZAPISY BAR — pruh nad menu (zapisy 2027/28), zaviratelny, vyprsi po 7. 2. 2027 */
+.zapis-bar { background: var(--c-yellow); color: var(--c-blue-deep); font-size: var(--fs-sm); position: relative; z-index: 101; }
+.zapis-bar[hidden] { display: none; }
+.zapis-bar__inner { width: min(var(--container), 92%); margin-inline: auto; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 9px 36px 9px 0; position: relative; }
+.zapis-bar__link { color: var(--c-blue-deep); text-decoration: none; text-align: center; line-height: 1.35; }
+.zapis-bar__link strong { font-weight: 800; }
+.zapis-bar__cta { font-weight: 800; border-bottom: 2px solid var(--c-blue-deep); padding-bottom: 1px; margin-left: 6px; white-space: nowrap; }
+.zapis-bar__link:hover .zapis-bar__cta { color: var(--c-blue); border-bottom-color: var(--c-blue); }
+.zapis-bar__close { position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: none; border: 0; font-size: 1.35rem; line-height: 1; color: var(--c-blue-deep); cursor: pointer; padding: 4px 6px; }
+@media (max-width: 600px) {
+  .zapis-bar__dates { display: none; }
+}
