@@ -156,16 +156,6 @@
   </url>
 
   <url>
-    <loc>https://www.skolaflow.cz/materska-skola-little-flow</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/materska-skola-little-flow" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/materska-skola-little-flow" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.skolaflow.cz/materska-skola-little-flow" />
-  </url>
-
-  <url>
     <loc>https://www.skolaflow.cz/nas-tym</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
@@ -383,15 +373,6 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/kurikulum" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/kurikulum" />
-  </url>
-
-  <url>
-    <loc>https://www.skolaflow.cz/en/materska-skola-little-flow</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/materska-skola-little-flow" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/materska-skola-little-flow" />
   </url>
 
   <url>

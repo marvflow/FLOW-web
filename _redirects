@@ -32,6 +32,10 @@
 # Kampus má vlastní stránku, tak ať tam návštěvník dojde.
 /slavnostni-otevreni                 /novy-kampus               301
 
+# Materska skola Little FLOW ma od 9/2026 vlastni web littleflow.cz
+/materska-skola-little-flow          https://www.littleflow.cz/     301
+/en/materska-skola-little-flow       https://www.littleflow.cz/en/  301
+
 # ------------------------------------------------------------
 # 4) Legacy Webflow CMS collection URLs
 #    /teacher/[slug] was the old per-teacher profile route
