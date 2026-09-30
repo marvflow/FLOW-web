@@ -314,6 +314,8 @@ em.highlight::after,
   box-shadow: 0 4px 16px rgba(20, 37, 107, 0.18);
   transition: transform 0.3s ease;
 }
+/* 1px modry pruh pod hlavickou: prekryje subpixelovou mezeru (bila linka po zavreni zapisove listy, 30. 9. 2026) */
+.site-header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--c-blue-deep); pointer-events: none; }
 .site-header.is-hidden {
   transform: translateY(-100%);
 }
@@ -1679,4 +1681,11 @@ body.no-messenger .msg-fab { display: none; }
 .zapis-bar__close { position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: none; border: 0; font-size: 1.35rem; line-height: 1; color: var(--c-blue-deep); cursor: pointer; padding: 4px 6px; }
 @media (max-width: 600px) {
   .zapis-bar__dates { display: none; }
+}
+
+/* Menu mezi 881–1200 px: polozky se nesmi lamat na dva radky */
+.site-nav__link, .site-nav__cta { white-space: nowrap; }
+@media (max-width: 1200px) and (min-width: 881px) {
+  .site-nav { gap: 2px; }
+  .site-nav__link { padding: 8px 10px; }
 }
