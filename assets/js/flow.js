@@ -542,6 +542,50 @@
     });
   }
 
+  // ───── REZERVACE — sekce .meet--book (zapisy): kazda cesta nese vlastni
+  // Google Calendar embed v data-book, titulek a poznamku v data-book-title/-note.
+  // Tlacitka [data-book-open="klic"] kdekoli na strance otevrou prislusnou cestu.
+  function initBookSection() {
+    var sec = document.querySelector('.meet--book');
+    if (!sec) return;
+    var panel  = sec.querySelector('.meet__panel');
+    var embed  = sec.querySelector('[data-meet-embed]');
+    var pTitle = sec.querySelector('[data-meet-title]');
+    var pNote  = sec.querySelector('[data-meet-note]');
+    if (!panel || !embed) return;
+
+    function openPath(key, scrollToSection) {
+      var path = sec.querySelector('.meet__path[data-path="' + key + '"]');
+      if (!path || !path.dataset.book) return;
+      sec.querySelectorAll('.meet__path').forEach(function (p) {
+        p.setAttribute('aria-expanded', String(p === path));
+      });
+      var title = path.dataset.bookTitle || '';
+      if (pTitle) pTitle.textContent = title;
+      if (pNote) pNote.textContent = path.dataset.bookNote || '';
+      embed.innerHTML = '<iframe src="' + path.dataset.book + '" title="' + title.replace(/"/g, '&quot;') +
+        '" width="100%" height="620" frameborder="0" style="border:0"></iframe>';
+      embed.hidden = false;
+      panel.hidden = false;
+      if (scrollToSection) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      else panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    sec.addEventListener('click', function (e) {
+      var cta = e.target.closest('.meet__cta');
+      if (!cta) return;
+      var path = cta.closest('.meet__path');
+      if (path) openPath(path.dataset.path, false);
+    });
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('[data-book-open]');
+      if (!a) return;
+      e.preventDefault();
+      openPath(a.getAttribute('data-book-open'), true);
+    });
+  }
+
   // Homepage: rozbalovaci "zavolejte mi" pod tremi cestami
   function initMeetCallback() {
     var btn = document.querySelector('.meet__callback-toggle');
@@ -880,6 +924,7 @@
     initCallbackForm();
     initFormCloserDropdown();
     initMeetSection();
+    initBookSection();
     initMeetCallback();
     initDodPopup();
     initLittleFlowOpenDay();
