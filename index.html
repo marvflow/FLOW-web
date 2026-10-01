@@ -533,6 +533,11 @@
       .strip__grid .lead { order: 3; }
       .strip__photo { order: 4; margin: 0 0 28px; }
       .strip__grid .btn { order: 5; align-self: flex-start; }
+      /* posuvniky na mobilu: pilire + reference (karta 82 % sirky, dalsi vykukuje) */
+      .bento, .testimonials__grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin: 0 -4.35vw; padding: 0 4.35vw 10px; scroll-padding: 0 4.35vw; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+      .bento::-webkit-scrollbar, .testimonials__grid::-webkit-scrollbar { display: none; }
+      .bento > .bento-tile, .testimonials__grid > .testimonial { flex: 0 0 82%; scroll-snap-align: start; }
+      .testimonials__grid > .testimonial { border: 1px solid var(--c-border); border-radius: 20px; padding: 22px 22px 20px; background: var(--c-white); }
     }
   </style>
   <!-- Meta Pixel Code -->
