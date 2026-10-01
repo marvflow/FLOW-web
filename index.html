@@ -525,6 +525,14 @@
       .section-head, .video-section__head { text-align: left; margin-left: 0; margin-right: 0; }
       .section-head .lead, .video-section__head .lead { text-align: left !important; margin-inline: 0 !important; }
       .video-pill { margin: 24px 0 0; }
+      /* system sekce na mobilu: bublina → nadpis → text → fotka → tlačítko */
+      .strip__grid { display: flex; flex-direction: column; gap: 0; }
+      .strip__grid > div:not(.strip__photo) { display: contents; }
+      .strip__grid .eyebrow { order: 1; align-self: flex-start; }
+      .strip__grid .h-section { order: 2; }
+      .strip__grid .lead { order: 3; }
+      .strip__photo { order: 4; margin: 0 0 28px; }
+      .strip__grid .btn { order: 5; align-self: flex-start; }
     }
   </style>
   <!-- Meta Pixel Code -->
