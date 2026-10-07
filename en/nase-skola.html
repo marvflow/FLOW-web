@@ -194,6 +194,9 @@
       transition: transform var(--t);
     }
     .ns-gallery__tile:nth-child(n+3) .ns-gallery__tile-photo { aspect-ratio: 4 / 3; }
+    /* 7 fotek: 2 velke + 3 mensi + 2 velke */
+    .ns-gallery__tile:nth-child(n+6) { grid-column: span 3; }
+    .ns-gallery__tile:nth-child(n+6) .ns-gallery__tile-photo { aspect-ratio: 16 / 9; }
     .ns-gallery__tile:hover .ns-gallery__tile-photo { transform: translateY(-4px); }
     .ns-gallery__tile-overlay { display: none; }
     .ns-gallery__tile-body {
@@ -326,7 +329,9 @@
       .ns-stats__grid { grid-template-columns: repeat(3, 1fr); row-gap: var(--space-md); }
       .ns-gallery__grid { grid-template-columns: 1fr 1fr; }
       .ns-gallery__tile,
-      .ns-gallery__tile:nth-child(n+3) { grid-column: span 1; }
+      .ns-gallery__tile:nth-child(n+3),
+      .ns-gallery__tile:nth-child(n+6) { grid-column: span 1; }
+      .ns-gallery__tile:nth-child(n+6) .ns-gallery__tile-photo { aspect-ratio: 4 / 3; }
       .ns-gallery__tile:nth-child(1) { grid-column: span 2; }
     }
     @media (max-width: 560px) {
@@ -508,13 +513,13 @@
       <div class="section-head">
         <span class="eyebrow">FLOW spaces</span>
         <h2 class="h-section">See what it <em style="font-style:normal;color:var(--c-blue);">looks like</em>.</h2>
-        <p class="lead" style="margin-inline:auto;text-align:center;">A tour of the school: from classrooms to the dining hall, canteen and cloakroom. Everywhere the children spend their day.</p>
+        <p class="lead" style="margin-inline:auto;text-align:center;">A tour of the school: classrooms, the Social Hub and the cloakroom. Everywhere the children spend their day.</p>
       </div>
 
       <div class="ns-gallery__grid">
 
-        <a href="../images/nase-skola/skola-trida__nase-skola.jpg" class="ns-gallery__tile ns-gallery__tile--feat" data-lightbox data-caption="<strong>Classroom</strong>Round tables for project-based learning." aria-label="View photo, FLOW classroom">
- <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/skola-trida__nase-skola.jpg')"></div>
+        <a href="../images/nase-skola/galerie-trida-2026.jpg" class="ns-gallery__tile ns-gallery__tile--feat" data-lightbox data-caption="<strong>Classroom</strong>Round tables for project-based learning." aria-label="View photo, Classroom">
+          <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/galerie-trida-2026.jpg');background-position:center 60%;"></div>
           <div class="ns-gallery__tile-overlay"></div>
           <div class="ns-gallery__tile-body">
             <span class="ns-gallery__tile-num">01</span>
@@ -523,18 +528,18 @@
           </div>
         </a>
 
-        <a href="../images/nase-skola/skola-recepce.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Reception</strong>Where we welcome you." aria-label="View photo, Reception">
- <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/skola-recepce.jpg')"></div>
+        <a href="../images/nase-skola/galerie-anglictina-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>English</strong>Daily English from Grade 1." aria-label="View photo, English">
+          <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/galerie-anglictina-2026.jpg');background-position:center 55%;"></div>
           <div class="ns-gallery__tile-overlay"></div>
           <div class="ns-gallery__tile-body">
             <span class="ns-gallery__tile-num">02</span>
-            <h3>Reception</h3>
-            <p>Where we welcome you.</p>
+            <h3>English</h3>
+            <p>Daily English from Grade 1.</p>
           </div>
         </a>
 
-        <a href="../images/nase-skola/skola-jidelna.jpeg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Social Hub</strong>The heart of the campus, for events of all kinds." aria-label="View photo, Social Hub">
- <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/skola-jidelna.jpeg')"></div>
+        <a href="../images/nase-skola/galerie-social-hub-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Social Hub</strong>The heart of the campus, for events of all kinds." aria-label="View photo, Social Hub">
+          <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/galerie-social-hub-2026.jpg');background-position:center 70%;"></div>
           <div class="ns-gallery__tile-overlay"></div>
           <div class="ns-gallery__tile-body">
             <span class="ns-gallery__tile-num">03</span>
@@ -543,23 +548,43 @@
           </div>
         </a>
 
-        <a href="../images/nase-skola/skola-kantyna.jpeg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Canteen</strong>A spot for snacks and short breaks." aria-label="View photo, Canteen">
- <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/skola-kantyna.jpeg')"></div>
+        <a href="../images/nase-skola/galerie-satna-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Cloakroom</strong>Every child has their own space." aria-label="View photo, Cloakroom">
+          <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/galerie-satna-2026.jpg');background-position:center 62%;"></div>
           <div class="ns-gallery__tile-overlay"></div>
           <div class="ns-gallery__tile-body">
             <span class="ns-gallery__tile-num">04</span>
-            <h3>Canteen</h3>
-            <p>A spot for snacks and short breaks.</p>
+            <h3>Cloakroom</h3>
+            <p>Every child has their own space.</p>
           </div>
         </a>
 
-        <a href="../images/nase-skola/skola-satna.jpeg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Cloakroom</strong>Every child has their own space." aria-label="View photo, Cloakroom">
- <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/skola-satna.jpeg')"></div>
+        <a href="../images/nase-skola/galerie-mimo-lavice-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Beyond the desk</strong>Children don't have to learn only at a desk." aria-label="View photo, Beyond the desk">
+          <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/galerie-mimo-lavice-2026.jpg');background-position:center 35%;"></div>
           <div class="ns-gallery__tile-overlay"></div>
           <div class="ns-gallery__tile-body">
             <span class="ns-gallery__tile-num">05</span>
-            <h3>Cloakroom</h3>
-            <p>Every child has their own space.</p>
+            <h3>Beyond the desk</h3>
+            <p>Children don't have to learn only at a desk.</p>
+          </div>
+        </a>
+
+        <a href="../images/nase-skola/galerie-luna-b-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Home classroom</strong>Whole-class learning at the interactive screen." aria-label="View photo, Home classroom">
+          <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/galerie-luna-b-2026.jpg');background-position:center 60%;"></div>
+          <div class="ns-gallery__tile-overlay"></div>
+          <div class="ns-gallery__tile-body">
+            <span class="ns-gallery__tile-num">06</span>
+            <h3>Home classroom</h3>
+            <p>Whole-class learning at the interactive screen.</p>
+          </div>
+        </a>
+
+        <a href="../images/nase-skola/galerie-trida-svetlo-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Light and space</strong>Large windows and daylight in the classrooms." aria-label="View photo, Light and space">
+          <div class="ns-gallery__tile-photo" style="background-image:url('../images/nase-skola/galerie-trida-svetlo-2026.jpg');background-position:center 50%;"></div>
+          <div class="ns-gallery__tile-overlay"></div>
+          <div class="ns-gallery__tile-body">
+            <span class="ns-gallery__tile-num">07</span>
+            <h3>Light and space</h3>
+            <p>Large windows and daylight in the classrooms.</p>
           </div>
         </a>
 

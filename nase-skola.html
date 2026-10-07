@@ -194,6 +194,9 @@
       transition: transform var(--t);
     }
     .ns-gallery__tile:nth-child(n+3) .ns-gallery__tile-photo { aspect-ratio: 4 / 3; }
+    /* 7 fotek: 2 velke + 3 mensi + 2 velke */
+    .ns-gallery__tile:nth-child(n+6) { grid-column: span 3; }
+    .ns-gallery__tile:nth-child(n+6) .ns-gallery__tile-photo { aspect-ratio: 16 / 9; }
     .ns-gallery__tile:hover .ns-gallery__tile-photo { transform: translateY(-4px); }
     .ns-gallery__tile-overlay { display: none; }
     .ns-gallery__tile-body {
@@ -326,7 +329,9 @@
       .ns-stats__grid { grid-template-columns: repeat(3, 1fr); row-gap: var(--space-md); }
       .ns-gallery__grid { grid-template-columns: 1fr 1fr; }
       .ns-gallery__tile,
-      .ns-gallery__tile:nth-child(n+3) { grid-column: span 1; }
+      .ns-gallery__tile:nth-child(n+3),
+      .ns-gallery__tile:nth-child(n+6) { grid-column: span 1; }
+      .ns-gallery__tile:nth-child(n+6) .ns-gallery__tile-photo { aspect-ratio: 4 / 3; }
       .ns-gallery__tile:nth-child(1) { grid-column: span 2; }
     }
     @media (max-width: 560px) {
@@ -509,13 +514,13 @@
       <div class="section-head">
         <span class="eyebrow">Prostory FLOW</span>
         <h2 class="h-section">Podívejte se, jak to <em style="font-style:normal;color:var(--c-blue);">u nás vypadá</em>.</h2>
-        <p class="lead" style="margin-inline:auto;text-align:center;">Tour po škole: od třídy po jídelnu, kantýnu a šatnu. Vše, kde děti tráví den.</p>
+        <p class="lead" style="margin-inline:auto;text-align:center;">Tour po škole: třídy, Social Hub i šatna. Vše, kde děti tráví den.</p>
       </div>
 
       <div class="ns-gallery__grid">
 
-        <a href="images/nase-skola/skola-trida__nase-skola.jpg" class="ns-gallery__tile ns-gallery__tile--feat" data-lightbox data-caption="<strong>Třída</strong>Kruhové stoly pro projektovou výuku." aria-label="Zobrazit fotku, Třída ve FLOW">
- <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/skola-trida__nase-skola.jpg')"></div>
+        <a href="images/nase-skola/galerie-trida-2026.jpg" class="ns-gallery__tile ns-gallery__tile--feat" data-lightbox data-caption="<strong>Třída</strong>Kruhové stoly pro projektovou výuku." aria-label="Zobrazit fotku, Třída">
+          <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/galerie-trida-2026.jpg');background-position:center 60%;"></div>
           <div class="ns-gallery__tile-overlay"></div>
           <div class="ns-gallery__tile-body">
             <span class="ns-gallery__tile-num">01</span>
@@ -524,18 +529,18 @@
           </div>
         </a>
 
-        <a href="images/nase-skola/skola-recepce.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Recepce</strong>Místo, kde vás vítáme." aria-label="Zobrazit fotku, Recepce">
- <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/skola-recepce.jpg')"></div>
+        <a href="images/nase-skola/galerie-anglictina-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Angličtina</strong>Denní angličtina od 1. třídy." aria-label="Zobrazit fotku, Angličtina">
+          <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/galerie-anglictina-2026.jpg');background-position:center 55%;"></div>
           <div class="ns-gallery__tile-overlay"></div>
           <div class="ns-gallery__tile-body">
             <span class="ns-gallery__tile-num">02</span>
-            <h3>Recepce</h3>
-            <p>Místo, kde vás vítáme.</p>
+            <h3>Angličtina</h3>
+            <p>Denní angličtina od 1. třídy.</p>
           </div>
         </a>
 
-        <a href="images/nase-skola/skola-jidelna.jpeg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Social Hub</strong>Srdce celého kampusu, určené pro různé typy akcí a eventů." aria-label="Zobrazit fotku, Social Hub">
- <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/skola-jidelna.jpeg')"></div>
+        <a href="images/nase-skola/galerie-social-hub-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Social Hub</strong>Srdce celého kampusu, určené pro různé typy akcí a eventů." aria-label="Zobrazit fotku, Social Hub">
+          <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/galerie-social-hub-2026.jpg');background-position:center 70%;"></div>
           <div class="ns-gallery__tile-overlay"></div>
           <div class="ns-gallery__tile-body">
             <span class="ns-gallery__tile-num">03</span>
@@ -544,23 +549,43 @@
           </div>
         </a>
 
-        <a href="images/nase-skola/skola-kantyna.jpeg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Kantýna</strong>Místo pro svačiny a krátké pauzy." aria-label="Zobrazit fotku, Kantýna">
- <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/skola-kantyna.jpeg')"></div>
+        <a href="images/nase-skola/galerie-satna-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Šatna</strong>Vlastní místo pro každé dítě." aria-label="Zobrazit fotku, Šatna">
+          <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/galerie-satna-2026.jpg');background-position:center 62%;"></div>
           <div class="ns-gallery__tile-overlay"></div>
           <div class="ns-gallery__tile-body">
             <span class="ns-gallery__tile-num">04</span>
-            <h3>Kantýna</h3>
-            <p>Místo pro svačiny a krátké pauzy.</p>
+            <h3>Šatna</h3>
+            <p>Vlastní místo pro každé dítě.</p>
           </div>
         </a>
 
-        <a href="images/nase-skola/skola-satna.jpeg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Šatna</strong>Vlastní místo pro každé dítě." aria-label="Zobrazit fotku, Šatna">
- <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/skola-satna.jpeg')"></div>
+        <a href="images/nase-skola/galerie-mimo-lavice-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Mimo lavice</strong>Děti se nemusí učit jen v lavici." aria-label="Zobrazit fotku, Mimo lavice">
+          <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/galerie-mimo-lavice-2026.jpg');background-position:center 35%;"></div>
           <div class="ns-gallery__tile-overlay"></div>
           <div class="ns-gallery__tile-body">
             <span class="ns-gallery__tile-num">05</span>
-            <h3>Šatna</h3>
-            <p>Vlastní místo pro každé dítě.</p>
+            <h3>Mimo lavice</h3>
+            <p>Děti se nemusí učit jen v lavici.</p>
+          </div>
+        </a>
+
+        <a href="images/nase-skola/galerie-luna-b-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Kmenová třída</strong>Společná výuka u interaktivní obrazovky." aria-label="Zobrazit fotku, Kmenová třída">
+          <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/galerie-luna-b-2026.jpg');background-position:center 60%;"></div>
+          <div class="ns-gallery__tile-overlay"></div>
+          <div class="ns-gallery__tile-body">
+            <span class="ns-gallery__tile-num">06</span>
+            <h3>Kmenová třída</h3>
+            <p>Společná výuka u interaktivní obrazovky.</p>
+          </div>
+        </a>
+
+        <a href="images/nase-skola/galerie-trida-svetlo-2026.jpg" class="ns-gallery__tile" data-lightbox data-caption="<strong>Světlo a prostor</strong>Velká okna a denní světlo ve třídách." aria-label="Zobrazit fotku, Světlo a prostor">
+          <div class="ns-gallery__tile-photo" style="background-image:url('images/nase-skola/galerie-trida-svetlo-2026.jpg');background-position:center 50%;"></div>
+          <div class="ns-gallery__tile-overlay"></div>
+          <div class="ns-gallery__tile-body">
+            <span class="ns-gallery__tile-num">07</span>
+            <h3>Světlo a prostor</h3>
+            <p>Velká okna a denní světlo ve třídách.</p>
           </div>
         </a>
 
