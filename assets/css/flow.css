@@ -1690,14 +1690,28 @@ body.no-messenger .msg-fab { display: none; }
   .site-nav__link { padding: 8px 10px; }
 }
 
-/* NAV — zúžení mezer, aby se vešel štítek "Nábor" u 2. stupně */
-@media (max-width: 1120px) and (min-width: 881px) {
-  .site-nav__link { padding: 8px 7px; font-size: 0.84rem; }
-  .site-nav .nav-ms__tag { margin-right: 5px; padding: 3px 4px; }
-  .site-nav__cta { padding-left: 16px; padding-right: 16px; font-size: 0.84rem; }
+/* ============================================================
+   PŘIJETÍ — pruh se 4 kartami hned pod menu (všechny stránky
+   kromě Zápisů a 2. stupně). Neodjíždí s menu, scrolluje s obsahem.
+   ============================================================ */
+.pj { background: var(--c-white, #fff); border-top: 3px solid var(--c-yellow); box-shadow: 0 6px 20px rgba(10, 20, 70, 0.08); position: relative; z-index: 5; }
+.pj__in { width: min(var(--container), 92%); margin-inline: auto; display: flex; align-items: center; gap: 20px; padding: 14px 0; }
+.pj__lbl span { display: inline-block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800; color: var(--c-blue-deep); border-bottom: 2px solid var(--c-yellow); line-height: 1.35; white-space: nowrap; }
+.pj__cards { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.pj-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--c-cream); color: var(--c-blue-deep); text-decoration: none; transition: transform var(--t), box-shadow var(--t); }
+.pj-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(10, 20, 70, 0.1); }
+.pj-card__ic { flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--c-yellow); display: grid; place-items: center; }
+.pj-card b { display: block; font-weight: 800; font-size: 0.95rem; line-height: 1.25; }
+.pj-card small { display: block; font-size: 0.8rem; opacity: 0.75; margin-top: 2px; line-height: 1.35; }
+.pj-card i { font-style: normal; margin-left: 4px; vertical-align: 2px; }
+@media (max-width: 1100px) {
+  .pj__lbl { display: none; }
 }
-@media (max-width: 980px) and (min-width: 881px) {
-  .site-nav .nav-ms__tag { display: none; }
-  .site-nav__link { padding: 8px 6px; }
-  .site-nav__cta { padding-left: 12px; padding-right: 12px; }
+@media (max-width: 880px) {
+  .pj__in { width: 100%; padding: 12px 0; }
+  .pj__cards { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; padding: 0 16px; gap: 10px; scrollbar-width: none; }
+  .pj__cards::-webkit-scrollbar { display: none; }
+  .pj__cards::after { content: ""; flex: 0 0 6px; }
+  .pj-card { flex: 0 0 78%; scroll-snap-align: start; }
 }
+
