@@ -1714,4 +1714,8 @@ body.no-messenger .msg-fab { display: none; }
   .pj__cards::after { content: ""; flex: 0 0 6px; }
   .pj-card { flex: 0 0 78%; scroll-snap-align: start; }
 }
-
+.pj-card--on { background: #fff; box-shadow: inset 0 0 0 2px var(--c-yellow); }
+.pj-card--on:hover { transform: none; }
+/* pruh je uvnitř hlavičky → drží se a schovává spolu s menu */
+.site-header:has(.pj)::after { display: none; }
+.site-header .pj { z-index: auto; }
