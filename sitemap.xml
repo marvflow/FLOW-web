@@ -483,4 +483,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/wellbeing" />
   </url>
 
+  <url>
+    <loc>https://www.skolaflow.cz/druhy-stupen</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

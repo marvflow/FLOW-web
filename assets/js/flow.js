@@ -358,6 +358,20 @@
       });
     }
 
+    // DOD pro 2. stupeň se v Eventy sheetu pozna podle titulku ("... 2. stupeň ...").
+    // Stranka s <body data-dod-scope="2st"> ukaze jen tyto DOD, vsechny ostatni stranky je vynechaji.
+    function scopeRows(rows) {
+      var only2 = document.body && document.body.getAttribute('data-dod-scope') === '2st';
+      window.FLOW_DOD_2ST = rows.filter(function (r) {
+        return r.type === 'zs-od' && /2\.\s*stupe|grades?\s*6/i.test(r.title + ' ' + (r.title_en || ''));
+      }).map(function (r) { return formatDatePart(r); });
+      return rows.filter(function (r) {
+        if (r.type !== 'zs-od') return true;
+        var is2 = /2\.\s*stupe|grades?\s*6/i.test(r.title + ' ' + (r.title_en || ''));
+        return only2 ? is2 : !is2;
+      });
+    }
+
     select.addEventListener('change', function () {
       var opt = select.options[select.selectedIndex];
       if (!opt) return;
@@ -368,7 +382,7 @@
     fetch(SHEET_CSV_URL + (SHEET_CSV_URL.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now())
       .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
       .then(function (text) {
-        var rows = parseCSV(text);
+        var rows = scopeRows(parseCSV(text));
         populate(rows.length ? rows : FALLBACK);
         select.dispatchEvent(new CustomEvent('flow:options-ready', { bubbles: true }));
       })
