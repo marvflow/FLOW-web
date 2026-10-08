@@ -488,5 +488,16 @@
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/druhy-stupen" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/druhy-stupen" />
+  </url>
+
+  <url>
+    <loc>https://www.skolaflow.cz/en/druhy-stupen</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.skolaflow.cz/druhy-stupen" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.skolaflow.cz/en/druhy-stupen" />
   </url>
 </urlset>
