@@ -62,3 +62,18 @@
 #    rule was removed. /en (no trailing slash) → /en/ for consistency.
 # ------------------------------------------------------------
 /en      /en/    301
+
+# ------------------------------------------------------------
+# 5) Blogové stuby (dříve meta refresh → teď 301, audit Damdit 10/2026)
+#    EN verze článků neexistují → česká verze článku
+# ------------------------------------------------------------
+/en/blog-post/marv-shamma-tedx-prague-ed                              /blog-post/marv-shamma-tedx-prague-ed                              301
+/en/blog-post/proc-jsem-zalozil-skolu-flow-a-jak-vnimam-vzdelavani     /blog-post/proc-jsem-zalozil-skolu-flow-a-jak-vnimam-vzdelavani     301
+/en/blog-post/proc-ve-flow-sazime-na-projektovou-vyuku                 /blog-post/proc-ve-flow-sazime-na-projektovou-vyuku                 301
+/en/blog-post/s-mindsetem-minulosti-deti-na-budoucnost-nikdy-nepripravime  /blog-post/s-mindsetem-minulosti-deti-na-budoucnost-nikdy-nepripravime  301
+/en/blog-post/marv-shamma-smysl-zivota-je-pomahat                     /blog                                                               301
+#    Staré české články, které už nejsou → blog / kariéra
+/blog-post/marv-shamma-smysl-zivota-je-pomahat                        /blog                                                               301
+/blog-post/na-vlne-podnikani-s-marvem-shammou                         /blog                                                               301
+/blog-post/talk-z-lomu-s-marvem-shammou                               /blog                                                               301
+/blog-post/jak-stavime-pedagogicky-tym-ve-flow-a-koho-to-vlastne-hledame  /kariera                                                         301
