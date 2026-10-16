@@ -35,13 +35,21 @@
     var drawer = document.querySelector('.mobile-drawer');
     if (!burger || !drawer) return;
 
+    // Zavrene menu = mimo Tab i ctecku obrazovky (WCAG 4.1.2)
+    drawer.inert = true;
+    drawer.setAttribute('aria-hidden', 'true');
+
     function open() {
       drawer.classList.add('is-open');
+      drawer.inert = false;
+      drawer.setAttribute('aria-hidden', 'false');
       burger.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
     }
     function close() {
       drawer.classList.remove('is-open');
+      drawer.inert = true;
+      drawer.setAttribute('aria-hidden', 'true');
       burger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
@@ -767,11 +775,12 @@
       '<button class="lightbox__close" aria-label="Zavřít fotografii" type="button">×</button>' +
       '<button class="lightbox__nav lightbox__nav--prev" aria-label="Předchozí fotografie" type="button">‹</button>' +
       '<button class="lightbox__nav lightbox__nav--next" aria-label="Další fotografie" type="button">›</button>' +
-      '<img class="lightbox__image" alt="">' +
       '<p class="lightbox__caption"></p>';
     document.body.appendChild(box);
 
-    var imgEl = box.querySelector('.lightbox__image');
+    // <img> se vklada az pri otevreni — prazdny <img> bez src je chyba (audit Damdit 10/2026)
+    var imgEl = document.createElement('img');
+    imgEl.className = 'lightbox__image';
     var capEl = box.querySelector('.lightbox__caption');
     var closeBtn = box.querySelector('.lightbox__close');
     var prevBtn = box.querySelector('.lightbox__nav--prev');
@@ -801,6 +810,7 @@
       if (imgIn) alt = imgIn.alt;
       if (!src) return;
 
+      if (!imgEl.parentNode) box.insertBefore(imgEl, capEl);
       imgEl.src = src;
       imgEl.alt = alt || caption || '';
       capEl.innerHTML = caption;
@@ -816,7 +826,8 @@
 
     function close() {
       box.hidden = true;
-      imgEl.src = '';
+      imgEl.removeAttribute('src');
+      if (imgEl.parentNode) imgEl.parentNode.removeChild(imgEl);
       document.body.style.overflow = '';
       if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
     }
