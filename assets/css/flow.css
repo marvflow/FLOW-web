@@ -1598,7 +1598,7 @@ body.no-messenger .msg-fab { display: none; }
 }
 .meet__path:first-child { border-left: 0; padding-left: 0; }
 .meet__path:last-child { padding-right: 0; }
-.meet__num { font-family: var(--font-display); font-weight: 800; font-size: 2.2rem; color: var(--c-yellow); line-height: 1; }
+.meet__num { font-family: var(--font-display); font-weight: 800; font-size: 2.2rem; color: var(--c-blue-deep); line-height: 1; text-decoration: underline; text-decoration-color: var(--c-yellow); text-decoration-thickness: 0.09em; text-underline-offset: 0.14em; text-decoration-skip-ink: none; }
 .meet__name { font-family: var(--font-display); font-size: 1.22rem; font-weight: 800; color: var(--c-blue-deep); }
 .meet__when { font-size: var(--fs-sm); color: var(--c-blue); font-weight: 700; border-bottom: 2px solid var(--c-yellow); padding-bottom: 2px; }
 .meet__desc { font-size: var(--fs-sm); color: var(--c-muted); margin: 0; }
