@@ -947,6 +947,22 @@
     }, { passive: true });
   }
 
+  // ───── Loom facade: nahled + Play, iframe az po kliknuti (setri ~MB JS na HP)
+  function initLoomFacade() {
+    document.querySelectorAll('.video-loom__facade[data-loom-id]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.loom.com/embed/' + btn.getAttribute('data-loom-id') + '?autoplay=1';
+        iframe.title = btn.getAttribute('data-loom-title') || 'Video';
+        iframe.setAttribute('allow', 'autoplay; fullscreen');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('frameborder', '0');
+        btn.parentNode.replaceChild(iframe, btn);
+        iframe.focus();
+      });
+    });
+  }
+
   // ───── Bootstrap
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -965,6 +981,7 @@
     initDodPopup();
     initLittleFlowOpenDay();
     initLightbox();
+    initLoomFacade();
     initSmoothScroll();
     initSmartHideNav();
     initMessengerFab();
