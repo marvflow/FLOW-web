@@ -1643,48 +1643,46 @@ body.no-messenger .msg-fab { display: none; }
 
 /* Zkusebni blok (zapisy): vlevo mesicni kalendar, vpravo formular. Max 3 deti na termin,
    tecky v kazdem dni = volna mista. */
-.trial__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 36px; margin-top: 24px; align-items: start; }
-.trial__cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.trial__month { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; color: var(--c-blue-deep); }
+.trial__layout { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 44px; margin-top: 24px; align-items: start; }
+.trial__cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.trial__month { font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--c-blue-deep); }
 .trial__nav {
-  width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--c-border); background: var(--c-white);
-  color: var(--c-blue-deep); font-size: 1.4rem; line-height: 1; cursor: pointer; transition: border-color var(--t-fast);
+  width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--c-border); background: var(--c-white);
+  color: var(--c-blue-deep); font-size: 1.15rem; line-height: 1; cursor: pointer; transition: border-color var(--t-fast);
 }
 .trial__nav:hover:not(:disabled) { border-color: var(--c-blue-soft); }
 .trial__nav:disabled { opacity: .3; cursor: default; }
-.trial__grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
-.trial__wd { text-align: center; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--c-muted); padding-bottom: 4px; }
+.trial__grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.trial__wd { text-align: center; font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--c-muted); padding-bottom: 4px; }
 .trial__day {
-  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-  min-height: 52px; border-radius: 12px; border: 2px solid transparent; background: none;
-  font-family: var(--font-body); font-size: var(--fs-sm); font-weight: 600; color: rgba(20, 37, 107, .3);
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  min-height: 42px; border-radius: 10px; border: 2px solid transparent; background: none;
+  font-family: var(--font-body); font-size: .85rem; font-weight: 600; color: rgba(20, 37, 107, .3);
 }
 .trial__day--free { cursor: pointer; background: var(--c-yellow-soft); color: var(--c-blue-deep); font-weight: 800; transition: border-color var(--t-fast); }
 .trial__day--free:hover { border-color: var(--c-blue-soft); }
 .trial__day--free[aria-pressed="true"] { background: var(--c-yellow); border-color: var(--c-blue-deep); }
 .trial__day--full { color: var(--c-muted); text-decoration: line-through; }
 .trial__dots { display: inline-flex; gap: 3px; }
-.trial__dots i { width: 6px; height: 6px; border-radius: 50%; border: 1.5px solid currentColor; opacity: .45; }
+.trial__dots i { width: 5px; height: 5px; border-radius: 50%; border: 1.5px solid currentColor; opacity: .45; }
 .trial__dots i.is-free { background: var(--c-blue-deep); border-color: var(--c-blue-deep); opacity: 1; }
 .trial__day--full .trial__dots i { opacity: .35; }
-.trial__legend { margin: 14px 0 0; font-size: var(--fs-xs); color: var(--c-muted); display: flex; align-items: center; gap: 6px; }
+.trial__legend { margin: 12px 0 0; font-size: var(--fs-xs); color: var(--c-muted); display: flex; align-items: center; gap: 6px; }
 .trial__picked { display: flex; flex-direction: column; gap: 2px; margin: 0 0 16px; }
 .trial__picked span { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); }
 .trial__picked b { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; color: var(--c-blue-deep); }
 .trial__picked small { font-size: var(--fs-sm); color: var(--c-muted); }
 .trial .form-closer__card { margin: 0; max-width: none; padding: 26px 26px 22px; }
-.trial .form-closer__grid { grid-template-columns: 1fr; gap: 14px; }
-.trial .form-closer__submit-row { flex-direction: column; align-items: stretch; }
-.trial .form-closer__submit-row .btn { width: 100%; justify-content: center; }
+.trial .form-closer__grid { gap: 16px; }
 .trial__status { margin: 16px 0 0; font-size: var(--fs-sm); color: var(--c-muted); }
 .trial .form-success { margin-top: 20px; }
 @media (max-width: 900px) {
-  .trial__layout { grid-template-columns: 1fr; gap: 28px; }
+  .trial__layout { grid-template-columns: 1fr; gap: 26px; }
+  .trial__cal { max-width: 360px; }
 }
 @media (max-width: 480px) {
-  .trial__grid { gap: 4px; }
-  .trial__day { min-height: 44px; border-radius: 10px; }
-  .trial__dots i { width: 5px; height: 5px; }
+  .trial__cal { max-width: none; }
+  .trial__day { min-height: 40px; }
 }
 
 /* Homepage: "zavolejte mi" pod tremi cestami */
