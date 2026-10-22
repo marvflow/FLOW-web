@@ -615,6 +615,16 @@
       e.preventDefault();
       openPath(a.getAttribute('data-book-open'), true);
     });
+
+    // Primy odkaz na rezervaci (do e-mailu, reklamy, Messengeru):
+    // skolaflow.cz/pro-zajemce/zapisy#zkusebni-blok  (EN: /en/pro-zajemce/zapisy#trial-block)
+    var HASH = { 'zkusebni-blok': 'zkusebni', 'trial-block': 'zkusebni' };
+    function fromHash() {
+      var key = HASH[(location.hash || '').replace('#', '')];
+      if (key) setTimeout(function () { openPath(key, true); }, 150);
+    }
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
   }
 
   // ───── ZKUSEBNI BLOK pro budouci prvnacky — vlastni rezervace (max 3 deti na termin).
@@ -671,37 +681,89 @@
     function status(msg) { statusEl.textContent = msg || ''; statusEl.hidden = !msg; }
     function setField(name, val) { var f = form.querySelector('[name="' + name + '"]'); if (f) f.value = val; }
 
+    // ── Kalendar: mesicni mrizka, zvyraznene dny s volnymi misty, prepinani mesicu
+    var MONTHS = IS_EN
+      ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+      : ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'];
+    var WEEK = IS_EN ? ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'] : ['Po', 'Út', 'St', 'Čt', 'Pá', 'So', 'Ne'];
+    var pickedEl = box.querySelector('[data-trial-picked]');
+    var layout = box.querySelector('[data-trial-layout]');
+    var view = null, byDate = {}, minM = 0, maxM = 0;
+
+    function iso(y, m, d) { return y + '-' + (m < 9 ? '0' : '') + (m + 1) + '-' + (d < 10 ? '0' : '') + d; }
+    function mIndex(y, m) { return y * 12 + m; }
+    function dots(n, cap) {
+      var h = '';
+      for (var i = 0; i < cap; i++) h += '<i class="' + (i < n ? 'is-free' : '') + '"></i>';
+      return '<span class="trial__dots" aria-hidden="true">' + h + '</span>';
+    }
+
+    function drawCal() {
+      var y = view.y, m = view.m, cap = (data && data.cap) || 3;
+      var first = new Date(y, m, 1);
+      var offset = (first.getDay() + 6) % 7;
+      var daysIn = new Date(y, m + 1, 0).getDate();
+      var cur = mIndex(y, m);
+      var h = '<div class="trial__cal-head">' +
+        '<button type="button" class="trial__nav" data-nav="-1"' + (cur <= minM ? ' disabled' : '') + ' aria-label="' + (IS_EN ? 'Previous month' : 'Předchozí měsíc') + '">‹</button>' +
+        '<span class="trial__month">' + MONTHS[m] + ' ' + y + '</span>' +
+        '<button type="button" class="trial__nav" data-nav="1"' + (cur >= maxM ? ' disabled' : '') + ' aria-label="' + (IS_EN ? 'Next month' : 'Další měsíc') + '">›</button>' +
+        '</div><div class="trial__grid" role="grid">';
+      WEEK.forEach(function (w) { h += '<span class="trial__wd">' + w + '</span>'; });
+      for (var i = 0; i < offset; i++) h += '<span class="trial__day trial__day--blank"></span>';
+      for (var d = 1; d <= daysIn; d++) {
+        var s = byDate[iso(y, m, d)];
+        if (!s) { h += '<span class="trial__day">' + d + '</span>'; continue; }
+        if (s.left <= 0) {
+          h += '<span class="trial__day trial__day--full" title="' + T.full + '">' + d + dots(0, cap) + '</span>';
+          continue;
+        }
+        var sel = picked && picked.date === s.date;
+        h += '<button type="button" class="trial__day trial__day--free" data-date="' + s.date + '" aria-pressed="' + sel + '" aria-label="' +
+          long(s) + ', ' + left(s.left) + '">' + d + dots(s.left, cap) + '</button>';
+      }
+      h += '</div><p class="trial__legend">' + dots(1, 1) + (IS_EN ? ' = free place' : ' = volné místo') + '</p>';
+      slotsEl.innerHTML = h;
+    }
+
+    slotsEl.addEventListener('click', function (e) {
+      var nav = e.target.closest('[data-nav]');
+      if (nav && !nav.disabled) {
+        var mi = mIndex(view.y, view.m) + (+nav.dataset.nav);
+        view = { y: Math.floor(mi / 12), m: mi % 12 };
+        drawCal();
+        return;
+      }
+      var b = e.target.closest('.trial__day--free');
+      if (b && byDate[b.dataset.date]) pick(byDate[b.dataset.date]);
+    });
+
     function pick(s) {
       picked = s;
-      slotsEl.querySelectorAll('.meet__slot').forEach(function (b) {
-        b.setAttribute('aria-pressed', String(b.dataset.date === s.date));
-      });
+      var d = day(s.date);
+      view = { y: d.getFullYear(), m: d.getMonth() };
+      drawCal();
       setField('termin', s.date);
       setField('event_date', s.date);
       setField('event_title', (IS_EN ? 'Trial block, ' : 'Zkušební blok, ') + long(s));
+      if (pickedEl) pickedEl.innerHTML = '<span>' + (IS_EN ? 'Selected date' : 'Vybraný termín') + '</span><b>' + long(s) + '</b><small>' + left(s.left) + '</small>';
       status('');
     }
 
     function render(d) {
       data = d;
-      slotsEl.innerHTML = '';
+      byDate = {};
       var list = (d && d.slots) || [];
+      list.forEach(function (s) { byDate[s.date] = s; });
       var free = list.filter(function (s) { return s.left > 0; });
-      if (!free.length) { status(T.none); form.hidden = true; return; }
+      if (!free.length) { status(T.none); if (layout) layout.hidden = true; return; }
       status('');
-      list.forEach(function (s) {
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'meet__slot' + (s.left > 0 ? '' : ' meet__slot--full');
-        b.dataset.date = s.date;
-        b.setAttribute('aria-pressed', 'false');
-        if (s.left <= 0) b.disabled = true;
-        b.innerHTML = '<span>' + short(s) + '</span><small>' + (s.left > 0 ? left(s.left) : T.full) + '</small>';
-        b.addEventListener('click', function () { pick(s); });
-        slotsEl.appendChild(b);
-      });
+      var a = day(list[0].date), z = day(list[list.length - 1].date);
+      minM = mIndex(a.getFullYear(), a.getMonth());
+      maxM = mIndex(z.getFullYear(), z.getMonth());
       var keep = picked && free.filter(function (s) { return s.date === picked.date; })[0];
       pick(keep || free[0]);
+      if (layout) layout.hidden = false;
       form.hidden = false;
     }
 
@@ -717,7 +779,7 @@
       if (started) return;
       started = true;
       var cached = readCache();
-      if (cached) render(cached); else { status(T.loading); form.hidden = true; }
+      if (cached) render(cached); else { status(T.loading); if (layout) layout.hidden = true; }
       var ctrl = window.AbortController ? new AbortController() : null;
       var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 45000);
       fetch(endpoint + '?action=trial-slots&_=' + Date.now(), ctrl ? { signal: ctrl.signal } : {})
@@ -732,7 +794,7 @@
         .catch(function (err) {
           clearTimeout(timer);
           console.warn('Zkusebni blok: terminy se nenacetly', err);
-          if (!cached && !box.hasAttribute('data-trial-done')) { status(T.error); form.hidden = true; }
+          if (!cached && !box.hasAttribute('data-trial-done')) { status(T.error); if (layout) layout.hidden = true; }
         });
     }
 

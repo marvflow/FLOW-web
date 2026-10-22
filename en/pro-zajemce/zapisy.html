@@ -52,7 +52,7 @@
   </script>
   <link rel="stylesheet" href="../../assets/css/cmp.css">
 
-  <link rel="stylesheet" href="../../assets/css/flow.css?v=20261022a">
+  <link rel="stylesheet" href="../../assets/css/flow.css?v=20261023a">
 
   <!-- Page-specific CSS (Zápis do 1. třídy) -->
   <style>
@@ -868,47 +868,52 @@
 
       <!-- Zkusebni blok: vlastni rezervace (max 3 deti na termin) misto Google planovace. Obsluhuje flow.js initTrialBooking, backend trial-blok.gs -->
       <div class="trial" data-trial hidden>
-        <span class="meet__slots-label">Pick a date</span>
-        <div class="meet__slots" data-trial-slots role="group" aria-label="Trial block dates"></div>
         <p class="trial__status" data-trial-status>Loading available dates…</p>
 
-        <form class="form-closer__card" data-trial-form style="margin-top:22px;" data-endpoint="https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec" novalidate hidden>
-          <input type="hidden" name="source" value="trial-blok-form">
-          <input type="hidden" name="lang" value="en">
-          <input type="hidden" name="rocnik" value="1">
-          <input type="hidden" name="termin" value="">
-          <input type="hidden" name="event_title" value="">
-          <input type="hidden" name="event_date" value="">
-          <input type="hidden" name="booking_id" value="">
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-closer__honeypot" aria-hidden="true">
+        <div class="trial__layout" data-trial-layout hidden>
+          <div class="trial__cal" data-trial-slots aria-label="Trial block dates"></div>
 
-          <div class="form-closer__grid">
-            <div class="form-field">
-              <label for="trial-name">Parent's name</label>
-              <input class="form-input" id="trial-name" name="name" type="text" required autocomplete="name" placeholder="Jane Smith">
-            </div>
-            <div class="form-field">
-              <label for="trial-child">Child's name</label>
-              <input class="form-input" id="trial-child" name="jmeno_ditete" type="text" required placeholder="Emma">
-            </div>
-            <div class="form-field">
-              <label for="trial-email">Email</label>
-              <input class="form-input" id="trial-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
-            </div>
-            <div class="form-field">
-              <label for="trial-phone">Phone</label>
-              <input class="form-input" id="trial-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+420 ___ ___ ___">
-            </div>
-          </div>
+          <div class="trial__side">
+            <p class="trial__picked" data-trial-picked></p>
+          <form class="form-closer__card" data-trial-form data-endpoint="https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec" novalidate>
+            <input type="hidden" name="source" value="trial-blok-form">
+            <input type="hidden" name="lang" value="en">
+            <input type="hidden" name="rocnik" value="1">
+            <input type="hidden" name="termin" value="">
+            <input type="hidden" name="event_title" value="">
+            <input type="hidden" name="event_date" value="">
+            <input type="hidden" name="booking_id" value="">
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-closer__honeypot" aria-hidden="true">
 
-          <div class="form-closer__submit-row">
-            <label class="form-gdpr">
-              <input type="checkbox" name="gdpr_consent" required>
-              <span>I agree to the processing of my personal data under the <a href="../gdpr">GDPR policy</a>.</span>
-            </label>
-            <button type="submit" class="btn btn-primary">Book a place →</button>
+            <div class="form-closer__grid">
+              <div class="form-field">
+                <label for="trial-name">Parent's name</label>
+                <input class="form-input" id="trial-name" name="name" type="text" required autocomplete="name" placeholder="Jane Smith">
+              </div>
+              <div class="form-field">
+                <label for="trial-child">Child's name</label>
+                <input class="form-input" id="trial-child" name="jmeno_ditete" type="text" required placeholder="Emma">
+              </div>
+              <div class="form-field">
+                <label for="trial-email">Email</label>
+                <input class="form-input" id="trial-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
+              </div>
+              <div class="form-field">
+                <label for="trial-phone">Phone</label>
+                <input class="form-input" id="trial-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+420 ___ ___ ___">
+              </div>
+            </div>
+
+            <div class="form-closer__submit-row">
+              <label class="form-gdpr">
+                <input type="checkbox" name="gdpr_consent" required>
+                <span>I agree to the processing of my personal data under the <a href="../gdpr">GDPR policy</a>.</span>
+              </label>
+              <button type="submit" class="btn btn-primary">Book a place →</button>
+            </div>
+          </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
 
@@ -995,6 +1000,6 @@
 <!-- FLOW-FOOTER-EN-END -->
 
 <script defer src="../../assets/js/cmp.js?v=20260916c"></script>
-<script src="../../assets/js/flow.js?v=20261022a" defer></script>
+<script src="../../assets/js/flow.js?v=20261023a" defer></script>
 </body>
 </html>
