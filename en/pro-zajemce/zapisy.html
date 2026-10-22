@@ -52,7 +52,7 @@
   </script>
   <link rel="stylesheet" href="../../assets/css/cmp.css">
 
-  <link rel="stylesheet" href="../../assets/css/flow.css?v=20261017a">
+  <link rel="stylesheet" href="../../assets/css/flow.css?v=20261022a">
 
   <!-- Page-specific CSS (Zápis do 1. třídy) -->
   <style>
@@ -835,7 +835,7 @@
 
     <div class="meet__grid">
 
-      <article class="meet__path" data-path="zkusebni" data-book="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2MsbdgcL0TCamMHx99H5ffs3VWcEIaPHeCEn_KUm5vhgbJbYk-JE6ZJwCODx0C3XayR1A2l6zq?gv=true" data-book-title="Trial lesson for future first-graders" data-book-note="Pick a time that suits you. The confirmation will arrive by email from our calendar." aria-expanded="false">
+      <article class="meet__path" data-path="zkusebni" data-book="trial" data-book-title="Trial lesson for future first-graders" data-book-note="Pick a date and leave us your details. We take at most 3 children per date." aria-expanded="false">
         <span class="meet__num">01</span>
         <span class="meet__name">Trial lesson</span>
         <span class="meet__when">Tue &amp; Wed · 8:30–10:00</span>
@@ -865,6 +865,51 @@
       <h3 class="meet__panel-head" data-meet-title></h3>
       <p class="meet__panel-note" data-meet-note></p>
       <div class="meet__embed" data-meet-embed hidden></div>
+
+      <!-- Zkusebni blok: vlastni rezervace (max 3 deti na termin) misto Google planovace. Obsluhuje flow.js initTrialBooking, backend trial-blok.gs -->
+      <div class="trial" data-trial hidden>
+        <span class="meet__slots-label">Pick a date</span>
+        <div class="meet__slots" data-trial-slots role="group" aria-label="Trial block dates"></div>
+        <p class="trial__status" data-trial-status>Loading available dates…</p>
+
+        <form class="form-closer__card" data-trial-form style="margin-top:22px;" data-endpoint="https://script.google.com/macros/s/AKfycbw7-QIefbMmKHPXo1MKYXoxgxiIm4nQypC09bWCsILSHzFNZYEoE_Txo0OSq6EFrEfR/exec" novalidate hidden>
+          <input type="hidden" name="source" value="trial-blok-form">
+          <input type="hidden" name="lang" value="en">
+          <input type="hidden" name="rocnik" value="1">
+          <input type="hidden" name="termin" value="">
+          <input type="hidden" name="event_title" value="">
+          <input type="hidden" name="event_date" value="">
+          <input type="hidden" name="booking_id" value="">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-closer__honeypot" aria-hidden="true">
+
+          <div class="form-closer__grid">
+            <div class="form-field">
+              <label for="trial-name">Parent's name</label>
+              <input class="form-input" id="trial-name" name="name" type="text" required autocomplete="name" placeholder="Jane Smith">
+            </div>
+            <div class="form-field">
+              <label for="trial-child">Child's name</label>
+              <input class="form-input" id="trial-child" name="jmeno_ditete" type="text" required placeholder="Emma">
+            </div>
+            <div class="form-field">
+              <label for="trial-email">Email</label>
+              <input class="form-input" id="trial-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
+            </div>
+            <div class="form-field">
+              <label for="trial-phone">Phone</label>
+              <input class="form-input" id="trial-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+420 ___ ___ ___">
+            </div>
+          </div>
+
+          <div class="form-closer__submit-row">
+            <label class="form-gdpr">
+              <input type="checkbox" name="gdpr_consent" required>
+              <span>I agree to the processing of my personal data under the <a href="../gdpr">GDPR policy</a>.</span>
+            </label>
+            <button type="submit" class="btn btn-primary">Book a place →</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <p class="meet__foot">Questions? Email <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a> or call <a href="tel:+420770673828">+420 770 673 828</a>.</p>
@@ -950,6 +995,6 @@
 <!-- FLOW-FOOTER-EN-END -->
 
 <script defer src="../../assets/js/cmp.js?v=20260916c"></script>
-<script src="../../assets/js/flow.js?v=20261017a" defer></script>
+<script src="../../assets/js/flow.js?v=20261022a" defer></script>
 </body>
 </html>
