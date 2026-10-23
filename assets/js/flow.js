@@ -715,12 +715,12 @@
         var s = byDate[iso(y, m, d)];
         if (!s) { h += '<span class="trial__day">' + d + '</span>'; continue; }
         if (s.left <= 0) {
-          h += '<span class="trial__day trial__day--full" title="' + T.full + '">' + d + dots(0, cap) + '</span>';
+          h += '<span class="trial__day trial__day--full" title="' + T.full + '">' + d + dots(0, s.cap || cap) + '</span>';
           continue;
         }
         var sel = picked && picked.date === s.date;
         h += '<button type="button" class="trial__day trial__day--free" data-date="' + s.date + '" aria-pressed="' + sel + '" aria-label="' +
-          long(s) + ', ' + left(s.left) + '">' + d + dots(s.left, cap) + '</button>';
+          long(s) + ', ' + left(s.left) + '">' + d + dots(s.left, s.cap || cap) + '</button>';
       }
       h += '</div><p class="trial__legend">' + dots(1, 1) + (IS_EN ? ' = free place' : ' = volné místo') + '</p>';
       slotsEl.innerHTML = h;
