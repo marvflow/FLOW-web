@@ -575,6 +575,7 @@
     var pTitle = sec.querySelector('[data-meet-title]');
     var pNote  = sec.querySelector('[data-meet-note]');
     if (!panel || !embed) return;
+    var trial = initTrialBooking(sec);
 
     function openPath(key, scrollToSection) {
       var path = sec.querySelector('.meet__path[data-path="' + key + '"]');
@@ -585,9 +586,17 @@
       var title = path.dataset.bookTitle || '';
       if (pTitle) pTitle.textContent = title;
       if (pNote) pNote.textContent = path.dataset.bookNote || '';
-      embed.innerHTML = '<iframe src="' + path.dataset.book + '" title="' + title.replace(/"/g, '&quot;') +
-        '" width="100%" height="620" frameborder="0" style="border:0"></iframe>';
-      embed.hidden = false;
+      if (path.dataset.book === 'trial' && trial) {
+        // Zkusebni blok: vlastni rezervace (max 3 deti), ne Google iframe
+        embed.innerHTML = '';
+        embed.hidden = true;
+        trial.show();
+      } else {
+        if (trial) trial.hide();
+        embed.innerHTML = '<iframe src="' + path.dataset.book + '" title="' + title.replace(/"/g, '&quot;') +
+          '" width="100%" height="620" frameborder="0" style="border:0"></iframe>';
+        embed.hidden = false;
+      }
       panel.hidden = false;
       if (scrollToSection) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
       else panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -606,6 +615,243 @@
       e.preventDefault();
       openPath(a.getAttribute('data-book-open'), true);
     });
+
+    // Primy odkaz na rezervaci (do e-mailu, reklamy, Messengeru):
+    // skolaflow.cz/pro-zajemce/zapisy#zkusebni-blok  (EN: /en/pro-zajemce/zapisy#trial-block)
+    var HASH = { 'zkusebni-blok': 'zkusebni', 'trial-block': 'zkusebni' };
+    function fromHash() {
+      var key = HASH[(location.hash || '').replace('#', '')];
+      if (key) setTimeout(function () { openPath(key, true); }, 150);
+    }
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+  }
+
+  // ───── ZKUSEBNI BLOK pro budouci prvnacky — vlastni rezervace (max 3 deti na termin).
+  // Nahrazuje Google planovac, ktery umi jen 1 misto. Backend = trial-blok.gs v Apps Scriptu:
+  //  - terminy + volna mista: GET ?action=trial-slots (CORS jde, 3–36 s → nacitame hned
+  //    pri otevreni stranky a drzime posledni odpoved v localStorage)
+  //  - rezervace: POST source=trial-blok-form, mode no-cors, odpoved se necte. Kapacitu
+  //    hlida Apps Script pod zamkem a vysledek (potvrzeni / plno) posila rodici e-mailem.
+  function initTrialBooking(sec) {
+    var box = sec.querySelector('[data-trial]');
+    if (!box) return null;
+    var form     = box.querySelector('[data-trial-form]');
+    var slotsEl  = box.querySelector('[data-trial-slots]');
+    var statusEl = box.querySelector('[data-trial-status]');
+    var endpoint = form && form.dataset.endpoint;
+    if (!form || !slotsEl || !statusEl || !endpoint) return null;
+
+    var CACHE_KEY = 'flow_trial_slots_v1';
+    var DOW = IS_EN ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] : ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so'];
+    var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var T = IS_EN ? {
+      loading: 'Loading available dates…',
+      error:   'We couldn\'t load the dates right now. Please refresh the page, or call +420 770 673 828.',
+      none:    'All dates are fully booked at the moment. Write to info@skolaflow.cz and we\'ll find one together.',
+      pick:    'Please pick a date first.',
+      full:    'full',
+      sending: 'Booking…'
+    } : {
+      loading: 'Načítám volné termíny…',
+      error:   'Termíny se teď nepodařilo načíst. Zkuste obnovit stránku, nebo zavolejte na +420 770 673 828.',
+      none:    'Všechny termíny jsou teď obsazené. Napište na info@skolaflow.cz a termín domluvíme spolu.',
+      pick:    'Nejdřív prosím vyberte termín.',
+      full:    'plno',
+      sending: 'Rezervuji…'
+    };
+    var picked = null, data = null, started = false;
+
+    function day(iso) { var m = iso.split('-'); return new Date(+m[0], +m[1] - 1, +m[2]); }
+    function short(s) {
+      var d = day(s.date);
+      return IS_EN ? DOW[d.getDay()] + ' ' + d.getDate() + ' ' + MON[d.getMonth()]
+                   : DOW[d.getDay()] + ' ' + d.getDate() + '. ' + (d.getMonth() + 1) + '.';
+    }
+    function long(s) {
+      var d = day(s.date);
+      var t = s.start.replace(/^0/, '') + '–' + s.end.replace(/^0/, '');
+      return IS_EN ? DOW[d.getDay()] + ' ' + d.getDate() + ' ' + MON[d.getMonth()] + ' ' + d.getFullYear() + ', ' + t
+                   : DOW[d.getDay()] + ' ' + d.getDate() + '. ' + (d.getMonth() + 1) + '. ' + d.getFullYear() + ', ' + t;
+    }
+    function left(n) {
+      if (IS_EN) return n === 1 ? '1 spot left' : n + ' spots left';
+      return n === 1 ? 'volné 1 místo' : (n < 5 ? 'volná ' + n + ' místa' : 'volných ' + n + ' míst');
+    }
+    function status(msg) { statusEl.textContent = msg || ''; statusEl.hidden = !msg; }
+    function setField(name, val) { var f = form.querySelector('[name="' + name + '"]'); if (f) f.value = val; }
+
+    // ── Kalendar: mesicni mrizka, zvyraznene dny s volnymi misty, prepinani mesicu
+    var MONTHS = IS_EN
+      ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+      : ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'];
+    var WEEK = IS_EN ? ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'] : ['Po', 'Út', 'St', 'Čt', 'Pá', 'So', 'Ne'];
+    var pickedEl = box.querySelector('[data-trial-picked]');
+    var layout = box.querySelector('[data-trial-layout]');
+    var view = null, byDate = {}, minM = 0, maxM = 0;
+
+    function iso(y, m, d) { return y + '-' + (m < 9 ? '0' : '') + (m + 1) + '-' + (d < 10 ? '0' : '') + d; }
+    function mIndex(y, m) { return y * 12 + m; }
+    function dots(n, cap) {
+      var h = '';
+      for (var i = 0; i < cap; i++) h += '<i class="' + (i < n ? 'is-free' : '') + '"></i>';
+      return '<span class="trial__dots" aria-hidden="true">' + h + '</span>';
+    }
+
+    function drawCal() {
+      var y = view.y, m = view.m, cap = (data && data.cap) || 3;
+      var first = new Date(y, m, 1);
+      var offset = (first.getDay() + 6) % 7;
+      var daysIn = new Date(y, m + 1, 0).getDate();
+      var cur = mIndex(y, m);
+      var h = '<div class="trial__cal-head">' +
+        '<button type="button" class="trial__nav" data-nav="-1"' + (cur <= minM ? ' disabled' : '') + ' aria-label="' + (IS_EN ? 'Previous month' : 'Předchozí měsíc') + '">‹</button>' +
+        '<span class="trial__month">' + MONTHS[m] + ' ' + y + '</span>' +
+        '<button type="button" class="trial__nav" data-nav="1"' + (cur >= maxM ? ' disabled' : '') + ' aria-label="' + (IS_EN ? 'Next month' : 'Další měsíc') + '">›</button>' +
+        '</div><div class="trial__grid" role="grid">';
+      WEEK.forEach(function (w) { h += '<span class="trial__wd">' + w + '</span>'; });
+      for (var i = 0; i < offset; i++) h += '<span class="trial__day trial__day--blank"></span>';
+      for (var d = 1; d <= daysIn; d++) {
+        var s = byDate[iso(y, m, d)];
+        if (!s) { h += '<span class="trial__day">' + d + '</span>'; continue; }
+        if (s.left <= 0) {
+          h += '<span class="trial__day trial__day--full" title="' + T.full + '">' + d + dots(0, cap) + '</span>';
+          continue;
+        }
+        var sel = picked && picked.date === s.date;
+        h += '<button type="button" class="trial__day trial__day--free" data-date="' + s.date + '" aria-pressed="' + sel + '" aria-label="' +
+          long(s) + ', ' + left(s.left) + '">' + d + dots(s.left, cap) + '</button>';
+      }
+      h += '</div><p class="trial__legend">' + dots(1, 1) + (IS_EN ? ' = free place' : ' = volné místo') + '</p>';
+      slotsEl.innerHTML = h;
+    }
+
+    slotsEl.addEventListener('click', function (e) {
+      var nav = e.target.closest('[data-nav]');
+      if (nav && !nav.disabled) {
+        var mi = mIndex(view.y, view.m) + (+nav.dataset.nav);
+        view = { y: Math.floor(mi / 12), m: mi % 12 };
+        drawCal();
+        return;
+      }
+      var b = e.target.closest('.trial__day--free');
+      if (b && byDate[b.dataset.date]) pick(byDate[b.dataset.date]);
+    });
+
+    function pick(s) {
+      picked = s;
+      var d = day(s.date);
+      view = { y: d.getFullYear(), m: d.getMonth() };
+      drawCal();
+      setField('termin', s.date);
+      setField('event_date', s.date);
+      setField('event_title', (IS_EN ? 'Trial block, ' : 'Zkušební blok, ') + long(s));
+      if (pickedEl) pickedEl.innerHTML = '<span>' + (IS_EN ? 'Selected date' : 'Vybraný termín') + '</span><b>' + long(s) + '</b><small>' + left(s.left) + '</small>';
+      status('');
+    }
+
+    function render(d) {
+      data = d;
+      byDate = {};
+      var list = (d && d.slots) || [];
+      list.forEach(function (s) { byDate[s.date] = s; });
+      var free = list.filter(function (s) { return s.left > 0; });
+      if (!free.length) { status(T.none); if (layout) layout.hidden = true; return; }
+      status('');
+      var a = day(list[0].date), z = day(list[list.length - 1].date);
+      minM = mIndex(a.getFullYear(), a.getMonth());
+      maxM = mIndex(z.getFullYear(), z.getMonth());
+      var keep = picked && free.filter(function (s) { return s.date === picked.date; })[0];
+      pick(keep || free[0]);
+      if (layout) layout.hidden = false;
+      form.hidden = false;
+    }
+
+    function readCache() {
+      try {
+        var c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+        return c && Array.isArray(c.slots) && Date.now() - c.t < 6 * 3600 * 1000 ? c : null;
+      } catch (e) { return null; }
+    }
+    function writeCache(d) { try { localStorage.setItem(CACHE_KEY, JSON.stringify(d)); } catch (e) {} }
+
+    function load() {
+      if (started) return;
+      started = true;
+      var cached = readCache();
+      if (cached) render(cached); else { status(T.loading); if (layout) layout.hidden = true; }
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 45000);
+      fetch(endpoint + '?action=trial-slots&_=' + Date.now(), ctrl ? { signal: ctrl.signal } : {})
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          clearTimeout(timer);
+          if (!d || !d.ok || !Array.isArray(d.slots)) throw new Error('bad payload');
+          d.t = Date.now();
+          writeCache(d);
+          if (!box.hasAttribute('data-trial-done')) render(d);
+        })
+        .catch(function (err) {
+          clearTimeout(timer);
+          console.warn('Zkusebni blok: terminy se nenacetly', err);
+          if (!cached && !box.hasAttribute('data-trial-done')) { status(T.error); if (layout) layout.hidden = true; }
+        });
+    }
+
+    function done(s, name) {
+      box.setAttribute('data-trial-done', '');
+      // Lokalne ubereme misto, at stejny prohlizec hned nevidi stare volno.
+      if (data && data.slots) {
+        data.slots.forEach(function (x) { if (x.date === s.date) x.left = Math.max(0, x.left - 1); });
+        writeCache(data);
+      }
+      var first = (name || '').split(' ')[0];
+      box.innerHTML = '<div class="form-success">' +
+        '<div class="form-success__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l5 5L20 7"/></svg></div>' +
+        (IS_EN
+          ? '<h3>Booked' + (first ? ', ' + first.replace(/[<>&"]/g, '') : '') + '!</h3>' +
+            '<p class="form-success__event">' + long(s) + '</p>' +
+            '<p>The confirmation with all the details is on its way to your email. If the date filled up in the meantime, we\'ll email you right away so you can pick another one.</p>'
+          : '<h3>Máte rezervováno!</h3>' +
+            '<p class="form-success__event">' + long(s) + '</p>' +
+            '<p>Potvrzení se všemi detaily vám posíláme e-mailem. Kdyby se termín mezitím zaplnil, hned vám napíšeme, ať si vyberete jiný.</p>') +
+        '</div>';
+      box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!picked) { status(T.pick); return; }
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      var s = picked;
+      var name = (form.querySelector('[name="name"]') || {}).value || '';
+      var btn = form.querySelector('button[type=submit]');
+      var orig = btn ? btn.innerHTML : '';
+      if (btn) { btn.disabled = true; btn.innerHTML = T.sending; }
+      setField('booking_id', Date.now() + '-' + Math.floor(Math.random() * 1e6));
+      fetch(endpoint, { method: 'POST', mode: 'no-cors', body: new FormData(form) })
+        .then(function () {
+          if (window.dataLayer) window.dataLayer.push({ event: 'trial_booking_submit', source: 'zapisy', trial_date: s.date });
+          if (window.fbq && window.__flowConsent && window.__flowConsent.marketing) {
+            window.fbq('track', 'Lead', { content_name: 'zapisy', content_category: 'Trial block booking' });
+            window.fbq('track', 'CompleteRegistration', { content_name: 'zapisy', content_category: 'Trial block booking', status: 'submitted' });
+          }
+          done(s, name);
+        })
+        .catch(function (err) {
+          console.error('Zkusebni blok: odeslani selhalo', err);
+          if (btn) { btn.disabled = false; btn.innerHTML = orig; }
+          alert(IS_EN
+            ? 'Booking failed. Please try again or call +420 770 673 828.'
+            : 'Rezervaci se nepodařilo odeslat. Zkuste to prosím znovu, nebo zavolejte na +420 770 673 828.');
+        });
+    });
+
+    load(); // nacitat hned, ne az po kliknuti — Apps Script odpovida i desitky vterin
+    return {
+      show: function () { box.hidden = false; },
+      hide: function () { box.hidden = true; }
+    };
   }
 
   // ───── ZAPISY BAR — pruh nad menu. Krizek ho skryje jen do dalsiho nacteni
