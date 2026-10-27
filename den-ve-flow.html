@@ -272,6 +272,71 @@
       letter-spacing: 0.04em;
     }
 
+    /* KROUŽKY — krátký teaser na konci denního režimu */
+    .dv-clubs {
+      max-width: 880px;
+      margin: var(--space-xl) auto 0;
+      padding-top: var(--space-xl);
+      border-top: 1.5px solid rgba(20, 37, 107, 0.1);
+      text-align: center;
+    }
+    .dv-clubs h3 {
+      font-size: var(--fs-xl);
+      line-height: 1.2;
+      color: var(--c-blue-deep);
+      margin: 0 auto 10px;
+      max-width: 760px;
+    }
+    .dv-clubs__text {
+      color: var(--c-blue-deep);
+      opacity: 0.78;
+      font-size: var(--fs-md);
+      line-height: 1.6;
+      max-width: 560px;
+      margin: 0 auto var(--space-md);
+    }
+    .dv-clubs__list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      max-width: 720px;
+    }
+    .dv-clubs__list li {
+      background: var(--c-white);
+      border: 1.5px solid rgba(20, 37, 107, 0.14);
+      color: var(--c-blue-deep);
+      padding: 8px 14px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      line-height: 1.2;
+    }
+    .dv-clubs__en {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 1px 6px;
+      border-radius: var(--r-pill);
+      background: var(--c-yellow);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      vertical-align: 1px;
+    }
+    .dv-clubs__note {
+      margin: var(--space-md) auto 0;
+      font-size: var(--fs-sm);
+      color: rgba(20, 37, 107, 0.65);
+    }
+    @media (max-width: 880px) {
+      .dv-clubs { margin-top: var(--space-lg); padding-top: var(--space-lg); }
+      .dv-clubs h3 { font-size: 1.3rem; }
+      .dv-clubs__list li { font-size: 0.8rem; padding: 7px 12px; }
+    }
+
     /* 5 OBLASTÍ — editorial 5-col */
     .dv-areas {
       padding: 100px 0;
@@ -636,10 +701,29 @@
           <div class="dv-step__time">15:00–17:00<small>Konec dne</small></div>
           <div class="dv-step__body">
             <h3>Družina nebo kroužky</h3>
-            <p>Volný čas nebo zájmové aktivity: sport, hudba, výtvarka, jazyky. Klidné prostředí, prostor na hru i odpočinek. Družina dostupná pro všechny rodiny, kroužky podle volby.</p>
+            <p>Volný čas nebo zájmové aktivity. Klidné prostředí, prostor na hru i odpočinek. Družina dostupná pro všechny rodiny, kroužky podle volby (<a href="#krouzky">přehled níže</a>).</p>
           </div>
         </article>
 
+      </div>
+
+      <!-- KROUŽKY — teaser, bez detailů -->
+      <div class="dv-clubs" id="krouzky">
+        <span class="eyebrow">Kroužky</span>
+        <h3>Odpoledne: AI animace, 3D tisk, robotika i divadlo.</h3>
+        <p class="dv-clubs__text">Po vyučování si děti vybírají z kroužků, které vedou naši pedagogové a lektoři. Část z nich probíhá v angličtině.</p>
+        <ul class="dv-clubs__list">
+          <li>AI animace</li>
+          <li>3D tisk a design</li>
+          <li>LEGO robotika</li>
+          <li>Herecká Crew</li>
+          <li>Vaření<span class="dv-clubs__en">EN</span></li>
+          <li>Čtenářský klub<span class="dv-clubs__en">EN</span></li>
+          <li>Florbal</li>
+          <li>Plavání</li>
+          <li>Zahradnický klub</li>
+        </ul>
+        <p class="dv-clubs__note">Pro děti z celé školy · kroužky se hradí zvlášť</p>
       </div>
     </div>
   </section>
