@@ -1642,7 +1642,7 @@ body.no-messenger .msg-fab { display: none; }
 .meet__slot--none[aria-pressed="true"] { background: var(--c-yellow-soft); color: var(--c-blue-deep); }
 
 /* Zkusebni blok (zapisy): vlevo mesicni kalendar, vpravo formular. Max 3 deti na termin,
-   tecky v kazdem dni = volna mista. */
+   pod datem text s poctem volnych mist ("2 volná"). */
 .trial__layout { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 44px; margin-top: 24px; align-items: start; }
 .trial__cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 .trial__month { font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--c-blue-deep); }
@@ -1662,12 +1662,8 @@ body.no-messenger .msg-fab { display: none; }
 .trial__day--free { cursor: pointer; background: var(--c-yellow-soft); color: var(--c-blue-deep); font-weight: 800; transition: border-color var(--t-fast); }
 .trial__day--free:hover { border-color: var(--c-blue-soft); }
 .trial__day--free[aria-pressed="true"] { background: var(--c-yellow); border-color: var(--c-blue-deep); }
-.trial__day--full { color: var(--c-muted); text-decoration: line-through; }
-.trial__dots { display: inline-flex; gap: 3px; }
-.trial__dots i { width: 5px; height: 5px; border-radius: 50%; border: 1.5px solid currentColor; opacity: .45; }
-.trial__dots i.is-free { background: var(--c-blue-deep); border-color: var(--c-blue-deep); opacity: 1; }
-.trial__day--full .trial__dots i { opacity: .35; }
-.trial__legend { margin: 12px 0 0; font-size: var(--fs-xs); color: var(--c-muted); display: flex; align-items: center; gap: 6px; }
+.trial__day--full { color: var(--c-muted); }
+.trial__left { font-size: .6rem; font-weight: 600; line-height: 1; white-space: nowrap; letter-spacing: .01em; }
 .trial__picked { display: flex; flex-direction: column; gap: 2px; margin: 0 0 16px; }
 .trial__picked span { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); }
 .trial__picked b { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; color: var(--c-blue-deep); }

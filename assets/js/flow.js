@@ -692,10 +692,10 @@
 
     function iso(y, m, d) { return y + '-' + (m < 9 ? '0' : '') + (m + 1) + '-' + (d < 10 ? '0' : '') + d; }
     function mIndex(y, m) { return y * 12 + m; }
-    function dots(n, cap) {
-      var h = '';
-      for (var i = 0; i < cap; i++) h += '<i class="' + (i < n ? 'is-free' : '') + '"></i>';
-      return '<span class="trial__dots" aria-hidden="true">' + h + '</span>';
+    // Pocet volnych mist jako kratky text pod datem (driv tecky – lide je cetli obracene).
+    function freeLabel(n) {
+      var t = n <= 0 ? T.full : (IS_EN ? n + ' free' : n + (n === 1 ? ' volné' : ' volná'));
+      return '<small class="trial__left" aria-hidden="true">' + t + '</small>';
     }
 
     function drawCal() {
@@ -715,14 +715,14 @@
         var s = byDate[iso(y, m, d)];
         if (!s) { h += '<span class="trial__day">' + d + '</span>'; continue; }
         if (s.left <= 0) {
-          h += '<span class="trial__day trial__day--full" title="' + T.full + '">' + d + dots(0, s.cap || cap) + '</span>';
+          h += '<span class="trial__day trial__day--full" title="' + T.full + '">' + d + freeLabel(0) + '</span>';
           continue;
         }
         var sel = picked && picked.date === s.date;
         h += '<button type="button" class="trial__day trial__day--free" data-date="' + s.date + '" aria-pressed="' + sel + '" aria-label="' +
-          long(s) + ', ' + left(s.left) + '">' + d + dots(s.left, s.cap || cap) + '</button>';
+          long(s) + ', ' + left(s.left) + '">' + d + freeLabel(s.left) + '</button>';
       }
-      h += '</div><p class="trial__legend">' + dots(1, 1) + (IS_EN ? ' = free place' : ' = volné místo') + '</p>';
+      h += '</div>';
       slotsEl.innerHTML = h;
     }
 
