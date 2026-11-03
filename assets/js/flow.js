@@ -423,6 +423,8 @@
     var pTitle   = sec.querySelector('[data-meet-title]');
     var pNote    = sec.querySelector('[data-meet-note]');
     if (!select || !panel) return;
+    // School Tour = vlastni rezervace (max 3 rodiny), ne Google iframe (Marv 3. 11. 2026)
+    var tour = initTourBooking(sec, form);
 
     // Prohlidka a online schuzka nemaji pevny termin: zajemce si vybira slot
     // primo v rezervacnim okne Google Kalendare, formular se u nich neukazuje.
@@ -524,9 +526,16 @@
       if (form) form.hidden = !isDod;
       if (embed) embed.hidden = isDod;
 
+      if (tour) tour.hide();
       if (isDod) {
         if (embed) embed.innerHTML = '';
         buildSlots();
+      } else if (type === 'kafe' && tour) {
+        if (embed) { embed.innerHTML = ''; embed.hidden = true; }
+        pTitle.textContent = IS_EN ? 'School Tour with FLOW leadership' : 'School Tour s vedením ZŠ FLOW';
+        pNote.textContent = IS_EN ? 'Pick a day and time and leave us your details. We take at most 3 families per tour.'
+                                  : 'Vyberte den a čas a nechte nám kontakt. Na jednu prohlídku bereme nejvýš 3 rodiny.';
+        tour.show();
       } else {
         var idx = optionsOf(type);
         if (idx.length) pickIndex(idx[0]);
@@ -850,6 +859,299 @@
     load(); // nacitat hned, ne az po kliknuti — Apps Script odpovida i desitky vterin
     return {
       show: function () { box.hidden = false; },
+      hide: function () { box.hidden = true; }
+    };
+  }
+
+  // ───── SCHOOL TOUR s vedenim — vlastni rezervace (max 3 rodiny na termin), misto Google planovace.
+  // Stejny princip jako zkusebni blok, jen v jednom dni muze byt vic casu (9:00 a 10:45).
+  //  - terminy + volna mista: GET ?action=tour-slots → { slots: [{date, start, end, cap, left}] }
+  //    Nacita se, az se sekce .meet blizi k obrazovce (ne na kazde strance hned), cache 6 h.
+  //  - rezervace: POST source=school-tour-form, mode no-cors, odpoved se necte. Kapacitu hlida
+  //    Apps Script pod zamkem a vysledek (potvrzeni / plno) posila rodici e-mailem.
+  //  - Markup si funkce vyrobi sama → staci zmenit flow.js, ne 30 HTML stranek.
+  function initTourBooking(sec, srcForm) {
+    var panel = sec.querySelector('.meet__panel');
+    var endpoint = srcForm && srcForm.dataset.endpoint;
+    if (!panel || !endpoint) return null;
+    var srcInput = srcForm.querySelector('[name="source"]');
+    var pageSource = srcInput ? srcInput.value : '';
+    var gdprA = srcForm.querySelector('.form-gdpr a');
+    var gdprHref = gdprA ? gdprA.getAttribute('href') : 'gdpr';
+
+    var CACHE_KEY = 'flow_tour_slots_v1';
+    var T = IS_EN ? {
+      loading: 'Loading available dates…',
+      error:   'We couldn\'t load the dates right now. Please refresh the page, or call +420 770 673 828.',
+      none:    'All tours are fully booked at the moment. Write to info@skolaflow.cz and we\'ll find a time together.',
+      pick:    'Please pick a date and time first.',
+      full:    'full', sending: 'Booking…',
+      selDate: 'Selected date', pickTime: 'Pick a time',
+      parent: 'Parent\'s name', child: 'Child\'s name', email: 'Email', phone: 'Phone',
+      grade: 'Which grade are you interested in?', gradePh: 'Choose a grade', gradeNo: 'Not sure yet',
+      gdpr: 'I agree to the processing of personal data under the <a href="' + gdprHref + '">GDPR policy</a>.',
+      submit: 'Book a tour →'
+    } : {
+      loading: 'Načítám volné termíny…',
+      error:   'Termíny se teď nepodařilo načíst. Zkuste obnovit stránku, nebo zavolejte na +420 770 673 828.',
+      none:    'Všechny prohlídky jsou teď obsazené. Napište na info@skolaflow.cz a termín domluvíme spolu.',
+      pick:    'Nejdřív prosím vyberte den a čas.',
+      full:    'plno', sending: 'Rezervuji…',
+      selDate: 'Vybraný den', pickTime: 'Vyberte čas',
+      parent: 'Jméno rodiče', child: 'Jméno dítěte', email: 'E-mail', phone: 'Telefon',
+      grade: 'O který ročník máte zájem?', gradePh: 'Vyberte ročník', gradeNo: 'Zatím nevím',
+      gdpr: 'Souhlasím se zpracováním osobních údajů dle <a href="' + gdprHref + '">zásad GDPR</a>.',
+      submit: 'Rezervovat prohlídku →'
+    };
+    var DOW = IS_EN ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] : ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so'];
+    var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var MONTHS = IS_EN
+      ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+      : ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'];
+    var WEEK = IS_EN ? ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'] : ['Po', 'Út', 'St', 'Čt', 'Pá', 'So', 'Ne'];
+
+    var grades = '<option value="" disabled selected>' + T.gradePh + '</option>';
+    for (var g = 1; g <= 9; g++) grades += '<option value="' + g + '">' + (IS_EN ? 'Grade ' + g : g + '. třída') + '</option>';
+    grades += '<option value="nevim">' + T.gradeNo + '</option>';
+
+    var box = document.createElement('div');
+    box.className = 'trial tour';
+    box.hidden = true;
+    box.innerHTML =
+      '<p class="trial__status" data-tour-status></p>' +
+      '<div class="trial__layout" data-tour-layout hidden>' +
+        '<div class="trial__cal" data-tour-cal aria-label="' + (IS_EN ? 'School tour dates' : 'Termíny prohlídek') + '"></div>' +
+        '<div class="trial__side">' +
+          '<p class="trial__picked" data-tour-picked></p>' +
+          '<div class="tour__times" data-tour-times role="group" aria-label="' + T.pickTime + '"></div>' +
+          '<form class="form-closer__card" data-tour-form novalidate>' +
+            '<input type="hidden" name="source" value="school-tour-form">' +
+            '<input type="hidden" name="meeting" value="kafe">' +
+            '<input type="hidden" name="stranka" value="' + pageSource + '">' +
+            (IS_EN ? '<input type="hidden" name="lang" value="en">' : '') +
+            '<input type="hidden" name="termin" value=""><input type="hidden" name="cas" value="">' +
+            '<input type="hidden" name="event_title" value=""><input type="hidden" name="event_date" value="">' +
+            '<input type="hidden" name="booking_id" value="">' +
+            '<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-closer__honeypot" aria-hidden="true">' +
+            '<div class="form-closer__grid">' +
+              '<div class="form-field"><label for="tour-name">' + T.parent + '</label><input class="form-input" id="tour-name" name="name" type="text" required autocomplete="name" placeholder="Jan Novák"></div>' +
+              '<div class="form-field"><label for="tour-child">' + T.child + '</label><input class="form-input" id="tour-child" name="jmeno_ditete" type="text" required placeholder="' + (IS_EN ? 'Emma' : 'Eliška') + '"></div>' +
+              '<div class="form-field"><label for="tour-email">' + T.email + '</label><input class="form-input" id="tour-email" name="email" type="email" required autocomplete="email" placeholder="' + (IS_EN ? 'you@email.com' : 'vas@email.cz') + '"></div>' +
+              '<div class="form-field"><label for="tour-phone">' + T.phone + '</label><input class="form-input" id="tour-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+420 ___ ___ ___"></div>' +
+              '<div class="form-field tour__grade"><label for="tour-grade">' + T.grade + '</label><select class="form-select" id="tour-grade" name="rocnik" required>' + grades + '</select></div>' +
+            '</div>' +
+            '<div class="form-closer__submit-row">' +
+              '<label class="form-gdpr"><input type="checkbox" name="gdpr_consent" required><span>' + T.gdpr + '</span></label>' +
+              '<button type="submit" class="btn btn-primary">' + T.submit + '</button>' +
+            '</div>' +
+          '</form>' +
+        '</div>' +
+      '</div>';
+    var embedEl = panel.querySelector('[data-meet-embed]');
+    if (embedEl && embedEl.nextSibling) panel.insertBefore(box, embedEl.nextSibling); else panel.appendChild(box);
+
+    var form = box.querySelector('[data-tour-form]');
+    var calEl = box.querySelector('[data-tour-cal]');
+    var timesEl = box.querySelector('[data-tour-times]');
+    var pickedEl = box.querySelector('[data-tour-picked]');
+    var statusEl = box.querySelector('[data-tour-status]');
+    var layout = box.querySelector('[data-tour-layout]');
+
+    var data = null, started = false, byDate = {}, view = null, minM = 0, maxM = 0;
+    var pickedDate = null, picked = null;   // picked = konkretni slot {date, start, end, cap, left}
+
+    function day(iso) { var m = iso.split('-'); return new Date(+m[0], +m[1] - 1, +m[2]); }
+    function iso(y, m, d) { return y + '-' + (m < 9 ? '0' : '') + (m + 1) + '-' + (d < 10 ? '0' : '') + d; }
+    function mIndex(y, m) { return y * 12 + m; }
+    function t0(t) { return String(t).replace(/^0/, ''); }
+    function dayLabel(date) {
+      var d = day(date);
+      return IS_EN ? DOW[d.getDay()] + ' ' + d.getDate() + ' ' + MON[d.getMonth()] + ' ' + d.getFullYear()
+                   : DOW[d.getDay()] + ' ' + d.getDate() + '. ' + (d.getMonth() + 1) + '. ' + d.getFullYear();
+    }
+    function slotLabel(s) { return dayLabel(s.date) + ', ' + t0(s.start) + '–' + t0(s.end); }
+    function left(n) {
+      if (IS_EN) return n === 1 ? '1 spot left' : n + ' spots left';
+      return n === 1 ? 'volné 1 místo' : (n < 5 ? 'volná ' + n + ' místa' : 'volných ' + n + ' míst');
+    }
+    function freeOf(date) { return (byDate[date] || []).reduce(function (a, s) { return a + Math.max(0, s.left); }, 0); }
+    function status(msg) { statusEl.textContent = msg || ''; statusEl.hidden = !msg; }
+    function setField(name, val) { var f = form.querySelector('[name="' + name + '"]'); if (f) f.value = val; }
+
+    function drawCal() {
+      var y = view.y, m = view.m;
+      var first = new Date(y, m, 1), offset = (first.getDay() + 6) % 7, daysIn = new Date(y, m + 1, 0).getDate();
+      var cur = mIndex(y, m);
+      var h = '<div class="trial__cal-head">' +
+        '<button type="button" class="trial__nav" data-nav="-1"' + (cur <= minM ? ' disabled' : '') + ' aria-label="' + (IS_EN ? 'Previous month' : 'Předchozí měsíc') + '">‹</button>' +
+        '<span class="trial__month">' + MONTHS[m] + ' ' + y + '</span>' +
+        '<button type="button" class="trial__nav" data-nav="1"' + (cur >= maxM ? ' disabled' : '') + ' aria-label="' + (IS_EN ? 'Next month' : 'Další měsíc') + '">›</button>' +
+        '</div><div class="trial__grid" role="grid">';
+      WEEK.forEach(function (w) { h += '<span class="trial__wd">' + w + '</span>'; });
+      for (var i = 0; i < offset; i++) h += '<span class="trial__day trial__day--blank"></span>';
+      for (var d = 1; d <= daysIn; d++) {
+        var ds = iso(y, m, d);
+        if (!byDate[ds]) { h += '<span class="trial__day">' + d + '</span>'; continue; }
+        var n = freeOf(ds);
+        if (n <= 0) { h += '<span class="trial__day trial__day--full" title="' + T.full + '">' + d + '<small class="trial__left" aria-hidden="true">' + T.full + '</small></span>'; continue; }
+        var times = byDate[ds].filter(function (s) { return s.left > 0; }).length;
+        var sub = IS_EN ? (times === 1 ? '1 time' : times + ' times') : (times === 1 ? '1 čas' : times + ' časy');
+        h += '<button type="button" class="trial__day trial__day--free" data-date="' + ds + '" aria-pressed="' + (pickedDate === ds) +
+          '" aria-label="' + dayLabel(ds) + ', ' + left(n) + '">' + d + '<small class="trial__left" aria-hidden="true">' + sub + '</small></button>';
+      }
+      calEl.innerHTML = h + '</div>';
+    }
+
+    function drawTimes() {
+      var list = byDate[pickedDate] || [];
+      timesEl.innerHTML = '<span class="tour__times-label">' + T.pickTime + '</span>' + list.map(function (s, i) {
+        var off = s.left <= 0;
+        var sel = picked && picked.date === s.date && picked.start === s.start;
+        return '<button type="button" class="meet__slot tour__time" data-i="' + i + '" aria-pressed="' + !!sel + '"' + (off ? ' disabled' : '') + '>' +
+          '<b>' + t0(s.start) + '–' + t0(s.end) + '</b><small>' + (off ? T.full : left(s.left)) + '</small></button>';
+      }).join('');
+    }
+
+    function pickSlot(s) {
+      picked = s;
+      setField('termin', s.date);
+      setField('cas', s.start);
+      setField('event_date', s.date);
+      setField('event_title', 'School Tour, ' + slotLabel(s));
+      drawTimes();
+      status('');
+    }
+
+    function pickDay(date) {
+      pickedDate = date;
+      var d = day(date);
+      view = { y: d.getFullYear(), m: d.getMonth() };
+      drawCal();
+      if (pickedEl) pickedEl.innerHTML = '<span>' + T.selDate + '</span><b>' + dayLabel(date) + '</b>';
+      var keep = picked && picked.date === date && (byDate[date] || []).filter(function (s) { return s.start === picked.start && s.left > 0; })[0];
+      var firstFree = (byDate[date] || []).filter(function (s) { return s.left > 0; })[0];
+      if (keep || firstFree) pickSlot(keep || firstFree); else { picked = null; drawTimes(); }
+    }
+
+    calEl.addEventListener('click', function (e) {
+      var nav = e.target.closest('[data-nav]');
+      if (nav && !nav.disabled) {
+        var mi = mIndex(view.y, view.m) + (+nav.dataset.nav);
+        view = { y: Math.floor(mi / 12), m: mi % 12 };
+        drawCal();
+        return;
+      }
+      var b = e.target.closest('.trial__day--free');
+      if (b && byDate[b.dataset.date]) pickDay(b.dataset.date);
+    });
+    timesEl.addEventListener('click', function (e) {
+      var b = e.target.closest('.tour__time');
+      if (!b || b.disabled) return;
+      var s = (byDate[pickedDate] || [])[+b.dataset.i];
+      if (s) pickSlot(s);
+    });
+
+    function render(d) {
+      data = d;
+      byDate = {};
+      var list = ((d && d.slots) || []).slice().sort(function (a, b) { return (a.date + ('0' + a.start).slice(-5)) < (b.date + ('0' + b.start).slice(-5)) ? -1 : 1; });
+      list.forEach(function (s) { (byDate[s.date] = byDate[s.date] || []).push(s); });
+      var free = list.filter(function (s) { return s.left > 0; });
+      if (!free.length) { status(T.none); layout.hidden = true; return; }
+      status('');
+      var a = day(list[0].date), z = day(list[list.length - 1].date);
+      minM = mIndex(a.getFullYear(), a.getMonth());
+      maxM = mIndex(z.getFullYear(), z.getMonth());
+      var keepDay = pickedDate && freeOf(pickedDate) > 0 ? pickedDate : free[0].date;
+      pickDay(keepDay);
+      layout.hidden = false;
+    }
+
+    function readCache() {
+      try {
+        var c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+        return c && Array.isArray(c.slots) && Date.now() - c.t < 6 * 3600 * 1000 ? c : null;
+      } catch (e) { return null; }
+    }
+    function writeCache(d) { try { localStorage.setItem(CACHE_KEY, JSON.stringify(d)); } catch (e) {} }
+
+    function load() {
+      if (started) return;
+      started = true;
+      var cached = readCache();
+      if (cached) render(cached); else { status(T.loading); layout.hidden = true; }
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 45000);
+      fetch(endpoint + '?action=tour-slots&_=' + Date.now(), ctrl ? { signal: ctrl.signal } : {})
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          clearTimeout(timer);
+          if (!d || !d.ok || !Array.isArray(d.slots)) throw new Error('bad payload');
+          d.t = Date.now();
+          writeCache(d);
+          if (!box.hasAttribute('data-tour-done')) render(d);
+        })
+        .catch(function (err) {
+          clearTimeout(timer);
+          console.warn('School Tour: terminy se nenacetly', err);
+          if (!cached && !box.hasAttribute('data-tour-done')) { status(T.error); layout.hidden = true; }
+        });
+    }
+
+    function done(s) {
+      box.setAttribute('data-tour-done', '');
+      if (data && data.slots) {
+        data.slots.forEach(function (x) { if (x.date === s.date && x.start === s.start) x.left = Math.max(0, x.left - 1); });
+        writeCache(data);
+      }
+      box.innerHTML = '<div class="form-success">' +
+        '<div class="form-success__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l5 5L20 7"/></svg></div>' +
+        (IS_EN
+          ? '<h3>Your tour is booked!</h3><p class="form-success__event">' + slotLabel(s) + '</p>' +
+            '<p>The confirmation with all the details is on its way to your email. If the time filled up in the meantime, we\'ll email you right away so you can pick another one.</p>'
+          : '<h3>Máte rezervováno!</h3><p class="form-success__event">' + slotLabel(s) + '</p>' +
+            '<p>Potvrzení se všemi detaily vám posíláme e-mailem. Kdyby se termín mezitím zaplnil, hned vám napíšeme, ať si vyberete jiný.</p>') +
+        '</div>';
+      box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!picked) { status(T.pick); return; }
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      var s = picked;
+      var btn = form.querySelector('button[type=submit]');
+      var orig = btn ? btn.innerHTML : '';
+      if (btn) { btn.disabled = true; btn.innerHTML = T.sending; }
+      setField('booking_id', Date.now() + '-' + Math.floor(Math.random() * 1e6));
+      fetch(endpoint, { method: 'POST', mode: 'no-cors', body: new FormData(form) })
+        .then(function () {
+          if (window.dataLayer) window.dataLayer.push({ event: 'tour_booking_submit', source: pageSource, tour_date: s.date });
+          if (window.fbq && window.__flowConsent && window.__flowConsent.marketing) {
+            window.fbq('track', 'Lead', { content_name: pageSource, content_category: 'School tour booking' });
+            window.fbq('track', 'CompleteRegistration', { content_name: pageSource, content_category: 'School tour booking', status: 'submitted' });
+          }
+          done(s);
+        })
+        .catch(function (err) {
+          console.error('School Tour: odeslani selhalo', err);
+          if (btn) { btn.disabled = false; btn.innerHTML = orig; }
+          alert(IS_EN
+            ? 'Booking failed. Please try again or call +420 770 673 828.'
+            : 'Rezervaci se nepodařilo odeslat. Zkuste to prosím znovu, nebo zavolejte na +420 770 673 828.');
+        });
+    });
+
+    // Nacitat s predstihem: az se sekce blizi k obrazovce (Apps Script odpovida i desitky vterin)
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (en) {
+        if (en.some(function (x) { return x.isIntersecting; })) { io.disconnect(); load(); }
+      }, { rootMargin: '1500px 0px' });
+      io.observe(sec);
+    } else load();
+
+    return {
+      show: function () { box.hidden = false; load(); },
       hide: function () { box.hidden = true; }
     };
   }

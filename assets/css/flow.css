@@ -1681,6 +1681,20 @@ body.no-messenger .msg-fab { display: none; }
   .trial__day { min-height: 40px; }
 }
 
+/* School Tour (sekce .meet, karta 02): stejny kalendar jako zkusebni blok + vyber casu.
+   Max 3 rodiny na termin, pod datem pocet volnych casu ("2 časy"). */
+.tour__times { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin: -4px 0 18px; }
+.tour__times-label { flex-basis: 100%; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); }
+.tour__time { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 1px; padding: 9px 18px; border-radius: 14px; }
+.tour__time b { font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--c-blue-deep); }
+.tour__time small { font-size: .72rem; font-weight: 600; color: var(--c-muted); }
+.tour__time[aria-pressed="true"] small { color: var(--c-blue-deep); }
+.tour__time:disabled { opacity: .45; cursor: default; }
+.tour__time:disabled:hover { border-color: var(--c-border); }
+.tour .tour__grade { grid-column: 1 / -1; }
+.tour .tour__grade .form-select { max-width: calc(50% - 8px); }
+@media (max-width: 640px) { .tour .tour__grade .form-select { max-width: none; } }
+
 /* Homepage: "zavolejte mi" pod tremi cestami */
 .meet__callback { margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--c-border); text-align: center; }
 .meet__callback-q { font-size: var(--fs-base); color: var(--c-muted); margin: 0; }
