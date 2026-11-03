@@ -12,14 +12,13 @@
   // ───── Jazyk: detekce z <html lang="..."> (EN web pouziva stejny script)
   var IS_EN = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
 
-  // ───── Rezervace prohlidky (Google Calendar appointment schedule)
-  // 60 min osobne v kampusu na Balabence. Menit na jednom miste.
-  var BOOKING_URL = 'https://calendar.app.google/YVTTWSvt6Zj56ykV8';
+  // ───── Rezervace prohlidky = NASE rezervace School Tour (max 3 rodiny), ne Google (Marv 3. 11. 2026).
+  // Odkaz otevre na strance Kontakt sekci .meet rovnou na karte School Tour (#school-tour).
+  var BOOKING_URL = IS_EN ? '/en/kontakt#school-tour' : '/kontakt#school-tour';
   var ONLINE_URL  = 'https://calendar.app.google/UytpdiarvKwDieUe6';
   // Rezervacni okna. Vkladaji se primo do potvrzeni, protoze u techto dvou
   // typu zajemce jeste zapsany neni, musi si nejdriv zvolit slot.
   var BOOKING_EMBED = {
-    'kafe':   'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3N93cfV77dKYDuMRGazbi1HrqazS5qtbeQ4IvREGidzIVdASo24Lxb420L5FMr2sBF2Qkgd69C?gv=true',
     'online': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1KmkQl_AsS1m_MeKTfNXHyUoZuaHh52N1FkV7qpxW4nrAYW9OEwYCLmBJHR96Xi09Gqnzy-MNF?gv=true'
   };
 
@@ -116,7 +115,16 @@
       var bookType = sel && BOOKING_EMBED[sel.value] ? sel.value : '';
 
       var body;
-      if (form.hasAttribute('data-callback-form')) {
+      if (!form.hasAttribute('data-callback-form') && sel && sel.value === 'kafe') {
+        // School Tour: termin si vybira v nasi rezervaci (Kontakt → karta School Tour)
+        body = IS_EN
+          ? '<h3>One last step, pick a time</h3>' +
+            '<p>We run tours on Tuesdays and Thursdays, with at most 3 families per tour. Pick a day and time in our booking calendar.</p>' +
+            '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '">Pick a tour time →</a></p>'
+          : '<h3>Ještě si vyberte čas</h3>' +
+            '<p>Prohlídky vedeme v úterý a ve čtvrtek, na jednu prohlídku bereme nejvýš 3 rodiny. Den a čas si vyberete v našem kalendáři.</p>' +
+            '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '">Vybrat termín prohlídky →</a></p>';
+      } else if (form.hasAttribute('data-callback-form')) {
         body = IS_EN
           ? '<h3>Thank you' + (firstName ? ', ' + firstName : '') + '!</h3>' +
             '<p>We\'ll give you a call soon.</p>'
@@ -162,11 +170,11 @@
         body = IS_EN
           ? '<h3>Thanks' + (firstName ? ', ' + firstName : '') + '!</h3>' +
             '<p>Pick a time that suits you, an hour at our Balabenka campus. We\'ll walk you through the school and talk about what you\'re looking for.</p>' +
-            '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Book a campus visit</a></p>' +
+            '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '">Book a campus visit</a></p>' +
             '<p class="form-success__fallback">Or <a href="' + ONLINE_URL + '" target="_blank" rel="noopener">book an online meeting</a> straight away. If none of the times work, write to <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>'
           : '<h3>Děkujeme za zájem!</h3>' +
             '<p>Vyberte si termín, který vám sedne, hodina u nás na Balabence. Projdeme spolu školu a probereme, co pro dítě hledáte.</p>' +
-            '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Vybrat termín prohlídky</a></p>' +
+            '<p class="form-success__cta"><a class="btn btn-primary" href="' + BOOKING_URL + '">Vybrat termín prohlídky</a></p>' +
             '<p class="form-success__fallback">Nebo si rovnou <a href="' + ONLINE_URL + '" target="_blank" rel="noopener">domluvte online schůzku</a>. Kdyby nesedl žádný termín, napište na <a href="mailto:info@skolaflow.cz">info@skolaflow.cz</a>.</p>';
       }
 
@@ -429,7 +437,6 @@
     // Prohlidka a online schuzka nemaji pevny termin: zajemce si vybira slot
     // primo v rezervacnim okne Google Kalendare, formular se u nich neukazuje.
     var BOOK = {
-      'kafe':   'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3N93cfV77dKYDuMRGazbi1HrqazS5qtbeQ4IvREGidzIVdASo24Lxb420L5FMr2sBF2Qkgd69C?gv=true',
       'online': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1KmkQl_AsS1m_MeKTfNXHyUoZuaHh52N1FkV7qpxW4nrAYW9OEwYCLmBJHR96Xi09Gqnzy-MNF?gv=true'
     };
 
@@ -571,6 +578,17 @@
       fillNext();
       if (!panel.hidden && !slots.hidden) buildSlots();
     });
+
+    // Primy odkaz na rezervaci School Tour: <stranka>#school-tour (napr. /kontakt#school-tour)
+    function tourFromHash() {
+      if ((location.hash || '') !== '#school-tour' || !tour) return;
+      setTimeout(function () {
+        openPath('kafe');
+        sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
+    }
+    tourFromHash();
+    window.addEventListener('hashchange', tourFromHash);
   }
 
   // ───── REZERVACE — sekce .meet--book (zapisy): kazda cesta nese vlastni

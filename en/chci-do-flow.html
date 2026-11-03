@@ -54,7 +54,7 @@
   </script>
   <link rel="stylesheet" href="../assets/css/cmp.css">
 
-  <link rel="stylesheet" href="../assets/css/flow.css?v=20261103a">
+  <link rel="stylesheet" href="../assets/css/flow.css?v=20261103b">
 
   <!-- Page-specific CSS (Chci do FLOW landing page) -->
   <style>
@@ -882,7 +882,7 @@
 <!-- FLOW-FOOTER-EN-END -->
 
 <script defer src="../assets/js/cmp.js?v=20260916c"></script>
-<script src="../assets/js/flow.js?v=20261103a" defer></script>
+<script src="../assets/js/flow.js?v=20261103b" defer></script>
 
 <script>
 /* ─────────────────────────────────────────────────
@@ -1104,11 +1104,17 @@
 
           // Neither the tour nor the online meeting has a fixed date. The
           // visitor picks a slot right here in the booking window.
-          var bookingEmbed = { 'kafe': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3N93cfV77dKYDuMRGazbi1HrqazS5qtbeQ4IvREGidzIVdASo24Lxb420L5FMr2sBF2Qkgd69C?gv=true', 'online': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1KmkQl_AsS1m_MeKTfNXHyUoZuaHh52N1FkV7qpxW4nrAYW9OEwYCLmBJHR96Xi09Gqnzy-MNF?gv=true' };
+          var bookingEmbed = { 'online': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1KmkQl_AsS1m_MeKTfNXHyUoZuaHh52N1FkV7qpxW4nrAYW9OEwYCLmBJHR96Xi09Gqnzy-MNF?gv=true' };
           var bookType = bookingEmbed[meeting] ? meeting : '';
 
           var html;
-          if (bookType) {
+          if (meeting === 'kafe') {
+            // School Tour = nase rezervace (max 3 rodiny), ne Google (3. 11. 2026)
+            html = checkIcon +
+              '<h2 class="h-section" style="margin-bottom:14px;">One last step, <em style="font-style:normal;color:var(--c-blue);">pick a time</em></h2>' +
+              '<p class="lead" style="max-width:560px;margin:0 auto 14px;text-align:center;">We run tours on Tuesdays and Thursdays, with at most 3 families per tour. Pick a day and time in our booking calendar.</p>' +
+              '<p class="form-success__cta" style="margin-top:22px;"><a class="btn btn-primary" href="/en/kontakt#school-tour">Pick a tour time →</a></p>';
+          } else if (bookType) {
             var isOnline = bookType === 'online';
             html = checkIcon +
               '<h2 class="h-section" style="margin-bottom:14px;">One last step, <em style="font-style:normal;color:var(--c-blue);">pick a time</em></h2>' +
