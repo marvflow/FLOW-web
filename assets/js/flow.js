@@ -582,10 +582,13 @@
     // Primy odkaz na rezervaci School Tour: <stranka>#school-tour (napr. /kontakt#school-tour)
     function tourFromHash() {
       if ((location.hash || '') !== '#school-tour' || !tour) return;
+      // Okamzity skok (ne plynuly): plynuly posun nekdy nedobehne a rodic zustane nahore.
+      // Znovu po nacteni obrazku, protoze posunou layout.
       setTimeout(function () {
         openPath('kafe');
-        sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        sec.scrollIntoView({ block: 'start' });
       }, 150);
+      window.addEventListener('load', function () { sec.scrollIntoView({ block: 'start' }); }, { once: true });
     }
     tourFromHash();
     window.addEventListener('hashchange', tourFromHash);
@@ -648,7 +651,10 @@
     var HASH = { 'zkusebni-blok': 'zkusebni', 'trial-block': 'zkusebni' };
     function fromHash() {
       var key = HASH[(location.hash || '').replace('#', '')];
-      if (key) setTimeout(function () { openPath(key, true); }, 150);
+      if (!key) return;
+      // Okamzity skok na rezervaci (plynuly posun nekdy nedobehne); znovu po nacteni obrazku.
+      setTimeout(function () { openPath(key, false); sec.scrollIntoView({ block: 'start' }); }, 150);
+      window.addEventListener('load', function () { sec.scrollIntoView({ block: 'start' }); }, { once: true });
     }
     fromHash();
     window.addEventListener('hashchange', fromHash);
