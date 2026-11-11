@@ -1558,6 +1558,16 @@
     initSmartHideNav();
     initMessengerFab();
     initConversionPageEvents();
+    loadSearch();
+  }
+
+  // ───── Vyhledávání na webu (Marv 11. 11. 2026) — vše v assets/js/search.js
+  function loadSearch() {
+    if (!document.querySelector('.site-header')) return;
+    var s = document.createElement('script');
+    s.src = '/assets/js/search.js?v=20261111a';
+    s.defer = true;
+    document.head.appendChild(s);
   }
 
   // ───── Conversion page events (CompleteRegistration on /dekujeme-za-zajem)
